@@ -19,6 +19,7 @@
 		AC3B382E22365BCB000AD635 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B382D22365BCB000AD635 /* Operators.swift */; };
 		AC3B383022365C52000AD635 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B382F22365C52000AD635 /* Environment.swift */; };
 		AC3B383222365CF8000AD635 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B383122365CF8000AD635 /* Utils.swift */; };
+		AC3B383522365E12000AD635 /* Column.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B383422365E12000AD635 /* Column.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		AC3B382D22365BCB000AD635 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		AC3B382F22365C52000AD635 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		AC3B383122365CF8000AD635 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		AC3B383422365E12000AD635 /* Column.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Column.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				AC3B380E22365543000AD635 /* Chart.swift */,
+				AC3B383422365E12000AD635 /* Column.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -211,8 +214,8 @@
 		AC3B382C22365BBA000AD635 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				AC3B382D22365BCB000AD635 /* Operators.swift */,
 				AC3B382F22365C52000AD635 /* Environment.swift */,
+				AC3B382D22365BCB000AD635 /* Operators.swift */,
 				AC3B383122365CF8000AD635 /* Utils.swift */,
 			);
 			path = Utils;
@@ -321,6 +324,7 @@
 			files = (
 				AC3B381622365987000AD635 /* ChartsService.swift in Sources */,
 				AC3B382922365B08000AD635 /* Optional+Extensions.swift in Sources */,
+				AC3B383522365E12000AD635 /* Column.swift in Sources */,
 				AC3B381322365725000AD635 /* UIColor+Hex.swift in Sources */,
 				AC3B383022365C52000AD635 /* Environment.swift in Sources */,
 				AC3B380F22365543000AD635 /* Chart.swift in Sources */,
