@@ -1,7 +1,2 @@
 source 'https://rubygems.org'
-gem 'cocoapods'
-gem 'psych'
-gem 'fastlane'
-gem 'fastlane-craft'
 gem 'code-formatter'
-gem 'danger'
