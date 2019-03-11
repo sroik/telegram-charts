@@ -11,6 +11,9 @@
 		AC3B37FB2236510D000AD635 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC3B37FA2236510D000AD635 /* Assets.xcassets */; };
 		AC3B380A223651E4000AD635 /* charts_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = AC3B3809223651E4000AD635 /* charts_mock.json */; };
 		AC3B380C2236526D000AD635 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC3B380B2236526D000AD635 /* LaunchScreen.storyboard */; };
+		AC3B380F22365543000AD635 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B380E22365543000AD635 /* Chart.swift */; };
+		AC3B381322365725000AD635 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B381222365725000AD635 /* UIColor+Hex.swift */; };
+		AC3B381622365987000AD635 /* ChartsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B381522365987000AD635 /* ChartsService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +23,9 @@
 		AC3B37FF2236510D000AD635 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC3B3809223651E4000AD635 /* charts_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = charts_mock.json; sourceTree = "<group>"; };
 		AC3B380B2236526D000AD635 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AC3B380E22365543000AD635 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
+		AC3B381222365725000AD635 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		AC3B381522365987000AD635 /* ChartsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,9 @@
 			isa = PBXGroup;
 			children = (
 				AC3B37F32236510C000AD635 /* AppDelegate.swift */,
+				AC3B381422365970000AD635 /* Services */,
+				AC3B380D22365537000AD635 /* Model */,
+				AC3B381022365710000AD635 /* Extensions */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -91,6 +100,38 @@
 				AC3B3809223651E4000AD635 /* charts_mock.json */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		AC3B380D22365537000AD635 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AC3B380E22365543000AD635 /* Chart.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AC3B381022365710000AD635 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AC3B38112236571E000AD635 /* UIKit */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AC3B38112236571E000AD635 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				AC3B381222365725000AD635 /* UIColor+Hex.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		AC3B381422365970000AD635 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AC3B381522365987000AD635 /* ChartsService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,6 +205,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC3B381622365987000AD635 /* ChartsService.swift in Sources */,
+				AC3B381322365725000AD635 /* UIColor+Hex.swift in Sources */,
+				AC3B380F22365543000AD635 /* Chart.swift in Sources */,
 				AC3B37F42236510C000AD635 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
