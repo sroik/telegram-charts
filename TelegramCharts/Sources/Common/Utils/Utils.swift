@@ -14,7 +14,7 @@ public func assertWrapper(
     guard !condition() else {
         return
     }
-    
+
     guard !Environment.isTests else {
         return
     }
@@ -22,7 +22,7 @@ public func assertWrapper(
     assertionFailure(domain(), file: file, line: line)
 }
 
-func assertionWrapperFailure(
+func assertionFailureWrapper(
     _ domain: @autoclosure () -> String = String(),
     _ message: @autoclosure () -> String? = nil,
     file: StaticString = #file,

@@ -4,6 +4,19 @@
 
 import Foundation
 
-struct Chart {
+enum ColumnType: String, Codable {
+    case timestamps = "x"
+    case line
+}
+
+struct Column: Hashable {
+    let label: String
+    let type: ColumnType
+    let name: String?
+    let color: HexColor?
+    var values: [Int]
+}
+
+struct Chart: Hashable {
     var columns: [Column]
 }

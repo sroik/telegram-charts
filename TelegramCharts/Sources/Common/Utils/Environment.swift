@@ -12,7 +12,7 @@ public class Environment {
     static var isPad: Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
     }
-    
+
     static var isTests: Bool {
         return ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
     }
