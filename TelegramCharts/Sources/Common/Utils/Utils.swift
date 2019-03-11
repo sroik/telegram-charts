@@ -4,7 +4,14 @@
 
 import Foundation
 
-public func assertWrapper(
+@discardableResult
+public func synchronized<T>(_ lock: AnyObject, _ body: () throws -> T) rethrows -> T {
+    objc_sync_enter(lock)
+    defer { objc_sync_exit(lock) }
+    return try body()
+}
+
+func assertWrapper(
     _ condition: @autoclosure () -> Bool,
     _ domain: @autoclosure () -> String = String(),
     _ message: @autoclosure () -> String? = nil,
@@ -16,6 +23,7 @@ public func assertWrapper(
     }
 
     guard !Environment.isTests else {
+        print("assertion failed: ", domain())
         return
     }
 

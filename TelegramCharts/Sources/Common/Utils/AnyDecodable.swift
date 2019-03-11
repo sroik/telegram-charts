@@ -20,19 +20,19 @@ struct AnyDecodable: Decodable {
 extension AnyDecodable: AnyDecodableType {}
 
 extension AnyDecodableType {
-    public var stringValue: String? {
+    var stringValue: String? {
         return value as? String
     }
 
-    public var intValue: Int? {
+    var intValue: Int? {
         return value as? Int
     }
 
-    public var doubleValue: Double? {
+    var doubleValue: Double? {
         return value as? Double
     }
 
-    public init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
 
         if container.decodeNil() {
@@ -61,7 +61,7 @@ extension AnyDecodableType {
 }
 
 extension AnyDecodable: CustomStringConvertible {
-    public var description: String {
+    var description: String {
         switch value {
         case is Void:
             return String(describing: nil as Any?)
@@ -74,7 +74,7 @@ extension AnyDecodable: CustomStringConvertible {
 }
 
 extension AnyDecodable: CustomDebugStringConvertible {
-    public var debugDescription: String {
+    var debugDescription: String {
         switch value {
         case let value as CustomDebugStringConvertible:
             return "AnyDecodable(\(value.debugDescription))"

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		AC3B37F42236510C000AD635 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B37F32236510C000AD635 /* AppDelegate.swift */; };
 		AC3B37FB2236510D000AD635 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC3B37FA2236510D000AD635 /* Assets.xcassets */; };
-		AC3B380A223651E4000AD635 /* charts_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = AC3B3809223651E4000AD635 /* charts_mock.json */; };
+		AC3B380A223651E4000AD635 /* charts.json in Resources */ = {isa = PBXBuildFile; fileRef = AC3B3809223651E4000AD635 /* charts.json */; };
 		AC3B380C2236526D000AD635 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC3B380B2236526D000AD635 /* LaunchScreen.storyboard */; };
 		AC3B380F22365543000AD635 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B380E22365543000AD635 /* Chart.swift */; };
 		AC3B381322365725000AD635 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B381222365725000AD635 /* UIColor+Hex.swift */; };
@@ -25,6 +25,21 @@
 		AC3B3856223666C3000AD635 /* AnyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B3855223666C3000AD635 /* AnyDecodable.swift */; };
 		AC3B385922366839000AD635 /* Chart+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B385822366839000AD635 /* Chart+Extensions.swift */; };
 		AC3B385B223682E0000AD635 /* ChartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B385A223682E0000AD635 /* ChartTests.swift */; };
+		ACE6866F22369EBD00724432 /* ChartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6866E22369EBD00724432 /* ChartScene.swift */; };
+		ACE6867922369EEF00724432 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6867322369EEF00724432 /* ViewController.swift */; };
+		ACE6867C22369EEF00724432 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6867622369EEF00724432 /* NavigationController.swift */; };
+		ACE6867F2236A09400724432 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6867E2236A09400724432 /* Theme.swift */; };
+		ACE686832236A0B400724432 /* Theme+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE686822236A0B400724432 /* Theme+Factory.swift */; };
+		ACE686882236AB9400724432 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE686872236AB9400724432 /* View.swift */; };
+		ACE6868A2236AD1000724432 /* Themeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE686892236AD1000724432 /* Themeable.swift */; };
+		ACE6868C2236AFB200724432 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6868B2236AFB200724432 /* SettingsService.swift */; };
+		ACE686902236B1AD00724432 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6868D2236B1AD00724432 /* Property.swift */; };
+		ACE686912236B1AD00724432 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6868E2236B1AD00724432 /* Token.swift */; };
+		ACE686922236B1AD00724432 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6868F2236B1AD00724432 /* Channel.swift */; };
+		ACE686942236B60F00724432 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE686932236B60F00724432 /* Dependencies.swift */; };
+		ACE686962236BB9500724432 /* ChartsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE686952236BB9500724432 /* ChartsListViewController.swift */; };
+		ACE686992236BED100724432 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE686982236BED100724432 /* UIView+Layout.swift */; };
+		ACE6869B2236C01300724432 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6869A2236C01300724432 /* Reusable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +57,7 @@
 		AC3B37F32236510C000AD635 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC3B37FA2236510D000AD635 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC3B37FF2236510D000AD635 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AC3B3809223651E4000AD635 /* charts_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = charts_mock.json; sourceTree = "<group>"; };
+		AC3B3809223651E4000AD635 /* charts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = charts.json; sourceTree = "<group>"; };
 		AC3B380B2236526D000AD635 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC3B380E22365543000AD635 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
 		AC3B381222365725000AD635 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
@@ -60,6 +75,21 @@
 		AC3B3855223666C3000AD635 /* AnyDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDecodable.swift; sourceTree = "<group>"; };
 		AC3B385822366839000AD635 /* Chart+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart+Extensions.swift"; sourceTree = "<group>"; };
 		AC3B385A223682E0000AD635 /* ChartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTests.swift; sourceTree = "<group>"; };
+		ACE6866E22369EBD00724432 /* ChartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartScene.swift; sourceTree = "<group>"; };
+		ACE6867322369EEF00724432 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		ACE6867622369EEF00724432 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		ACE6867E2236A09400724432 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		ACE686822236A0B400724432 /* Theme+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Factory.swift"; sourceTree = "<group>"; };
+		ACE686872236AB9400724432 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		ACE686892236AD1000724432 /* Themeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themeable.swift; sourceTree = "<group>"; };
+		ACE6868B2236AFB200724432 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
+		ACE6868D2236B1AD00724432 /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
+		ACE6868E2236B1AD00724432 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		ACE6868F2236B1AD00724432 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		ACE686932236B60F00724432 /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
+		ACE686952236BB9500724432 /* ChartsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsListViewController.swift; sourceTree = "<group>"; };
+		ACE686982236BED100724432 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
+		ACE6869A2236C01300724432 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				AC3B37F32236510C000AD635 /* AppDelegate.swift */,
+				ACE686972236BBB100724432 /* App */,
 				AC3B381422365970000AD635 /* Services */,
 				AC3B380D22365537000AD635 /* Model */,
 				AC3B382B22365BB1000AD635 /* Common */,
@@ -140,7 +171,7 @@
 		AC3B3808223651C8000AD635 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				AC3B3809223651E4000AD635 /* charts_mock.json */,
+				AC3B3809223651E4000AD635 /* charts.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -148,9 +179,8 @@
 		AC3B380D22365537000AD635 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AC3B3857223667C3000AD635 /* Extensions */,
-				AC3B3853223663D1000AD635 /* ChartData.swift */,
-				AC3B380E22365543000AD635 /* Chart.swift */,
+				ACE686812236A0A500724432 /* Theme */,
+				ACE686802236A09800724432 /* Chart */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -168,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				AC3B381222365725000AD635 /* UIColor+Hex.swift */,
+				ACE686982236BED100724432 /* UIView+Layout.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -175,7 +206,9 @@
 		AC3B381422365970000AD635 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				ACE686932236B60F00724432 /* Dependencies.swift */,
 				AC3B381522365987000AD635 /* ChartsService.swift */,
+				ACE6868B2236AFB200724432 /* SettingsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -219,6 +252,7 @@
 		AC3B382B22365BB1000AD635 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				ACE6867022369EEF00724432 /* Controller */,
 				AC3B382C22365BBA000AD635 /* Utils */,
 				AC3B381022365710000AD635 /* Extensions */,
 			);
@@ -232,6 +266,10 @@
 				AC3B382D22365BCB000AD635 /* Operators.swift */,
 				AC3B383122365CF8000AD635 /* Utils.swift */,
 				AC3B3855223666C3000AD635 /* AnyDecodable.swift */,
+				ACE6868F2236B1AD00724432 /* Channel.swift */,
+				ACE6868D2236B1AD00724432 /* Property.swift */,
+				ACE6868E2236B1AD00724432 /* Token.swift */,
+				ACE6869A2236C01300724432 /* Reusable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -252,12 +290,43 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		AC3B3857223667C3000AD635 /* Extensions */ = {
+		ACE6867022369EEF00724432 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				ACE6867322369EEF00724432 /* ViewController.swift */,
+				ACE6867622369EEF00724432 /* NavigationController.swift */,
+				ACE686872236AB9400724432 /* View.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		ACE686802236A09800724432 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
 				AC3B385822366839000AD635 /* Chart+Extensions.swift */,
+				AC3B3853223663D1000AD635 /* ChartData.swift */,
+				AC3B380E22365543000AD635 /* Chart.swift */,
 			);
-			path = Extensions;
+			path = Chart;
+			sourceTree = "<group>";
+		};
+		ACE686812236A0A500724432 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				ACE6867E2236A09400724432 /* Theme.swift */,
+				ACE686822236A0B400724432 /* Theme+Factory.swift */,
+				ACE686892236AD1000724432 /* Themeable.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		ACE686972236BBB100724432 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				ACE6866E22369EBD00724432 /* ChartScene.swift */,
+				ACE686952236BB9500724432 /* ChartsListViewController.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,7 +412,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC3B380C2236526D000AD635 /* LaunchScreen.storyboard in Resources */,
-				AC3B380A223651E4000AD635 /* charts_mock.json in Resources */,
+				AC3B380A223651E4000AD635 /* charts.json in Resources */,
 				AC3B37FB2236510D000AD635 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,17 +453,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACE6866F22369EBD00724432 /* ChartScene.swift in Sources */,
+				ACE686962236BB9500724432 /* ChartsListViewController.swift in Sources */,
+				ACE686942236B60F00724432 /* Dependencies.swift in Sources */,
 				AC3B381622365987000AD635 /* ChartsService.swift in Sources */,
 				AC3B385922366839000AD635 /* Chart+Extensions.swift in Sources */,
+				ACE686882236AB9400724432 /* View.swift in Sources */,
+				ACE6869B2236C01300724432 /* Reusable.swift in Sources */,
 				AC3B3854223663D1000AD635 /* ChartData.swift in Sources */,
+				ACE6868A2236AD1000724432 /* Themeable.swift in Sources */,
+				ACE686832236A0B400724432 /* Theme+Factory.swift in Sources */,
+				ACE6867922369EEF00724432 /* ViewController.swift in Sources */,
 				AC3B382922365B08000AD635 /* Optional+Extensions.swift in Sources */,
+				ACE6867F2236A09400724432 /* Theme.swift in Sources */,
+				ACE686902236B1AD00724432 /* Property.swift in Sources */,
 				AC3B381322365725000AD635 /* UIColor+Hex.swift in Sources */,
 				AC3B3856223666C3000AD635 /* AnyDecodable.swift in Sources */,
+				ACE686922236B1AD00724432 /* Channel.swift in Sources */,
 				AC3B383022365C52000AD635 /* Environment.swift in Sources */,
 				AC3B380F22365543000AD635 /* Chart.swift in Sources */,
+				ACE686912236B1AD00724432 /* Token.swift in Sources */,
+				ACE686992236BED100724432 /* UIView+Layout.swift in Sources */,
 				AC3B37F42236510C000AD635 /* AppDelegate.swift in Sources */,
+				ACE6867C22369EEF00724432 /* NavigationController.swift in Sources */,
 				AC3B382E22365BCB000AD635 /* Operators.swift in Sources */,
 				AC3B383222365CF8000AD635 /* Utils.swift in Sources */,
+				ACE6868C2236AFB200724432 /* SettingsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

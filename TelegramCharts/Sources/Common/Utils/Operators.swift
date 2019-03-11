@@ -11,6 +11,6 @@ precedencegroup Exponentiation {
 
 infix operator **: Exponentiation
 
-public func ** (lhs: CGFloat, rhs: CGFloat) -> CGFloat {
+func ** (lhs: CGFloat, rhs: CGFloat) -> CGFloat {
     return pow(lhs, rhs)
 }

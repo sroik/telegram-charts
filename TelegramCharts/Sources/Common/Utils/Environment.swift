@@ -4,7 +4,7 @@
 
 import UIKit
 
-public class Environment {
+class Environment {
     static var isPhone: Bool {
         return UIDevice.current.userInterfaceIdiom == .phone
     }

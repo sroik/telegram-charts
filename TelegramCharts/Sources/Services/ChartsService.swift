@@ -10,9 +10,9 @@ enum ChartsError: Error {
 
 protocol ChartsService {
     /*
-     I know that it's should be asynchronous.
-     But I don't have a lot of time for that and
-     it's not the purpose of this contest
+     I know that it's should be asynchronous
+     or loaded from network. But I don't have a lot of time
+     for that and it's not the purpose of this contest
      */
     func load() throws -> [Chart]
 }
