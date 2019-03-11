@@ -20,6 +20,8 @@
 		AC3B383022365C52000AD635 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B382F22365C52000AD635 /* Environment.swift */; };
 		AC3B383222365CF8000AD635 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B383122365CF8000AD635 /* Utils.swift */; };
 		AC3B383522365E12000AD635 /* Column.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B383422365E12000AD635 /* Column.swift */; };
+		AC3B38382236612C000AD635 /* test_charts.json in Resources */ = {isa = PBXBuildFile; fileRef = AC3B38372236612C000AD635 /* test_charts.json */; };
+		AC3B384C223661E3000AD635 /* Bundle+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B3840223661E3000AD635 /* Bundle+Stub.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		AC3B382F22365C52000AD635 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		AC3B383122365CF8000AD635 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		AC3B383422365E12000AD635 /* Column.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Column.swift; sourceTree = "<group>"; };
+		AC3B38372236612C000AD635 /* test_charts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test_charts.json; sourceTree = "<group>"; };
+		AC3B3840223661E3000AD635 /* Bundle+Stub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Stub.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +176,7 @@
 		AC3B381C22365A71000AD635 /* TelegramChartsTests */ = {
 			isa = PBXGroup;
 			children = (
+				AC3B383622366106000AD635 /* Resources */,
 				AC3B382522365A91000AD635 /* Sources */,
 				AC3B382622365A95000AD635 /* SupportingFiles */,
 			);
@@ -181,6 +186,7 @@
 		AC3B382522365A91000AD635 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				AC3B3839223661E3000AD635 /* Helpers */,
 				AC3B381D22365A71000AD635 /* UIColorHexTests.swift */,
 			);
 			path = Sources;
@@ -219,6 +225,22 @@
 				AC3B383122365CF8000AD635 /* Utils.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		AC3B383622366106000AD635 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AC3B38372236612C000AD635 /* test_charts.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AC3B3839223661E3000AD635 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				AC3B3840223661E3000AD635 /* Bundle+Stub.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,6 +334,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC3B38382236612C000AD635 /* test_charts.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC3B381E22365A71000AD635 /* UIColorHexTests.swift in Sources */,
+				AC3B384C223661E3000AD635 /* Bundle+Stub.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
