@@ -41,9 +41,19 @@ class NavigationController: UINavigationController {
         self.init()
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        themeUp()
+    }
+
     func themeUp() {
-        view.backgroundColor = theme.color.background
-        viewControllers.theme(with: theme)
         children.theme(with: theme)
+        viewControllers.theme(with: theme)
+        view.backgroundColor = theme.color.background
+        navigationBar.tintColor = theme.color.text
+        navigationBar.barTintColor = theme.color.navigation
+        navigationBar.titleTextAttributes = [
+            .foregroundColor: theme.color.text
+        ]
     }
 }

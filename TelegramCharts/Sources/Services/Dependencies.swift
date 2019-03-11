@@ -10,7 +10,7 @@ final class Dependencies {
 
     init(
         charts: ChartsService = BuiltinChartsService(file: "charts.json"),
-        settings: SettingsService = InMemorySettingsService(settings: .default)
+        settings: SettingsService = LocalSettingsService()
     ) {
         self.charts = charts
         self.settings = settings

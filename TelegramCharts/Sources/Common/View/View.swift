@@ -11,6 +11,11 @@ class View: UIView, Themeable {
         }
     }
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        themeUp()
+    }
+
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError()

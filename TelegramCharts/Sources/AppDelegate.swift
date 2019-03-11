@@ -15,12 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = appScene
+        window?.rootViewController = statisticsScene
         window?.makeKeyAndVisible()
 
         return true
     }
 
     private lazy var dependencies = Dependencies()
-    private lazy var appScene = ChartScene(dependencies: dependencies)
+    private lazy var statisticsScene = StatisticsScene(dependencies: dependencies)
 }

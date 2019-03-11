@@ -2,7 +2,7 @@
 //  Copyright © 2019 sroik. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension ThemeMode {
     var theme: Theme {
@@ -12,7 +12,7 @@ extension ThemeMode {
         }
     }
 
-    var rotated: Theme {
+    var rotated: ThemeMode {
         switch self {
         case .day: return .night
         case .night: return .day
@@ -21,8 +21,8 @@ extension ThemeMode {
 
     var title: String {
         switch self {
-        case .day: return "Day"
-        case .night: return "Night"
+        case .day: return "day"
+        case .night: return "night"
         }
     }
 }
@@ -34,20 +34,20 @@ extension Theme {
 
 extension ThemeColor {
     static let day = ThemeColor(
-        background: .lightGray,
-        placeholder: .white,
-        navigation: .lightGray,
+        background: UIColor(white: 0.85, alpha: 1.0),
+        placeholder: UIColor(white: 1.0, alpha: 1.0),
+        navigation: UIColor(white: 0.9, alpha: 1.0),
         tint: .blue,
-        text: .black,
-        details: .darkGray
+        text: UIColor(white: 0.1, alpha: 1.0),
+        details: UIColor(white: 0.5, alpha: 1.0)
     )
 
     static let night = ThemeColor(
-        background: .darkGray,
-        placeholder: .darkGray,
-        navigation: .darkGray,
+        background: UIColor(white: 0.35, alpha: 1.0),
+        placeholder: UIColor(white: 0.2, alpha: 1.0),
+        navigation: UIColor(white: 0.2, alpha: 1.0),
         tint: .blue,
-        text: .white,
-        details: .lightGray
+        text: UIColor(white: 1.0, alpha: 1.0),
+        details: UIColor(white: 0.6, alpha: 1.0)
     )
 }

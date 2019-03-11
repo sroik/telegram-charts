@@ -6,6 +6,10 @@ import Foundation
 import UIKit
 
 public extension UIView {
+    /*
+     It's not the best decision, but I didn't
+     want to use SnapKit-like in this project
+     */
     func anchor(
         in view: UIView? = nil,
         top: NSLayoutYAxisAnchor? = nil,
@@ -61,13 +65,17 @@ public extension UIView {
         }
     }
 
-    func fill(in view: UIView) {
+    func fill(in view: UIView, insets: UIEdgeInsets = .zero) {
         anchor(
-            in: self,
+            in: view,
             top: view.topAnchor,
             left: view.leftAnchor,
             bottom: view.bottomAnchor,
-            right: view.rightAnchor
+            right: view.rightAnchor,
+            topOffset: insets.top,
+            leftOffset: insets.left,
+            bottomOffset: insets.bottom,
+            rightOffset: insets.right
         )
     }
 }
