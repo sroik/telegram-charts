@@ -9,3 +9,11 @@ extension CGFloat {
         return 1.0 / UIScreen.main.scale
     }
 }
+
+extension CGPath {
+    static func between(points: [CGPoint]) -> CGPath {
+        let path = CGMutablePath()
+        path.addLines(between: points)
+        return path
+    }
+}

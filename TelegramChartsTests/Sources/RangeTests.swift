@@ -17,12 +17,10 @@ class RangeTests: XCTestCase {
         let range = TelegramCharts.Range<Int>(min: array.min() ?? 0, max: array.max() ?? 0)
         XCTAssertEqual(array.range, range)
     }
-
-    fu
 }
 
 private extension Array where Element == Int {
-    static func random(count: Int, min: Int = 0, max: Int = 100) -> [Int] {
+    static func random(count: Int, min: Int = 1, max: Int = 100) -> [Int] {
         return (0 ..< count).map { _ in
             Int.random(in: min ... max)
         }

@@ -25,6 +25,11 @@ extension Range {
         return max - min
     }
 
+    func inflated(by: T) -> Range<T> {
+        let inflation: T = by * size
+        return Range(min: min - inflation, max: max + inflation)
+    }
+
     func union(with range: Range<T>) -> Range<T> {
         return Range(
             min: Swift.min(min, range.min),
@@ -35,10 +40,14 @@ extension Range {
 
 extension Array where Element: Arithmetical {
     var range: Range<Element> {
-        var min: Element = 0
-        var max: Element = 0
+        guard let first = first else {
+            return .zero
+        }
 
-        forEach { element in
+        var min: Element = first
+        var max: Element = first
+
+        dropFirst().forEach { element in
             min = Swift.min(min, element)
             max = Swift.max(max, element)
         }

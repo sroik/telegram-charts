@@ -23,20 +23,20 @@ final class ChartMapView: View {
     }
 
     private func setup() {
-        let viewport = viewportRange()
+        let verticalRange = chart.drawableColumns.range
         chart.drawableColumns.forEach { column in
             let columnLayer = ColumnLayer(column: column)
-            columnLayer.viewportRange = viewport
+            columnLayer.viewport = verticalRange
             layer.addSublayer(columnLayer)
             columnLayer.frame = bounds
             columnLayers.append(columnLayer)
         }
     }
 
-    private func viewportRange() -> Range<Int> {
-        return chart.drawableColumns.reduce(Range<Int>.zero) { range, column in
-            range.union(with: column.range)
-        }
+    #warning("remove")
+    override func themeUp() {
+        super.themeUp()
+        backgroundColor = theme.color.background.withAlphaComponent(0.5)
     }
 
     private var columnLayers: [ColumnLayer] = []

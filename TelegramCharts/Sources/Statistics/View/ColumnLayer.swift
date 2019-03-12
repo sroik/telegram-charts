@@ -5,9 +5,15 @@
 import UIKit
 
 class ColumnLayer: CALayer {
-    var viewportRange: Range<Int> = .zero {
+    var viewport: Range<Int> = .zero {
         didSet {
             draw()
+        }
+    }
+
+    var lineWidth: CGFloat = 1 {
+        didSet {
+            shapeLayer.lineWidth = lineWidth
         }
     }
 
@@ -28,19 +34,39 @@ class ColumnLayer: CALayer {
 
     override func layoutSublayers() {
         super.layoutSublayers()
-        layer.frame = bounds
+        shapeLayer.frame = bounds
         draw()
     }
 
     private func setup() {
-        addSublayer(layer)
+        addSublayer(shapeLayer)
     }
 
     private func draw() {
-        #warning("fix")
-        layer.backgroundColor = UIColor.yellow.cgColor
+        guard let column = column else {
+            return
+        }
+
+        switch column.type {
+        case .line:
+            drawLineColumn(column)
+        default:
+            assertionFailureWrapper("column type is not supported yet")
+        }
+    }
+
+    private func drawLineColumn(_ column: Column) {
+        let points = column.points(in: bounds, viewport: viewport)
+        let path = CGPath.between(points: points)
+
+        shapeLayer.path = path
+        shapeLayer.lineWidth = lineWidth
+        shapeLayer.lineCap = .round
+        shapeLayer.lineJoin = .round
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeColor = column.cgColor
     }
 
     private let column: Column?
-    private let layer = CAShapeLayer()
+    private let shapeLayer = CAShapeLayer()
 }

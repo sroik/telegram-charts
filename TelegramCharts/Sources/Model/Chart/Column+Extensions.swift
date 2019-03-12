@@ -4,17 +4,56 @@
 
 import UIKit
 
-extension Column {
-    var range: Range<Int> {
-        return values.range
-    }
-}
-
 extension ColumnType {
     var isDrawable: Bool {
         switch self {
         case .line: return true
         case .timestamps: return false
+        }
+    }
+}
+
+extension Column {
+    var range: Range<Int> {
+        return values.range
+    }
+
+    var isEmpty: Bool {
+        return values.isEmpty
+    }
+
+    var cgColor: CGColor? {
+        return color.flatMap { hex in
+            UIColor(hex: hex)?.cgColor
+        }
+    }
+
+    func points(in rect: CGRect, viewport: Range<Int>) -> [CGPoint] {
+        guard !rect.isEmpty, !isEmpty, viewport.size > 0 else {
+            return []
+        }
+
+        let hStride = rect.width / CGFloat(values.count)
+        let vStride = rect.height / CGFloat(viewport.size)
+        let points: [CGPoint] = values.enumerated().map {
+            return CGPoint(
+                x: rect.minX + CGFloat($0.offset) * hStride,
+                y: rect.maxY - CGFloat($0.element - viewport.min) * vStride
+            )
+        }
+
+        return points
+    }
+}
+
+extension Array where Element == Column {
+    var range: Range<Int> {
+        guard let first = first else {
+            return .zero
+        }
+
+        return dropFirst().reduce(first.range) { range, column in
+            range.union(with: column.range)
         }
     }
 }
