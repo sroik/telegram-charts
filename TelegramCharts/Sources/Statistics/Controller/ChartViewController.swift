@@ -21,7 +21,7 @@ final class ChartViewController: ViewController {
             bottom: view.bottomAnchor,
             left: view.leftAnchor,
             right: view.rightAnchor,
-            height: 44
+            height: 42
         )
 
         chartView.delegate = self
