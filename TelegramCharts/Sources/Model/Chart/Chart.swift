@@ -14,7 +14,7 @@ struct Column: Hashable {
     let type: ColumnType
     let name: String?
     let color: HexColor?
-    var values: [Int]
+    let values: [Int]
 }
 
 struct Chart: Hashable {

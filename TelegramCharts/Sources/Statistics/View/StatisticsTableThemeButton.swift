@@ -36,7 +36,7 @@ final class StatisticsTableThemeButton: View {
         )
 
         button.fill(in: placeholder)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
 

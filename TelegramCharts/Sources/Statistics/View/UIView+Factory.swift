@@ -21,3 +21,11 @@ extension UITableView {
         return tableView
     }
 }
+
+extension UIScrollView {
+    static func charts() -> UIScrollView {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        return scrollView
+    }
+}
