@@ -25,11 +25,6 @@ extension Range {
         return max - min
     }
 
-    func inflated(by: T) -> Range<T> {
-        let inflation: T = by * size
-        return Range(min: min - inflation, max: max + inflation)
-    }
-
     func union(with range: Range<T>) -> Range<T> {
         return Range(
             min: Swift.min(min, range.min),

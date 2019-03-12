@@ -7,7 +7,7 @@ import UIKit
 class ColumnLayer: CALayer {
     var viewport: Range<Int> = .zero {
         didSet {
-            draw()
+            setNeedsLayout()
         }
     }
 
@@ -34,7 +34,7 @@ class ColumnLayer: CALayer {
 
     override func layoutSublayers() {
         super.layoutSublayers()
-        shapeLayer.frame = bounds
+        shapeLayer.frame = contentInsets.inset(bounds)
         draw()
     }
 
@@ -56,7 +56,7 @@ class ColumnLayer: CALayer {
     }
 
     private func drawLineColumn(_ column: Column) {
-        let points = column.points(in: bounds, viewport: viewport)
+        let points = column.points(in: shapeLayer.bounds, viewport: viewport)
         let path = CGPath.between(points: points)
 
         shapeLayer.path = path
@@ -65,6 +65,10 @@ class ColumnLayer: CALayer {
         shapeLayer.lineJoin = .round
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.strokeColor = column.cgColor
+    }
+
+    private var contentInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: lineWidth * 2, bottom: lineWidth * 2)
     }
 
     private let column: Column?
