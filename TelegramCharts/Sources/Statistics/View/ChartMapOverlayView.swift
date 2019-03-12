@@ -10,7 +10,12 @@ protocol ChartMapOverlayViewDelegate: AnyObject {
 
 final class ChartMapOverlayView: View {
     weak var delegate: ChartMapOverlayViewDelegate?
-    var range: Range<CGFloat> = Range(min: 0.65, max: 0.85)
+
+    var range: Range<CGFloat> = Range(min: 0.8, max: 1.0) {
+        didSet {
+            layoutViewport()
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,6 +29,11 @@ final class ChartMapOverlayView: View {
 
     private func setup() {
         addSubviews(viewportView, leftSpaceView, rightSpaceView)
+
+        let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(onPan))
+        panRecognizer.delaysTouchesBegan = false
+        panRecognizer.cancelsTouchesInView = false
+        addGestureRecognizer(panRecognizer)
     }
 
     private func layoutViewport() {
@@ -47,6 +57,59 @@ final class ChartMapOverlayView: View {
             width: bounds.width - viewportView.frame.maxX,
             height: bounds.height
         )
+    }
+
+    private func moveViewport(by delta: CGFloat) {
+        let movedMin = range.min + delta
+        let movedMax = range.max + delta
+        
+        switch viewportView.selectedKnob {
+        case .left where movedMin > 0:
+            range = Range(
+                min: movedMin,
+                max: range.max
+            )
+        case .right where movedMax < 1:
+            range = Range(
+                min: range.min,
+                max: movedMax
+            )
+        case .mid where movedMin > 0 && movedMax < 1:
+            range = Range(
+                min: movedMin,
+                max: movedMax
+            )
+        default:
+            break
+        }
+    }
+
+    @objc private func onPan(_ recognizer: UIPanGestureRecognizer) {
+        guard !bounds.isEmpty, recognizer.state == .changed else {
+            return
+        }
+
+        let translation = recognizer.translation(in: self).x
+        let delta = translation / bounds.width
+        moveViewport(by: delta)
+        recognizer.setTranslation(.zero, in: self)
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        if let point = touches.first?.location(in: self) {
+            viewportView.selectedKnob = viewportView.knob(at: point)
+        }
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        viewportView.selectedKnob = .none
+    }
+
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        viewportView.selectedKnob = .none
     }
 
     override func themeUp() {

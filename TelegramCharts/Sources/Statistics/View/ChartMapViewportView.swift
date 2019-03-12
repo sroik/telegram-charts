@@ -5,11 +5,36 @@
 import UIKit
 
 final class ChartMapViewportView: View {
-    let lineWidth: CGFloat = 1
+    enum Knob: String {
+        case none
+        case left
+        case right
+        case mid
+    }
+
+    let lineWidth: CGFloat = 1.5
+    let tapAreaInsets: UIEdgeInsets = UIEdgeInsets(repeated: -15)
+    var selectedKnob: Knob = .none
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         layout()
+    }
+
+    func knob(at point: CGPoint) -> Knob {
+        guard tapAreaInsets.inset(frame).contains(point) else {
+            return .none
+        }
+
+        if point.x < leftKnob.frame.maxX + frame.origin.x {
+            return .left
+        }
+
+        if point.x > rightKnob.frame.minX + frame.origin.x {
+            return .right
+        }
+
+        return .mid
     }
 
     private func layout() {
