@@ -11,9 +11,17 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
         }
     }
 
+    var controller: ViewController? {
+        didSet {
+            oldValue?.view.removeFromSuperview()
+            controller?.view.fill(in: placeholder)
+            controller?.theme = theme
+        }
+    }
+
     var title: String? {
         didSet {
-            themeUp()
+            label.text = title?.uppercased()
         }
     }
 
@@ -25,6 +33,12 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError()
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        controller = nil
+        title = nil
     }
 
     private func setup() {
@@ -48,8 +62,8 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
 
     private func themeUp() {
         placeholder.theme = theme
+        controller?.theme = theme
         backgroundColor = .clear
-        label.text = title?.uppercased()
         label.textColor = theme.color.header
         label.backgroundColor = theme.color.background
     }

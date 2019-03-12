@@ -73,6 +73,7 @@ extension StatisticsViewController: UITableViewDataSource {
 
         statisticsCell.title = "Followers"
         statisticsCell.theme = theme
+        statisticsCell.controller = ChartViewController(chart: charts[indexPath.row])
         return statisticsCell
     }
 }
