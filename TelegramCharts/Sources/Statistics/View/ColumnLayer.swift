@@ -4,7 +4,7 @@
 
 import UIKit
 
-class ColumnLayer: CALayer {
+final class ColumnLayer: CALayer {
     var viewport: Range<Int> = .zero {
         didSet {
             setNeedsLayout()

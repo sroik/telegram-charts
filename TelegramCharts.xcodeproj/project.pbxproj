@@ -21,6 +21,8 @@
 		AC143B4C2237B43D00FEB9CD /* RangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B4B2237B43D00FEB9CD /* RangeTests.swift */; };
 		AC143B4E2237C94400FEB9CD /* ColumnLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B4D2237C94400FEB9CD /* ColumnLayer.swift */; };
 		AC143B502237CD8000FEB9CD /* ChartMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B4F2237CD8000FEB9CD /* ChartMapView.swift */; };
+		AC143B522237F09500FEB9CD /* ChartMapOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B512237F09500FEB9CD /* ChartMapOverlayView.swift */; };
+		AC143B572237F52D00FEB9CD /* ChartMapViewportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */; };
 		AC3B37F42236510C000AD635 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B37F32236510C000AD635 /* AppDelegate.swift */; };
 		AC3B37FB2236510D000AD635 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC3B37FA2236510D000AD635 /* Assets.xcassets */; };
 		AC3B380A223651E4000AD635 /* charts.json in Resources */ = {isa = PBXBuildFile; fileRef = AC3B3809223651E4000AD635 /* charts.json */; };
@@ -78,6 +80,8 @@
 		AC143B4B2237B43D00FEB9CD /* RangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeTests.swift; sourceTree = "<group>"; };
 		AC143B4D2237C94400FEB9CD /* ColumnLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnLayer.swift; sourceTree = "<group>"; };
 		AC143B4F2237CD8000FEB9CD /* ChartMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMapView.swift; sourceTree = "<group>"; };
+		AC143B512237F09500FEB9CD /* ChartMapOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMapOverlayView.swift; sourceTree = "<group>"; };
+		AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMapViewportView.swift; sourceTree = "<group>"; };
 		AC3B37F02236510C000AD635 /* TelegramCharts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TelegramCharts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC3B37F32236510C000AD635 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC3B37FA2236510D000AD635 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -147,10 +151,12 @@
 			children = (
 				AC143B432237A67D00FEB9CD /* ChartView.swift */,
 				AC143B4F2237CD8000FEB9CD /* ChartMapView.swift */,
+				AC143B512237F09500FEB9CD /* ChartMapOverlayView.swift */,
+				AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */,
+				AC143B4D2237C94400FEB9CD /* ColumnLayer.swift */,
 				AC143B312236F36C00FEB9CD /* StatisticsTableViewCell.swift */,
 				AC143B3722378B5100FEB9CD /* StatisticsTableThemeButton.swift */,
 				AC143B3322378A9300FEB9CD /* UIView+Factory.swift */,
-				AC143B4D2237C94400FEB9CD /* ColumnLayer.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -170,6 +176,14 @@
 				AC143B3F22379A9C00FEB9CD /* CGGeometry+Extensions.swift */,
 			);
 			path = CoreGraphics;
+			sourceTree = "<group>";
+		};
+		AC143B532237F0F400FEB9CD /* Math */ = {
+			isa = PBXGroup;
+			children = (
+				AC143B492237AD2F00FEB9CD /* Range.swift */,
+			);
+			path = Math;
 			sourceTree = "<group>";
 		};
 		AC3B37E72236510C000AD635 = {
@@ -241,6 +255,7 @@
 		AC3B380D22365537000AD635 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AC143B532237F0F400FEB9CD /* Math */,
 				ACE686812236A0A500724432 /* Theme */,
 				ACE686802236A09800724432 /* Chart */,
 			);
@@ -369,7 +384,6 @@
 				AC3B385822366839000AD635 /* Chart+Extensions.swift */,
 				AC3B3853223663D1000AD635 /* ChartData.swift */,
 				AC3B380E22365543000AD635 /* Chart.swift */,
-				AC143B492237AD2F00FEB9CD /* Range.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -522,6 +536,7 @@
 				ACE686962236BB9500724432 /* StatisticsViewController.swift in Sources */,
 				AC143B4222379F9400FEB9CD /* ChartViewController.swift in Sources */,
 				ACE686942236B60F00724432 /* Dependencies.swift in Sources */,
+				AC143B572237F52D00FEB9CD /* ChartMapViewportView.swift in Sources */,
 				AC3B381622365987000AD635 /* ChartsService.swift in Sources */,
 				AC143B322236F36C00FEB9CD /* StatisticsTableViewCell.swift in Sources */,
 				AC3B385922366839000AD635 /* Chart+Extensions.swift in Sources */,
@@ -549,6 +564,7 @@
 				AC143B4A2237AD2F00FEB9CD /* Range.swift in Sources */,
 				AC143B482237AC1700FEB9CD /* Column+Extensions.swift in Sources */,
 				AC3B37F42236510C000AD635 /* AppDelegate.swift in Sources */,
+				AC143B522237F09500FEB9CD /* ChartMapOverlayView.swift in Sources */,
 				ACE6867C22369EEF00724432 /* NavigationController.swift in Sources */,
 				AC3B382E22365BCB000AD635 /* Operators.swift in Sources */,
 				AC3B383222365CF8000AD635 /* Utils.swift in Sources */,

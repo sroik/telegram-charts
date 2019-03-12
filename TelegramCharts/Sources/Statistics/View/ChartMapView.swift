@@ -4,10 +4,23 @@
 
 import UIKit
 
-protocol ChartMapViewDelegate: AnyObject {}
+protocol ChartMapViewDelegate: ChartMapOverlayViewDelegate {}
 
 final class ChartMapView: View {
-    weak var delegate: ChartMapViewDelegate?
+    weak var delegate: ChartMapViewDelegate? {
+        didSet {
+            overlayView.delegate = delegate
+        }
+    }
+
+    var range: Range<CGFloat> {
+        get {
+            return overlayView.range
+        }
+        set {
+            overlayView.range = newValue
+        }
+    }
 
     init(chart: Chart) {
         self.chart = chart
@@ -31,14 +44,11 @@ final class ChartMapView: View {
             columnLayer.frame = bounds
             columnLayers.append(columnLayer)
         }
+
+        overlayView.fill(in: self)
     }
 
-    #warning("remove")
-    override func themeUp() {
-        super.themeUp()
-        backgroundColor = theme.color.background.withAlphaComponent(0.5)
-    }
-
+    private let overlayView = ChartMapOverlayView()
     private var columnLayers: [ColumnLayer] = []
     private let chart: Chart
 }

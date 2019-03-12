@@ -47,4 +47,9 @@ final class ChartViewController: ViewController {
 }
 
 extension ChartViewController: ChartViewDelegate {}
-extension ChartViewController: ChartMapViewDelegate {}
+
+extension ChartViewController: ChartMapViewDelegate {
+    func mapView(_ view: ChartMapOverlayView, didChageRange range: Range<CGFloat>) {
+        print("range changed: ", range)
+    }
+}

@@ -10,6 +10,12 @@ extension CGFloat {
     }
 }
 
+extension CGRect {
+    static var screen: CGRect {
+        return UIScreen.main.bounds
+    }
+}
+
 extension CGPath {
     static func between(points: [CGPoint]) -> CGPath {
         let path = CGMutablePath()

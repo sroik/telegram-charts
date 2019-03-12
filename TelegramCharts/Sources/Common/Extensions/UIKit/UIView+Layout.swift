@@ -78,4 +78,8 @@ public extension UIView {
             rightOffset: insets.right
         )
     }
+
+    func addSubviews(_ subviews: UIView...) {
+        subviews.forEach(addSubview(_:))
+    }
 }

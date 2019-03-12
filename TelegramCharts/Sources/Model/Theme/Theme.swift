@@ -18,4 +18,5 @@ struct ThemeColor {
     let header: UIColor
     let details: UIColor
     let line: UIColor
+    let control: UIColor
 }
