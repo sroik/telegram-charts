@@ -10,7 +10,7 @@ enum ChartsError: Error {
 
 protocol ChartsService {
     /*
-     I know that it's should be asynchronous
+     I know that it should be asynchronous
      or loaded from network. But I don't have a lot of time
      for that and it's not the purpose of this contest
      */

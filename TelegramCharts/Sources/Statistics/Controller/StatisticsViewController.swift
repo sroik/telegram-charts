@@ -4,7 +4,13 @@
 
 import UIKit
 
+protocol StatisticsViewControllerDelegate: AnyObject {
+    func statisticsViewControllerWantsToChangeTheme(_ controller: StatisticsViewController)
+}
+
 final class StatisticsViewController: ViewController {
+    weak var delegate: StatisticsViewControllerDelegate?
+
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
         super.init()
@@ -16,14 +22,18 @@ final class StatisticsViewController: ViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.fill(in: view)
-        theme = dependencies.settings.settings.themeMode.theme
+        theme = dependencies.settings.theme
         loadCharts()
     }
 
     override func themeUp() {
         super.themeUp()
+        themeButton.title = "Switch To \(theme.rotated.title) Mode"
+        themeButton.theme = theme
         tableView.backgroundColor = theme.color.background
-        tableView.reloadData()
+        tableView.forEachVisibleCell { (cell: StatisticsTableViewCell) in
+            cell.theme = theme
+        }
     }
 
     private func loadCharts() {
@@ -35,9 +45,15 @@ final class StatisticsViewController: ViewController {
         }
     }
 
+    private lazy var themeButton = StatisticsTableThemeButton { [weak self] in
+        if let self = self {
+            self.delegate?.statisticsViewControllerWantsToChangeTheme(self)
+        }
+    }
+
+    private lazy var tableView = UITableView.statistics(footer: themeButton)
     private var charts: [Chart] = []
     private let dependencies: Dependencies
-    private let tableView = UITableView.statistics()
 }
 
 extension StatisticsViewController: UITableViewDataSource {
@@ -55,7 +71,7 @@ extension StatisticsViewController: UITableViewDataSource {
             return cell
         }
 
-        statisticsCell.title = "Chart Title"
+        statisticsCell.title = "Followers"
         statisticsCell.theme = theme
         return statisticsCell
     }
@@ -63,21 +79,6 @@ extension StatisticsViewController: UITableViewDataSource {
 
 extension StatisticsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
-    }
-}
-
-private extension UITableView {
-    static func statistics() -> UITableView {
-        let tableView = UITableView()
-        tableView.tableFooterView = UIView()
-        tableView.allowsSelection = false
-        tableView.separatorStyle = .none
-        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
-        tableView.register(
-            StatisticsTableViewCell.self,
-            forCellReuseIdentifier: StatisticsTableViewCell.reusableIdentifier
-        )
-        return tableView
+        return 250
     }
 }

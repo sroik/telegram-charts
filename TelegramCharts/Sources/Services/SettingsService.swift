@@ -5,7 +5,7 @@
 import UIKit
 
 struct Settings: Hashable, Codable {
-    var themeMode: ThemeMode
+    var theme: Theme
 }
 
 protocol SettingsService {
@@ -14,7 +14,13 @@ protocol SettingsService {
 }
 
 extension Settings {
-    static let `default` = Settings(themeMode: .day)
+    static let `default` = Settings(theme: .day)
+}
+
+extension SettingsService {
+    var theme: Theme {
+        return settings.theme
+    }
 }
 
 final class LocalSettingsService: SettingsService {

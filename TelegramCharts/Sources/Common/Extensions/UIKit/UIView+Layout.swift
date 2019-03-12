@@ -13,8 +13,8 @@ public extension UIView {
     func anchor(
         in view: UIView? = nil,
         top: NSLayoutYAxisAnchor? = nil,
-        left: NSLayoutXAxisAnchor? = nil,
         bottom: NSLayoutYAxisAnchor? = nil,
+        left: NSLayoutXAxisAnchor? = nil,
         right: NSLayoutXAxisAnchor? = nil,
         topOffset: CGFloat = 0,
         leftOffset: CGFloat = 0,
@@ -69,8 +69,8 @@ public extension UIView {
         anchor(
             in: view,
             top: view.topAnchor,
-            left: view.leftAnchor,
             bottom: view.bottomAnchor,
+            left: view.leftAnchor,
             right: view.rightAnchor,
             topOffset: insets.top,
             leftOffset: insets.left,

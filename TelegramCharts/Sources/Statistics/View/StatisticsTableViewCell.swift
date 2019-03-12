@@ -32,21 +32,28 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
             in: contentView,
             top: contentView.topAnchor,
             left: contentView.leftAnchor,
-            right: contentView.rightAnchor,
+            topOffset: 10,
             leftOffset: 10,
-            height: 35
+            height: 30
+        )
+
+        placeholder.anchor(
+            in: contentView,
+            top: label.bottomAnchor,
+            bottom: contentView.bottomAnchor,
+            left: contentView.leftAnchor,
+            right: contentView.rightAnchor
         )
     }
 
     private func themeUp() {
+        placeholder.theme = theme
         backgroundColor = .clear
         label.text = title?.uppercased()
-        label.textColor = theme.color.details
-        label.backgroundColor = theme.color.placeholder
+        label.textColor = theme.color.header
+        label.backgroundColor = theme.color.background
     }
 
-    private let label = Label.primary(
-        font: UIFont.systemFont(ofSize: 13),
-        alignment: .left
-    )
+    private let placeholder = Placeholder()
+    private let label = Label.primary(font: UIFont.systemFont(ofSize: 13), alignment: .left)
 }

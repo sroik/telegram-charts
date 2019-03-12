@@ -4,12 +4,7 @@
 
 import UIKit
 
-/*
- I'm using separate data-structure because
- it's easy-storable in some settings and its way
- better than to store some pack of ui-colors
- */
-enum ThemeMode: String, Codable {
+enum Theme: String, Codable {
     case day
     case night
 }
@@ -20,9 +15,7 @@ struct ThemeColor {
     let navigation: UIColor
     let tint: UIColor
     let text: UIColor
+    let header: UIColor
     let details: UIColor
-}
-
-struct Theme {
-    let color: ThemeColor
+    let line: UIColor
 }
