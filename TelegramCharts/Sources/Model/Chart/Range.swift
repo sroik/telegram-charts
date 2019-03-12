@@ -2,13 +2,13 @@
 //  Copyright © 2019 sroik. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 typealias Arithmetical = Numeric & Comparable
 
 struct Range<T: Arithmetical>: Equatable {
-    var min: T
-    var max: T
+    let min: T
+    let max: T
 
     init(min: T, max: T) {
         self.min = Swift.min(min, max)
@@ -17,18 +17,32 @@ struct Range<T: Arithmetical>: Equatable {
 }
 
 extension Range {
+    static var zero: Range<T> {
+        return Range(min: 0, max: 0)
+    }
+
     var size: T {
         return max - min
+    }
+
+    func union(with range: Range<T>) -> Range<T> {
+        return Range(
+            min: Swift.min(min, range.min),
+            max: Swift.max(max, range.max)
+        )
     }
 }
 
 extension Array where Element: Arithmetical {
     var range: Range<Element> {
-        var range: Range<Element> = Range(min: 0, max: 0)
+        var min: Element = 0
+        var max: Element = 0
+
         forEach { element in
-            range.min = Swift.min(range.min, element)
-            range.max = Swift.max(range.max, element)
+            min = Swift.min(min, element)
+            max = Swift.max(max, element)
         }
-        return range
+
+        return Range<Element>(min: min, max: max)
     }
 }

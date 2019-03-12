@@ -9,3 +9,12 @@ extension Column {
         return values.range
     }
 }
+
+extension ColumnType {
+    var isDrawable: Bool {
+        switch self {
+        case .line: return true
+        case .timestamps: return false
+        }
+    }
+}

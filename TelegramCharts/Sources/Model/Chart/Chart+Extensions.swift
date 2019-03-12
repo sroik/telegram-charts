@@ -5,6 +5,12 @@
 import Foundation
 
 extension Chart {
+    var drawableColumns: [Column] {
+        return columns.filter { $0.type.isDrawable }
+    }
+}
+
+extension Chart {
     static func charts(at url: URL) throws -> [Chart] {
         let data = try Data(contentsOf: url)
         return try charts(with: data)
