@@ -13,12 +13,12 @@ final class ChartMapView: View {
         }
     }
 
-    var range: Range<CGFloat> {
+    var viewport: Range<CGFloat> {
         get {
-            return overlayView.range
+            return overlayView.viewport
         }
         set {
-            overlayView.range = newValue
+            overlayView.viewport = newValue
         }
     }
 

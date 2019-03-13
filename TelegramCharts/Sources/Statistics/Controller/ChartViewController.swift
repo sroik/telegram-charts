@@ -7,8 +7,8 @@ import UIKit
 final class ChartViewController: ViewController {
     init(chart: Chart) {
         self.chart = chart
-        self.chartView = ChartView(chart: chart)
         self.mapView = ChartMapView(chart: chart)
+        self.chartView = ChartView(chart: chart)
         self.columnsView = ChartColumnsStackView(columns: chart.drawableColumns)
         super.init()
     }
@@ -25,6 +25,7 @@ final class ChartViewController: ViewController {
             height: 44 * CGFloat(chart.drawableColumns.count)
         )
 
+        mapView.viewport = chartView.viewport
         mapView.delegate = self
         mapView.anchor(
             in: view,
@@ -67,7 +68,7 @@ extension ChartViewController: ChartColumnsStackViewDelegate {
 }
 
 extension ChartViewController: ChartMapViewDelegate {
-    func mapView(_ view: ChartMapOverlayView, didChageRange range: Range<CGFloat>) {
-        print("range changed: ", range)
+    func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Range<CGFloat>) {
+        chartView.viewport = viewport
     }
 }

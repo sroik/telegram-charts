@@ -36,7 +36,13 @@ final class ColumnLayer: CALayer {
 
     override func layoutSublayers() {
         super.layoutSublayers()
-        shapeLayer.frame = contentInsets.inset(bounds)
+
+        let shapeFrame = contentInsets.inset(bounds)
+        guard shapeLayer.frame != shapeFrame else {
+            return
+        }
+
+        shapeLayer.frame = shapeFrame
         draw()
     }
 

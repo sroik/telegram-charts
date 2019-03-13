@@ -5,13 +5,13 @@
 import UIKit
 
 protocol ChartMapOverlayViewDelegate: AnyObject {
-    func mapView(_ view: ChartMapOverlayView, didChageRange range: Range<CGFloat>)
+    func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Range<CGFloat>)
 }
 
 final class ChartMapOverlayView: View {
     weak var delegate: ChartMapOverlayViewDelegate?
 
-    var range: Range<CGFloat> = Range(min: 0.8, max: 1.0) {
+    var viewport: Range<CGFloat> = Range(min: 0, max: 1) {
         didSet {
             layoutViewport()
         }
@@ -38,9 +38,9 @@ final class ChartMapOverlayView: View {
 
     private func layoutViewport() {
         viewportView.frame = CGRect(
-            x: bounds.width * range.min,
+            x: bounds.width * viewport.min,
             y: -viewportView.lineWidth,
-            width: bounds.width * range.max - bounds.width * range.min,
+            width: bounds.width * viewport.max - bounds.width * viewport.min,
             height: bounds.height + viewportView.lineWidth * 2
         )
 
@@ -62,24 +62,26 @@ final class ChartMapOverlayView: View {
     private func moveViewport(by delta: CGFloat) {
         switch viewportView.selectedKnob {
         case .left:
-            range = Range(
-                min: max(0, range.min + delta),
-                max: range.max
+            viewport = Range(
+                min: max(0, viewport.min + delta),
+                max: viewport.max
             )
         case .right:
-            range = Range(
-                min: range.min,
-                max: min(1, range.max + delta)
+            viewport = Range(
+                min: viewport.min,
+                max: min(1, viewport.max + delta)
             )
         case .mid:
-            let halfSize = range.size / 2
-            range = Range(
-                mid: (range.mid + delta).clamped(from: halfSize, to: 1 - halfSize),
-                size: range.size
+            let halfSize = viewport.size / 2
+            viewport = Range(
+                mid: (viewport.mid + delta).clamped(from: halfSize, to: 1 - halfSize),
+                size: viewport.size
             )
         case .none:
-            break
+            return
         }
+
+        delegate?.mapView(self, didChageViewportTo: viewport)
     }
 
     @objc private func onPan(_ recognizer: UIPanGestureRecognizer) {
