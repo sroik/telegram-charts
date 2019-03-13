@@ -24,6 +24,7 @@
 		AC143B522237F09500FEB9CD /* ChartMapOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B512237F09500FEB9CD /* ChartMapOverlayView.swift */; };
 		AC143B572237F52D00FEB9CD /* ChartMapViewportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */; };
 		AC3099292238F02B00A04331 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3099282238F02B00A04331 /* Collection+Extensions.swift */; };
+		AC30992E2238F20700A04331 /* ChartColumnsStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC30992D2238F20700A04331 /* ChartColumnsStateView.swift */; };
 		AC3B37F42236510C000AD635 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B37F32236510C000AD635 /* AppDelegate.swift */; };
 		AC3B37FB2236510D000AD635 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC3B37FA2236510D000AD635 /* Assets.xcassets */; };
 		AC3B380A223651E4000AD635 /* charts.json in Resources */ = {isa = PBXBuildFile; fileRef = AC3B3809223651E4000AD635 /* charts.json */; };
@@ -84,6 +85,7 @@
 		AC143B512237F09500FEB9CD /* ChartMapOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMapOverlayView.swift; sourceTree = "<group>"; };
 		AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMapViewportView.swift; sourceTree = "<group>"; };
 		AC3099282238F02B00A04331 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
+		AC30992D2238F20700A04331 /* ChartColumnsStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartColumnsStateView.swift; sourceTree = "<group>"; };
 		AC3B37F02236510C000AD635 /* TelegramCharts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TelegramCharts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC3B37F32236510C000AD635 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC3B37FA2236510D000AD635 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -151,14 +153,9 @@
 		AC143B3522378B2C00FEB9CD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AC143B432237A67D00FEB9CD /* ChartView.swift */,
-				AC143B4F2237CD8000FEB9CD /* ChartMapView.swift */,
-				AC143B512237F09500FEB9CD /* ChartMapOverlayView.swift */,
-				AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */,
-				AC143B4D2237C94400FEB9CD /* ColumnLayer.swift */,
-				AC143B312236F36C00FEB9CD /* StatisticsTableViewCell.swift */,
-				AC143B3722378B5100FEB9CD /* StatisticsTableThemeButton.swift */,
-				AC143B3322378A9300FEB9CD /* UIView+Factory.swift */,
+				AC30992A2238F1AC00A04331 /* Chart */,
+				AC30992B2238F1B800A04331 /* Statistics */,
+				AC30992C2238F1C100A04331 /* Extensions */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -186,6 +183,36 @@
 				AC143B492237AD2F00FEB9CD /* Range.swift */,
 			);
 			path = Math;
+			sourceTree = "<group>";
+		};
+		AC30992A2238F1AC00A04331 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				AC143B432237A67D00FEB9CD /* ChartView.swift */,
+				AC143B4F2237CD8000FEB9CD /* ChartMapView.swift */,
+				AC143B512237F09500FEB9CD /* ChartMapOverlayView.swift */,
+				AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */,
+				AC143B4D2237C94400FEB9CD /* ColumnLayer.swift */,
+				AC30992D2238F20700A04331 /* ChartColumnsStateView.swift */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
+		AC30992B2238F1B800A04331 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				AC143B312236F36C00FEB9CD /* StatisticsTableViewCell.swift */,
+				AC143B3722378B5100FEB9CD /* StatisticsTableThemeButton.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		AC30992C2238F1C100A04331 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AC143B3322378A9300FEB9CD /* UIView+Factory.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		AC3B37E72236510C000AD635 = {
@@ -548,6 +575,7 @@
 				AC143B3822378B5100FEB9CD /* StatisticsTableThemeButton.swift in Sources */,
 				AC3B3854223663D1000AD635 /* ChartData.swift in Sources */,
 				AC143B4E2237C94400FEB9CD /* ColumnLayer.swift in Sources */,
+				AC30992E2238F20700A04331 /* ChartColumnsStateView.swift in Sources */,
 				AC143B302236F1D700FEB9CD /* Label.swift in Sources */,
 				ACE6868A2236AD1000724432 /* Themeable.swift in Sources */,
 				ACE686832236A0B400724432 /* Theme+Factory.swift in Sources */,
