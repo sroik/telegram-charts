@@ -7,7 +7,7 @@ import UIKit
 final class ColumnLayer: CALayer {
     var viewport: Range<Int> = .zero {
         didSet {
-            setNeedsLayout()
+            draw()
         }
     }
 
@@ -16,6 +16,8 @@ final class ColumnLayer: CALayer {
             shapeLayer.lineWidth = lineWidth
         }
     }
+
+    let column: Column?
 
     init(column: Column?) {
         self.column = column
@@ -39,6 +41,10 @@ final class ColumnLayer: CALayer {
     }
 
     private func setup() {
+        shapeLayer.lineWidth = lineWidth
+        shapeLayer.lineCap = .round
+        shapeLayer.lineJoin = .round
+        shapeLayer.fillColor = UIColor.clear.cgColor
         addSublayer(shapeLayer)
     }
 
@@ -58,12 +64,7 @@ final class ColumnLayer: CALayer {
     private func drawLineColumn(_ column: Column) {
         let points = column.points(in: shapeLayer.bounds, viewport: viewport)
         let path = CGPath.between(points: points)
-
         shapeLayer.path = path
-        shapeLayer.lineWidth = lineWidth
-        shapeLayer.lineCap = .round
-        shapeLayer.lineJoin = .round
-        shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.strokeColor = column.cgColor
     }
 
@@ -71,6 +72,5 @@ final class ColumnLayer: CALayer {
         return UIEdgeInsets(top: lineWidth * 2, bottom: lineWidth * 2)
     }
 
-    private let column: Column?
     private let shapeLayer = CAShapeLayer()
 }

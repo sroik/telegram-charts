@@ -61,7 +61,7 @@ final class ChartViewController: ViewController {
 
 extension ChartViewController: ChartColumnsStackViewDelegate {
     func columnsView(_ view: ChartColumnsStackView, didChangeEnabledColumns columns: [Column]) {
-        print("update columns")
+        mapView.enabledColumns = Set(columns)
     }
 }
 

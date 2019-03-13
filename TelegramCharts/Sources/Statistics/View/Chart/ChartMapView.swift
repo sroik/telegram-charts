@@ -22,33 +22,33 @@ final class ChartMapView: View {
         }
     }
 
+    var enabledColumns: Set<Column> {
+        get {
+            return chartLayer.enabledColumns
+        }
+        set {
+            chartLayer.enabledColumns = newValue
+        }
+    }
+
     init(chart: Chart) {
         self.chart = chart
+        self.chartLayer = ChartLayer(chart: chart)
         super.init(frame: .screen)
         setup()
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        columnLayers.forEach { layer in
-            layer.frame = bounds
-        }
+        chartLayer.frame = bounds
     }
 
     private func setup() {
-        let verticalRange = chart.drawableColumns.range
-        chart.drawableColumns.forEach { column in
-            let columnLayer = ColumnLayer(column: column)
-            columnLayer.viewport = verticalRange
-            layer.addSublayer(columnLayer)
-            columnLayer.frame = bounds
-            columnLayers.append(columnLayer)
-        }
-
+        layer.addSublayer(chartLayer)
         overlayView.fill(in: self)
     }
 
     private let overlayView = ChartMapOverlayView()
-    private var columnLayers: [ColumnLayer] = []
+    private let chartLayer: ChartLayer
     private let chart: Chart
 }

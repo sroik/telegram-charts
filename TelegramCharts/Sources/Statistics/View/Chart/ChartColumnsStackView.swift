@@ -38,7 +38,7 @@ final class ChartColumnsStackView: View {
 
     @objc private func cellPressed(_ cell: ChartColumnsStackViewCell) {
         cell.isSelected.toggle()
-        delegate?.columnsView(self, didChangeEnabledColumns: columns)
+        delegate?.columnsView(self, didChangeEnabledColumns: enabledColumns)
     }
 
     override func themeUp() {
