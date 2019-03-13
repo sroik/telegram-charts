@@ -20,6 +20,7 @@ public extension UIView {
         leftOffset: CGFloat = 0,
         bottomOffset: CGFloat = 0,
         rightOffset: CGFloat = 0,
+        insets: UIEdgeInsets = .zero,
         width: CGFloat? = nil,
         height: CGFloat? = nil,
         centerX: NSLayoutXAxisAnchor? = nil,
@@ -33,19 +34,23 @@ public extension UIView {
         }
 
         if let top = top {
-            topAnchor.constraint(equalTo: top, constant: topOffset).isActive = true
+            let constant = topOffset + insets.top
+            topAnchor.constraint(equalTo: top, constant: constant).isActive = true
         }
 
         if let left = left {
-            leftAnchor.constraint(equalTo: left, constant: leftOffset).isActive = true
+            let constant = leftOffset + insets.left
+            leftAnchor.constraint(equalTo: left, constant: constant).isActive = true
         }
 
         if let bottom = bottom {
-            bottomAnchor.constraint(equalTo: bottom, constant: -bottomOffset).isActive = true
+            let constant = -(bottomOffset + insets.bottom)
+            bottomAnchor.constraint(equalTo: bottom, constant: constant).isActive = true
         }
 
         if let right = right {
-            rightAnchor.constraint(equalTo: right, constant: -rightOffset).isActive = true
+            let constant = -(rightOffset + insets.right)
+            rightAnchor.constraint(equalTo: right, constant: constant).isActive = true
         }
 
         if let width = width {

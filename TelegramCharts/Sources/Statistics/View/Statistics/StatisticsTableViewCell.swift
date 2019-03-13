@@ -14,8 +14,7 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
     var controller: ViewController? {
         didSet {
             oldValue?.view.removeFromSuperview()
-            controller?.view.fill(in: placeholder)
-            controller?.theme = theme
+            layoutController()
         }
     }
 
@@ -41,13 +40,18 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
         title = nil
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layoutController()
+    }
+
     private func setup() {
         label.anchor(
             in: contentView,
             top: contentView.topAnchor,
             left: contentView.leftAnchor,
-            topOffset: 10,
-            leftOffset: 10,
+            topOffset: 15,
+            leftOffset: 15,
             height: 30
         )
 
@@ -58,6 +62,15 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
             left: contentView.leftAnchor,
             right: contentView.rightAnchor
         )
+    }
+
+    private func layoutController() {
+        guard !bounds.isEmpty, controller?.view.superview != placeholder else {
+            return
+        }
+
+        controller?.view.fill(in: placeholder)
+        controller?.theme = theme
     }
 
     private func themeUp() {

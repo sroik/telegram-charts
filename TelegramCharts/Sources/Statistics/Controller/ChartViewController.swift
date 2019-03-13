@@ -31,16 +31,17 @@ final class ChartViewController: ViewController {
             bottom: columnsView.topAnchor,
             left: view.leftAnchor,
             right: view.rightAnchor,
+            insets: UIEdgeInsets(right: 15, left: 15),
             height: 42
         )
 
-        chartView.delegate = self
         chartView.anchor(
             in: view,
             top: view.topAnchor,
             bottom: mapView.topAnchor,
             left: view.leftAnchor,
-            right: view.rightAnchor
+            right: view.rightAnchor,
+            insets: UIEdgeInsets(right: 15, left: 15)
         )
     }
 
@@ -48,6 +49,7 @@ final class ChartViewController: ViewController {
         super.themeUp()
         chartView.theme = theme
         mapView.theme = theme
+        columnsView.theme = theme
         view.backgroundColor = theme.color.placeholder
     }
 
@@ -57,8 +59,12 @@ final class ChartViewController: ViewController {
     private let chart: Chart
 }
 
-extension ChartViewController: ChartViewDelegate {}
-extension ChartViewController: ChartColumnsStackViewDelegate {}
+extension ChartViewController: ChartColumnsStackViewDelegate {
+    func columnsView(_ view: ChartColumnsStackView, didChangeEnabledColumns columns: [Column]) {
+        print("update columns")
+    }
+}
+
 extension ChartViewController: ChartMapViewDelegate {
     func mapView(_ view: ChartMapOverlayView, didChageRange range: Range<CGFloat>) {
         print("range changed: ", range)

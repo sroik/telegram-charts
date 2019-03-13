@@ -4,14 +4,10 @@
 
 import UIKit
 
-protocol ChartViewDelegate: AnyObject {}
-
 final class ChartView: View {
-    weak var delegate: ChartViewDelegate?
-
     init(chart: Chart) {
         self.chart = chart
-        super.init(frame: .zero)
+        super.init(frame: .screen)
         setup()
     }
 

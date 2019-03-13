@@ -15,18 +15,18 @@ final class ChartColumnsStackViewCell: Control {
 
     init(column: Column) {
         self.column = column
-        super.init(frame: .zero)
+        super.init(frame: .screen)
         setup()
     }
 
     private func setup() {
-        colorView.layer.cornerRadius = 2
+        colorView.layer.cornerRadius = 2.5
         colorView.backgroundColor = column.uiColor
         colorView.anchor(
             in: self,
             left: leftAnchor,
-            leftOffset: 10,
-            width: 10, height: 10,
+            leftOffset: 15,
+            width: 12.5, height: 12.5,
             centerY: centerYAnchor
         )
 
@@ -52,7 +52,7 @@ final class ChartColumnsStackViewCell: Control {
             in: self,
             right: rightAnchor,
             rightOffset: 15,
-            width: 10, height: 10,
+            width: 12.5, height: 12.5,
             centerY: centerYAnchor
         )
 

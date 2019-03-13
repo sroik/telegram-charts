@@ -20,7 +20,7 @@ final class StatisticsTableThemeButton: View {
     }
 
     init(onTap: Callback? = nil) {
-        super.init(frame: .zero)
+        super.init(frame: .screen)
         self.onTap = onTap
         setup()
     }

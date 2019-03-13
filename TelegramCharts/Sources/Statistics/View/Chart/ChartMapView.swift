@@ -24,7 +24,7 @@ final class ChartMapView: View {
 
     init(chart: Chart) {
         self.chart = chart
-        super.init(frame: .zero)
+        super.init(frame: .screen)
         setup()
     }
 

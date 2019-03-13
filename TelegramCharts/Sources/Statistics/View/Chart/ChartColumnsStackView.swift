@@ -4,21 +4,29 @@
 
 import UIKit
 
-protocol ChartColumnsStackViewDelegate: AnyObject {}
+protocol ChartColumnsStackViewDelegate: AnyObject {
+    func columnsView(_ view: ChartColumnsStackView, didChangeEnabledColumns columns: [Column])
+}
 
 final class ChartColumnsStackView: View {
     weak var delegate: ChartColumnsStackViewDelegate?
 
+    var enabledColumns: [Column] {
+        return cells.filter { $0.isSelected }.map { $0.column }
+    }
+
     init(columns: [Column]) {
         self.columns = columns
         self.cells = columns.map(ChartColumnsStackViewCell.init(column:))
-        super.init(frame: .zero)
+        super.init(frame: .screen)
+        setup()
     }
 
     private func setup() {
         cells.forEach { cell in
             cell.addTarget(self, action: #selector(cellPressed), for: .touchUpInside)
             cell.isSelected = true
+            cell.theme = theme
             stackView.addArrangedSubview(cell)
         }
 
@@ -30,6 +38,12 @@ final class ChartColumnsStackView: View {
 
     @objc private func cellPressed(_ cell: ChartColumnsStackViewCell) {
         cell.isSelected.toggle()
+        delegate?.columnsView(self, didChangeEnabledColumns: columns)
+    }
+
+    override func themeUp() {
+        super.themeUp()
+        cells.theme(with: theme)
     }
 
     private let stackView = UIStackView()
