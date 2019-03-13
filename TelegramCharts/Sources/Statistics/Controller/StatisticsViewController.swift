@@ -39,6 +39,7 @@ final class StatisticsViewController: ViewController {
     private func loadCharts() {
         do {
             charts = try dependencies.charts.load()
+            chartViewControllers = charts.map(ChartViewController.init(chart:))
             tableView.reloadData()
         } catch {
             assertionFailureWrapper("failed to load charts")
@@ -53,6 +54,7 @@ final class StatisticsViewController: ViewController {
 
     private lazy var tableView = UITableView.statistics(footer: themeButton)
     private var charts: [Chart] = []
+    private var chartViewControllers: [ChartViewController] = []
     private let dependencies: Dependencies
 }
 
@@ -73,13 +75,18 @@ extension StatisticsViewController: UITableViewDataSource {
 
         statisticsCell.title = "Followers"
         statisticsCell.theme = theme
-        statisticsCell.controller = ChartViewController(chart: charts[indexPath.row])
+        statisticsCell.controller = chartViewControllers[safe: indexPath.row]
         return statisticsCell
     }
 }
 
 extension StatisticsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 362
+        guard let chart = charts[safe: indexPath.row] else {
+            assertionFailureWrapper("invalid index path")
+            return 0
+        }
+
+        return 362 + CGFloat(chart.drawableColumns.count) * 44
     }
 }

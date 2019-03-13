@@ -60,26 +60,24 @@ final class ChartMapOverlayView: View {
     }
 
     private func moveViewport(by delta: CGFloat) {
-        let movedMin = range.min + delta
-        let movedMax = range.max + delta
-        
         switch viewportView.selectedKnob {
-        case .left where movedMin > 0:
+        case .left:
             range = Range(
-                min: movedMin,
+                min: max(0, range.min + delta),
                 max: range.max
             )
-        case .right where movedMax < 1:
+        case .right:
             range = Range(
                 min: range.min,
-                max: movedMax
+                max: min(1, range.max + delta)
             )
-        case .mid where movedMin > 0 && movedMax < 1:
+        case .mid:
+            let halfSize = range.size / 2
             range = Range(
-                min: movedMin,
-                max: movedMax
+                mid: (range.mid + delta).clamped(from: halfSize, to: 1 - halfSize),
+                size: range.size
             )
-        default:
+        case .none:
             break
         }
     }
