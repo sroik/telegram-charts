@@ -11,6 +11,12 @@ final class ChartLayer: CALayer {
         }
     }
 
+    var lineWidth: CGFloat = 1.0 {
+        didSet {
+            columnLayers.forEach { $0.lineWidth = lineWidth }
+        }
+    }
+
     init(chart: Chart?) {
         self.chart = chart
         self.enabledColumns = Set(chart?.drawableColumns ?? [])
@@ -40,6 +46,7 @@ final class ChartLayer: CALayer {
         chart.drawableColumns.forEach { column in
             let layer = ColumnLayer(column: column)
             layer.frame = bounds
+            layer.lineWidth = lineWidth
             columnLayers.append(layer)
             addSublayer(layer)
         }
@@ -57,7 +64,8 @@ final class ChartLayer: CALayer {
             return
         }
 
-        layer.isHidden = !enabledColumns.contains(column)
+        let opacity = enabledColumns.contains(column) ? 1 : 0
+        layer.set(value: opacity, for: .opacity, animated: true)
         layer.viewport = layersViewport
     }
 

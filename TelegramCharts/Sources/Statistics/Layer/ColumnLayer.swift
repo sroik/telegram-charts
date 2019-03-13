@@ -7,7 +7,7 @@ import UIKit
 final class ColumnLayer: CALayer {
     var viewport: Range<Int> = .zero {
         didSet {
-            draw()
+            draw(animated: true)
         }
     }
 
@@ -40,32 +40,32 @@ final class ColumnLayer: CALayer {
         draw()
     }
 
-    private func setup() {
-        shapeLayer.lineWidth = lineWidth
-        shapeLayer.lineCap = .round
-        shapeLayer.lineJoin = .round
-        shapeLayer.fillColor = UIColor.clear.cgColor
-        addSublayer(shapeLayer)
-    }
-
-    private func draw() {
+    func draw(animated: Bool = false) {
         guard let column = column else {
             return
         }
 
         switch column.type {
         case .line:
-            drawLineColumn(column)
+            drawLineColumn(column, animated: animated)
         default:
             assertionFailureWrapper("column type is not supported yet")
         }
     }
 
-    private func drawLineColumn(_ column: Column) {
+    private func drawLineColumn(_ column: Column, animated: Bool) {
         let points = column.points(in: shapeLayer.bounds, viewport: viewport)
         let path = CGPath.between(points: points)
-        shapeLayer.path = path
-        shapeLayer.strokeColor = column.cgColor
+        shapeLayer.set(value: path, for: .path, animated: animated)
+    }
+
+    private func setup() {
+        shapeLayer.lineWidth = lineWidth
+        shapeLayer.lineCap = .round
+        shapeLayer.lineJoin = .round
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeColor = column?.cgColor
+        addSublayer(shapeLayer)
     }
 
     private var contentInsets: UIEdgeInsets {
