@@ -9,7 +9,7 @@ final class ChartViewController: ViewController {
         self.chart = chart
         self.chartView = ChartView(chart: chart)
         self.mapView = ChartMapView(chart: chart)
-        self.columnsView = ChartColumnsStateView(columns: chart.drawableColumns)
+        self.columnsView = ChartColumnsStackView(columns: chart.drawableColumns)
         super.init()
     }
 
@@ -51,14 +51,14 @@ final class ChartViewController: ViewController {
         view.backgroundColor = theme.color.placeholder
     }
 
-    private let columnsView: ChartColumnsStateView
+    private let columnsView: ChartColumnsStackView
     private let chartView: ChartView
     private let mapView: ChartMapView
     private let chart: Chart
 }
 
 extension ChartViewController: ChartViewDelegate {}
-extension ChartViewController: ChartColumnsStateViewDelegate {}
+extension ChartViewController: ChartColumnsStackViewDelegate {}
 extension ChartViewController: ChartMapViewDelegate {
     func mapView(_ view: ChartMapOverlayView, didChageRange range: Range<CGFloat>) {
         print("range changed: ", range)

@@ -22,10 +22,12 @@ extension Column {
         return values.isEmpty
     }
 
+    var uiColor: UIColor? {
+        return color.flatMap { UIColor(hex: $0) }
+    }
+
     var cgColor: CGColor? {
-        return color.flatMap { hex in
-            UIColor(hex: hex)?.cgColor
-        }
+        return uiColor?.cgColor
     }
 
     func points(in rect: CGRect, viewport: Range<Int>) -> [CGPoint] {
