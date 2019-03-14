@@ -9,7 +9,7 @@ final class ChartTimestampsView: View {
 
     var minimumSpacing: CGFloat = 50.0 {
         didSet {
-            update()
+            updateSpacing()
         }
     }
 
@@ -21,7 +21,7 @@ final class ChartTimestampsView: View {
 
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
-        update()
+        updateSpacing()
     }
 
     override func themeUp() {
@@ -30,24 +30,101 @@ final class ChartTimestampsView: View {
         labels.values.forEach { $0.textColor = theme.color.details }
     }
 
-    private func update() {
-        guard timestamps.count > 0 else {
+    func updateSpacing(animated: Bool = true) {
+        switch labelsNumber.compare(with: fitLabelsNumber) {
+        case .orderedAscending:
+            recursiveBisect(animated: animated)
+            updateFrames()
+        case .orderedDescending where labelsNumber > 1:
+            recursiveJoin(animated: false)
+            updateFrames()
+        case .orderedSame, .orderedDescending:
+            updateFrames()
+        }
+    }
+
+    private func recursiveBisect(animated: Bool) {
+        while labelsNumber < fitLabelsNumber {
+            bisect(animated: animated)
+        }
+    }
+
+    private func recursiveJoin(animated: Bool) {
+        while labelsNumber > fitLabelsNumber && labelsNumber > 1 {
+            join(animated: animated)
+        }
+    }
+
+    private func bisect(animated: Bool) {
+        labelsNumber *= 2
+        labels = labels.mapKeys { $0 * 2 + 1 }
+
+        (0 ..< labelsNumber).forEach { index in
+            guard labels[index] == nil else {
+                return
+            }
+
+            addLabel(at: index, animated: animated)
+        }
+    }
+
+    private func join(animated: Bool) {
+        (0 ..< labelsNumber).filter { $0.isEven }.forEach { index in
+            removeLabel(at: index, animated: animated)
+        }
+
+        labelsNumber /= 2
+        labels = labels.mapKeys { $0 / 2 }
+    }
+
+    private func updateFrames() {
+        labels.forEach { index, label in
+            label.frame = frame(at: index)
+        }
+    }
+
+    private func removeLabel(at index: Index, animated: Bool) {
+        guard let label = labels[index] else {
             return
         }
 
-//        labels.values.forEach { $0.removeFromSuperview() }
-//        labels.removeAll()
+        labels[index] = nil
+        label.removeFromSuperview(animated: animated)
+    }
 
-//        let fitLabelsNumber = Int(bounds.width / minimumSpacing)
-//        let fitLabelsStride = 1 + (timestamps.count / fitLabelsNumber)
+    private func addLabel(at index: Index, animated: Bool) {
+        guard labels[index] == nil else {
+            return
+        }
 
-//        timestamps.enumerated().forEach { index, timestamp in
-//            let label = buildLabel(for: timestamp)
-//            label.text = "\(index)"
-//            labels[index] = label
-//            label.frame =
-//            addSubview(label)
-//        }
+        let label = buildLabel(at: index)
+        addSubview(label, animated: animated)
+        labels[index] = label
+    }
+
+    private func buildLabel(at index: Index) -> Label {
+        let timestamp = timestamps[0]
+        let label = buildLabel(for: timestamp)
+        label.frame = frame(at: index)
+        return label
+    }
+
+    private func buildLabel(for timestamp: Timestamp) -> Label {
+        return Label.primary(
+            text: "Feb 10",
+            color: theme.color.details,
+            font: UIFont.systemFont(ofSize: 10),
+            alignment: .right
+        )
+    }
+
+    private func frame(at index: Index) -> CGRect {
+        return CGRect(
+            x: CGFloat(index) * spacing,
+            y: 0,
+            width: spacing,
+            height: bounds.height
+        )
     }
 
     private func setup() {
@@ -60,14 +137,17 @@ final class ChartTimestampsView: View {
         )
     }
 
-    private func buildLabel(for timestamp: Timestamp) -> Label {
-        return Label.primary(
-            text: "Feb 10",
-            color: theme.color.details,
-            font: UIFont.systemFont(ofSize: 10)
-        )
+    private var fitLabelsNumber: Int {
+        let fitNumber = Int(bounds.width / minimumSpacing)
+        let maxNumber = timestamps.count
+        return min(fitNumber, maxNumber).nearestPowerOfTwo ?? 1
     }
 
+    private var spacing: CGFloat {
+        return bounds.width / CGFloat(labelsNumber)
+    }
+
+    private var labelsNumber: Int = 1
     private var labels: [Index: Label] = [:]
     private let timestamps: [Timestamp]
     private let line = UIView()

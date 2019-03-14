@@ -87,4 +87,21 @@ public extension UIView {
     func addSubviews(_ subviews: UIView...) {
         subviews.forEach(addSubview(_:))
     }
+
+    func removeFromSuperview(animated: Bool, duration: TimeInterval = 0.25) {
+        UIView.animate(
+            withDuration: animated ? duration : 0,
+            animations: { self.alpha = 0 },
+            completion: { _ in self.removeFromSuperview() }
+        )
+    }
+
+    func addSubview(_ view: UIView, animated: Bool, duration: TimeInterval = 0.25) {
+        view.alpha = 0
+        addSubview(view)
+        UIView.animate(
+            withDuration: animated ? duration : 0,
+            animations: { view.alpha = 1 }
+        )
+    }
 }

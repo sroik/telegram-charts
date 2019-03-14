@@ -4,13 +4,6 @@
 
 import UIKit
 
-extension Comparable {
-    func clamped(from: Self, to: Self) -> Self {
-        assertWrapper(from <= to, "invalid clamp range", "`to` should be greater than `from`")
-        return min(max(self, from), to)
-    }
-}
-
 extension CGFloat {
     static var layoutEpsilon: CGFloat {
         return 1e-2

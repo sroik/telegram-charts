@@ -9,3 +9,11 @@ extension Collection {
         return indices.contains(index) ? self[index] : nil
     }
 }
+
+extension Dictionary {
+    func mapKeys<K: Hashable>(using block: (Key) -> K) -> [K: Value] {
+        return [K: Value](uniqueKeysWithValues: map { key, value in
+            (block(key), value)
+        })
+    }
+}
