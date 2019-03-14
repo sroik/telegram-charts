@@ -38,14 +38,31 @@ final class ChartMapViewportView: View {
     }
 
     private func layout() {
-        layer.cornerRadius = 1
+        layer.cornerRadius = 1.5
         layer.masksToBounds = true
+
+        topLine.anchor(
+            in: self,
+            top: topAnchor,
+            left: leftAnchor,
+            right: rightAnchor,
+            height: lineWidth
+        )
+
+        bottomLine.anchor(
+            in: self,
+            bottom: bottomAnchor,
+            left: leftAnchor,
+            right: rightAnchor,
+            height: lineWidth
+        )
 
         leftKnob.anchor(
             in: self,
             top: topAnchor,
             bottom: bottomAnchor,
             left: leftAnchor,
+            insets: UIEdgeInsets(top: lineWidth, left: 0, bottom: lineWidth, right: 0),
             width: 8
         )
 
@@ -54,23 +71,8 @@ final class ChartMapViewportView: View {
             top: topAnchor,
             bottom: bottomAnchor,
             right: rightAnchor,
+            insets: UIEdgeInsets(top: lineWidth, left: 0, bottom: lineWidth, right: 0),
             width: 8
-        )
-
-        topLine.anchor(
-            in: self,
-            top: topAnchor,
-            left: leftKnob.rightAnchor,
-            right: rightKnob.leftAnchor,
-            height: lineWidth
-        )
-
-        bottomLine.anchor(
-            in: self,
-            bottom: bottomAnchor,
-            left: leftKnob.rightAnchor,
-            right: rightKnob.leftAnchor,
-            height: lineWidth
         )
     }
 

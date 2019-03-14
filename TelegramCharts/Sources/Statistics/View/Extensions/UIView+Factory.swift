@@ -26,6 +26,8 @@ extension UIScrollView {
     static func charts() -> UIScrollView {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.isScrollEnabled = false
         return scrollView
     }
 }

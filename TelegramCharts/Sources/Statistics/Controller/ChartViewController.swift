@@ -25,14 +25,14 @@ final class ChartViewController: ViewController {
             height: 44 * CGFloat(chart.drawableColumns.count)
         )
 
-        mapView.viewport = chartView.viewport
+        mapView.viewport = chartView.timeViewport
         mapView.delegate = self
         mapView.anchor(
             in: view,
             bottom: columnsView.topAnchor,
             left: view.leftAnchor,
             right: view.rightAnchor,
-            insets: UIEdgeInsets(right: 15, left: 15),
+            insets: UIEdgeInsets(top: 0, left: 15, bottom: 10, right: 15),
             height: 42
         )
 
@@ -42,7 +42,7 @@ final class ChartViewController: ViewController {
             bottom: mapView.topAnchor,
             left: view.leftAnchor,
             right: view.rightAnchor,
-            insets: UIEdgeInsets(right: 15, left: 15)
+            insets: UIEdgeInsets(top: 0, left: 15, bottom: 10, right: 15)
         )
     }
 
@@ -69,6 +69,6 @@ extension ChartViewController: ChartColumnsStackViewDelegate {
 
 extension ChartViewController: ChartMapViewDelegate {
     func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Range<CGFloat>) {
-        chartView.viewport = viewport
+        chartView.timeViewport = viewport
     }
 }

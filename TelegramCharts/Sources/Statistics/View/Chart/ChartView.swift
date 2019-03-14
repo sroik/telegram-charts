@@ -5,7 +5,7 @@
 import UIKit
 
 final class ChartView: View {
-    var viewport: Range<CGFloat> = Range(min: 0.8, max: 1.0) {
+    var timeViewport: Range<CGFloat> = Range(min: 0.8, max: 1.0) {
         didSet {
             adaptToViewport()
         }
@@ -39,12 +39,12 @@ final class ChartView: View {
 
     private func adaptToViewport() {
         scrollView.contentSize = CGSize(
-            width: bounds.width / viewport.size,
+            width: bounds.width / timeViewport.size,
             height: bounds.height
         )
 
         scrollView.contentOffset = CGPoint(
-            x: scrollView.contentSize.width * viewport.min,
+            x: scrollView.contentSize.width * timeViewport.min,
             y: 0
         )
 

@@ -87,6 +87,6 @@ extension StatisticsViewController: UITableViewDelegate {
             return 0
         }
 
-        return 367 + CGFloat(chart.drawableColumns.count) * 44
+        return 360 + CGFloat(chart.drawableColumns.count) * 44
     }
 }
