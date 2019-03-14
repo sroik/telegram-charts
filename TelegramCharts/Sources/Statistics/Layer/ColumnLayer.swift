@@ -4,7 +4,7 @@
 
 import UIKit
 
-final class ColumnLayer: CALayer {
+final class ColumnLayer: Layer {
     var range: Range<Int> = .zero {
         didSet {
             draw(animated: true)
@@ -34,15 +34,9 @@ final class ColumnLayer: CALayer {
         self.init(column: nil)
     }
 
-    override func layoutSublayers() {
-        super.layoutSublayers()
-
-        let shapeFrame = contentInsets.inset(bounds)
-        guard shapeLayer.frame.distance(to: shapeFrame) > .layoutEpsilon else {
-            return
-        }
-
-        shapeLayer.frame = shapeFrame
+    override func layoutSublayersOnBoundsChange() {
+        super.layoutSublayersOnBoundsChange()
+        shapeLayer.frame = contentInsets.inset(bounds)
         draw()
     }
 
