@@ -25,7 +25,7 @@ final class ChartViewController: ViewController {
             height: 44 * CGFloat(chart.drawableColumns.count)
         )
 
-        mapView.viewport = chartView.timeViewport
+        mapView.viewport = chartView.viewport
         mapView.delegate = self
         mapView.anchor(
             in: view,
@@ -69,6 +69,6 @@ extension ChartViewController: ChartColumnsStackViewDelegate {
 
 extension ChartViewController: ChartMapViewDelegate {
     func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Range<CGFloat>) {
-        chartView.timeViewport = viewport
+        chartView.viewport = viewport
     }
 }

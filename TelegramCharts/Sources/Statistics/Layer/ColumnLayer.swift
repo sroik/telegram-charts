@@ -5,7 +5,7 @@
 import UIKit
 
 final class ColumnLayer: CALayer {
-    var viewport: Range<Int> = .zero {
+    var range: Range<Int> = .zero {
         didSet {
             draw(animated: true)
         }
@@ -38,7 +38,7 @@ final class ColumnLayer: CALayer {
         super.layoutSublayers()
 
         let shapeFrame = contentInsets.inset(bounds)
-        guard shapeLayer.frame != shapeFrame else {
+        guard shapeLayer.frame.distance(to: shapeFrame) > .layoutEpsilon else {
             return
         }
 
@@ -60,7 +60,7 @@ final class ColumnLayer: CALayer {
     }
 
     private func drawLineColumn(_ column: Column, animated: Bool) {
-        let points = column.points(in: shapeLayer.bounds, viewport: viewport)
+        let points = column.points(in: shapeLayer.bounds, range: range)
         let path = CGPath.between(points: points)
         shapeLayer.set(value: path, for: .path, animated: animated)
     }

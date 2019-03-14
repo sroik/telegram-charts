@@ -12,14 +12,41 @@ extension Comparable {
 }
 
 extension CGFloat {
+    static var layoutEpsilon: CGFloat {
+        return 1e-2
+    }
+
     static var pixel: CGFloat {
         return 1.0 / UIScreen.main.scale
+    }
+}
+
+extension CGPoint {
+    func distance(to: CGPoint) -> CGFloat {
+        let dx = x - to.x
+        let dy = y - to.y
+        return sqrt(dx * dx + dy * dy)
     }
 }
 
 extension CGRect {
     static var screen: CGRect {
         return UIScreen.main.bounds
+    }
+
+    var vertices: [CGPoint] {
+        return [
+            CGPoint(x: minX, y: minY),
+            CGPoint(x: minX, y: maxY),
+            CGPoint(x: maxX, y: maxY),
+            CGPoint(x: maxX, y: minY)
+        ]
+    }
+
+    func distance(to rect: CGRect) -> CGFloat {
+        return zip(vertices, rect.vertices).reduce(0) { accumulator, next in
+            accumulator + next.0.distance(to: next.1)
+        }
     }
 }
 

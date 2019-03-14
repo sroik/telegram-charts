@@ -13,8 +13,8 @@ extension Label {
         font: UIFont,
         alignment: NSTextAlignment = .center,
         numberOfLines: Int = 1
-    ) -> UILabel {
-        let label = UILabel()
+    ) -> Label {
+        let label = Label()
         label.textAlignment = alignment
         label.text = text
         label.font = font

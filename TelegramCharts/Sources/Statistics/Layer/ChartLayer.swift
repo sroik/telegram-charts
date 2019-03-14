@@ -55,7 +55,7 @@ final class ChartLayer: CALayer {
     }
 
     private func updateLayers() {
-        layersViewport = Array(enabledColumns).range
+        layersRange = Array(enabledColumns).range
         columnLayers.forEach { update(layer: $0) }
     }
 
@@ -66,10 +66,10 @@ final class ChartLayer: CALayer {
 
         let opacity = enabledColumns.contains(column) ? 1 : 0
         layer.set(value: opacity, for: .opacity, animated: true)
-        layer.viewport = layersViewport
+        layer.range = layersRange
     }
 
-    private var layersViewport: Range<Int> = .zero
+    private var layersRange: Range<Int> = .zero
     private var columnLayers: [ColumnLayer] = []
     private let chart: Chart?
 }

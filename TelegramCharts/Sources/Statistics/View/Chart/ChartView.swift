@@ -5,7 +5,7 @@
 import UIKit
 
 final class ChartView: View {
-    var timeViewport: Range<CGFloat> = Range(min: 0.8, max: 1.0) {
+    var viewport: Range<CGFloat> = Range(min: 0.8, max: 1.0) {
         didSet {
             adaptToViewport()
         }
@@ -48,7 +48,7 @@ final class ChartView: View {
 
     private func adaptToViewport() {
         scrollView.contentSize = adaptedContentSize
-        scrollView.contentOffset = CGPoint(x: adaptedContentSize.width * timeViewport.min, y: 0)
+        scrollView.contentOffset = CGPoint(x: adaptedContentSize.width * viewport.min, y: 0)
 
         workspace.frame = workspaceFrame
         timestampsView.frame = timestampsFrame
@@ -74,7 +74,7 @@ final class ChartView: View {
 
     private var adaptedContentSize: CGSize {
         return CGSize(
-            width: bounds.width / timeViewport.size,
+            width: bounds.width / viewport.size,
             height: bounds.height
         )
     }
