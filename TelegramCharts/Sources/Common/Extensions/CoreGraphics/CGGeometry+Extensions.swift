@@ -58,7 +58,7 @@ extension CGPath {
     }
 }
 
-public extension UIEdgeInsets {
+extension UIEdgeInsets {
     init(repeated value: CGFloat) {
         self.init(top: value, left: value, bottom: value, right: value)
     }

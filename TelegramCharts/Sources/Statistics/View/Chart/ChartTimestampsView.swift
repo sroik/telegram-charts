@@ -7,6 +7,12 @@ import UIKit
 final class ChartTimestampsView: View {
     static let preferredHeight: CGFloat = 20
 
+    var minimumSpacing: CGFloat = 50.0 {
+        didSet {
+            update()
+        }
+    }
+
     init(timestamps: [Timestamp]) {
         self.timestamps = timestamps
         super.init(frame: .screen)
@@ -15,7 +21,7 @@ final class ChartTimestampsView: View {
 
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
-        layout()
+        update()
     }
 
     override func themeUp() {
@@ -24,8 +30,24 @@ final class ChartTimestampsView: View {
         labels.values.forEach { $0.textColor = theme.color.details }
     }
 
-    private func layout() {
-        print("LAYOUT")
+    private func update() {
+        guard timestamps.count > 0 else {
+            return
+        }
+
+//        labels.values.forEach { $0.removeFromSuperview() }
+//        labels.removeAll()
+
+//        let fitLabelsNumber = Int(bounds.width / minimumSpacing)
+//        let fitLabelsStride = 1 + (timestamps.count / fitLabelsNumber)
+
+//        timestamps.enumerated().forEach { index, timestamp in
+//            let label = buildLabel(for: timestamp)
+//            label.text = "\(index)"
+//            labels[index] = label
+//            label.frame =
+//            addSubview(label)
+//        }
     }
 
     private func setup() {
@@ -36,23 +58,17 @@ final class ChartTimestampsView: View {
             right: rightAnchor,
             height: .pixel
         )
-
-        timestamps.forEach { timestamp in
-            let label = buildLabel(for: timestamp)
-            labels[timestamp] = label
-            addSubview(label)
-        }
     }
 
     private func buildLabel(for timestamp: Timestamp) -> Label {
         return Label.primary(
             text: "Feb 10",
             color: theme.color.details,
-            font: UIFont.systemFont(ofSize: 9)
+            font: UIFont.systemFont(ofSize: 10)
         )
     }
 
-    private var labels: [Timestamp: Label] = [:]
+    private var labels: [Index: Label] = [:]
     private let timestamps: [Timestamp]
     private let line = UIView()
 }
