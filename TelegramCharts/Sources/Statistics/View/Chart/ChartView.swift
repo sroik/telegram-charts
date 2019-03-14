@@ -21,6 +21,7 @@ final class ChartView: View {
         self.chart = chart
         self.enabledColumns = Set(chart.drawableColumns)
         self.chartLayer = ChartLayer(chart: chart)
+        self.timestampsView = ChartTimestampsView(timestamps: chart.timestamps)
         super.init(frame: .screen)
         setup()
     }
@@ -30,27 +31,56 @@ final class ChartView: View {
         adaptToViewport()
     }
 
+    override func themeUp() {
+        super.themeUp()
+        workspace.theme = theme
+        timestampsView.theme = theme
+    }
+
     private func setup() {
         scrollView.fill(in: self)
-        scrollView.layer.addSublayer(chartLayer)
+        scrollView.addSubview(workspace)
+        scrollView.addSubview(timestampsView)
+        workspace.layer.addSublayer(chartLayer)
         chartLayer.lineWidth = 2
         adaptToViewport()
     }
 
     private func adaptToViewport() {
-        scrollView.contentSize = CGSize(
+        scrollView.contentSize = adaptedContentSize
+        scrollView.contentOffset = CGPoint(x: adaptedContentSize.width * timeViewport.min, y: 0)
+
+        workspace.frame = workspaceFrame
+        timestampsView.frame = timestampsFrame
+        chartLayer.frame = workspace.bounds
+    }
+
+    private var workspaceFrame: CGRect {
+        return CGRect(
+            x: 0, y: 0,
+            width: adaptedContentSize.width,
+            height: adaptedContentSize.height - ChartTimestampsView.preferredHeight
+        )
+    }
+
+    private var timestampsFrame: CGRect {
+        return CGRect(
+            x: 0,
+            y: adaptedContentSize.height - ChartTimestampsView.preferredHeight,
+            width: adaptedContentSize.width,
+            height: ChartTimestampsView.preferredHeight
+        )
+    }
+
+    private var adaptedContentSize: CGSize {
+        return CGSize(
             width: bounds.width / timeViewport.size,
             height: bounds.height
         )
-
-        scrollView.contentOffset = CGPoint(
-            x: scrollView.contentSize.width * timeViewport.min,
-            y: 0
-        )
-
-        chartLayer.frame = CGRect(origin: .zero, size: scrollView.contentSize)
     }
 
+    private let workspace = View()
+    private let timestampsView: ChartTimestampsView
     private let chartLayer: ChartLayer
     private let scrollView = UIScrollView.charts()
     private let chart: Chart

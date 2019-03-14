@@ -38,7 +38,7 @@ final class ChartMapViewportView: View {
     }
 
     private func layout() {
-        layer.cornerRadius = 1.5
+        layer.cornerRadius = lineWidth
         layer.masksToBounds = true
 
         topLine.anchor(

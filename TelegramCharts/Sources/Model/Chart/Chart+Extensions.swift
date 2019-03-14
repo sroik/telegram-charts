@@ -4,7 +4,22 @@
 
 import Foundation
 
+typealias Timestamp = Int
+
 extension Chart {
+    var timestamps: [Timestamp] {
+        guard let column = timestampsColumn else {
+            assertionFailureWrapper("chart has no timestamps column")
+            return []
+        }
+
+        return column.values
+    }
+
+    var timestampsColumn: Column? {
+        return columns.first { $0.type.isDrawable }
+    }
+
     var drawableColumns: [Column] {
         return columns.filter { $0.type.isDrawable }
     }

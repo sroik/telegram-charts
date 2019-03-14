@@ -11,6 +11,13 @@ extension ColumnType {
         case .timestamps: return false
         }
     }
+
+    var isTimestamps: Bool {
+        switch self {
+        case .line: return false
+        case .timestamps: return true
+        }
+    }
 }
 
 extension Column {

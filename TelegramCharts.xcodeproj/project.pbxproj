@@ -47,6 +47,7 @@
 		AC3B3856223666C3000AD635 /* AnyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B3855223666C3000AD635 /* AnyDecodable.swift */; };
 		AC3B385922366839000AD635 /* Chart+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B385822366839000AD635 /* Chart+Extensions.swift */; };
 		AC3B385B223682E0000AD635 /* ChartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B385A223682E0000AD635 /* ChartTests.swift */; };
+		AC5EFB6B223A2D8A00979B60 /* ChartTimestampsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB6A223A2D8A00979B60 /* ChartTimestampsView.swift */; };
 		ACB9B9C822397F5200B8E841 /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB9B9C722397F5200B8E841 /* CALayer+Extensions.swift */; };
 		ACE6866F22369EBD00724432 /* StatisticsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6866E22369EBD00724432 /* StatisticsScene.swift */; };
 		ACE6867922369EEF00724432 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6867322369EEF00724432 /* ViewController.swift */; };
@@ -117,6 +118,7 @@
 		AC3B3855223666C3000AD635 /* AnyDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDecodable.swift; sourceTree = "<group>"; };
 		AC3B385822366839000AD635 /* Chart+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart+Extensions.swift"; sourceTree = "<group>"; };
 		AC3B385A223682E0000AD635 /* ChartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTests.swift; sourceTree = "<group>"; };
+		AC5EFB6A223A2D8A00979B60 /* ChartTimestampsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTimestampsView.swift; sourceTree = "<group>"; };
 		ACB9B9C722397F5200B8E841 /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
 		ACE6866E22369EBD00724432 /* StatisticsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsScene.swift; sourceTree = "<group>"; };
 		ACE6867322369EEF00724432 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				AC143B4F2237CD8000FEB9CD /* ChartMapView.swift */,
 				AC143B512237F09500FEB9CD /* ChartMapOverlayView.swift */,
 				AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */,
+				AC5EFB6A223A2D8A00979B60 /* ChartTimestampsView.swift */,
 				AC30992D2238F20700A04331 /* ChartColumnsStackView.swift */,
 				AC3099422239211800A04331 /* ChartColumnsStackViewCell.swift */,
 			);
@@ -618,6 +621,7 @@
 				ACE6867F2236A09400724432 /* Theme.swift in Sources */,
 				AC3B381322365725000AD635 /* UIColor+Hex.swift in Sources */,
 				AC3099292238F02B00A04331 /* Collection+Extensions.swift in Sources */,
+				AC5EFB6B223A2D8A00979B60 /* ChartTimestampsView.swift in Sources */,
 				AC3099482239254800A04331 /* Control.swift in Sources */,
 				AC3B3856223666C3000AD635 /* AnyDecodable.swift in Sources */,
 				AC143B502237CD8000FEB9CD /* ChartMapView.swift in Sources */,
