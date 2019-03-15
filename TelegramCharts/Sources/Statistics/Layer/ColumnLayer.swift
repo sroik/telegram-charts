@@ -11,9 +11,15 @@ final class ColumnLayer: Layer {
         }
     }
 
-    var lineWidth: CGFloat = 1 {
+    var lineWidth: CGFloat = 2 {
         didSet {
             shapeLayer.lineWidth = lineWidth
+        }
+    }
+
+    var pointsThreshold: CGFloat = .pointsEpsilon {
+        didSet {
+            draw(animated: true)
         }
     }
 
@@ -55,7 +61,9 @@ final class ColumnLayer: Layer {
 
     private func drawLineColumn(_ column: Column, animated: Bool) {
         let points = column.points(in: shapeLayer.bounds, range: range)
-        let path = CGPath.between(points: points)
+        let filteredPoint = points.dropClose(threshold: pointsThreshold)
+        let path = CGPath.between(points: filteredPoint)
+
         shapeLayer.set(value: path, for: .path, animated: animated)
     }
 

@@ -42,7 +42,6 @@ final class ChartView: View {
         scrollView.addSubview(workspace)
         scrollView.addSubview(timestampsView)
         workspace.layer.addSublayer(chartLayer)
-        chartLayer.lineWidth = 2
         adaptToViewport()
     }
 

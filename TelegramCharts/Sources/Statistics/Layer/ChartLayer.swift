@@ -11,9 +11,15 @@ final class ChartLayer: CALayer {
         }
     }
 
-    var lineWidth: CGFloat = 1.0 {
+    var lineWidth: CGFloat = 2 {
         didSet {
             columnLayers.forEach { $0.lineWidth = lineWidth }
+        }
+    }
+
+    var pointsThreshold: CGFloat = .pointsEpsilon {
+        didSet {
+            columnLayers.forEach { $0.pointsThreshold = pointsThreshold }
         }
     }
 

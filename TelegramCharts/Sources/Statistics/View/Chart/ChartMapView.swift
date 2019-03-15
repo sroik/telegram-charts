@@ -46,6 +46,8 @@ final class ChartMapView: View {
     private func setup() {
         layer.addSublayer(chartLayer)
         chartLayer.masksToBounds = true
+        chartLayer.lineWidth = 1.0
+        chartLayer.pointsThreshold = 2.0
         overlayView.fill(in: self)
     }
 

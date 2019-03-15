@@ -52,7 +52,7 @@
 		AC5EFB6B223A2D8A00979B60 /* ChartTimestampsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB6A223A2D8A00979B60 /* ChartTimestampsView.swift */; };
 		AC5EFB70223A946400979B60 /* Math+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB6F223A946400979B60 /* Math+Extensions.swift */; };
 		AC5EFB72223B98EE00979B60 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB71223B98EE00979B60 /* Date+Extensions.swift */; };
-		AC5EFB74223BA02600979B60 /* Array+Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB73223BA02600979B60 /* Array+Range.swift */; };
+		AC5EFB74223BA02600979B60 /* Range+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB73223BA02600979B60 /* Range+Extensions.swift */; };
 		ACB9B9C822397F5200B8E841 /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB9B9C722397F5200B8E841 /* CALayer+Extensions.swift */; };
 		ACCAD327223AE13200A99436 /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCAD326223AE13200A99436 /* Layer.swift */; };
 		ACE6866F22369EBD00724432 /* StatisticsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6866E22369EBD00724432 /* StatisticsScene.swift */; };
@@ -129,7 +129,7 @@
 		AC5EFB6A223A2D8A00979B60 /* ChartTimestampsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTimestampsView.swift; sourceTree = "<group>"; };
 		AC5EFB6F223A946400979B60 /* Math+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Math+Extensions.swift"; sourceTree = "<group>"; };
 		AC5EFB71223B98EE00979B60 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
-		AC5EFB73223BA02600979B60 /* Array+Range.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Range.swift"; sourceTree = "<group>"; };
+		AC5EFB73223BA02600979B60 /* Range+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Range+Extensions.swift"; sourceTree = "<group>"; };
 		ACB9B9C722397F5200B8E841 /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
 		ACCAD326223AE13200A99436 /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
 		ACE6866E22369EBD00724432 /* StatisticsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsScene.swift; sourceTree = "<group>"; };
@@ -206,8 +206,8 @@
 		AC143B532237F0F400FEB9CD /* Math */ = {
 			isa = PBXGroup;
 			children = (
+				AC5EFB73223BA02600979B60 /* Range+Extensions.swift */,
 				AC143B492237AD2F00FEB9CD /* Range.swift */,
-				AC5EFB73223BA02600979B60 /* Array+Range.swift */,
 				AC32DCA4223C2B1000873B04 /* Stride.swift */,
 			);
 			path = Math;
@@ -249,9 +249,18 @@
 			children = (
 				AC143B4D2237C94400FEB9CD /* ColumnLayer.swift */,
 				AC30994A2239329000A04331 /* ChartLayer.swift */,
-				AC32DCA6223C2B6D00873B04 /* Column+Points.swift */,
 			);
 			path = Layer;
+			sourceTree = "<group>";
+		};
+		AC32DCA8223C2F7A00873B04 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AC32DCA6223C2B6D00873B04 /* Column+Points.swift */,
+				AC143B472237AC1700FEB9CD /* Column+Extensions.swift */,
+				AC3B385822366839000AD635 /* Chart+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		AC3B37E72236510C000AD635 = {
@@ -461,8 +470,7 @@
 		ACE686802236A09800724432 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
-				AC143B472237AC1700FEB9CD /* Column+Extensions.swift */,
-				AC3B385822366839000AD635 /* Chart+Extensions.swift */,
+				AC32DCA8223C2F7A00873B04 /* Extensions */,
 				AC3B3853223663D1000AD635 /* ChartData.swift */,
 				AC3B380E22365543000AD635 /* Chart.swift */,
 			);
@@ -664,7 +672,7 @@
 				AC3B383222365CF8000AD635 /* Utils.swift in Sources */,
 				ACE6868C2236AFB200724432 /* SettingsService.swift in Sources */,
 				AC143B3A22378B7D00FEB9CD /* Placeholder.swift in Sources */,
-				AC5EFB74223BA02600979B60 /* Array+Range.swift in Sources */,
+				AC5EFB74223BA02600979B60 /* Range+Extensions.swift in Sources */,
 				ACCAD327223AE13200A99436 /* Layer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

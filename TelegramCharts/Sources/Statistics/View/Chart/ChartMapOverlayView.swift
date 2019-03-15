@@ -15,7 +15,7 @@ final class ChartMapOverlayView: View {
      I don't know the logic of it's size,
      so I'll leave this hardcoded number for now
      */
-    var minSize: CGFloat = 0.075
+    var minSize: CGFloat = 0.05
 
     var viewport: Range<CGFloat> = Range(min: 0, max: 1) {
         didSet {
