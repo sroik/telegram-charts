@@ -5,8 +5,6 @@
 import UIKit
 
 final class ChartTimestampsView: View {
-    static let preferredHeight: CGFloat = 20
-
     var minimumSpacing: CGFloat = 50.0 {
         didSet {
             updateSpacing()
@@ -31,6 +29,10 @@ final class ChartTimestampsView: View {
     }
 
     func updateSpacing(animated: Bool = true) {
+        guard !bounds.isEmpty else {
+            return
+        }
+
         switch labelsNumber.compare(with: fitLabelsNumber) {
         case .orderedAscending:
             recursiveBisect(animated: animated)
@@ -103,7 +105,11 @@ final class ChartTimestampsView: View {
     }
 
     private func buildLabel(at index: Index) -> Label {
-        let timestamp = timestamps[0]
+        guard let timestamp = timestamp(at: index) else {
+            assertionFailureWrapper("invalid timestamp index")
+            return Label()
+        }
+
         let label = buildLabel(for: timestamp)
         label.frame = frame(at: index)
         return label
@@ -111,11 +117,20 @@ final class ChartTimestampsView: View {
 
     private func buildLabel(for timestamp: Timestamp) -> Label {
         return Label.primary(
-            text: "Feb 10",
+            text: Date(timestamp: timestamp).monthDayString,
             color: theme.color.details,
             font: UIFont.systemFont(ofSize: 10),
             alignment: .right
         )
+    }
+
+    private func timestamp(at index: Index) -> Timestamp? {
+        guard !bounds.isEmpty else {
+            return timestamps.last
+        }
+
+        let position = CGFloat(index + 1) * spacing / bounds.width
+        return timestamps.element(nearestTo: position)
     }
 
     private func frame(at index: Index) -> CGRect {

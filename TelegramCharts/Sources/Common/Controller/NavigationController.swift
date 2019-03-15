@@ -21,6 +21,10 @@ class NavigationController: UINavigationController {
         return true
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return topViewController?.preferredStatusBarStyle ?? theme.statusBarStyle
+    }
+
     var theme: Theme = .day {
         didSet {
             themeUp()
@@ -48,6 +52,7 @@ class NavigationController: UINavigationController {
     }
 
     func themeUp() {
+        setNeedsStatusBarAppearanceUpdate()
         children.theme(with: theme)
         viewControllers.theme(with: theme)
         view.backgroundColor = theme.color.background

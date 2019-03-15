@@ -17,6 +17,10 @@ class ViewController: UIViewController, Themeable {
         return true
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return theme.statusBarStyle
+    }
+
     var theme: Theme = .day {
         didSet {
             themeUp()
@@ -38,6 +42,7 @@ class ViewController: UIViewController, Themeable {
     }
 
     func themeUp() {
+        setNeedsStatusBarAppearanceUpdate()
         view.backgroundColor = theme.color.background
         children.theme(with: theme)
     }

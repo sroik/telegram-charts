@@ -11,6 +11,12 @@ protocol ChartMapOverlayViewDelegate: AnyObject {
 final class ChartMapOverlayView: View {
     weak var delegate: ChartMapOverlayViewDelegate?
 
+    /*
+     I don't know the logic of it's size,
+     so I'll leave this hardcoded number for now
+     */
+    var minSize: CGFloat = 0.075
+
     var viewport: Range<CGFloat> = Range(min: 0, max: 1) {
         didSet {
             layoutViewport()
@@ -60,20 +66,21 @@ final class ChartMapOverlayView: View {
     }
 
     private func moveViewport(by delta: CGFloat) {
+        let movedViewport: Range<CGFloat>
         switch viewportView.selectedKnob {
         case .left:
-            viewport = Range(
+            movedViewport = Range(
                 min: max(0, viewport.min + delta),
                 max: viewport.max
             )
         case .right:
-            viewport = Range(
+            movedViewport = Range(
                 min: viewport.min,
                 max: min(1, viewport.max + delta)
             )
         case .mid:
             let halfSize = viewport.size / 2
-            viewport = Range(
+            movedViewport = Range(
                 mid: (viewport.mid + delta).clamped(from: halfSize, to: 1 - halfSize),
                 size: viewport.size
             )
@@ -81,6 +88,11 @@ final class ChartMapOverlayView: View {
             return
         }
 
+        guard movedViewport.size > minSize else {
+            return
+        }
+
+        viewport = movedViewport
         delegate?.mapView(self, didChageViewportTo: viewport)
     }
 

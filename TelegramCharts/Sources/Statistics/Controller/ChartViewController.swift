@@ -42,7 +42,7 @@ final class ChartViewController: ViewController {
             bottom: mapView.topAnchor,
             left: view.leftAnchor,
             right: view.rightAnchor,
-            insets: UIEdgeInsets(top: 0, left: 15, bottom: 10, right: 15)
+            insets: UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
         )
     }
 

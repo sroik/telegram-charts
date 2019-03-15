@@ -17,7 +17,7 @@ extension Chart {
     }
 
     var timestampsColumn: Column? {
-        return columns.first { $0.type.isDrawable }
+        return columns.first { $0.type.isTimestamps }
     }
 
     var drawableColumns: [Column] {

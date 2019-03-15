@@ -59,16 +59,16 @@ final class ChartView: View {
         return CGRect(
             x: 0, y: 0,
             width: adaptedContentSize.width,
-            height: adaptedContentSize.height - ChartTimestampsView.preferredHeight
+            height: adaptedContentSize.height - timestampsHeight - timestampsOffset
         )
     }
 
     private var timestampsFrame: CGRect {
         return CGRect(
             x: 0,
-            y: adaptedContentSize.height - ChartTimestampsView.preferredHeight,
+            y: adaptedContentSize.height - timestampsHeight,
             width: adaptedContentSize.width,
-            height: ChartTimestampsView.preferredHeight
+            height: timestampsHeight
         )
     }
 
@@ -79,6 +79,8 @@ final class ChartView: View {
         )
     }
 
+    private let timestampsHeight: CGFloat = 20
+    private let timestampsOffset: CGFloat = 5
     private let workspace = View()
     private let timestampsView: ChartTimestampsView
     private let chartLayer: ChartLayer

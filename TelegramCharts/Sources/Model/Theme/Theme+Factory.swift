@@ -19,6 +19,13 @@ extension Theme {
         }
     }
 
+    var statusBarStyle: UIStatusBarStyle {
+        switch self {
+        case .day: return .default
+        case .night: return .lightContent
+        }
+    }
+
     var title: String {
         switch self {
         case .day: return "Day"
