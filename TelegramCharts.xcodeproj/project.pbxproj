@@ -29,6 +29,8 @@
 		AC3099462239236300A04331 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC3099452239236300A04331 /* Images.xcassets */; };
 		AC3099482239254800A04331 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3099472239254800A04331 /* Control.swift */; };
 		AC30994B2239329000A04331 /* ChartLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC30994A2239329000A04331 /* ChartLayer.swift */; };
+		AC32DCA5223C2B1000873B04 /* Stride.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32DCA4223C2B1000873B04 /* Stride.swift */; };
+		AC32DCA7223C2B6D00873B04 /* Column+Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32DCA6223C2B6D00873B04 /* Column+Points.swift */; };
 		AC3B37F42236510C000AD635 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B37F32236510C000AD635 /* AppDelegate.swift */; };
 		AC3B37FB2236510D000AD635 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC3B37FA2236510D000AD635 /* Assets.xcassets */; };
 		AC3B380A223651E4000AD635 /* charts.json in Resources */ = {isa = PBXBuildFile; fileRef = AC3B3809223651E4000AD635 /* charts.json */; };
@@ -100,6 +102,8 @@
 		AC3099452239236300A04331 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AC3099472239254800A04331 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
 		AC30994A2239329000A04331 /* ChartLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLayer.swift; sourceTree = "<group>"; };
+		AC32DCA4223C2B1000873B04 /* Stride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stride.swift; sourceTree = "<group>"; };
+		AC32DCA6223C2B6D00873B04 /* Column+Points.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Column+Points.swift"; sourceTree = "<group>"; };
 		AC3B37F02236510C000AD635 /* TelegramCharts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TelegramCharts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC3B37F32236510C000AD635 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC3B37FA2236510D000AD635 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -204,6 +208,7 @@
 			children = (
 				AC143B492237AD2F00FEB9CD /* Range.swift */,
 				AC5EFB73223BA02600979B60 /* Array+Range.swift */,
+				AC32DCA4223C2B1000873B04 /* Stride.swift */,
 			);
 			path = Math;
 			sourceTree = "<group>";
@@ -244,6 +249,7 @@
 			children = (
 				AC143B4D2237C94400FEB9CD /* ColumnLayer.swift */,
 				AC30994A2239329000A04331 /* ChartLayer.swift */,
+				AC32DCA6223C2B6D00873B04 /* Column+Points.swift */,
 			);
 			path = Layer;
 			sourceTree = "<group>";
@@ -643,6 +649,7 @@
 				AC143B3422378A9300FEB9CD /* UIView+Factory.swift in Sources */,
 				AC143B3D223796BA00FEB9CD /* UITableView+Extensions.swift in Sources */,
 				AC143B442237A67D00FEB9CD /* ChartView.swift in Sources */,
+				AC32DCA7223C2B6D00873B04 /* Column+Points.swift in Sources */,
 				AC3B380F22365543000AD635 /* Chart.swift in Sources */,
 				ACE686992236BED100724432 /* UIView+Layout.swift in Sources */,
 				AC30994B2239329000A04331 /* ChartLayer.swift in Sources */,
@@ -653,6 +660,7 @@
 				AC5EFB72223B98EE00979B60 /* Date+Extensions.swift in Sources */,
 				ACE6867C22369EEF00724432 /* NavigationController.swift in Sources */,
 				AC3B382E22365BCB000AD635 /* Operators.swift in Sources */,
+				AC32DCA5223C2B1000873B04 /* Stride.swift in Sources */,
 				AC3B383222365CF8000AD635 /* Utils.swift in Sources */,
 				ACE6868C2236AFB200724432 /* SettingsService.swift in Sources */,
 				AC143B3A22378B7D00FEB9CD /* Placeholder.swift in Sources */,

@@ -36,23 +36,6 @@ extension Column {
     var cgColor: CGColor? {
         return uiColor?.cgColor
     }
-
-    func points(in rect: CGRect, range: Range<Int>) -> [CGPoint] {
-        guard !rect.isEmpty, !isEmpty, range.size > 0 else {
-            return []
-        }
-
-        let hStride = rect.width / CGFloat(values.count)
-        let vStride = rect.height / CGFloat(range.size)
-        let points: [CGPoint] = values.enumerated().map {
-            return CGPoint(
-                x: rect.minX + CGFloat($0.offset) * hStride,
-                y: rect.maxY - CGFloat($0.element - range.min) * vStride
-            )
-        }
-
-        return points
-    }
 }
 
 extension Array where Element == Column {
