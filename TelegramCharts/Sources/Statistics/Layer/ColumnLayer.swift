@@ -7,7 +7,9 @@ import UIKit
 final class ColumnLayer: Layer {
     var range: Range<Int> = .zero {
         didSet {
-            draw(animated: true)
+            if oldValue != range {
+                draw(animated: true)
+            }
         }
     }
 
@@ -19,7 +21,9 @@ final class ColumnLayer: Layer {
 
     var pointsThreshold: CGFloat = .pointsEpsilon {
         didSet {
-            draw(animated: true)
+            if oldValue != pointsThreshold {
+                draw(animated: true)
+            }
         }
     }
 
@@ -63,7 +67,6 @@ final class ColumnLayer: Layer {
         let points = column.points(in: shapeLayer.bounds, range: range)
         let filteredPoint = points.dropClose(threshold: pointsThreshold)
         let path = CGPath.between(points: filteredPoint)
-
         shapeLayer.set(value: path, for: .path, animated: animated)
     }
 

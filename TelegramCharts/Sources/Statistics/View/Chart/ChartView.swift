@@ -7,7 +7,7 @@ import UIKit
 final class ChartView: View {
     var viewport: Range<CGFloat> = Range(min: 0.8, max: 1.0) {
         didSet {
-            adaptToViewport()
+            adaptViewport()
         }
     }
 
@@ -17,9 +17,16 @@ final class ChartView: View {
         }
     }
 
+    var range: Range<Int> {
+        didSet {
+            adaptRange()
+        }
+    }
+
     init(chart: Chart) {
         self.chart = chart
         self.enabledColumns = Set(chart.drawableColumns)
+        self.range = chart.drawableColumns.range
         self.chartLayer = ChartLayer(chart: chart)
         self.timestampsView = ChartTimestampsView(timestamps: chart.timestamps)
         super.init(frame: .screen)
@@ -28,7 +35,7 @@ final class ChartView: View {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        adaptToViewport()
+        adaptViewport()
     }
 
     override func themeUp() {
@@ -42,10 +49,14 @@ final class ChartView: View {
         scrollView.addSubview(workspace)
         scrollView.addSubview(timestampsView)
         workspace.layer.addSublayer(chartLayer)
-        adaptToViewport()
+        adaptViewport()
     }
 
-    private func adaptToViewport() {
+    private func adaptRange() {
+        chartLayer.range = range
+    }
+
+    private func adaptViewport() {
         scrollView.contentSize = adaptedContentSize
         scrollView.contentOffset = CGPoint(x: adaptedContentSize.width * viewport.min, y: 0)
 

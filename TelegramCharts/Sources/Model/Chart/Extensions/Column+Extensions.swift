@@ -21,10 +21,6 @@ extension ColumnType {
 }
 
 extension Column {
-    var range: Range<Int> {
-        return values.range
-    }
-
     var isEmpty: Bool {
         return values.isEmpty
     }
@@ -40,12 +36,16 @@ extension Column {
 
 extension Array where Element == Column {
     var range: Range<Int> {
+        return range(in: Range(min: 0, max: 1))
+    }
+
+    func range(in viewport: Range<CGFloat>) -> Range<Int> {
         guard let first = first else {
             return .zero
         }
 
-        return dropFirst().reduce(first.range) { range, column in
-            range.union(with: column.range)
+        return dropFirst().reduce(first.values.range(in: viewport)) { r, c in
+            r.union(with: c.values.range(in: viewport))
         }
     }
 }

@@ -31,6 +31,15 @@ final class ChartMapView: View {
         }
     }
 
+    var range: Range<Int> {
+        get {
+            return chartLayer.range
+        }
+        set {
+            chartLayer.range = newValue
+        }
+    }
+
     init(chart: Chart) {
         self.chart = chart
         self.chartLayer = ChartLayer(chart: chart)

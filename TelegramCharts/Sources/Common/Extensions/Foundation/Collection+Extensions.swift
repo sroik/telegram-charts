@@ -11,14 +11,22 @@ extension Collection {
 }
 
 extension Collection where Index == Int {
-    func element(nearestTo zeroToOnePosition: CGFloat) -> Iterator.Element? {
+    func index(nearestTo zeroToOnePosition: CGFloat) -> Int? {
         guard !isEmpty else {
             return nil
         }
 
         let index = Int(CGFloat(count) * zeroToOnePosition) - 1
         let clampedIndex = index.clamped(from: 0, to: count - 1)
-        return self[safe: clampedIndex]
+        return clampedIndex
+    }
+
+    func element(nearestTo zeroToOnePosition: CGFloat) -> Iterator.Element? {
+        guard let index = index(nearestTo: zeroToOnePosition) else {
+            return nil
+        }
+
+        return self[safe: index]
     }
 }
 

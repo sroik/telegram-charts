@@ -7,25 +7,36 @@ import UIKit
 final class ChartLayer: CALayer {
     var enabledColumns: Set<Column> = [] {
         didSet {
-            updateLayers()
+            update()
+        }
+    }
+
+    var range: Range<Int> {
+        didSet {
+            update()
         }
     }
 
     var lineWidth: CGFloat = 2 {
         didSet {
-            columnLayers.forEach { $0.lineWidth = lineWidth }
+            columnLayers.forEach {
+                $0.lineWidth = lineWidth
+            }
         }
     }
 
     var pointsThreshold: CGFloat = .pointsEpsilon {
         didSet {
-            columnLayers.forEach { $0.pointsThreshold = pointsThreshold }
+            columnLayers.forEach {
+                $0.pointsThreshold = pointsThreshold
+            }
         }
     }
 
     init(chart: Chart?) {
         self.chart = chart
         self.enabledColumns = Set(chart?.drawableColumns ?? [])
+        self.range = Array(enabledColumns).range
         super.init()
         setup()
     }
@@ -36,6 +47,7 @@ final class ChartLayer: CALayer {
 
     override init(layer: Any) {
         chart = nil
+        range = .zero
         super.init(layer: layer)
     }
 
@@ -57,12 +69,13 @@ final class ChartLayer: CALayer {
             addSublayer(layer)
         }
 
-        updateLayers()
+        update()
     }
 
-    private func updateLayers() {
-        layersRange = Array(enabledColumns).range
-        columnLayers.forEach { update(layer: $0) }
+    private func update() {
+        columnLayers.forEach {
+            update(layer: $0)
+        }
     }
 
     private func update(layer: ColumnLayer) {
@@ -72,10 +85,9 @@ final class ChartLayer: CALayer {
 
         let opacity = enabledColumns.contains(column) ? 1 : 0
         layer.set(value: opacity, for: .opacity, animated: true)
-        layer.range = layersRange
+        layer.range = range
     }
 
-    private var layersRange: Range<Int> = .zero
     private var columnLayers: [ColumnLayer] = []
     private let chart: Chart?
 }

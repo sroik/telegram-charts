@@ -31,6 +31,7 @@
 		AC30994B2239329000A04331 /* ChartLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC30994A2239329000A04331 /* ChartLayer.swift */; };
 		AC32DCA5223C2B1000873B04 /* Stride.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32DCA4223C2B1000873B04 /* Stride.swift */; };
 		AC32DCA7223C2B6D00873B04 /* Column+Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32DCA6223C2B6D00873B04 /* Column+Points.swift */; };
+		AC32DCAA223C3F9100873B04 /* Collection+Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32DCA9223C3F9100873B04 /* Collection+Range.swift */; };
 		AC3B37F42236510C000AD635 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B37F32236510C000AD635 /* AppDelegate.swift */; };
 		AC3B37FB2236510D000AD635 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC3B37FA2236510D000AD635 /* Assets.xcassets */; };
 		AC3B380A223651E4000AD635 /* charts.json in Resources */ = {isa = PBXBuildFile; fileRef = AC3B3809223651E4000AD635 /* charts.json */; };
@@ -49,6 +50,7 @@
 		AC3B3856223666C3000AD635 /* AnyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B3855223666C3000AD635 /* AnyDecodable.swift */; };
 		AC3B385922366839000AD635 /* Chart+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B385822366839000AD635 /* Chart+Extensions.swift */; };
 		AC3B385B223682E0000AD635 /* ChartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B385A223682E0000AD635 /* ChartTests.swift */; };
+		AC4AE89B223CB8DF002CF635 /* DisplayLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4AE89A223CB8DF002CF635 /* DisplayLink.swift */; };
 		AC5EFB6B223A2D8A00979B60 /* ChartTimestampsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB6A223A2D8A00979B60 /* ChartTimestampsView.swift */; };
 		AC5EFB70223A946400979B60 /* Math+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB6F223A946400979B60 /* Math+Extensions.swift */; };
 		AC5EFB72223B98EE00979B60 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB71223B98EE00979B60 /* Date+Extensions.swift */; };
@@ -104,6 +106,7 @@
 		AC30994A2239329000A04331 /* ChartLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLayer.swift; sourceTree = "<group>"; };
 		AC32DCA4223C2B1000873B04 /* Stride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stride.swift; sourceTree = "<group>"; };
 		AC32DCA6223C2B6D00873B04 /* Column+Points.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Column+Points.swift"; sourceTree = "<group>"; };
+		AC32DCA9223C3F9100873B04 /* Collection+Range.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Range.swift"; sourceTree = "<group>"; };
 		AC3B37F02236510C000AD635 /* TelegramCharts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TelegramCharts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC3B37F32236510C000AD635 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC3B37FA2236510D000AD635 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -126,6 +129,7 @@
 		AC3B3855223666C3000AD635 /* AnyDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDecodable.swift; sourceTree = "<group>"; };
 		AC3B385822366839000AD635 /* Chart+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart+Extensions.swift"; sourceTree = "<group>"; };
 		AC3B385A223682E0000AD635 /* ChartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTests.swift; sourceTree = "<group>"; };
+		AC4AE89A223CB8DF002CF635 /* DisplayLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayLink.swift; sourceTree = "<group>"; };
 		AC5EFB6A223A2D8A00979B60 /* ChartTimestampsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTimestampsView.swift; sourceTree = "<group>"; };
 		AC5EFB6F223A946400979B60 /* Math+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Math+Extensions.swift"; sourceTree = "<group>"; };
 		AC5EFB71223B98EE00979B60 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -206,6 +210,7 @@
 		AC143B532237F0F400FEB9CD /* Math */ = {
 			isa = PBXGroup;
 			children = (
+				AC32DCA9223C3F9100873B04 /* Collection+Range.swift */,
 				AC5EFB73223BA02600979B60 /* Range+Extensions.swift */,
 				AC143B492237AD2F00FEB9CD /* Range.swift */,
 				AC32DCA4223C2B1000873B04 /* Stride.swift */,
@@ -426,6 +431,7 @@
 			isa = PBXGroup;
 			children = (
 				AC3B382F22365C52000AD635 /* Environment.swift */,
+				AC4AE89A223CB8DF002CF635 /* DisplayLink.swift */,
 				AC3B382D22365BCB000AD635 /* Operators.swift */,
 				AC3B383122365CF8000AD635 /* Utils.swift */,
 				AC3B3855223666C3000AD635 /* AnyDecodable.swift */,
@@ -623,6 +629,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC4AE89B223CB8DF002CF635 /* DisplayLink.swift in Sources */,
 				ACE6866F22369EBD00724432 /* StatisticsScene.swift in Sources */,
 				ACE686962236BB9500724432 /* StatisticsViewController.swift in Sources */,
 				AC143B4222379F9400FEB9CD /* ChartViewController.swift in Sources */,
@@ -640,6 +647,7 @@
 				AC3B3854223663D1000AD635 /* ChartData.swift in Sources */,
 				AC143B4E2237C94400FEB9CD /* ColumnLayer.swift in Sources */,
 				AC30992E2238F20700A04331 /* ChartColumnsStackView.swift in Sources */,
+				AC32DCAA223C3F9100873B04 /* Collection+Range.swift in Sources */,
 				AC143B302236F1D700FEB9CD /* Label.swift in Sources */,
 				ACE6868A2236AD1000724432 /* Themeable.swift in Sources */,
 				ACE686832236A0B400724432 /* Theme+Factory.swift in Sources */,

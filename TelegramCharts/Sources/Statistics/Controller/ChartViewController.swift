@@ -44,6 +44,13 @@ final class ChartViewController: ViewController {
             right: view.rightAnchor,
             insets: UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
         )
+
+        displayLink.callback = { [weak self] _ in
+            self?.updateChartRange()
+        }
+
+        updateChartRange()
+        displayLink.start()
     }
 
     override func themeUp() {
@@ -54,6 +61,21 @@ final class ChartViewController: ViewController {
         view.backgroundColor = theme.color.placeholder
     }
 
+    private func updateChartRange() {
+        if isChartOutdated {
+            chartView.range = viewportRange
+        }
+    }
+
+    private var isChartOutdated: Bool {
+        return chartView.range != viewportRange
+    }
+
+    private var viewportRange: Range<Int> {
+        return columnsView.enabledColumns.range(in: mapView.viewport)
+    }
+
+    private let displayLink = DisplayLink(fps: 1)
     private let columnsView: ChartColumnsStackView
     private let chartView: ChartView
     private let mapView: ChartMapView
@@ -62,7 +84,10 @@ final class ChartViewController: ViewController {
 
 extension ChartViewController: ChartColumnsStackViewDelegate {
     func columnsView(_ view: ChartColumnsStackView, didChangeEnabledColumns columns: [Column]) {
+        mapView.range = columns.range
         mapView.enabledColumns = Set(columns)
+
+        updateChartRange()
         chartView.enabledColumns = Set(columns)
     }
 }
