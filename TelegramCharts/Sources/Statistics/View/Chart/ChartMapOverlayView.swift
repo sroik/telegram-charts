@@ -23,6 +23,10 @@ final class ChartMapOverlayView: View {
         }
     }
 
+    var selectedKnob: ChartMapViewportView.Knob {
+        return viewportView.selectedKnob
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()

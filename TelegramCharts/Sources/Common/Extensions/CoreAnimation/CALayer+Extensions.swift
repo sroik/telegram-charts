@@ -11,7 +11,7 @@ extension CALayer {
         value: Any?,
         for keyPath: KeyPath,
         animated: Bool,
-        duration: TimeInterval = 0.25,
+        duration: TimeInterval = 0.35,
         timingFunction: CAMediaTimingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
     ) {
         if let keys = animationKeys(), keys.contains(keyPath) {

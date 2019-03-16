@@ -88,3 +88,12 @@ final class ChartMapViewportView: View {
     private let topLine = UIView()
     private let bottomLine = UIView()
 }
+
+extension ChartMapViewportView.Knob {
+    var isSide: Bool {
+        switch self {
+        case .left, .right: return true
+        case .mid, .none: return false
+        }
+    }
+}

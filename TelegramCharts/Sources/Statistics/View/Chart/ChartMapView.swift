@@ -40,6 +40,10 @@ final class ChartMapView: View {
         }
     }
 
+    var selectedKnob: ChartMapViewportView.Knob {
+        return overlayView.selectedKnob
+    }
+
     init(chart: Chart) {
         self.chart = chart
         self.chartLayer = ChartLayer(chart: chart)

@@ -24,6 +24,7 @@ final class ChartTimestampsView: View {
 
     override func themeUp() {
         super.themeUp()
+        backgroundColor = theme.color.placeholder
         line.backgroundColor = theme.color.line
         labels.values.forEach { $0.textColor = theme.color.details }
     }
@@ -145,7 +146,7 @@ final class ChartTimestampsView: View {
     private func setup() {
         line.anchor(
             in: self,
-            bottom: topAnchor,
+            top: topAnchor,
             left: leftAnchor,
             right: rightAnchor,
             height: .pixel

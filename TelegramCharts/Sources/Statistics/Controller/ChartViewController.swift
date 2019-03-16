@@ -62,7 +62,7 @@ final class ChartViewController: ViewController {
     }
 
     private func updateChartRange() {
-        if isChartOutdated {
+        if isChartOutdated, !mapView.selectedKnob.isSide {
             chartView.range = viewportRange
         }
     }
@@ -75,7 +75,7 @@ final class ChartViewController: ViewController {
         return columnsView.enabledColumns.range(in: mapView.viewport)
     }
 
-    private let displayLink = DisplayLink(fps: 1)
+    private let displayLink = DisplayLink(fps: 2)
     private let columnsView: ChartColumnsStackView
     private let chartView: ChartView
     private let mapView: ChartMapView
