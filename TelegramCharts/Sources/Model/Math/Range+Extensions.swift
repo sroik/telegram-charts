@@ -26,6 +26,10 @@ extension Range {
 }
 
 extension Range where T == Int {
+    func scale(by: CGFloat) -> Range<Int> {
+        return Range(mid: mid, size: Int(CGFloat(size) * by))
+    }
+
     func value(at zeroToOnePosition: CGFloat) -> Int {
         let offset = Int(CGFloat(size) * zeroToOnePosition)
         let value = (min + offset).clamped(from: min, to: max)

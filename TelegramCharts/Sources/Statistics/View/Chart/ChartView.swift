@@ -50,8 +50,10 @@ final class ChartView: View {
     }
 
     func set(range: Range<Int>, animated: Bool = false) {
-        chartLayer.set(range: range, animated: animated)
-        valuesView.set(range: range, animated: animated)
+        /* let's scale range a little to make it look better */
+        let scaledRange = range.scale(by: 1.1)
+        chartLayer.set(range: scaledRange, animated: animated)
+        valuesView.set(range: scaledRange, animated: animated)
     }
 
     func set(enabledColumns: Set<Column>, animated: Bool = false) {
