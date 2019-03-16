@@ -11,6 +11,12 @@ final class ChartValuesViewCell: View {
         }
     }
 
+    var isUnderlined: Bool = true {
+        didSet {
+            line.isHidden = !isUnderlined
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -19,10 +25,11 @@ final class ChartValuesViewCell: View {
     override func themeUp() {
         super.themeUp()
         label.textColor = theme.color.details
-        line.backgroundColor = theme.color.line.withAlphaComponent(0.5)
+        line.backgroundColor = theme.color.line.withAlphaComponent(0.35)
     }
 
     private func setup() {
+        label.fill(in: self)
         line.anchor(
             in: self,
             bottom: bottomAnchor,
@@ -30,15 +37,11 @@ final class ChartValuesViewCell: View {
             right: rightAnchor,
             height: .pixel
         )
-
-        label.anchor(
-            in: self,
-            bottom: bottomAnchor,
-            left: leftAnchor,
-            bottomOffset: 3
-        )
     }
 
     private let line = UIView()
-    private let label = Label.primary(font: UIFont.systemFont(ofSize: 10))
+    private let label = Label.primary(
+        font: UIFont.systemFont(ofSize: 10),
+        alignment: .left
+    )
 }

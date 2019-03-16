@@ -82,7 +82,7 @@ final class ChartTimestampsView: View {
 
     private func updateFrames() {
         labels.forEach { index, label in
-            label.frame = frame(at: index)
+            label.frame = labelFrame(at: index)
         }
     }
 
@@ -112,7 +112,7 @@ final class ChartTimestampsView: View {
         }
 
         let label = buildLabel(for: timestamp)
-        label.frame = frame(at: index)
+        label.frame = labelFrame(at: index)
         return label
     }
 
@@ -134,7 +134,7 @@ final class ChartTimestampsView: View {
         return timestamps.element(nearestTo: position)
     }
 
-    private func frame(at index: Index) -> CGRect {
+    private func labelFrame(at index: Index) -> CGRect {
         return CGRect(
             x: CGFloat(index) * spacing,
             y: 0,

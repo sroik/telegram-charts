@@ -32,16 +32,16 @@ final class ChartView: View {
 
     override func themeUp() {
         super.themeUp()
-        workspace.theme = theme
+        valuesView.theme = theme
         timestampsView.theme = theme
     }
 
     private func setup() {
+        valuesView.fill(in: self, insets: UIEdgeInsets(bottom: timestampsHeight))
         scrollView.fill(in: self)
-        scrollView.addSubview(workspace)
+        scrollView.layer.addSublayer(chartLayer)
         scrollView.addSubview(timestampsView)
-        workspace.layer.addSublayer(chartLayer)
-        valuesView.fill(in: workspace)
+
         set(enabledColumns: Set(chart.drawableColumns))
         set(range: chart.drawableColumns.range)
         adaptViewport()
@@ -60,16 +60,16 @@ final class ChartView: View {
         scrollView.contentSize = adaptedContentSize
         scrollView.contentOffset = CGPoint(x: adaptedContentSize.width * viewport.min, y: 0)
 
-        workspace.frame = workspaceFrame
+        chartLayer.frame = chartFrame
         timestampsView.frame = timestampsFrame
-        chartLayer.frame = workspace.bounds
     }
 
-    private var workspaceFrame: CGRect {
+    private var chartFrame: CGRect {
         return CGRect(
-            x: 0, y: 0,
+            x: 0,
+            y: 0,
             width: adaptedContentSize.width,
-            height: adaptedContentSize.height - timestampsHeight - timestampsOffset
+            height: adaptedContentSize.height - timestampsHeight
         )
     }
 
@@ -89,9 +89,7 @@ final class ChartView: View {
         )
     }
 
-    private let timestampsHeight: CGFloat = 20
-    private let timestampsOffset: CGFloat = 5
-    private let workspace = View()
+    private let timestampsHeight: CGFloat = 25
     private let valuesView: ChartValuesView
     private let timestampsView: ChartTimestampsView
     private let chartLayer: ChartLayer
