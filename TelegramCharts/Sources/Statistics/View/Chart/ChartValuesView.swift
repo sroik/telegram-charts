@@ -13,7 +13,7 @@ final class ChartValuesView: View {
 
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
-        rebuildLabels()
+        rebuildCells()
     }
 
     override func themeUp() {
@@ -21,25 +21,50 @@ final class ChartValuesView: View {
         cells.forEach { $0.theme = theme }
     }
 
-    func set(range: Range<Int>, animated: Bool = false) {}
-
-    private func setup() {
-        isUserInteractionEnabled = false
+    func set(range: Range<Int>, animated: Bool = false) {
+        self.range = range
+        updateValues(animated: true)
     }
 
-    private func rebuildLabels() {
+    private func updateValues(animated: Bool) {
+        cells.enumerated().forEach { index, cell in
+            cell.set(
+                value: cellValue(at: index),
+                animated: animated
+            )
+        }
+    }
+
+    private func rebuildCells() {
+        guard !bounds.isEmpty else {
+            return
+        }
+
         cells.forEach { $0.removeFromSuperview() }
         cells.removeAll()
 
         (0 ..< cellsNumber).forEach { index in
             let cell = ChartValuesViewCell()
             cell.theme = theme
-            cell.value = index
-            cell.frame = cellFrame(at: index)
             cell.isUnderlined = index < cellsNumber - 1
+            cell.frame = cellFrame(at: index)
             cells.append(cell)
             addSubview(cell)
         }
+
+        updateValues(animated: false)
+    }
+
+    private func cellValue(at index: Index) -> Int {
+        let cellMaxY = cellFrame(at: index).maxY
+        let position = 1 - (cellMaxY / bounds.height)
+        let value = range.value(at: position)
+        return value
+    }
+
+    private func setup() {
+        isUserInteractionEnabled = false
+        rebuildCells()
     }
 
     private func cellFrame(at index: Index) -> CGRect {
@@ -68,5 +93,5 @@ final class ChartValuesView: View {
     private let minimumSpacing: CGFloat = 30
     private let cellHeight: CGFloat = 20
     private var range: Range<Int>
-    private(set) var cells: [ChartValuesViewCell] = []
+    private var cells: [ChartValuesViewCell] = []
 }

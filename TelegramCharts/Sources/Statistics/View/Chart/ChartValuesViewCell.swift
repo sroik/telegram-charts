@@ -5,12 +5,6 @@
 import UIKit
 
 final class ChartValuesViewCell: View {
-    var value: Int = 0 {
-        didSet {
-            label.text = String(value)
-        }
-    }
-
     var isUnderlined: Bool = true {
         didSet {
             line.isHidden = !isUnderlined
@@ -26,6 +20,10 @@ final class ChartValuesViewCell: View {
         super.themeUp()
         label.textColor = theme.color.details
         line.backgroundColor = theme.color.line.withAlphaComponent(0.35)
+    }
+
+    func set(value: Int, animated: Bool) {
+        label.set(text: String(value), animated: animated)
     }
 
     private func setup() {

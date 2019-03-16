@@ -25,6 +25,14 @@ extension Range {
     }
 }
 
+extension Range where T == Int {
+    func value(at zeroToOnePosition: CGFloat) -> Int {
+        let offset = Int(CGFloat(size) * zeroToOnePosition)
+        let value = (min + offset).clamped(from: min, to: max)
+        return value
+    }
+}
+
 extension Int: DoubleConvertible, Dividable {}
 extension CGFloat: DoubleConvertible, Dividable {}
 extension Double: DoubleConvertible, Dividable {}
