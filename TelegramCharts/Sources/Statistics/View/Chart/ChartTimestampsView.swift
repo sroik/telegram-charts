@@ -130,7 +130,7 @@ final class ChartTimestampsView: View {
         }
 
         let position = CGFloat(index + 1) * spacing / bounds.width
-        return timestamps.element(nearestTo: position)
+        return timestamps.element(nearestTo: position, strategy: .ceil)
     }
 
     private func labelFrame(at index: Index) -> CGRect {

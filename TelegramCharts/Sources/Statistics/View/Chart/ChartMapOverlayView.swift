@@ -37,6 +37,17 @@ final class ChartMapOverlayView: View {
         layoutViewport()
     }
 
+    override func themeUp() {
+        super.themeUp()
+        [leftSpaceView, rightSpaceView].forEach { view in
+            view.backgroundColor = theme.color.background.withAlphaComponent(0.5)
+        }
+    }
+
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        return viewportView.knob(at: point) != .none
+    }
+
     private func setup() {
         addSubviews(viewportView, leftSpaceView, rightSpaceView)
 
@@ -126,13 +137,6 @@ final class ChartMapOverlayView: View {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
         viewportView.selectedKnob = .none
-    }
-
-    override func themeUp() {
-        super.themeUp()
-        [leftSpaceView, rightSpaceView].forEach { view in
-            view.backgroundColor = theme.color.background.withAlphaComponent(0.5)
-        }
     }
 
     private let viewportView = ChartMapViewportView(frame: .screen)

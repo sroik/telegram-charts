@@ -16,6 +16,14 @@ extension CGFloat {
     static var pixel: CGFloat {
         return 1.0 / UIScreen.main.scale
     }
+
+    func floored() -> CGFloat {
+        return floor(self)
+    }
+
+    func ceiled() -> CGFloat {
+        return ceil(self)
+    }
 }
 
 extension CGPoint {
@@ -42,6 +50,10 @@ extension CGRect {
             CGPoint(x: maxX, y: maxY),
             CGPoint(x: maxX, y: minY)
         ]
+    }
+
+    var diagonal: CGFloat {
+        return sqrt(width * width + height * height)
     }
 
     func distance(to rect: CGRect) -> CGFloat {

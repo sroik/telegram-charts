@@ -26,7 +26,7 @@ extension Range {
 }
 
 extension Range where T == Int {
-    func scale(by: CGFloat) -> Range<Int> {
+    func scaled(by: CGFloat) -> Range<Int> {
         return Range(mid: mid, size: Int(CGFloat(size) * by))
     }
 

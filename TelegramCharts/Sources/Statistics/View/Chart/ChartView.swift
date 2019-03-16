@@ -34,26 +34,12 @@ final class ChartView: View {
         super.themeUp()
         valuesView.theme = theme
         timestampsView.theme = theme
-    }
-
-    private func setup() {
-        gridView.fill(in: self, insets: UIEdgeInsets(bottom: timestampsHeight))
-        scrollView.fill(in: self)
-        valuesView.fill(in: self, insets: UIEdgeInsets(bottom: timestampsHeight))
-
-        scrollView.layer.addSublayer(chartLayer)
-        scrollView.addSubview(timestampsView)
-
-        set(enabledColumns: Set(chart.drawableColumns))
-        set(range: chart.drawableColumns.range)
-        adaptViewport()
+        selectedLine.backgroundColor = theme.color.line
     }
 
     func set(range: Range<Int>, animated: Bool = false) {
-        /* let's scale range a little to make it look better */
-        let scaledRange = range.scale(by: 1.1)
-        chartLayer.set(range: scaledRange, animated: animated)
-        valuesView.set(range: scaledRange, animated: animated)
+        chartLayer.set(range: range, animated: animated)
+        valuesView.set(range: range, animated: animated)
     }
 
     func set(enabledColumns: Set<Column>, animated: Bool = false) {
@@ -66,6 +52,54 @@ final class ChartView: View {
 
         chartLayer.frame = chartFrame
         timestampsView.frame = timestampsFrame
+        displayValue(at: selectedIndex)
+    }
+
+    private func selectIndex(at point: CGPoint) {
+        let position = point.x / scrollView.contentSize.width
+        selectedIndex = chart.timestamps.index(nearestTo: position, strategy: .ceil)
+        displayValue(at: selectedIndex)
+    }
+
+    private func displayValue(at index: Int?) {
+        guard let index = index else {
+            selectedLine.isHidden = true
+            return
+        }
+
+        let stride = adaptedContentSize.width / CGFloat(chart.timestamps.count)
+        selectedLine.isHidden = false
+        selectedLine.frame = CGRect(
+            x: (CGFloat(index) + 0.5) * stride,
+            y: 0,
+            width: .pixel,
+            height: adaptedContentSize.height
+        )
+    }
+
+    private func setup() {
+        gridView.fill(in: self, insets: UIEdgeInsets(bottom: timestampsHeight))
+        scrollView.fill(in: self)
+        valuesView.fill(in: self, insets: UIEdgeInsets(bottom: timestampsHeight))
+
+        scrollView.addSubview(selectedLine)
+        scrollView.layer.addSublayer(chartLayer)
+        scrollView.addSubview(timestampsView)
+
+        set(enabledColumns: Set(chart.drawableColumns))
+        set(range: chart.drawableColumns.range)
+        setupGestures()
+        adaptViewport()
+    }
+
+    private func setupGestures() {
+        let pan = UILongPressGestureRecognizer(target: self, action: #selector(onPan))
+        pan.minimumPressDuration = 0.25
+        pan.allowableMovement = CGRect.screen.diagonal
+        scrollView.addGestureRecognizer(pan)
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(onTap))
+        scrollView.addGestureRecognizer(tap)
     }
 
     private var chartFrame: CGRect {
@@ -93,6 +127,16 @@ final class ChartView: View {
         )
     }
 
+    @objc private func onTap(_ recognizer: UITapGestureRecognizer) {
+        selectIndex(at: recognizer.location(in: scrollView))
+    }
+
+    @objc private func onPan(_ recognizer: UILongPressGestureRecognizer) {
+        selectIndex(at: recognizer.location(in: scrollView))
+    }
+
+    private var selectedIndex: Int?
+    private let selectedLine = UIView()
     private let timestampsHeight: CGFloat = 25
     private let gridView = ChartGridView()
     private let valuesView: ChartValuesView

@@ -62,19 +62,20 @@ final class ChartViewController: ViewController {
     }
 
     private func updateChartRange() {
-        if isChartOutdated, !mapView.selectedKnob.isSide {
+        if needsToUpdateChartRange, !mapView.selectedKnob.isSide {
+            needsToUpdateChartRange = false
             chartView.set(range: viewportRange, animated: true)
         }
     }
 
-    private var isChartOutdated: Bool {
-        return chartView.range != viewportRange
-    }
-
     private var viewportRange: Range<Int> {
-        return columnsView.enabledColumns.range(in: mapView.viewport)
+        /* let's scale range a little to make it look better */
+        return columnsView.enabledColumns
+            .range(in: mapView.viewport)
+            .scaled(by: 1.1)
     }
 
+    private var needsToUpdateChartRange: Bool = true
     private let displayLink = DisplayLink(fps: 2)
     private let columnsView: ChartColumnsStackView
     private let chartView: ChartView
@@ -95,5 +96,6 @@ extension ChartViewController: ChartColumnsStackViewDelegate {
 extension ChartViewController: ChartMapViewDelegate {
     func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Range<CGFloat>) {
         chartView.viewport = viewport
+        needsToUpdateChartRange = true
     }
 }
