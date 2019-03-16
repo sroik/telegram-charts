@@ -5,12 +5,18 @@
 import UIKit
 
 final class ChartValuesView: View {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(range: Range<Int>) {
+        self.range = range
+        super.init(frame: .zero)
         setup()
     }
 
-    private func setup() {}
+    private func setup() {
+        isUserInteractionEnabled = false
+        backgroundColor = UIColor.yellow.withAlphaComponent(0.25)
+    }
 
-    private var range: Range<Int> = .zero
+    func set(range: Range<Int>, animated: Bool = false) {}
+
+    private var range: Range<Int>
 }

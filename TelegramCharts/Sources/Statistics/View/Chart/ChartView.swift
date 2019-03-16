@@ -5,7 +5,7 @@
 import UIKit
 
 final class ChartView: View {
-    var viewport: Range<CGFloat> = Range(min: 0.8, max: 1.0) {
+    var viewport: Range<CGFloat> {
         didSet {
             adaptViewport()
         }
@@ -19,6 +19,8 @@ final class ChartView: View {
         self.chart = chart
         self.chartLayer = ChartLayer(chart: chart)
         self.timestampsView = ChartTimestampsView(timestamps: chart.timestamps)
+        self.viewport = Range(min: 0.8, max: 1.0)
+        self.valuesView = ChartValuesView(range: chartLayer.range)
         super.init(frame: .screen)
         setup()
     }
@@ -39,6 +41,7 @@ final class ChartView: View {
         scrollView.addSubview(workspace)
         scrollView.addSubview(timestampsView)
         workspace.layer.addSublayer(chartLayer)
+        valuesView.fill(in: workspace)
         set(enabledColumns: Set(chart.drawableColumns))
         set(range: chart.drawableColumns.range)
         adaptViewport()
@@ -46,6 +49,7 @@ final class ChartView: View {
 
     func set(range: Range<Int>, animated: Bool = false) {
         chartLayer.set(range: range, animated: animated)
+        valuesView.set(range: range, animated: animated)
     }
 
     func set(enabledColumns: Set<Column>, animated: Bool = false) {
@@ -88,6 +92,7 @@ final class ChartView: View {
     private let timestampsHeight: CGFloat = 20
     private let timestampsOffset: CGFloat = 5
     private let workspace = View()
+    private let valuesView: ChartValuesView
     private let timestampsView: ChartTimestampsView
     private let chartLayer: ChartLayer
     private let scrollView = UIScrollView.charts()
