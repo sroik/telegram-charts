@@ -7,7 +7,7 @@ import UIKit
 final class ChartTimestampsView: View {
     var minimumSpacing: CGFloat = 50.0 {
         didSet {
-            updateSpacing()
+            updateSpacing(animated: true)
         }
     }
 
@@ -19,7 +19,7 @@ final class ChartTimestampsView: View {
 
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
-        updateSpacing()
+        updateSpacing(animated: true)
     }
 
     override func themeUp() {
@@ -29,7 +29,7 @@ final class ChartTimestampsView: View {
         labels.values.forEach { $0.textColor = theme.color.details }
     }
 
-    func updateSpacing(animated: Bool = true) {
+    func updateSpacing(animated: Bool) {
         guard !bounds.isEmpty else {
             return
         }

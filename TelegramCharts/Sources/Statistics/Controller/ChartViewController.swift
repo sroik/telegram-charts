@@ -63,7 +63,7 @@ final class ChartViewController: ViewController {
 
     private func updateChartRange() {
         if isChartOutdated, !mapView.selectedKnob.isSide {
-            chartView.range = viewportRange
+            chartView.set(range: viewportRange, animated: true)
         }
     }
 
@@ -84,11 +84,11 @@ final class ChartViewController: ViewController {
 
 extension ChartViewController: ChartColumnsStackViewDelegate {
     func columnsView(_ view: ChartColumnsStackView, didChangeEnabledColumns columns: [Column]) {
-        mapView.range = columns.range
-        mapView.enabledColumns = Set(columns)
+        mapView.set(range: columns.range, animated: true)
+        mapView.set(enabledColumns: Set(columns), animated: true)
 
         updateChartRange()
-        chartView.enabledColumns = Set(columns)
+        chartView.set(enabledColumns: Set(columns), animated: true)
     }
 }
 

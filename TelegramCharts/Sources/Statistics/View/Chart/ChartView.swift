@@ -11,22 +11,12 @@ final class ChartView: View {
         }
     }
 
-    var enabledColumns: Set<Column> {
-        didSet {
-            chartLayer.enabledColumns = enabledColumns
-        }
-    }
-
     var range: Range<Int> {
-        didSet {
-            adaptRange()
-        }
+        return chartLayer.range
     }
 
     init(chart: Chart) {
         self.chart = chart
-        self.enabledColumns = Set(chart.drawableColumns)
-        self.range = chart.drawableColumns.range
         self.chartLayer = ChartLayer(chart: chart)
         self.timestampsView = ChartTimestampsView(timestamps: chart.timestamps)
         super.init(frame: .screen)
@@ -49,11 +39,17 @@ final class ChartView: View {
         scrollView.addSubview(workspace)
         scrollView.addSubview(timestampsView)
         workspace.layer.addSublayer(chartLayer)
+        set(enabledColumns: Set(chart.drawableColumns))
+        set(range: chart.drawableColumns.range)
         adaptViewport()
     }
 
-    private func adaptRange() {
-        chartLayer.range = range
+    func set(range: Range<Int>, animated: Bool = false) {
+        chartLayer.set(range: range, animated: animated)
+    }
+
+    func set(enabledColumns: Set<Column>, animated: Bool = false) {
+        chartLayer.set(enabledColumns: enabledColumns, animated: animated)
     }
 
     private func adaptViewport() {

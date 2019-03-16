@@ -5,25 +5,9 @@
 import UIKit
 
 final class ColumnLayer: Layer {
-    var range: Range<Int> = .zero {
-        didSet {
-            if oldValue != range {
-                draw(animated: true)
-            }
-        }
-    }
-
     var lineWidth: CGFloat = 2 {
         didSet {
             shapeLayer.lineWidth = lineWidth
-        }
-    }
-
-    var pointsThreshold: CGFloat = .pointsEpsilon {
-        didSet {
-            if oldValue != pointsThreshold {
-                draw(animated: true)
-            }
         }
     }
 
@@ -47,10 +31,24 @@ final class ColumnLayer: Layer {
     override func layoutSublayersOnBoundsChange() {
         super.layoutSublayersOnBoundsChange()
         shapeLayer.frame = contentInsets.inset(bounds)
-        draw()
+        draw(animated: false)
     }
 
-    func draw(animated: Bool = false) {
+    func set(pointsThreshold: CGFloat, animated: Bool) {
+        if self.pointsThreshold != pointsThreshold {
+            self.pointsThreshold = pointsThreshold
+            draw(animated: animated)
+        }
+    }
+
+    func set(range: Range<Int>, animated: Bool) {
+        if self.range != range {
+            self.range = range
+            draw(animated: animated)
+        }
+    }
+
+    func draw(animated: Bool) {
         guard let column = column else {
             return
         }
@@ -83,5 +81,7 @@ final class ColumnLayer: Layer {
         return UIEdgeInsets(top: lineWidth * 2, bottom: lineWidth * 2)
     }
 
+    private var pointsThreshold: CGFloat = .pointsEpsilon
+    private var range: Range<Int> = .zero
     private let shapeLayer = CAShapeLayer()
 }

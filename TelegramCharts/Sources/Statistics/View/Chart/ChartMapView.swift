@@ -22,24 +22,6 @@ final class ChartMapView: View {
         }
     }
 
-    var enabledColumns: Set<Column> {
-        get {
-            return chartLayer.enabledColumns
-        }
-        set {
-            chartLayer.enabledColumns = newValue
-        }
-    }
-
-    var range: Range<Int> {
-        get {
-            return chartLayer.range
-        }
-        set {
-            chartLayer.range = newValue
-        }
-    }
-
     var selectedKnob: ChartMapViewportView.Knob {
         return overlayView.selectedKnob
     }
@@ -56,11 +38,19 @@ final class ChartMapView: View {
         chartLayer.frame = bounds
     }
 
+    func set(range: Range<Int>, animated: Bool = false) {
+        chartLayer.set(range: range, animated: animated)
+    }
+
+    func set(enabledColumns: Set<Column>, animated: Bool = false) {
+        chartLayer.set(enabledColumns: enabledColumns, animated: animated)
+    }
+
     private func setup() {
         layer.addSublayer(chartLayer)
         chartLayer.masksToBounds = true
-        chartLayer.lineWidth = 1.0
-        chartLayer.pointsThreshold = 2.0
+        chartLayer.set(lineWidth: 1)
+        chartLayer.set(pointsThreshold: 2)
         overlayView.fill(in: self)
     }
 

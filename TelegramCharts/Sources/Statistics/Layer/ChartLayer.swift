@@ -5,38 +5,8 @@
 import UIKit
 
 final class ChartLayer: CALayer {
-    var enabledColumns: Set<Column> = [] {
-        didSet {
-            update()
-        }
-    }
-
-    var range: Range<Int> {
-        didSet {
-            update()
-        }
-    }
-
-    var lineWidth: CGFloat = 2 {
-        didSet {
-            columnLayers.forEach {
-                $0.lineWidth = lineWidth
-            }
-        }
-    }
-
-    var pointsThreshold: CGFloat = .pointsEpsilon {
-        didSet {
-            columnLayers.forEach {
-                $0.pointsThreshold = pointsThreshold
-            }
-        }
-    }
-
     init(chart: Chart?) {
         self.chart = chart
-        self.enabledColumns = Set(chart?.drawableColumns ?? [])
-        self.range = Array(enabledColumns).range
         super.init()
         setup()
     }
@@ -47,13 +17,51 @@ final class ChartLayer: CALayer {
 
     override init(layer: Any) {
         chart = nil
-        range = .zero
         super.init(layer: layer)
     }
 
     override func layoutSublayers() {
         super.layoutSublayers()
         columnLayers.forEach { $0.frame = bounds }
+    }
+
+    func set(lineWidth: CGFloat) {
+        columnLayers.forEach {
+            $0.lineWidth = lineWidth
+        }
+    }
+
+    func set(pointsThreshold: CGFloat, animated: Bool = false) {
+        columnLayers.forEach {
+            $0.set(pointsThreshold: pointsThreshold, animated: animated)
+        }
+    }
+
+    func set(range: Range<Int>, animated: Bool = false) {
+        self.range = range
+        columnLayers.forEach {
+            $0.set(range: range, animated: animated)
+        }
+    }
+
+    func set(enabledColumns: Set<Column>, animated: Bool = false) {
+        self.enabledColumns = enabledColumns
+        columnLayers.forEach {
+            update(layer: $0, animated: animated)
+        }
+    }
+
+    private func update(layer: ColumnLayer, animated: Bool) {
+        guard let column = layer.column else {
+            assertionFailureWrapper("layer has no column")
+            return
+        }
+
+        layer.set(
+            value: enabledColumns.contains(column) ? 1 : 0,
+            for: .opacity,
+            animated: animated
+        )
     }
 
     private func setup() {
@@ -64,30 +72,16 @@ final class ChartLayer: CALayer {
         chart.drawableColumns.forEach { column in
             let layer = ColumnLayer(column: column)
             layer.frame = bounds
-            layer.lineWidth = lineWidth
             columnLayers.append(layer)
             addSublayer(layer)
         }
 
-        update()
+        set(enabledColumns: Set(chart.drawableColumns))
+        set(range: chart.drawableColumns.range)
     }
 
-    private func update() {
-        columnLayers.forEach {
-            update(layer: $0)
-        }
-    }
-
-    private func update(layer: ColumnLayer) {
-        guard let column = layer.column else {
-            return
-        }
-
-        let opacity = enabledColumns.contains(column) ? 1 : 0
-        layer.set(value: opacity, for: .opacity, animated: true)
-        layer.range = range
-    }
-
+    private(set) var range: Range<Int> = .zero
+    private(set) var enabledColumns: Set<Column> = []
     private var columnLayers: [ColumnLayer] = []
     private let chart: Chart?
 }
