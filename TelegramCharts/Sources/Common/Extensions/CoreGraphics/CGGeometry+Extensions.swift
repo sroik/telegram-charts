@@ -60,6 +60,10 @@ extension CGPath {
 }
 
 extension UIEdgeInsets {
+    var vertical: CGFloat {
+        return top + bottom
+    }
+
     init(repeated value: CGFloat) {
         self.init(top: value, left: value, bottom: value, right: value)
     }

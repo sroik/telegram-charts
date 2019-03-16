@@ -117,10 +117,9 @@ final class ChartTimestampsView: View {
     }
 
     private func buildLabel(for timestamp: Timestamp) -> Label {
-        return Label.primary(
+        return Label.details(
             text: Date(timestamp: timestamp).monthDayString,
             color: theme.color.details,
-            font: UIFont.systemFont(ofSize: 10),
             alignment: .right
         )
     }
