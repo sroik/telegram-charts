@@ -7,6 +7,19 @@ import UIKit
 final class Label: UILabel {}
 
 extension Label {
+    static func details(
+        text: String? = nil,
+        color: UIColor = .white,
+        alignment: NSTextAlignment = .center
+    ) -> Label {
+        return primary(
+            text: text,
+            color: color,
+            font: UIFont.systemFont(ofSize: 10),
+            alignment: alignment
+        )
+    }
+
     static func primary(
         text: String? = nil,
         color: UIColor = .white,

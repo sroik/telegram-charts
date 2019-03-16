@@ -37,8 +37,10 @@ final class ChartView: View {
     }
 
     private func setup() {
-        valuesView.fill(in: self, insets: UIEdgeInsets(bottom: timestampsHeight))
+        gridView.fill(in: self, insets: UIEdgeInsets(bottom: timestampsHeight))
         scrollView.fill(in: self)
+        valuesView.fill(in: self, insets: UIEdgeInsets(bottom: timestampsHeight))
+
         scrollView.layer.addSublayer(chartLayer)
         scrollView.addSubview(timestampsView)
 
@@ -90,6 +92,7 @@ final class ChartView: View {
     }
 
     private let timestampsHeight: CGFloat = 25
+    private let gridView = ChartGridView()
     private let valuesView: ChartValuesView
     private let timestampsView: ChartTimestampsView
     private let chartLayer: ChartLayer
