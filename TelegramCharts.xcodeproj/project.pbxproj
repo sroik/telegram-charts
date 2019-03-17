@@ -526,7 +526,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AC3B38022236510D000AD635 /* Build configuration list for PBXNativeTarget "TelegramCharts" */;
 			buildPhases = (
-				AC3B385C2236841A000AD635 /* Format Code */,
 				AC3B37EC2236510C000AD635 /* Sources */,
 				AC3B37ED2236510C000AD635 /* Frameworks */,
 				AC3B37EE2236510C000AD635 /* Resources */,
@@ -617,27 +616,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		AC3B385C2236841A000AD635 /* Format Code */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Format Code";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "eval \"$(rbenv init -)\" && bundler exec code-formatter format\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AC3B37EC2236510C000AD635 /* Sources */ = {

@@ -21,6 +21,14 @@ extension ColumnType {
 }
 
 extension Column {
+    static var empty = Column(
+        label: "",
+        type: .line,
+        name: nil,
+        color: nil,
+        values: []
+    )
+
     var isEmpty: Bool {
         return values.isEmpty
     }

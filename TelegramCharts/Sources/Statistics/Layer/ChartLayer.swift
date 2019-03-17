@@ -4,7 +4,7 @@
 
 import UIKit
 
-final class ChartLayer: CALayer {
+final class ChartLayer: Layer {
     init(chart: Chart?) {
         self.chart = chart
         super.init()
@@ -23,6 +23,12 @@ final class ChartLayer: CALayer {
     override func layoutSublayers() {
         super.layoutSublayers()
         columnLayers.forEach { $0.frame = bounds }
+    }
+
+    func select(index: Int?) {
+        columnLayers.forEach {
+            $0.selectedIndex = index
+        }
     }
 
     func set(lineWidth: CGFloat) {
@@ -52,13 +58,8 @@ final class ChartLayer: CALayer {
     }
 
     private func update(layer: ColumnLayer, animated: Bool) {
-        guard let column = layer.column else {
-            assertionFailureWrapper("layer has no column")
-            return
-        }
-
         layer.set(
-            value: enabledColumns.contains(column) ? 1 : 0,
+            value: enabledColumns.contains(layer.column) ? 1 : 0,
             for: .opacity,
             animated: animated
         )

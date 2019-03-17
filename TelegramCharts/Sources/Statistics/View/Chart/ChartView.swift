@@ -33,6 +33,7 @@ final class ChartView: View {
 
     override func themeUp() {
         super.themeUp()
+        chartLayer.theme = theme
         scrollView.subviews.theme(with: theme)
         selectedLine.backgroundColor = theme.color.line
     }
@@ -58,7 +59,9 @@ final class ChartView: View {
     private func selectIndex(at point: CGPoint) {
         let position = point.x / scrollView.contentSize.width
         selectedIndex = chart.timestamps.index(nearestTo: position, strategy: .ceil)
+        chartLayer.select(index: selectedIndex)
         displayValue(at: selectedIndex)
+        limitValueCardFrame()
     }
 
     private func displayValue(at index: Int?) {
@@ -136,12 +139,10 @@ final class ChartView: View {
 
     @objc private func onTap(_ recognizer: UITapGestureRecognizer) {
         selectIndex(at: recognizer.location(in: scrollView))
-        limitValueCardFrame()
     }
 
     @objc private func onPan(_ recognizer: UILongPressGestureRecognizer) {
         selectIndex(at: recognizer.location(in: scrollView))
-        limitValueCardFrame()
     }
 
     private var selectedIndex: Int?

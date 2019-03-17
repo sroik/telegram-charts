@@ -8,30 +8,43 @@ final class ColumnLayer: Layer {
     var lineWidth: CGFloat = 2 {
         didSet {
             shapeLayer.lineWidth = lineWidth
+            pointLayer.lineWidth = lineWidth
         }
     }
 
-    let column: Column?
+    var selectedIndex: Int? {
+        didSet {
+            drawSelectedPoint()
+        }
+    }
 
-    init(column: Column?) {
+    let column: Column
+
+    init(column: Column) {
         self.column = column
         super.init()
         setup()
     }
 
     override init(layer: Any) {
-        column = nil
+        column = .empty
         super.init(layer: layer)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        self.init(column: nil)
+        self.init(column: .empty)
     }
 
     override func layoutSublayersOnBoundsChange() {
         super.layoutSublayersOnBoundsChange()
         shapeLayer.frame = contentInsets.inset(bounds)
+        pointLayer.frame = contentInsets.inset(bounds)
         draw(animated: false)
+    }
+
+    override func themeUp() {
+        super.themeUp()
+        pointLayer.fillColor = theme.color.placeholder.cgColor
     }
 
     func set(pointsThreshold: CGFloat, animated: Bool) {
@@ -49,23 +62,31 @@ final class ColumnLayer: Layer {
     }
 
     func draw(animated: Bool) {
-        guard let column = column else {
-            return
-        }
-
         switch column.type {
         case .line:
-            drawLineColumn(column, animated: animated)
+            drawLineColumn(animated: animated)
+            drawSelectedPoint(animated: animated)
         default:
             assertionFailureWrapper("column type is not supported yet")
         }
     }
 
-    private func drawLineColumn(_ column: Column, animated: Bool) {
+    private func drawLineColumn(animated: Bool) {
         let points = column.points(in: shapeLayer.bounds, range: range)
         let filteredPoint = points.dropClose(threshold: pointsThreshold)
         let path = CGPath.between(points: filteredPoint)
         shapeLayer.set(value: path, for: .path, animated: animated)
+    }
+
+    private func drawSelectedPoint(animated: Bool = false) {
+        guard let index = selectedIndex else {
+            pointLayer.path = nil
+            return
+        }
+
+        let point = column.point(at: index, in: pointLayer.bounds, range: range)
+        let path = CGPath.circle(center: point, radius: lineWidth * 1.5)
+        pointLayer.set(value: path, for: .path, animated: animated)
     }
 
     private func setup() {
@@ -73,8 +94,11 @@ final class ColumnLayer: Layer {
         shapeLayer.lineCap = .round
         shapeLayer.lineJoin = .round
         shapeLayer.fillColor = UIColor.clear.cgColor
-        shapeLayer.strokeColor = column?.cgColor
+        shapeLayer.strokeColor = column.cgColor
+        pointLayer.strokeColor = column.cgColor
+        pointLayer.lineWidth = lineWidth
         addSublayer(shapeLayer)
+        addSublayer(pointLayer)
     }
 
     private var contentInsets: UIEdgeInsets {
@@ -83,5 +107,6 @@ final class ColumnLayer: Layer {
 
     private var pointsThreshold: CGFloat = .pointsEpsilon
     private var range: Range<Int> = .zero
+    private let pointLayer = CAShapeLayer()
     private let shapeLayer = CAShapeLayer()
 }

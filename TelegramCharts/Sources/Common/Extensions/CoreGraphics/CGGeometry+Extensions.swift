@@ -113,6 +113,15 @@ extension CGPath {
         path.addLines(between: points)
         return path
     }
+
+    static func circle(center: CGPoint = .zero, radius: CGFloat) -> CGPath {
+        return CGPath(ellipseIn: CGRect(
+            x: center.x - radius,
+            y: center.y - radius,
+            width: 2 * radius,
+            height: 2 * radius
+        ), transform: nil)
+    }
 }
 
 extension UIEdgeInsets {
