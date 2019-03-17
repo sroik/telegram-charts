@@ -26,7 +26,7 @@ final class ChartColumnsStackViewCell: Control {
             in: self,
             left: leftAnchor,
             leftOffset: 15,
-            width: 12.5, height: 12.5,
+            width: 11.5, height: 11.5,
             centerY: centerYAnchor
         )
 
