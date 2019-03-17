@@ -21,6 +21,7 @@ final class ChartView: View {
         self.timestampsView = ChartTimestampsView(timestamps: chart.timestamps)
         self.viewport = Range(min: 0.8, max: 1.0)
         self.valuesView = ChartValuesView(range: chartLayer.range)
+        self.valueCard = ChartValueCardView(chart: chart)
         super.init(frame: .screen)
         setup()
     }
@@ -32,8 +33,7 @@ final class ChartView: View {
 
     override func themeUp() {
         super.themeUp()
-        valuesView.theme = theme
-        timestampsView.theme = theme
+        scrollView.subviews.theme(with: theme)
         selectedLine.backgroundColor = theme.color.line
     }
 
@@ -47,8 +47,8 @@ final class ChartView: View {
     }
 
     private func adaptViewport() {
-        scrollView.contentSize = adaptedContentSize
-        scrollView.contentOffset = CGPoint(x: adaptedContentSize.width * viewport.min, y: 0)
+        scrollView.contentSize = contentSize
+        scrollView.contentOffset = CGPoint(x: contentSize.width * viewport.min, y: 0)
 
         chartLayer.frame = chartFrame
         timestampsView.frame = timestampsFrame
@@ -64,17 +64,19 @@ final class ChartView: View {
     private func displayValue(at index: Int?) {
         guard let index = index else {
             selectedLine.isHidden = true
+            valueCard.isHidden = true
             return
         }
 
-        let stride = adaptedContentSize.width / CGFloat(chart.timestamps.count)
+        let stride = contentSize.width / CGFloat(chart.timestamps.count)
+        let centerX = (CGFloat(index) + 0.5) * stride
+
         selectedLine.isHidden = false
-        selectedLine.frame = CGRect(
-            x: (CGFloat(index) + 0.5) * stride,
-            y: 0,
-            width: .pixel,
-            height: adaptedContentSize.height
-        )
+        selectedLine.frame = CGRect(midX: centerX, width: .pixel, height: contentSize.height)
+
+        valueCard.index = index
+        valueCard.isHidden = false
+        valueCard.frame = CGRect(midX: centerX, size: valueCard.intrinsicContentSize)
     }
 
     private func setup() {
@@ -85,6 +87,7 @@ final class ChartView: View {
         scrollView.addSubview(selectedLine)
         scrollView.layer.addSublayer(chartLayer)
         scrollView.addSubview(timestampsView)
+        scrollView.addSubview(valueCard)
 
         set(enabledColumns: Set(chart.drawableColumns))
         set(range: chart.drawableColumns.range)
@@ -106,21 +109,21 @@ final class ChartView: View {
         return CGRect(
             x: 0,
             y: 0,
-            width: adaptedContentSize.width,
-            height: adaptedContentSize.height - timestampsHeight
+            width: contentSize.width,
+            height: contentSize.height - timestampsHeight
         )
     }
 
     private var timestampsFrame: CGRect {
         return CGRect(
             x: 0,
-            y: adaptedContentSize.height - timestampsHeight,
-            width: adaptedContentSize.width,
+            y: contentSize.height - timestampsHeight,
+            width: contentSize.width,
             height: timestampsHeight
         )
     }
 
-    private var adaptedContentSize: CGSize {
+    private var contentSize: CGSize {
         return CGSize(
             width: bounds.width / viewport.size,
             height: bounds.height
@@ -137,6 +140,8 @@ final class ChartView: View {
 
     private var selectedIndex: Int?
     private let selectedLine = UIView()
+    private let valueCard: ChartValueCardView
+
     private let timestampsHeight: CGFloat = 25
     private let gridView = ChartGridView()
     private let valuesView: ChartValuesView

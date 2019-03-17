@@ -59,6 +59,8 @@
 		AC5EFB74223BA02600979B60 /* Range+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB73223BA02600979B60 /* Range+Extensions.swift */; };
 		ACAF2AFD223D895E00533F37 /* ChartGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAF2AFC223D895E00533F37 /* ChartGridView.swift */; };
 		ACAF2B00223D89C300533F37 /* ChartGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAF2AFF223D89C300533F37 /* ChartGridLayout.swift */; };
+		ACAF2B02223E30CD00533F37 /* ChartValueCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAF2B01223E30CD00533F37 /* ChartValueCardView.swift */; };
+		ACAF2B04223E547F00533F37 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAF2B03223E547F00533F37 /* UIStackView+Extensions.swift */; };
 		ACB9B9C822397F5200B8E841 /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB9B9C722397F5200B8E841 /* CALayer+Extensions.swift */; };
 		ACCAD327223AE13200A99436 /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCAD326223AE13200A99436 /* Layer.swift */; };
 		ACE6866F22369EBD00724432 /* StatisticsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6866E22369EBD00724432 /* StatisticsScene.swift */; };
@@ -142,6 +144,8 @@
 		AC5EFB73223BA02600979B60 /* Range+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Range+Extensions.swift"; sourceTree = "<group>"; };
 		ACAF2AFC223D895E00533F37 /* ChartGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGridView.swift; sourceTree = "<group>"; };
 		ACAF2AFF223D89C300533F37 /* ChartGridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGridLayout.swift; sourceTree = "<group>"; };
+		ACAF2B01223E30CD00533F37 /* ChartValueCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartValueCardView.swift; sourceTree = "<group>"; };
+		ACAF2B03223E547F00533F37 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
 		ACB9B9C722397F5200B8E841 /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
 		ACCAD326223AE13200A99436 /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
 		ACE6866E22369EBD00724432 /* StatisticsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsScene.swift; sourceTree = "<group>"; };
@@ -237,6 +241,7 @@
 				AC4AE89C223CCB04002CF635 /* ChartValuesView.swift */,
 				ACAF2AFC223D895E00533F37 /* ChartGridView.swift */,
 				ACAF2AFF223D89C300533F37 /* ChartGridLayout.swift */,
+				ACAF2B01223E30CD00533F37 /* ChartValueCardView.swift */,
 				AC30992D2238F20700A04331 /* ChartColumnsStackView.swift */,
 				AC3099422239211800A04331 /* ChartColumnsStackViewCell.swift */,
 			);
@@ -374,6 +379,7 @@
 				ACE686982236BED100724432 /* UIView+Layout.swift */,
 				AC143B3C223796BA00FEB9CD /* UITableView+Extensions.swift */,
 				AC4AE8A0223D260B002CF635 /* UIView+Animation.swift */,
+				ACAF2B03223E547F00533F37 /* UIStackView+Extensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -660,6 +666,7 @@
 				AC3B3854223663D1000AD635 /* ChartData.swift in Sources */,
 				AC143B4E2237C94400FEB9CD /* ColumnLayer.swift in Sources */,
 				AC30992E2238F20700A04331 /* ChartColumnsStackView.swift in Sources */,
+				ACAF2B02223E30CD00533F37 /* ChartValueCardView.swift in Sources */,
 				AC32DCAA223C3F9100873B04 /* Collection+Range.swift in Sources */,
 				AC143B302236F1D700FEB9CD /* Label.swift in Sources */,
 				ACE6868A2236AD1000724432 /* Themeable.swift in Sources */,
@@ -668,6 +675,7 @@
 				AC3B382922365B08000AD635 /* Optional+Extensions.swift in Sources */,
 				ACE6867F2236A09400724432 /* Theme.swift in Sources */,
 				AC3B381322365725000AD635 /* UIColor+Hex.swift in Sources */,
+				ACAF2B04223E547F00533F37 /* UIStackView+Extensions.swift in Sources */,
 				AC3099292238F02B00A04331 /* Collection+Extensions.swift in Sources */,
 				AC5EFB6B223A2D8A00979B60 /* ChartTimestampsView.swift in Sources */,
 				AC3099482239254800A04331 /* Control.swift in Sources */,

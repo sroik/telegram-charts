@@ -9,20 +9,20 @@ final class Label: UILabel {}
 extension Label {
     static func details(
         text: String? = nil,
-        color: UIColor = .white,
+        color: UIColor? = .white,
         alignment: NSTextAlignment = .center
     ) -> Label {
         return primary(
             text: text,
             color: color,
-            font: UIFont.systemFont(ofSize: 10.5),
+            font: UIFont.systemFont(ofSize: 10.5, weight: .light),
             alignment: alignment
         )
     }
 
     static func primary(
         text: String? = nil,
-        color: UIColor = .white,
+        color: UIColor? = .white,
         font: UIFont,
         alignment: NSTextAlignment = .center,
         numberOfLines: Int = 1

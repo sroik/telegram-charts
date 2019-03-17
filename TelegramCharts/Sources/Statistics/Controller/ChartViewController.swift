@@ -88,7 +88,7 @@ extension ChartViewController: ChartColumnsStackViewDelegate {
         mapView.set(range: columns.range, animated: true)
         mapView.set(enabledColumns: Set(columns), animated: true)
 
-        updateChartRange()
+        chartView.set(range: viewportRange, animated: true)
         chartView.set(enabledColumns: Set(columns), animated: true)
     }
 }

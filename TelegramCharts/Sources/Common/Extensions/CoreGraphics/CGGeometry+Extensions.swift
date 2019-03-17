@@ -56,10 +56,32 @@ extension CGRect {
         return sqrt(width * width + height * height)
     }
 
+    init(midX: CGFloat, y: CGFloat = 0, size: CGSize) {
+        self.init(midX: midX, y: y, width: size.width, height: size.height)
+    }
+
+    init(midX: CGFloat, y: CGFloat = 0, width: CGFloat = 0, height: CGFloat = 0) {
+        self.init(
+            x: midX - width / 2,
+            y: y,
+            width: width,
+            height: height
+        )
+    }
+
     func distance(to rect: CGRect) -> CGFloat {
         return zip(vertices, rect.vertices).reduce(0) { accumulator, next in
             accumulator + next.0.distance(to: next.1)
         }
+    }
+
+    func with(width: CGFloat? = nil, height: CGFloat? = nil) -> CGRect {
+        return CGRect(
+            x: minX,
+            y: minY,
+            width: width ?? self.width,
+            height: height ?? self.height
+        )
     }
 }
 
@@ -74,6 +96,10 @@ extension CGPath {
 extension UIEdgeInsets {
     var vertical: CGFloat {
         return top + bottom
+    }
+
+    var horizontal: CGFloat {
+        return left + right
     }
 
     init(repeated value: CGFloat) {
