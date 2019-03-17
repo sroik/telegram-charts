@@ -12,7 +12,7 @@
 		AC143B3422378A9300FEB9CD /* UIView+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B3322378A9300FEB9CD /* UIView+Factory.swift */; };
 		AC143B3822378B5100FEB9CD /* StatisticsTableThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B3722378B5100FEB9CD /* StatisticsTableThemeButton.swift */; };
 		AC143B3A22378B7D00FEB9CD /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B3922378B7D00FEB9CD /* Placeholder.swift */; };
-		AC143B3D223796BA00FEB9CD /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B3C223796BA00FEB9CD /* UITableView+Extensions.swift */; };
+		AC143B3D223796BA00FEB9CD /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B3C223796BA00FEB9CD /* UIView+Extensions.swift */; };
 		AC143B4022379A9C00FEB9CD /* CGGeometry+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B3F22379A9C00FEB9CD /* CGGeometry+Extensions.swift */; };
 		AC143B4222379F9400FEB9CD /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B4122379F9400FEB9CD /* ChartViewController.swift */; };
 		AC143B442237A67D00FEB9CD /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B432237A67D00FEB9CD /* ChartView.swift */; };
@@ -52,7 +52,6 @@
 		AC3B385B223682E0000AD635 /* ChartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B385A223682E0000AD635 /* ChartTests.swift */; };
 		AC4AE89B223CB8DF002CF635 /* DisplayLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4AE89A223CB8DF002CF635 /* DisplayLink.swift */; };
 		AC4AE89D223CCB04002CF635 /* ChartValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4AE89C223CCB04002CF635 /* ChartValuesView.swift */; };
-		AC4AE8A1223D260B002CF635 /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4AE8A0223D260B002CF635 /* UIView+Animation.swift */; };
 		AC5EFB6B223A2D8A00979B60 /* ChartTimestampsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB6A223A2D8A00979B60 /* ChartTimestampsView.swift */; };
 		AC5EFB70223A946400979B60 /* Math+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB6F223A946400979B60 /* Math+Extensions.swift */; };
 		AC5EFB72223B98EE00979B60 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB71223B98EE00979B60 /* Date+Extensions.swift */; };
@@ -60,7 +59,7 @@
 		ACAF2AFD223D895E00533F37 /* ChartGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAF2AFC223D895E00533F37 /* ChartGridView.swift */; };
 		ACAF2B00223D89C300533F37 /* ChartGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAF2AFF223D89C300533F37 /* ChartGridLayout.swift */; };
 		ACAF2B02223E30CD00533F37 /* ChartValueCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAF2B01223E30CD00533F37 /* ChartValueCardView.swift */; };
-		ACAF2B04223E547F00533F37 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAF2B03223E547F00533F37 /* UIStackView+Extensions.swift */; };
+		ACAF2B06223E63A000533F37 /* CGGeometryExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAF2B05223E63A000533F37 /* CGGeometryExtensionsTests.swift */; };
 		ACB9B9C822397F5200B8E841 /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB9B9C722397F5200B8E841 /* CALayer+Extensions.swift */; };
 		ACCAD327223AE13200A99436 /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCAD326223AE13200A99436 /* Layer.swift */; };
 		ACE6866F22369EBD00724432 /* StatisticsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6866E22369EBD00724432 /* StatisticsScene.swift */; };
@@ -93,7 +92,7 @@
 		AC143B3322378A9300FEB9CD /* UIView+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Factory.swift"; sourceTree = "<group>"; };
 		AC143B3722378B5100FEB9CD /* StatisticsTableThemeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsTableThemeButton.swift; sourceTree = "<group>"; };
 		AC143B3922378B7D00FEB9CD /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
-		AC143B3C223796BA00FEB9CD /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
+		AC143B3C223796BA00FEB9CD /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		AC143B3F22379A9C00FEB9CD /* CGGeometry+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGGeometry+Extensions.swift"; sourceTree = "<group>"; };
 		AC143B4122379F9400FEB9CD /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		AC143B432237A67D00FEB9CD /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
@@ -137,7 +136,6 @@
 		AC3B385A223682E0000AD635 /* ChartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTests.swift; sourceTree = "<group>"; };
 		AC4AE89A223CB8DF002CF635 /* DisplayLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayLink.swift; sourceTree = "<group>"; };
 		AC4AE89C223CCB04002CF635 /* ChartValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartValuesView.swift; sourceTree = "<group>"; };
-		AC4AE8A0223D260B002CF635 /* UIView+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; };
 		AC5EFB6A223A2D8A00979B60 /* ChartTimestampsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTimestampsView.swift; sourceTree = "<group>"; };
 		AC5EFB6F223A946400979B60 /* Math+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Math+Extensions.swift"; sourceTree = "<group>"; };
 		AC5EFB71223B98EE00979B60 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -145,7 +143,7 @@
 		ACAF2AFC223D895E00533F37 /* ChartGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGridView.swift; sourceTree = "<group>"; };
 		ACAF2AFF223D89C300533F37 /* ChartGridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGridLayout.swift; sourceTree = "<group>"; };
 		ACAF2B01223E30CD00533F37 /* ChartValueCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartValueCardView.swift; sourceTree = "<group>"; };
-		ACAF2B03223E547F00533F37 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
+		ACAF2B05223E63A000533F37 /* CGGeometryExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGGeometryExtensionsTests.swift; sourceTree = "<group>"; };
 		ACB9B9C722397F5200B8E841 /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
 		ACCAD326223AE13200A99436 /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
 		ACE6866E22369EBD00724432 /* StatisticsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsScene.swift; sourceTree = "<group>"; };
@@ -377,9 +375,7 @@
 			children = (
 				AC3B381222365725000AD635 /* UIColor+Hex.swift */,
 				ACE686982236BED100724432 /* UIView+Layout.swift */,
-				AC143B3C223796BA00FEB9CD /* UITableView+Extensions.swift */,
-				AC4AE8A0223D260B002CF635 /* UIView+Animation.swift */,
-				ACAF2B03223E547F00533F37 /* UIStackView+Extensions.swift */,
+				AC143B3C223796BA00FEB9CD /* UIView+Extensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -411,6 +407,7 @@
 				AC3B381D22365A71000AD635 /* UIColorHexTests.swift */,
 				AC3B385A223682E0000AD635 /* ChartTests.swift */,
 				AC143B4B2237B43D00FEB9CD /* RangeTests.swift */,
+				ACAF2B05223E63A000533F37 /* CGGeometryExtensionsTests.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -652,7 +649,6 @@
 				ACE686962236BB9500724432 /* StatisticsViewController.swift in Sources */,
 				AC143B4222379F9400FEB9CD /* ChartViewController.swift in Sources */,
 				ACE686942236B60F00724432 /* Dependencies.swift in Sources */,
-				AC4AE8A1223D260B002CF635 /* UIView+Animation.swift in Sources */,
 				AC3099432239211800A04331 /* ChartColumnsStackViewCell.swift in Sources */,
 				AC143B572237F52D00FEB9CD /* ChartMapViewportView.swift in Sources */,
 				AC3B381622365987000AD635 /* ChartsService.swift in Sources */,
@@ -675,7 +671,6 @@
 				AC3B382922365B08000AD635 /* Optional+Extensions.swift in Sources */,
 				ACE6867F2236A09400724432 /* Theme.swift in Sources */,
 				AC3B381322365725000AD635 /* UIColor+Hex.swift in Sources */,
-				ACAF2B04223E547F00533F37 /* UIStackView+Extensions.swift in Sources */,
 				AC3099292238F02B00A04331 /* Collection+Extensions.swift in Sources */,
 				AC5EFB6B223A2D8A00979B60 /* ChartTimestampsView.swift in Sources */,
 				AC3099482239254800A04331 /* Control.swift in Sources */,
@@ -686,7 +681,7 @@
 				ACAF2AFD223D895E00533F37 /* ChartGridView.swift in Sources */,
 				AC143B4022379A9C00FEB9CD /* CGGeometry+Extensions.swift in Sources */,
 				AC143B3422378A9300FEB9CD /* UIView+Factory.swift in Sources */,
-				AC143B3D223796BA00FEB9CD /* UITableView+Extensions.swift in Sources */,
+				AC143B3D223796BA00FEB9CD /* UIView+Extensions.swift in Sources */,
 				AC143B442237A67D00FEB9CD /* ChartView.swift in Sources */,
 				AC32DCA7223C2B6D00873B04 /* Column+Points.swift in Sources */,
 				AC4AE89D223CCB04002CF635 /* ChartValuesView.swift in Sources */,
@@ -716,6 +711,7 @@
 				AC3B385B223682E0000AD635 /* ChartTests.swift in Sources */,
 				AC3B381E22365A71000AD635 /* UIColorHexTests.swift in Sources */,
 				AC3B384C223661E3000AD635 /* Bundle+Stub.swift in Sources */,
+				ACAF2B06223E63A000533F37 /* CGGeometryExtensionsTests.swift in Sources */,
 				AC143B4C2237B43D00FEB9CD /* RangeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

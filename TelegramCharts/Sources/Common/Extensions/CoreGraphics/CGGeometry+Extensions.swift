@@ -83,6 +83,28 @@ extension CGRect {
             height: height ?? self.height
         )
     }
+
+    func limited(with rect: CGRect) -> CGRect {
+        var result = self
+
+        if maxY > rect.maxY {
+            result.origin.y += rect.maxY - maxY
+        }
+
+        if minY < rect.minY {
+            result.origin.y = rect.minY
+        }
+
+        if maxX > rect.maxX {
+            result.origin.x += rect.maxX - maxX
+        }
+
+        if minX < rect.minX {
+            result.origin.x = rect.minX
+        }
+
+        return result
+    }
 }
 
 extension CGPath {

@@ -79,6 +79,10 @@ final class ChartView: View {
         valueCard.frame = CGRect(midX: centerX, size: valueCard.intrinsicContentSize)
     }
 
+    private func limitValueCardFrame() {
+        valueCard.frame = valueCard.frame.limited(with: scrollView.visibleRect)
+    }
+
     private func setup() {
         gridView.fill(in: self, insets: UIEdgeInsets(bottom: timestampsHeight))
         scrollView.fill(in: self)
@@ -132,10 +136,12 @@ final class ChartView: View {
 
     @objc private func onTap(_ recognizer: UITapGestureRecognizer) {
         selectIndex(at: recognizer.location(in: scrollView))
+        limitValueCardFrame()
     }
 
     @objc private func onPan(_ recognizer: UILongPressGestureRecognizer) {
         selectIndex(at: recognizer.location(in: scrollView))
+        limitValueCardFrame()
     }
 
     private var selectedIndex: Int?
