@@ -10,7 +10,7 @@ extension CGFloat {
     }
 
     static var pointsEpsilon: CGFloat {
-        return 1.0
+        return 1e-2
     }
 
     static var pixel: CGFloat {
