@@ -14,7 +14,8 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
     var controller: ViewController? {
         didSet {
             oldValue?.view.removeFromSuperview()
-            setNeedsLayout()
+            controller?.view.removeFromSuperview()
+            layoutControllerIfNeeded()
         }
     }
 
@@ -42,20 +43,9 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        guard !bounds.isEmpty else {
-            return
-        }
-
         label.frame = CGRect(x: 15, y: 15, width: contentView.bounds.width, height: 30)
         placeholder.frame = contentView.bounds.inset(by: UIEdgeInsets(top: label.frame.maxY))
-
-//        if let controller = controller {
-//            controller.view.frame = placeholder.bounds
-//            controller.theme = theme
-//            controller.hasSuperview.onFalse {
-//                placeholder.addSubview(controller.view)
-//            }
-//        }
+        layoutControllerIfNeeded()
     }
 
     private func setup() {
@@ -69,8 +59,17 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
         backgroundColor = .clear
         label.textColor = theme.color.header
         label.backgroundColor = theme.color.background
-        #warning("fix")
-        placeholder.backgroundColor = .red
+    }
+
+    private func layoutControllerIfNeeded() {
+        guard !placeholder.bounds.isEmpty, let controller = controller else {
+            return
+        }
+
+        controller.view.frame = placeholder.bounds
+        controller.hasSuperview.onFalse {
+            placeholder.addSubview(controller.view)
+        }
     }
 
     private let placeholder = Placeholder()

@@ -26,10 +26,8 @@ public extension UIView {
         centerX: NSLayoutXAxisAnchor? = nil,
         centerY: NSLayoutYAxisAnchor? = nil
     ) {
-        translatesAutoresizingMaskIntoConstraints = false
-
         if let view = view {
-            removeFromSuperview()
+            translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(self)
         }
 
@@ -77,10 +75,7 @@ public extension UIView {
             bottom: view.bottomAnchor,
             left: view.leftAnchor,
             right: view.rightAnchor,
-            topOffset: insets.top,
-            leftOffset: insets.left,
-            bottomOffset: insets.bottom,
-            rightOffset: insets.right
+            insets: insets
         )
     }
 
