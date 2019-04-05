@@ -54,6 +54,7 @@ final class ChartView: View {
         chartLayer.frame = chartFrame
         timestampsView.frame = timestampsFrame
         displayValue(at: selectedIndex)
+        limitValueCardFrame()
     }
 
     private func selectIndex(at point: CGPoint) {
