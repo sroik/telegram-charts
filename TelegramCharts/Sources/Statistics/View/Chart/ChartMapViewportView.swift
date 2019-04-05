@@ -26,7 +26,7 @@ final class ChartMapViewportView: View {
             return .none
         }
 
-        if bounds.width < 54, midFrame.contains(point) {
+        if bounds.width < 64, midFrame.contains(point) {
             return .mid
         }
 

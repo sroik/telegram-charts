@@ -62,7 +62,7 @@ final class ChartViewController: ViewController {
     }
 
     private func updateChartRange() {
-        if needsToUpdateChartRange, !mapView.selectedKnob.isSide {
+        if needsToUpdateChartRange {
             needsToUpdateChartRange = false
             chartView.set(range: viewportRange, animated: true)
         }
@@ -76,7 +76,7 @@ final class ChartViewController: ViewController {
     }
 
     private var needsToUpdateChartRange: Bool = true
-    private let displayLink = DisplayLink(fps: 2)
+    private let displayLink = DisplayLink(fps: 4)
     private let columnsView: ChartColumnsStackView
     private let chartView: ChartView
     private let mapView: ChartMapView
