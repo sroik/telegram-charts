@@ -125,6 +125,20 @@ extension CGPath {
             height: 2 * radius
         ), transform: nil)
     }
+
+    var bounds: CGRect {
+        return boundingBox
+    }
+
+    func scaled(x: CGFloat = 1, y: CGFloat = 1) -> CGPath {
+        return transformed(with: CGAffineTransform(scaleX: x, y: y))
+    }
+
+    func transformed(with transform: CGAffineTransform) -> CGPath {
+        var t = transform
+        let path = copy(using: &t)
+        return path ?? self
+    }
 }
 
 extension UIEdgeInsets {

@@ -5,7 +5,7 @@
 import Foundation
 import UIKit
 
-public extension UIView {
+extension UIView {
     /*
      It's not the best decision, but I didn't
      want to use SnapKit-like in this project
@@ -83,7 +83,10 @@ public extension UIView {
         subviews.forEach(addSubview(_:))
     }
 
-    func removeFromSuperview(animated: Bool, duration: TimeInterval = 0.25) {
+    func removeFromSuperview(
+        animated: Bool,
+        duration: TimeInterval = .defaultDuration
+    ) {
         UIView.animate(
             withDuration: animated ? duration : 0,
             animations: { self.alpha = 0 },
@@ -91,7 +94,11 @@ public extension UIView {
         )
     }
 
-    func addSubview(_ view: UIView, animated: Bool, duration: TimeInterval = 0.25) {
+    func addSubview(
+        _ view: UIView,
+        animated: Bool,
+        duration: TimeInterval = .defaultDuration
+    ) {
         view.alpha = 0
         addSubview(view)
         UIView.animate(

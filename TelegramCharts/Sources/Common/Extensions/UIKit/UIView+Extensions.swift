@@ -8,10 +8,6 @@ extension UIView {
     var isVisible: Bool {
         return !isHidden && alpha > .ulpOfOne
     }
-
-    func set(alpha: CGFloat, animated: Bool = true, duration: TimeInterval = 0.25) {
-        layer.set(value: alpha, for: .opacity, animated: animated, duration: duration)
-    }
 }
 
 extension UITableView {
@@ -25,7 +21,7 @@ extension UITableView {
 }
 
 extension UILabel {
-    func set(text: String?, animated: Bool, duration: TimeInterval = 0.35) {
+    func set(text: String?, animated: Bool, duration: TimeInterval = 0.25) {
         let transition = CATransition()
         transition.type = .fade
         transition.duration = animated ? duration : 0

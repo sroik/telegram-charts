@@ -27,12 +27,6 @@ final class ChartLayer: Layer {
         }
     }
 
-    func redraw() {
-        columnLayers.forEach {
-            $0.redraw()
-        }
-    }
-
     func select(index: Int?) {
         columnLayers.forEach {
             $0.selectedIndex = index

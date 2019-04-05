@@ -37,7 +37,9 @@ final class ColumnLayer: Layer {
 
     override func layoutSublayersOnBoundsChange() {
         super.layoutSublayersOnBoundsChange()
-        redraw()
+        shapeLayer.frame = contentFrame
+        pointLayer.frame = contentFrame
+        draw(animated: false)
     }
 
     override func themeUp() {
@@ -59,12 +61,6 @@ final class ColumnLayer: Layer {
         }
     }
 
-    func redraw() {
-        shapeLayer.frame = contentFrame
-        pointLayer.frame = contentFrame
-        draw(animated: false)
-    }
-
     func draw(animated: Bool) {
         switch column.type {
         case .line:
@@ -79,7 +75,7 @@ final class ColumnLayer: Layer {
         let points = column.points(in: shapeLayer.bounds, range: range)
         let filteredPoint = points.dropClose(threshold: pointsThreshold)
         let path = CGPath.between(points: filteredPoint)
-        shapeLayer.set(value: path, for: .path, animated: animated)
+        shapeLayer.set(path: path, animated: animated)
     }
 
     private func drawSelectedPoint(animated: Bool = false) {
@@ -90,7 +86,7 @@ final class ColumnLayer: Layer {
 
         let point = column.point(at: index, in: pointLayer.bounds, range: range)
         let path = CGPath.circle(center: point, radius: lineWidth * 1.5)
-        pointLayer.set(value: path, for: .path, animated: animated)
+        pointLayer.set(path: path, animated: animated)
     }
 
     private func setup() {
