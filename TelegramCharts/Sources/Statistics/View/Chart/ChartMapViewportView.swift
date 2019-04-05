@@ -26,8 +26,16 @@ final class ChartMapViewportView: View {
             return .none
         }
 
-        if bounds.width < -2 * tapAreaInsets.horizontal, midFrame.contains(point) {
+        if bounds.width < 54, midFrame.contains(point) {
             return .mid
+        }
+
+        if point.x < leftKnob.frame.maxX {
+            return .left
+        }
+
+        if point.x > rightKnob.frame.minX {
+            return .right
         }
 
         if leftKnob.frame.inset(by: tapAreaInsets).contains(point) {
