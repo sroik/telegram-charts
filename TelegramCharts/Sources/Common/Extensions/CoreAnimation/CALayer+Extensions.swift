@@ -15,24 +15,36 @@ extension CALayer {
         return value(forKeyPath: keyPath)
     }
 
+    func basicAnimation(for keyPath: KeyPath) -> CABasicAnimation? {
+        return animation(forKey: keyPath) as? CABasicAnimation
+    }
+
     func set(
         value: Any?,
         for keyPath: KeyPath,
         animated: Bool,
         duration: TimeInterval = 1.0
     ) {
-        let fromValue = presentedValue(for: keyPath) ?? modelValue(for: keyPath)
-        removeAnimation(forKey: keyPath)
+        let from = presentedValue(for: keyPath) ?? modelValue(for: keyPath)
         setValue(value, forKeyPath: keyPath)
 
-        guard animated, duration > .ulpOfOne else {
-            return
+        if animated, duration > .ulpOfOne {
+            animateValue(for: keyPath, from: from, to: value, duration: duration)
         }
+    }
 
+    func animateValue(
+        for keyPath: KeyPath,
+        from: Any?,
+        to: Any?,
+        duration: TimeInterval
+    ) {
         let animation = CABasicAnimation(keyPath: keyPath)
-        animation.fromValue = fromValue
-        animation.toValue = value
+        animation.fromValue = from
+        animation.toValue = to
         animation.duration = duration
+        animation.beginTime = CACurrentMediaTime()
+        removeAnimation(forKey: keyPath)
         add(animation, forKey: keyPath)
     }
 }
