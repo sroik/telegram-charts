@@ -47,12 +47,12 @@ final class ChartColumnsStackViewCell: Control {
             height: .pixel
         )
 
-        checkmarkView.contentMode = .scaleAspectFit
+        checkmarkView.contentMode = .center
         checkmarkView.anchor(
             in: self,
             right: rightAnchor,
             rightOffset: 15,
-            width: 12.5, height: 12.5,
+            width: 20, height: 20,
             centerY: centerYAnchor
         )
 
@@ -72,6 +72,6 @@ final class ChartColumnsStackViewCell: Control {
 
     private let colorView = UIView()
     private let separator = UIView()
-    private let checkmarkView = UIImageView(image: UIImage(named: "checkmark"))
+    private let checkmarkView = UIImageView(image: Image.checkmark)
     private let label = Label.primary(font: UIFont.systemFont(ofSize: 16), alignment: .left)
 }

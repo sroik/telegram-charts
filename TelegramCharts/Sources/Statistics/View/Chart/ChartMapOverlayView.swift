@@ -15,7 +15,7 @@ final class ChartMapOverlayView: View {
      I don't know the logic of it's size,
      so I'll leave this hardcoded number for now
      */
-    var minSize: CGFloat = 0.05
+    var minSize: CGFloat = 0.075
 
     var viewport: Range<CGFloat> = Range(min: 0, max: 1) {
         didSet {
@@ -45,7 +45,7 @@ final class ChartMapOverlayView: View {
     }
 
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        return viewportView.knob(at: point) != .none
+        return knob(at: point) != .none
     }
 
     private func setup() {
@@ -122,10 +122,15 @@ final class ChartMapOverlayView: View {
         recognizer.setTranslation(.zero, in: self)
     }
 
+    private func knob(at point: CGPoint) -> ChartMapViewportView.Knob {
+        let viewportPoint = convert(point, to: viewportView)
+        return viewportView.knob(at: viewportPoint)
+    }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         if let point = touches.first?.location(in: self) {
-            viewportView.selectedKnob = viewportView.knob(at: point)
+            viewportView.selectedKnob = knob(at: point)
         }
     }
 

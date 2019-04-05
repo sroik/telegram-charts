@@ -22,15 +22,19 @@ final class ChartMapViewportView: View {
     }
 
     func knob(at point: CGPoint) -> Knob {
-        guard tapAreaInsets.inset(frame).contains(point) else {
+        guard tapAreaInsets.inset(bounds).contains(point) else {
             return .none
         }
 
-        if point.x < leftKnob.frame.maxX + frame.origin.x {
+        if bounds.width < -2 * tapAreaInsets.horizontal, midFrame.contains(point) {
+            return .mid
+        }
+
+        if leftKnob.frame.inset(by: tapAreaInsets).contains(point) {
             return .left
         }
 
-        if point.x > rightKnob.frame.minX + frame.origin.x {
+        if rightKnob.frame.inset(by: tapAreaInsets).contains(point) {
             return .right
         }
 
@@ -57,22 +61,24 @@ final class ChartMapViewportView: View {
             height: lineWidth
         )
 
+        leftKnob.contentMode = .center
         leftKnob.anchor(
             in: self,
             top: topAnchor,
             bottom: bottomAnchor,
             left: leftAnchor,
             insets: UIEdgeInsets(top: lineWidth, left: 0, bottom: lineWidth, right: 0),
-            width: 8
+            width: 10
         )
 
+        rightKnob.contentMode = .center
         rightKnob.anchor(
             in: self,
             top: topAnchor,
             bottom: bottomAnchor,
             right: rightAnchor,
             insets: UIEdgeInsets(top: lineWidth, left: 0, bottom: lineWidth, right: 0),
-            width: 8
+            width: 10
         )
     }
 
@@ -83,8 +89,17 @@ final class ChartMapViewportView: View {
         }
     }
 
-    private let leftKnob = UIView()
-    private let rightKnob = UIView()
+    private var midFrame: CGRect {
+        return CGRect(
+            x: leftKnob.frame.maxX,
+            y: 0,
+            width: rightKnob.frame.minX - leftKnob.frame.maxX,
+            height: bounds.height
+        )
+    }
+
+    private let leftKnob = UIImageView(image: Image.leftKnobArrow)
+    private let rightKnob = UIImageView(image: Image.rightKnobArrow)
     private let topLine = UIView()
     private let bottomLine = UIView()
 }

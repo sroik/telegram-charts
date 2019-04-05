@@ -62,6 +62,7 @@
 		ACAF2B06223E63A000533F37 /* CGGeometryExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAF2B05223E63A000533F37 /* CGGeometryExtensionsTests.swift */; };
 		ACB9B9C822397F5200B8E841 /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB9B9C722397F5200B8E841 /* CALayer+Extensions.swift */; };
 		ACCAD327223AE13200A99436 /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCAD326223AE13200A99436 /* Layer.swift */; };
+		ACD5EF8822573496003B09C3 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD5EF8722573496003B09C3 /* Image.swift */; };
 		ACE6866F22369EBD00724432 /* StatisticsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6866E22369EBD00724432 /* StatisticsScene.swift */; };
 		ACE6867922369EEF00724432 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6867322369EEF00724432 /* ViewController.swift */; };
 		ACE6867C22369EEF00724432 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6867622369EEF00724432 /* NavigationController.swift */; };
@@ -146,6 +147,7 @@
 		ACAF2B05223E63A000533F37 /* CGGeometryExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGGeometryExtensionsTests.swift; sourceTree = "<group>"; };
 		ACB9B9C722397F5200B8E841 /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
 		ACCAD326223AE13200A99436 /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
+		ACD5EF8722573496003B09C3 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		ACE6866E22369EBD00724432 /* StatisticsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsScene.swift; sourceTree = "<group>"; };
 		ACE6867322369EEF00724432 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ACE6867622369EEF00724432 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				AC3099472239254800A04331 /* Control.swift */,
 				AC143B2F2236F1D700FEB9CD /* Label.swift */,
 				ACCAD326223AE13200A99436 /* Layer.swift */,
+				ACD5EF8722573496003B09C3 /* Image.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -677,6 +680,7 @@
 				AC3B3856223666C3000AD635 /* AnyDecodable.swift in Sources */,
 				AC143B502237CD8000FEB9CD /* ChartMapView.swift in Sources */,
 				AC3B383022365C52000AD635 /* Environment.swift in Sources */,
+				ACD5EF8822573496003B09C3 /* Image.swift in Sources */,
 				ACAF2B00223D89C300533F37 /* ChartGridLayout.swift in Sources */,
 				ACAF2AFD223D895E00533F37 /* ChartGridView.swift in Sources */,
 				AC143B4022379A9C00FEB9CD /* CGGeometry+Extensions.swift in Sources */,
