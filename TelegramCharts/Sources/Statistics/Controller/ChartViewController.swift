@@ -16,10 +16,34 @@ final class ChartViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        columnsView.delegate = self
+        columnsView.anchor(
+            in: view,
+            bottom: view.bottomAnchor,
+            left: view.leftAnchor,
+            right: view.rightAnchor,
+            height: 44 * CGFloat(chart.drawableColumns.count)
+        )
+
         mapView.viewport = chartView.viewport
         mapView.delegate = self
-        columnsView.delegate = self
-        view.addSubviews(chartView, mapView, columnsView)
+        mapView.anchor(
+            in: view,
+            bottom: columnsView.topAnchor,
+            left: view.leftAnchor,
+            right: view.rightAnchor,
+            insets: UIEdgeInsets(top: 0, left: 15, bottom: 10, right: 15),
+            height: 42
+        )
+
+        chartView.anchor(
+            in: view,
+            top: view.topAnchor,
+            bottom: mapView.topAnchor,
+            left: view.leftAnchor,
+            right: view.rightAnchor,
+            insets: UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
+        )
 
         displayLink.callback = { [weak self] _ in
             self?.updateChartRange()
@@ -27,19 +51,6 @@ final class ChartViewController: ViewController {
 
         updateChartRange()
         displayLink.start()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        let columnsHeight = 44 * CGFloat(chart.drawableColumns.count)
-        columnsView.frame = view.bounds.slice(at: columnsHeight, from: .maxYEdge)
-
-        let mapInsets = UIEdgeInsets(top: 0, left: 15, bottom: 10 + columnsHeight, right: 15)
-        mapView.frame = view.bounds.inset(by: mapInsets).slice(at: 42, from: .maxYEdge)
-
-//        let chartInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
-//        chartView.frame = view.bounds.inset(by: mapInsets)
     }
 
     override func themeUp() {

@@ -19,7 +19,7 @@ final class ChartTimestampsView: View {
 
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
-        line.frame = bounds.slice(at: .pixel, from: .maxYEdge)
+        line.frame = bounds.slice(at: .pixel, from: .minYEdge)
         updateSpacing(animated: true)
     }
 
