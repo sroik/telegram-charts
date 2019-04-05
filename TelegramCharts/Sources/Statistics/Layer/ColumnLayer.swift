@@ -37,9 +37,7 @@ final class ColumnLayer: Layer {
 
     override func layoutSublayersOnBoundsChange() {
         super.layoutSublayersOnBoundsChange()
-        shapeLayer.frame = contentInsets.inset(bounds)
-        pointLayer.frame = contentInsets.inset(bounds)
-        draw(animated: false)
+        redraw()
     }
 
     override func themeUp() {
@@ -59,6 +57,12 @@ final class ColumnLayer: Layer {
             self.range = range
             draw(animated: animated)
         }
+    }
+    
+    func redraw() {
+        shapeLayer.frame = contentInsets.inset(bounds)
+        pointLayer.frame = contentInsets.inset(bounds)
+        draw(animated: false)
     }
 
     func draw(animated: Bool) {
