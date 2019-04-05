@@ -21,7 +21,21 @@ class Control: UIControl, Themeable {
         fatalError()
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if laidoutBounds.distance(to: bounds) > .layoutEpsilon {
+            laidoutBounds = bounds
+            layoutSubviewsOnBoundsChange()
+        }
+    }
+
+    func layoutSubviewsOnBoundsChange() {
+        /* meant to be inherited */
+    }
+
     func themeUp() {
         subviews.theme(with: theme)
     }
+
+    private var laidoutBounds: CGRect = .zero
 }

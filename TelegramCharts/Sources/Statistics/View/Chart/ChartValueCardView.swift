@@ -4,7 +4,7 @@
 
 import UIKit
 
-final class ChartValueCardView: View {
+final class ChartValueCardView: Control {
     var index: Int = 0 {
         didSet {
             update()

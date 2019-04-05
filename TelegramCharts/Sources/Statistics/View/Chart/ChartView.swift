@@ -54,15 +54,21 @@ final class ChartView: View {
         chartLayer.frame = chartFrame
         timestampsView.frame = timestampsFrame
         displayValue(at: selectedIndex)
-        limitValueCardFrame()
+    }
+
+    private func deselectIndex() {
+        select(index: nil)
     }
 
     private func selectIndex(at point: CGPoint) {
         let position = point.x / scrollView.contentSize.width
-        selectedIndex = chart.timestamps.index(nearestTo: position, strategy: .ceil)
-        chartLayer.select(index: selectedIndex)
-        displayValue(at: selectedIndex)
-        limitValueCardFrame()
+        select(index: chart.timestamps.index(nearestTo: position, strategy: .ceil))
+    }
+
+    private func select(index: Int?) {
+        selectedIndex = index
+        chartLayer.select(index: index)
+        displayValue(at: index)
     }
 
     private func displayValue(at index: Int?) {
@@ -81,6 +87,7 @@ final class ChartView: View {
         valueCard.index = index
         valueCard.isHidden = false
         valueCard.frame = CGRect(midX: centerX, size: valueCard.intrinsicContentSize)
+        limitValueCardFrame()
     }
 
     private func limitValueCardFrame() {
@@ -139,7 +146,9 @@ final class ChartView: View {
     }
 
     @objc private func onTap(_ recognizer: UITapGestureRecognizer) {
-        selectIndex(at: recognizer.location(in: scrollView))
+        let point = recognizer.location(in: scrollView)
+        let isInCard = valueCard.frame.contains(point) && !valueCard.isHidden
+        isInCard ? deselectIndex() : selectIndex(at: point)
     }
 
     @objc private func onPan(_ recognizer: UILongPressGestureRecognizer) {
