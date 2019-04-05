@@ -4,6 +4,16 @@
 
 import UIKit
 
+extension UIView {
+    var isVisible: Bool {
+        return !isHidden && alpha > .ulpOfOne
+    }
+
+    func set(alpha: CGFloat, animated: Bool = true, duration: TimeInterval = 0.25) {
+        layer.set(value: alpha, for: .opacity, animated: animated, duration: duration)
+    }
+}
+
 extension UITableView {
     typealias EnumerationBlock<C> = (C) -> Void
 

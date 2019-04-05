@@ -84,8 +84,8 @@ final class ChartView: View {
         selectedLine.isHidden = false
         selectedLine.frame = CGRect(midX: centerX, width: .pixel, height: contentSize.height)
 
-        valueCard.index = index
         valueCard.isHidden = false
+        valueCard.index = index
         valueCard.frame = CGRect(midX: centerX, size: valueCard.intrinsicContentSize)
         limitValueCardFrame()
     }
@@ -147,7 +147,7 @@ final class ChartView: View {
 
     @objc private func onTap(_ recognizer: UITapGestureRecognizer) {
         let point = recognizer.location(in: scrollView)
-        let isInCard = valueCard.frame.contains(point) && !valueCard.isHidden
+        let isInCard = valueCard.frame.contains(point) && valueCard.isVisible
         isInCard ? deselectIndex() : selectIndex(at: point)
     }
 

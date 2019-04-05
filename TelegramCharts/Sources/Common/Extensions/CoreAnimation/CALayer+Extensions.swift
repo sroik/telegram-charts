@@ -21,17 +21,19 @@ extension CALayer {
         animated: Bool,
         duration: TimeInterval = 1.0
     ) {
-        let animation = CABasicAnimation(keyPath: keyPath)
-        animation.fromValue = presentedValue(for: keyPath) ?? modelValue(for: keyPath)
-        animation.toValue = value
-        animation.duration = duration
-
+        let fromValue = presentedValue(for: keyPath) ?? modelValue(for: keyPath)
         removeAnimation(forKey: keyPath)
         setValue(value, forKeyPath: keyPath)
 
-        if animated, duration > .ulpOfOne {
-            add(animation, forKey: keyPath)
+        guard animated, duration > .ulpOfOne else {
+            return
         }
+
+        let animation = CABasicAnimation(keyPath: keyPath)
+        animation.fromValue = fromValue
+        animation.toValue = value
+        animation.duration = duration
+        add(animation, forKey: keyPath)
     }
 }
 
