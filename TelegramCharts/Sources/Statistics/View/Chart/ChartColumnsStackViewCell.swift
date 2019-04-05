@@ -12,6 +12,7 @@ final class ChartColumnsStackViewCell: Control {
     }
 
     let column: Column
+    let inset: CGFloat = 15
 
     init(column: Column) {
         self.column = column
@@ -19,43 +20,44 @@ final class ChartColumnsStackViewCell: Control {
         setup()
     }
 
-    private func setup() {
-        colorView.layer.cornerRadius = 2.5
-        colorView.backgroundColor = column.uiColor
-        colorView.anchor(
-            in: self,
-            left: leftAnchor,
-            leftOffset: 15,
-            width: 11.5, height: 11.5,
-            centerY: centerYAnchor
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        colorView.frame = CGRect(
+            x: inset,
+            midY: bounds.midY,
+            width: 11.5,
+            height: 11.5
         )
 
-        label.text = column.name
-        label.anchor(
-            in: self,
-            left: colorView.rightAnchor,
-            leftOffset: 15,
-            centerY: centerYAnchor
+        checkmarkView.frame = CGRect(
+            x: bounds.width - 20 - inset,
+            midY: bounds.midY,
+            width: 20,
+            height: 20
         )
 
-        separator.anchor(
-            in: self,
-            top: bottomAnchor,
-            left: leftAnchor,
-            right: rightAnchor,
-            leftOffset: 44,
+        separator.frame = CGRect(
+            x: 44,
+            y: bounds.height - .pixel,
+            width: bounds.width - 44,
             height: .pixel
         )
 
-        checkmarkView.contentMode = .center
-        checkmarkView.anchor(
-            in: self,
-            right: rightAnchor,
-            rightOffset: 15,
-            width: 20, height: 20,
-            centerY: centerYAnchor
+        label.frame = CGRect(
+            x: colorView.frame.maxX + inset,
+            y: 0,
+            width: checkmarkView.frame.minX - colorView.frame.maxX - inset,
+            height: bounds.height
         )
+    }
 
+    private func setup() {
+        colorView.layer.cornerRadius = 2.5
+        colorView.backgroundColor = column.uiColor
+        label.text = column.name
+        checkmarkView.contentMode = .right
+        addSubviews(colorView, label, separator, checkmarkView)
         updateState()
     }
 

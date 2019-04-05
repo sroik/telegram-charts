@@ -22,6 +22,11 @@ final class ChartColumnsStackView: View {
         setup()
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        stackView.frame = bounds
+    }
+
     private func setup() {
         cells.forEach { cell in
             cell.addTarget(self, action: #selector(cellPressed), for: .touchUpInside)
@@ -33,7 +38,8 @@ final class ChartColumnsStackView: View {
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
-        stackView.fill(in: self)
+        stackView.frame = bounds
+        addSubview(stackView)
     }
 
     @objc private func cellPressed(_ cell: ChartColumnsStackViewCell) {

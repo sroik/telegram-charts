@@ -43,8 +43,8 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        label.frame = CGRect(x: 15, y: 15, width: contentView.bounds.width, height: 30)
-        placeholder.frame = contentView.bounds.inset(by: UIEdgeInsets(top: label.frame.maxY))
+        label.frame = CGRect(x: 15, y: 15, width: bounds.width, height: 30)
+        placeholder.frame = bounds.inset(by: UIEdgeInsets(top: label.frame.maxY))
         layoutControllerIfNeeded()
     }
 
@@ -66,6 +66,7 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
             return
         }
 
+        controller.theme = theme
         controller.view.frame = placeholder.bounds
         controller.hasSuperview.onFalse {
             placeholder.addSubview(controller.view)

@@ -12,13 +12,14 @@ final class ChartMapViewportView: View {
         case mid
     }
 
+    let knobWidth: CGFloat = 10
     let lineWidth: CGFloat = 1.5
     let tapAreaInsets: UIEdgeInsets = UIEdgeInsets(repeated: -15)
     var selectedKnob: Knob = .none
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layout()
+        setup()
     }
 
     func knob(at point: CGPoint) -> Knob {
@@ -49,45 +50,22 @@ final class ChartMapViewportView: View {
         return .mid
     }
 
-    private func layout() {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let knobsFrame = bounds.inset(by: UIEdgeInsets(top: lineWidth, bottom: lineWidth))
+        leftKnob.frame = knobsFrame.slice(at: knobWidth, from: .minXEdge)
+        rightKnob.frame = knobsFrame.slice(at: knobWidth, from: .maxXEdge)
+        bottomLine.frame = bounds.slice(at: lineWidth, from: .maxYEdge)
+        topLine.frame = bounds.slice(at: lineWidth, from: .minYEdge)
+    }
+
+    private func setup() {
         layer.cornerRadius = lineWidth
         layer.masksToBounds = true
 
-        topLine.anchor(
-            in: self,
-            top: topAnchor,
-            left: leftAnchor,
-            right: rightAnchor,
-            height: lineWidth
-        )
-
-        bottomLine.anchor(
-            in: self,
-            bottom: bottomAnchor,
-            left: leftAnchor,
-            right: rightAnchor,
-            height: lineWidth
-        )
-
-        leftKnob.contentMode = .center
-        leftKnob.anchor(
-            in: self,
-            top: topAnchor,
-            bottom: bottomAnchor,
-            left: leftAnchor,
-            insets: UIEdgeInsets(top: lineWidth, left: 0, bottom: lineWidth, right: 0),
-            width: 10
-        )
-
         rightKnob.contentMode = .center
-        rightKnob.anchor(
-            in: self,
-            top: topAnchor,
-            bottom: bottomAnchor,
-            right: rightAnchor,
-            insets: UIEdgeInsets(top: lineWidth, left: 0, bottom: lineWidth, right: 0),
-            width: 10
-        )
+        leftKnob.contentMode = .center
+        addSubviews(topLine, bottomLine, rightKnob, leftKnob)
     }
 
     override func themeUp() {

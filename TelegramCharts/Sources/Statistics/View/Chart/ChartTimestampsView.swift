@@ -19,6 +19,7 @@ final class ChartTimestampsView: View {
 
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
+        line.frame = bounds.slice(at: .pixel, from: .maxYEdge)
         updateSpacing(animated: true)
     }
 
@@ -143,13 +144,7 @@ final class ChartTimestampsView: View {
     }
 
     private func setup() {
-        line.anchor(
-            in: self,
-            top: topAnchor,
-            left: leftAnchor,
-            right: rightAnchor,
-            height: .pixel
-        )
+        addSubview(line)
     }
 
     private var fitLabelsNumber: Int {

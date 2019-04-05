@@ -35,7 +35,7 @@ final class ChartGridView: View {
 
     private func lineFrame(at index: Int) -> CGRect {
         let frame = layout.itemFrame(at: index, in: bounds)
-        let pixelHeightFrame = frame.divided(atDistance: .pixel, from: .maxYEdge).slice
+        let pixelHeightFrame = frame.slice(at: .pixel, from: .maxYEdge)
         return pixelHeightFrame
     }
 

@@ -12,8 +12,8 @@ class Placeholder: View {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        topLine.frame = bounds.divided(atDistance: .pixel, from: .minYEdge).slice
-        bottomLine.frame = bounds.divided(atDistance: .pixel, from: .maxYEdge).slice
+        topLine.frame = bounds.slice(at: .pixel, from: .minYEdge)
+        bottomLine.frame = bounds.slice(at: .pixel, from: .maxYEdge)
     }
 
     private func setup() {

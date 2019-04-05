@@ -41,11 +41,22 @@ final class StatisticsViewController: ViewController {
             charts = try dependencies.charts.load()
             #warning("fix the shit")
             charts = (0 ... 20).flatMap { _ in charts }
-            chartViewControllers = charts.map(ChartViewController.init(chart:))
+            chartViewControllers = charts.map(chartViewController(with:))
             tableView.reloadData()
         } catch {
             assertionFailureWrapper("failed to load charts")
         }
+    }
+
+    private func chartViewController(with chart: Chart) -> ChartViewController {
+        let height = cellHeight(with: chart)
+        let controller = ChartViewController(chart: chart)
+        controller.view.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: height)
+        return controller
+    }
+
+    private func cellHeight(with chart: Chart) -> CGFloat {
+        return 380 + CGFloat(chart.drawableColumns.count) * 44
     }
 
     private lazy var themeButton = StatisticsTableThemeButton { [weak self] in
@@ -89,6 +100,6 @@ extension StatisticsViewController: UITableViewDelegate {
             return 0
         }
 
-        return 380 + CGFloat(chart.drawableColumns.count) * 44
+        return cellHeight(with: chart)
     }
 }

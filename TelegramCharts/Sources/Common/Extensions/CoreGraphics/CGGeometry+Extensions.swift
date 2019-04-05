@@ -61,12 +61,11 @@ extension CGRect {
     }
 
     init(midX: CGFloat, y: CGFloat = 0, width: CGFloat = 0, height: CGFloat = 0) {
-        self.init(
-            x: midX - width / 2,
-            y: y,
-            width: width,
-            height: height
-        )
+        self.init(x: midX - width / 2, y: y, width: width, height: height)
+    }
+
+    init(x: CGFloat = 0, midY: CGFloat, width: CGFloat = 0, height: CGFloat = 0) {
+        self.init(x: x, y: midY - height / 2, width: width, height: height)
     }
 
     func distance(to rect: CGRect) -> CGFloat {
@@ -104,6 +103,10 @@ extension CGRect {
         }
 
         return result
+    }
+
+    func slice(at distance: CGFloat, from edge: CGRectEdge) -> CGRect {
+        return divided(atDistance: distance, from: edge).slice
     }
 }
 
