@@ -7,6 +7,14 @@ import UIKit
 extension CALayer {
     typealias KeyPath = String
 
+    func presentedValue(for keyPath: KeyPath) -> Any? {
+        return presentation()?.value(forKeyPath: keyPath)
+    }
+
+    func modelValue(for keyPath: KeyPath) -> Any? {
+        return value(forKeyPath: keyPath)
+    }
+
     func set(
         value: Any?,
         for keyPath: KeyPath,
@@ -14,20 +22,20 @@ extension CALayer {
         duration: TimeInterval = 0.35,
         timingFunction: CAMediaTimingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
     ) {
-        if let keys = animationKeys(), keys.contains(keyPath) {
-            removeAnimation(forKey: keyPath)
+        removeAnimation(forKey: keyPath)
+        setValue(value, forKeyPath: keyPath)
+
+        guard duration > .ulpOfOne, animated else {
+            return
         }
 
+        let fromValue = presentedValue(for: keyPath) ?? modelValue(for: keyPath)
         let animation = CABasicAnimation(keyPath: keyPath)
-        animation.fromValue = self.value(forKeyPath: keyPath)
+        animation.fromValue = fromValue
         animation.toValue = value
         animation.duration = duration
         animation.timingFunction = timingFunction
-        setValue(value, forKeyPath: keyPath)
-
-        if duration > .ulpOfOne, animated {
-            add(animation, forKey: keyPath)
-        }
+        add(animation, forKey: keyPath)
     }
 }
 
