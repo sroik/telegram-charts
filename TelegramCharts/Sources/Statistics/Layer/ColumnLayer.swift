@@ -58,7 +58,7 @@ final class ColumnLayer: Layer {
             draw(animated: animated)
         }
     }
-    
+
     func redraw() {
         shapeLayer.frame = contentInsets.inset(bounds)
         pointLayer.frame = contentInsets.inset(bounds)

@@ -10,22 +10,15 @@ class Placeholder: View {
         setup()
     }
 
-    private func setup() {
-        topLine.anchor(
-            in: self,
-            bottom: topAnchor,
-            left: leftAnchor,
-            right: rightAnchor,
-            height: .pixel
-        )
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        topLine.frame = bounds.divided(atDistance: .pixel, from: .minYEdge).slice
+        bottomLine.frame = bounds.divided(atDistance: .pixel, from: .maxYEdge).slice
+    }
 
-        bottomLine.anchor(
-            in: self,
-            top: bottomAnchor,
-            left: leftAnchor,
-            right: rightAnchor,
-            height: .pixel
-        )
+    private func setup() {
+        addSubview(topLine)
+        addSubview(bottomLine)
     }
 
     override func themeUp() {

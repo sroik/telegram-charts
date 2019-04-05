@@ -27,6 +27,10 @@ class ViewController: UIViewController, Themeable {
         }
     }
 
+    var hasSuperview: Bool {
+        return view.superview != nil
+    }
+
     init() {
         super.init(nibName: nil, bundle: nil)
     }

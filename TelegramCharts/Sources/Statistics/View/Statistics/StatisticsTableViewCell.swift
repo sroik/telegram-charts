@@ -14,7 +14,7 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
     var controller: ViewController? {
         didSet {
             oldValue?.view.removeFromSuperview()
-            layoutController()
+            setNeedsLayout()
         }
     }
 
@@ -42,35 +42,25 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        layoutController()
-    }
-
-    private func setup() {
-        label.anchor(
-            in: contentView,
-            top: contentView.topAnchor,
-            left: contentView.leftAnchor,
-            topOffset: 15,
-            leftOffset: 15,
-            height: 30
-        )
-
-        placeholder.anchor(
-            in: contentView,
-            top: label.bottomAnchor,
-            bottom: contentView.bottomAnchor,
-            left: contentView.leftAnchor,
-            right: contentView.rightAnchor
-        )
-    }
-
-    private func layoutController() {
-        guard !bounds.isEmpty, controller?.view.superview != placeholder else {
+        guard !bounds.isEmpty else {
             return
         }
 
-        controller?.view.fill(in: placeholder)
-        controller?.theme = theme
+        label.frame = CGRect(x: 15, y: 15, width: contentView.bounds.width, height: 30)
+        placeholder.frame = contentView.bounds.inset(by: UIEdgeInsets(top: label.frame.maxY))
+
+//        if let controller = controller {
+//            controller.view.frame = placeholder.bounds
+//            controller.theme = theme
+//            controller.hasSuperview.onFalse {
+//                placeholder.addSubview(controller.view)
+//            }
+//        }
+    }
+
+    private func setup() {
+        contentView.addSubview(label)
+        contentView.addSubview(placeholder)
     }
 
     private func themeUp() {
@@ -79,6 +69,8 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
         backgroundColor = .clear
         label.textColor = theme.color.header
         label.backgroundColor = theme.color.background
+        #warning("fix")
+        placeholder.backgroundColor = .red
     }
 
     private let placeholder = Placeholder()
