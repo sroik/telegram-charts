@@ -20,9 +20,17 @@ final class ChartLayer: Layer {
         super.init(layer: layer)
     }
 
-    override func layoutSublayers() {
-        super.layoutSublayers()
-        columnLayers.forEach { $0.frame = bounds }
+    override func layoutSublayersOnBoundsChange() {
+        super.layoutSublayersOnBoundsChange()
+        columnLayers.forEach {
+            $0.frame = bounds
+        }
+    }
+
+    func redraw() {
+        columnLayers.forEach {
+            $0.redraw()
+        }
     }
 
     func select(index: Int?) {

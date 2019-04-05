@@ -39,8 +39,6 @@ final class StatisticsViewController: ViewController {
     private func loadCharts() {
         do {
             charts = try dependencies.charts.load()
-            #warning("fix the shit")
-            charts = (0 ... 20).flatMap { _ in charts }
             chartViewControllers = charts.map(chartViewController(with:))
             tableView.reloadData()
         } catch {

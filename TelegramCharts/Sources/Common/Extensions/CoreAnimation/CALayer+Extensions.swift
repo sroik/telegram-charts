@@ -19,7 +19,7 @@ extension CALayer {
         value: Any?,
         for keyPath: KeyPath,
         animated: Bool,
-        duration: TimeInterval = 1.0
+        duration: TimeInterval = 2.0
     ) {
         let fromValue = presentedValue(for: keyPath) ?? modelValue(for: keyPath)
         removeAnimation(forKey: keyPath)

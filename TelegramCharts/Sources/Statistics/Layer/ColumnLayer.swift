@@ -37,7 +37,8 @@ final class ColumnLayer: Layer {
 
     override func layoutSublayersOnBoundsChange() {
         super.layoutSublayersOnBoundsChange()
-        redraw()
+        #warning("watch this")
+//        redraw()
     }
 
     override func themeUp() {
@@ -60,8 +61,8 @@ final class ColumnLayer: Layer {
     }
 
     func redraw() {
-        shapeLayer.frame = contentInsets.inset(bounds)
-        pointLayer.frame = contentInsets.inset(bounds)
+        shapeLayer.frame = contentFrame
+        pointLayer.frame = contentFrame
         draw(animated: false)
     }
 
@@ -103,6 +104,10 @@ final class ColumnLayer: Layer {
         pointLayer.lineWidth = lineWidth
         addSublayer(shapeLayer)
         addSublayer(pointLayer)
+    }
+
+    private var contentFrame: CGRect {
+        return contentInsets.inset(bounds)
     }
 
     private var contentInsets: UIEdgeInsets {
