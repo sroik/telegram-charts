@@ -37,8 +37,7 @@ final class ColumnLayer: Layer {
 
     override func layoutSublayersOnBoundsChange() {
         super.layoutSublayersOnBoundsChange()
-        #warning("watch this")
-//        redraw()
+        redraw()
     }
 
     override func themeUp() {

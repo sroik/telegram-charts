@@ -57,7 +57,7 @@ final class ChartValuesView: View {
     }
 
     private func labelText(at index: Int) -> String {
-        return String(labelValue(at: index))
+        return String(columnValue: labelValue(at: index))
     }
 
     private func labelValue(at index: Int) -> Int {

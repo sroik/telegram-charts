@@ -24,6 +24,7 @@
 		AC143B522237F09500FEB9CD /* ChartMapOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B512237F09500FEB9CD /* ChartMapOverlayView.swift */; };
 		AC143B572237F52D00FEB9CD /* ChartMapViewportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */; };
 		AC2542A42257961F00EE2021 /* Bool+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2542A32257961F00EE2021 /* Bool+Extensions.swift */; };
+		AC2542A82257F03400EE2021 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2542A72257F03400EE2021 /* String+Extensions.swift */; };
 		AC3099292238F02B00A04331 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3099282238F02B00A04331 /* Collection+Extensions.swift */; };
 		AC30992E2238F20700A04331 /* ChartColumnsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC30992D2238F20700A04331 /* ChartColumnsStackView.swift */; };
 		AC3099432239211800A04331 /* ChartColumnsStackViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3099422239211800A04331 /* ChartColumnsStackViewCell.swift */; };
@@ -106,6 +107,7 @@
 		AC143B512237F09500FEB9CD /* ChartMapOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMapOverlayView.swift; sourceTree = "<group>"; };
 		AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMapViewportView.swift; sourceTree = "<group>"; };
 		AC2542A32257961F00EE2021 /* Bool+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extensions.swift"; sourceTree = "<group>"; };
+		AC2542A72257F03400EE2021 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		AC3099282238F02B00A04331 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		AC30992D2238F20700A04331 /* ChartColumnsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartColumnsStackView.swift; sourceTree = "<group>"; };
 		AC3099422239211800A04331 /* ChartColumnsStackViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartColumnsStackViewCell.swift; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 				AC5EFB6F223A946400979B60 /* Math+Extensions.swift */,
 				AC5EFB71223B98EE00979B60 /* Date+Extensions.swift */,
 				AC2542A32257961F00EE2021 /* Bool+Extensions.swift */,
+				AC2542A72257F03400EE2021 /* String+Extensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -690,6 +693,7 @@
 				AC143B3422378A9300FEB9CD /* UIView+Factory.swift in Sources */,
 				AC143B3D223796BA00FEB9CD /* UIView+Extensions.swift in Sources */,
 				AC143B442237A67D00FEB9CD /* ChartView.swift in Sources */,
+				AC2542A82257F03400EE2021 /* String+Extensions.swift in Sources */,
 				AC32DCA7223C2B6D00873B04 /* Column+Points.swift in Sources */,
 				AC4AE89D223CCB04002CF635 /* ChartValuesView.swift in Sources */,
 				AC3B380F22365543000AD635 /* Chart.swift in Sources */,

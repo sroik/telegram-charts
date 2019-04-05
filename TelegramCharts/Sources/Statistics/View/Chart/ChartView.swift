@@ -29,9 +29,6 @@ final class ChartView: View {
     override func layoutSubviews() {
         super.layoutSubviews()
         adaptViewport()
-        #warning("watch")
-        chartLayer.layoutIfNeeded()
-        chartLayer.redraw()
     }
 
     override func themeUp() {
