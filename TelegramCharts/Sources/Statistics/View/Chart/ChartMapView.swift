@@ -36,6 +36,7 @@ final class ChartMapView: View {
     override func layoutSubviews() {
         super.layoutSubviews()
         chartLayer.frame = bounds
+        overlayView.frame = bounds
     }
 
     func set(range: Range<Int>, animated: Bool = false) {
@@ -51,7 +52,7 @@ final class ChartMapView: View {
         chartLayer.masksToBounds = true
         chartLayer.set(lineWidth: 1)
         chartLayer.set(pointsThreshold: 2)
-        overlayView.fill(in: self)
+        addSubviews(overlayView)
     }
 
     private let overlayView = ChartMapOverlayView()

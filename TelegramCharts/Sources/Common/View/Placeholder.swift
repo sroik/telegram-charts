@@ -14,11 +14,12 @@ class Placeholder: View {
         super.layoutSubviews()
         topLine.frame = bounds.slice(at: .pixel, from: .minYEdge)
         bottomLine.frame = bounds.slice(at: .pixel, from: .maxYEdge)
+        bringSubviewToFront(topLine)
+        bringSubviewToFront(bottomLine)
     }
 
     private func setup() {
-        addSubview(topLine)
-        addSubview(bottomLine)
+        addSubviews(topLine, bottomLine)
     }
 
     override func themeUp() {
