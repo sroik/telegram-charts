@@ -28,8 +28,9 @@ extension UIView {
         centerX: NSLayoutXAxisAnchor? = nil,
         centerY: NSLayoutYAxisAnchor? = nil
     ) {
+        translatesAutoresizingMaskIntoConstraints = false
+
         if let view = view {
-            translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(self)
         }
 
@@ -85,33 +86,24 @@ extension UIView {
         subviews.forEach(addSubview(_:))
     }
 
-    func removeFromSuperview(
-        animated: Bool,
-        duration: TimeInterval = .defaultDuration,
-        then completion: Completion? = nil
-    ) {
+    func removeFromSuperview(animated: Bool, duration: TimeInterval = .defaultDuration) {
         UIView.animate(
             withDuration: animated ? duration : 0,
             animations: { self.alpha = 0 },
-            completion: { _ in
-                self.removeFromSuperview()
-                completion?()
-            }
+            completion: { _ in self.removeFromSuperview() }
         )
     }
 
     func addSubview(
         _ view: UIView,
         animated: Bool,
-        duration: TimeInterval = .defaultDuration,
-        then completion: Completion? = nil
+        duration: TimeInterval = .defaultDuration
     ) {
         view.alpha = 0
         addSubview(view)
         UIView.animate(
             withDuration: animated ? duration : 0,
-            animations: { view.alpha = 1 },
-            completion: { _ in completion?() }
+            animations: { view.alpha = 1 }
         )
     }
 }
