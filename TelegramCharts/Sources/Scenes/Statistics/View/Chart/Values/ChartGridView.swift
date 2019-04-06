@@ -4,9 +4,12 @@
 
 import UIKit
 
-final class ChartGridView: View {
-    init(layout: ChartGridLayout = .default) {
+final class ChartGridView: View, Rangeable {
+    var range: Range<Int>
+
+    init(layout: ChartGridLayout = .default, range: Range<Int>) {
         self.layout = layout
+        self.range = range
         super.init(frame: .zero)
     }
 
@@ -18,6 +21,10 @@ final class ChartGridView: View {
     override func themeUp() {
         super.themeUp()
         lines.forEach { $0.backgroundColor = lineColor }
+    }
+
+    func set(range: Range<Int>, animated: Bool) {
+        ChartRangeAnimator(view: self).animate(to: range, animated: animated)
     }
 
     private func rebuildLines() {

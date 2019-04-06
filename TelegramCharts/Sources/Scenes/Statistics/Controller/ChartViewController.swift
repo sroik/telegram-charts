@@ -54,7 +54,7 @@ final class ChartViewController: ViewController {
             self?.updateChartRange()
         }
 
-        updateChartRange()
+        updateChartRange(animated: false)
     }
 
     override func themeUp() {
@@ -65,8 +65,8 @@ final class ChartViewController: ViewController {
         view.backgroundColor = theme.color.placeholder
     }
 
-    private func updateChartRange() {
-        chartView.set(range: viewportRange, animated: true)
+    private func updateChartRange(animated: Bool = true) {
+        chartView.set(range: viewportRange, animated: animated)
     }
 
     private var viewportRange: Range<Int> {

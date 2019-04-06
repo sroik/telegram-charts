@@ -4,7 +4,13 @@
 
 import UIKit
 
-final class ChartValuesView: View {
+final class ChartValuesView: View, Rangeable {
+    var range: Range<Int> {
+        didSet {
+            updateValues()
+        }
+    }
+
     init(layout: ChartGridLayout = .default, range: Range<Int>) {
         self.range = range
         self.layout = layout
@@ -22,21 +28,13 @@ final class ChartValuesView: View {
         labels.forEach { $0.textColor = theme.color.details }
     }
 
-    func set(range: Range<Int>, animated: Bool = false) {
-        guard self.range != range else {
-            return
-        }
-
-        self.range = range
-        updateValues(animated: true)
+    func set(range: Range<Int>, animated: Bool) {
+        ChartRangeAnimator(view: self).animate(to: range, animated: animated)
     }
 
-    private func updateValues(animated: Bool) {
-        #warning("remove")
-        print("UPDATE VALUES")
-
+    private func updateValues() {
         labels.enumerated().forEach { index, label in
-            label.set(text: labelText(at: index), animated: animated)
+            label.text = labelText(at: index)
         }
     }
 
@@ -83,6 +81,5 @@ final class ChartValuesView: View {
     }
 
     private let layout: ChartGridLayout
-    private var range: Range<Int>
     private var labels: [Label] = []
 }

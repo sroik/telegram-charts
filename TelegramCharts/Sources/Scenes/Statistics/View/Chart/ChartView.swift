@@ -17,11 +17,7 @@ final class ChartView: View {
 
     init(chart: Chart) {
         self.chart = chart
-        self.chartLayer = ChartLayer(chart: chart)
-        self.timestampsView = ChartTimestampsView(timestamps: chart.timestamps)
         self.viewport = Range(min: 0.8, max: 1.0)
-        self.valuesView = ChartValuesView(range: chartLayer.range)
-        self.valueCard = ChartValueCardView(chart: chart)
         super.init(frame: .screen)
         setup()
     }
@@ -41,6 +37,7 @@ final class ChartView: View {
     func set(range: Range<Int>, animated: Bool = false) {
         chartLayer.set(range: range, animated: animated)
         valuesView.set(range: range, animated: animated)
+        gridView.set(range: range, animated: animated)
     }
 
     func set(enabledColumns: Set<Column>, animated: Bool = false) {
@@ -51,8 +48,8 @@ final class ChartView: View {
         scrollView.contentSize = contentSize
         scrollView.contentOffset = CGPoint(x: contentSize.width * viewport.min, y: 0)
 
-        chartLayer.frame = chartFrame
-        timestampsView.frame = timestampsFrame
+        chartLayer.frame = contentFrame.remainder(at: timestampsHeight, from: .maxYEdge)
+        timestampsView.frame = contentFrame.slice(at: timestampsHeight, from: .maxYEdge)
         displayValue(at: selectedIndex)
     }
 
@@ -97,7 +94,9 @@ final class ChartView: View {
     private func setup() {
         gridView.fill(in: self, insets: UIEdgeInsets(bottom: timestampsHeight))
         scrollView.fill(in: self)
-        valuesView.fill(in: self, insets: UIEdgeInsets(bottom: timestampsHeight))
+        valuesView.fill(in: valuesContainer)
+        valuesContainer.fill(in: self, insets: UIEdgeInsets(bottom: timestampsHeight))
+        valuesContainer.clipsToBounds = true
 
         scrollView.addSubview(selectedLine)
         scrollView.layer.addSublayer(chartLayer)
@@ -120,29 +119,12 @@ final class ChartView: View {
         scrollView.addGestureRecognizer(tap)
     }
 
-    private var chartFrame: CGRect {
-        return CGRect(
-            x: 0,
-            y: 0,
-            width: contentSize.width,
-            height: contentSize.height - timestampsHeight
-        )
-    }
-
-    private var timestampsFrame: CGRect {
-        return CGRect(
-            x: 0,
-            y: contentSize.height - timestampsHeight,
-            width: contentSize.width,
-            height: timestampsHeight
-        )
+    private var contentFrame: CGRect {
+        return CGRect(origin: .zero, size: contentSize)
     }
 
     private var contentSize: CGSize {
-        return CGSize(
-            width: bounds.width / viewport.size,
-            height: bounds.height
-        )
+        return CGSize(width: bounds.width / viewport.size, height: bounds.height)
     }
 
     @objc private func onTap(_ recognizer: UITapGestureRecognizer) {
@@ -157,13 +139,14 @@ final class ChartView: View {
 
     private var selectedIndex: Int?
     private let selectedLine = UIView()
-    private let valueCard: ChartValueCardView
 
-    private let timestampsHeight: CGFloat = 25
-    private let gridView = ChartGridView()
-    private let valuesView: ChartValuesView
-    private let timestampsView: ChartTimestampsView
-    private let chartLayer: ChartLayer
-    private let scrollView = UIScrollView.charts()
     private let chart: Chart
+    private let timestampsHeight: CGFloat = 25
+    private let scrollView = UIScrollView.charts()
+    private lazy var valueCard = ChartValueCardView(chart: chart)
+    private lazy var valuesContainer = View()
+    private lazy var valuesView = ChartValuesView(range: chartLayer.range)
+    private lazy var gridView = ChartGridView(range: chartLayer.range)
+    private lazy var timestampsView = ChartTimestampsView(timestamps: chart.timestamps)
+    private lazy var chartLayer = ChartLayer(chart: chart)
 }

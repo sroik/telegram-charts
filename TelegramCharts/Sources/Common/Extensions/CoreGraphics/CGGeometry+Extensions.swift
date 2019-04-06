@@ -108,6 +108,10 @@ extension CGRect {
     func slice(at distance: CGFloat, from edge: CGRectEdge) -> CGRect {
         return divided(atDistance: distance, from: edge).slice
     }
+
+    func remainder(at distance: CGFloat, from edge: CGRectEdge) -> CGRect {
+        return divided(atDistance: distance, from: edge).remainder
+    }
 }
 
 extension CGPath {
