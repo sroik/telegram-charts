@@ -77,7 +77,7 @@ final class ChartViewController: ViewController {
             .clamped(from: 0, to: .max)
     }
 
-    private let displayLink = DisplayLink(fps: 3)
+    private let displayLink = DisplayLink(fps: 2)
     private let columnsView: ChartColumnsStackView
     private let chartView: ChartView
     private let mapView: ChartMapView

@@ -113,10 +113,10 @@ final class ChartView: View {
         let pan = UILongPressGestureRecognizer(target: self, action: #selector(onPan))
         pan.minimumPressDuration = 0.25
         pan.allowableMovement = CGRect.screen.diagonal
-        scrollView.addGestureRecognizer(pan)
+        valuesContainer.addGestureRecognizer(pan)
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTap))
-        scrollView.addGestureRecognizer(tap)
+        valuesContainer.addGestureRecognizer(tap)
     }
 
     private var contentFrame: CGRect {
