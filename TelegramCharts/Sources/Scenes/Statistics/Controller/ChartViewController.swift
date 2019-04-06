@@ -10,7 +10,7 @@ final class ChartViewController: ViewController {
     init(dependencies: Dependencies, chart: Chart) {
         self.chart = chart
         self.mapView = ChartMapView(chart: chart)
-        self.chartView = ChartView(chart: chart)
+        self.chartView = ChartBrowserView(chart: chart)
         self.columnsView = ChartColumnsStackView(
             sounds: dependencies.sounds,
             columns: chart.drawableColumns
@@ -73,13 +73,13 @@ final class ChartViewController: ViewController {
         /* let's scale range a little to make it look better */
         return columnsView.enabledColumns
             .range(in: mapView.viewport)
-            .scaled(by: 1.25, from: .top)
+            .scaled(by: 1.1, from: .center)
             .clamped(from: 0, to: .max)
     }
 
     private let displayLink = DisplayLink(fps: 2)
     private let columnsView: ChartColumnsStackView
-    private let chartView: ChartView
+    private let chartView: ChartBrowserView
     private let mapView: ChartMapView
     private let chart: Chart
 }

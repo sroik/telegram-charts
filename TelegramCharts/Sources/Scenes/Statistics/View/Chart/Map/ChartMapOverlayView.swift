@@ -49,8 +49,11 @@ final class ChartMapOverlayView: View {
     }
 
     private func setup() {
-        addSubviews(viewportView, leftSpaceView, rightSpaceView)
+        workspace.addSubviews(leftSpaceView, rightSpaceView)
+        workspace.layer.cornerRadius = 6
+        workspace.layer.masksToBounds = true
 
+        addSubviews(workspace, viewportView)
         let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(onPan))
         panRecognizer.delaysTouchesBegan = false
         panRecognizer.cancelsTouchesInView = false
@@ -58,6 +61,8 @@ final class ChartMapOverlayView: View {
     }
 
     private func layoutViewport() {
+        workspace.frame = bounds
+
         viewportView.frame = CGRect(
             x: bounds.width * viewport.min,
             y: -viewportView.lineWidth,
@@ -68,14 +73,14 @@ final class ChartMapOverlayView: View {
         leftSpaceView.frame = CGRect(
             x: 0,
             y: 0,
-            width: viewportView.frame.minX,
+            width: viewportView.frame.minX + viewportView.knobWidth,
             height: bounds.height
         )
 
         rightSpaceView.frame = CGRect(
-            x: viewportView.frame.maxX,
+            x: viewportView.frame.maxX - viewportView.knobWidth,
             y: 0,
-            width: bounds.width - viewportView.frame.maxX,
+            width: bounds.width - viewportView.frame.maxX + viewportView.knobWidth,
             height: bounds.height
         )
     }
@@ -144,6 +149,7 @@ final class ChartMapOverlayView: View {
         viewportView.selectedKnob = .none
     }
 
+    private let workspace = UIView()
     private let viewportView = ChartMapViewportView(frame: .screen)
     private let leftSpaceView = UIView()
     private let rightSpaceView = UIView()

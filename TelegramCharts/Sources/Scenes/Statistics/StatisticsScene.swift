@@ -13,19 +13,27 @@ final class StatisticsScene: NavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        statisticsViewController.delegate = self
         statisticsViewController.title = "Statistics"
         viewControllers = [statisticsViewController]
         theme = dependencies.settings.theme
+        updateNavigationBar()
+    }
+
+    private func updateNavigationBar() {
+        statisticsViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "\(theme.rotated.title) Mode",
+            style: .plain,
+            target: self,
+            action: #selector(themeButtonPressed)
+        )
+    }
+
+    @objc private func themeButtonPressed() {
+        dependencies.settings.tweak { $0.theme = $0.theme.rotated }
+        theme = dependencies.settings.theme
+        updateNavigationBar()
     }
 
     private let statisticsViewController: StatisticsViewController
     private let dependencies: Dependencies
-}
-
-extension StatisticsScene: StatisticsViewControllerDelegate {
-    func statisticsViewControllerWantsToChangeTheme(_ controller: StatisticsViewController) {
-        dependencies.settings.tweak { $0.theme = $0.theme.rotated }
-        theme = dependencies.settings.theme
-    }
 }

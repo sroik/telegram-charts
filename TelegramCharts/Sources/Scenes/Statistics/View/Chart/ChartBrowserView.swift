@@ -4,7 +4,7 @@
 
 import UIKit
 
-final class ChartView: View {
+final class ChartBrowserView: View {
     var viewport: Range<CGFloat> {
         didSet {
             adaptViewport()
@@ -53,7 +53,7 @@ final class ChartView: View {
         displayValue(at: selectedIndex)
     }
 
-    private func deselectIndex() {
+    private func selectValueCard() {
         select(index: nil)
     }
 
@@ -130,7 +130,7 @@ final class ChartView: View {
     @objc private func onTap(_ recognizer: UITapGestureRecognizer) {
         let point = recognizer.location(in: scrollView)
         let isInCard = valueCard.frame.contains(point) && valueCard.isVisible
-        isInCard ? deselectIndex() : selectIndex(at: point)
+        isInCard ? selectValueCard() : selectIndex(at: point)
     }
 
     @objc private func onPan(_ recognizer: UILongPressGestureRecognizer) {

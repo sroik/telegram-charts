@@ -4,13 +4,7 @@
 
 import UIKit
 
-protocol StatisticsViewControllerDelegate: AnyObject {
-    func statisticsViewControllerWantsToChangeTheme(_ controller: StatisticsViewController)
-}
-
 final class StatisticsViewController: ViewController {
-    weak var delegate: StatisticsViewControllerDelegate?
-
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
         super.init()
@@ -28,8 +22,6 @@ final class StatisticsViewController: ViewController {
 
     override func themeUp() {
         super.themeUp()
-        themeButton.title = "Switch To \(theme.rotated.title) Mode"
-        themeButton.theme = theme
         tableView.backgroundColor = theme.color.background
         tableView.forEachVisibleCell { (cell: StatisticsTableViewCell) in
             cell.theme = theme
@@ -57,13 +49,7 @@ final class StatisticsViewController: ViewController {
         return 380 + CGFloat(chart.drawableColumns.count) * 44
     }
 
-    private lazy var themeButton = StatisticsTableThemeButton { [weak self] in
-        if let self = self {
-            self.delegate?.statisticsViewControllerWantsToChangeTheme(self)
-        }
-    }
-
-    private lazy var tableView = UITableView.statistics(footer: themeButton)
+    private lazy var tableView = UITableView.statistics()
     private var charts: [Chart] = []
     private var chartViewControllers: [ChartViewController] = []
     private let dependencies: Dependencies

@@ -12,7 +12,7 @@ final class ChartMapViewportView: View {
         case mid
     }
 
-    let knobWidth: CGFloat = 10
+    let knobWidth: CGFloat = 12
     let lineWidth: CGFloat = 1.5
     let tapAreaInsets: UIEdgeInsets = UIEdgeInsets(repeated: -15)
     var selectedKnob: Knob = .none
@@ -60,7 +60,7 @@ final class ChartMapViewportView: View {
     }
 
     private func setup() {
-        layer.cornerRadius = lineWidth
+        layer.cornerRadius = 6
         layer.masksToBounds = true
 
         rightKnob.contentMode = .center
@@ -71,7 +71,7 @@ final class ChartMapViewportView: View {
     override func themeUp() {
         super.themeUp()
         [leftKnob, rightKnob, topLine, bottomLine].forEach { view in
-            view.backgroundColor = theme.color.control.withAlphaComponent(0.75)
+            view.backgroundColor = theme.color.control
         }
     }
 

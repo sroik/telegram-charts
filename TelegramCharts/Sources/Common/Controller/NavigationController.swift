@@ -56,7 +56,7 @@ class NavigationController: UINavigationController {
         children.theme(with: theme)
         viewControllers.theme(with: theme)
         view.backgroundColor = theme.color.background
-        navigationBar.tintColor = theme.color.text
+        navigationBar.tintColor = theme.color.tint
         navigationBar.barTintColor = theme.color.navigation
         navigationBar.titleTextAttributes = [
             .foregroundColor: theme.color.text
