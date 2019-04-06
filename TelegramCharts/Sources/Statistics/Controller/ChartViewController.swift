@@ -72,11 +72,12 @@ final class ChartViewController: ViewController {
         /* let's scale range a little to make it look better */
         return columnsView.enabledColumns
             .range(in: mapView.viewport)
-            .scaled(by: 1.1)
+            .scaled(by: 1.25, from: .top)
+            .clamped(from: 0, to: .max)
     }
 
     private var needsToUpdateChartRange: Bool = true
-    private let displayLink = DisplayLink(fps: 4)
+    private let displayLink = DisplayLink(fps: 24)
     private let columnsView: ChartColumnsStackView
     private let chartView: ChartView
     private let mapView: ChartMapView

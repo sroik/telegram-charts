@@ -29,3 +29,9 @@ struct Range<T: Arithmetical>: Equatable {
         self.max = mid + halfSize
     }
 }
+
+enum RangeEdge {
+    case center
+    case top
+    case bottom
+}

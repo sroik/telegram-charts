@@ -23,11 +23,23 @@ extension Range {
             max: Swift.max(max, range.max)
         )
     }
+
+    func clamped(from: T, to: T) -> Range<T> {
+        return Range(
+            min: min.clamped(from: from, to: to),
+            max: max.clamped(from: from, to: to)
+        )
+    }
 }
 
 extension Range where T == Int {
-    func scaled(by: CGFloat) -> Range<Int> {
-        return Range(mid: mid, size: Int(CGFloat(size) * by))
+    func scaled(by: CGFloat, from edge: RangeEdge) -> Range<Int> {
+        let size = Int(CGFloat(self.size) * by)
+        switch edge {
+        case .center: return Range(mid: mid, size: size)
+        case .top: return Range(min: max - size, max: max)
+        case .bottom: return Range(min: min, max: min + size)
+        }
     }
 
     func value(at zeroToOnePosition: CGFloat) -> Int {
