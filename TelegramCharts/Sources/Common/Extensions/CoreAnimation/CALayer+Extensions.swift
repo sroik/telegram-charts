@@ -53,6 +53,19 @@ extension CALayer {
         setValue(to, forKeyPath: keyPath)
         add(animation, forKey: keyPath)
     }
+
+    func shake(duration: TimeInterval = 0.5, translation: CGFloat = 10) {
+        let animation = CAKeyframeAnimation(keyPath: .xTranslation)
+        animation.duration = duration
+        animation.values = [
+            -translation, translation,
+            -translation / 2, translation / 2,
+            -translation / 4, translation / 4,
+            0.0
+        ]
+        removeAnimation(forKey: .xTranslation)
+        add(animation, forKey: .xTranslation)
+    }
 }
 
 extension TimeInterval {
@@ -64,4 +77,5 @@ extension TimeInterval {
 extension CALayer.KeyPath {
     static let opacity = "opacity"
     static let path = "path"
+    static let xTranslation = "transform.translation.x"
 }

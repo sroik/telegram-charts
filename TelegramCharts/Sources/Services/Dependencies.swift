@@ -7,13 +7,16 @@ import Foundation
 final class Dependencies {
     let charts: ChartsService
     let settings: SettingsService
+    let sounds: SoundService
 
     init(
         charts: ChartsService = BuiltinChartsService(file: "charts.json"),
-        settings: SettingsService = LocalSettingsService()
+        settings: SettingsService = LocalSettingsService(),
+        sounds: SoundService = SystemSoundService()
     ) {
         self.charts = charts
         self.settings = settings
+        self.sounds = sounds
     }
 }
 
@@ -25,5 +28,10 @@ protocol ChartsServiceContainer {
     var charts: ChartsService { get }
 }
 
+protocol SoundServiceContainer {
+    var sounds: SoundService { get }
+}
+
+extension Dependencies: SoundServiceContainer {}
 extension Dependencies: SettingsServiceContainer {}
 extension Dependencies: ChartsServiceContainer {}

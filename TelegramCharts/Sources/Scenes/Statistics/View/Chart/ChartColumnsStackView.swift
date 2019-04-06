@@ -15,7 +15,8 @@ final class ChartColumnsStackView: View {
         return cells.filter { $0.isSelected }.map { $0.column }
     }
 
-    init(columns: [Column]) {
+    init(sounds: SoundService, columns: [Column]) {
+        self.sounds = sounds
         self.columns = columns
         self.cells = columns.map(ChartColumnsStackViewCell.init(column:))
         super.init(frame: .screen)
@@ -43,8 +44,18 @@ final class ChartColumnsStackView: View {
     }
 
     @objc private func cellPressed(_ cell: ChartColumnsStackViewCell) {
+        guard !cell.isSelected || enabledColumns.count > 1 else {
+            cell.layer.shake()
+            sounds.play(.errorFeedback)
+            return
+        }
+
         cell.isSelected.toggle()
         delegate?.columnsView(self, didChangeEnabledColumns: enabledColumns)
+    }
+
+    private func canDisableColumn() -> Bool {
+        return cells.filter { $0.isSelected }.count > 1
     }
 
     override func themeUp() {
@@ -52,6 +63,7 @@ final class ChartColumnsStackView: View {
         cells.theme(with: theme)
     }
 
+    private let sounds: SoundService
     private let stackView = UIStackView()
     private let cells: [ChartColumnsStackViewCell]
     private let columns: [Column]

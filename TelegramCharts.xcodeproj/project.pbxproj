@@ -55,6 +55,8 @@
 		AC3B385922366839000AD635 /* Chart+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B385822366839000AD635 /* Chart+Extensions.swift */; };
 		AC3B385B223682E0000AD635 /* ChartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B385A223682E0000AD635 /* ChartTests.swift */; };
 		AC45EC5F2258D7DE00A8E884 /* ChartTimestampsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC45EC5E2258D7DE00A8E884 /* ChartTimestampsRowView.swift */; };
+		AC45EC622259037700A8E884 /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC45EC612259037700A8E884 /* HapticService.swift */; };
+		AC45EC642259042B00A8E884 /* SoundService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC45EC632259042B00A8E884 /* SoundService.swift */; };
 		AC4AE89B223CB8DF002CF635 /* DisplayLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4AE89A223CB8DF002CF635 /* DisplayLink.swift */; };
 		AC4AE89D223CCB04002CF635 /* ChartValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4AE89C223CCB04002CF635 /* ChartValuesView.swift */; };
 		AC5EFB6B223A2D8A00979B60 /* ChartTimestampsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB6A223A2D8A00979B60 /* ChartTimestampsView.swift */; };
@@ -145,6 +147,8 @@
 		AC3B385822366839000AD635 /* Chart+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart+Extensions.swift"; sourceTree = "<group>"; };
 		AC3B385A223682E0000AD635 /* ChartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTests.swift; sourceTree = "<group>"; };
 		AC45EC5E2258D7DE00A8E884 /* ChartTimestampsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTimestampsRowView.swift; sourceTree = "<group>"; };
+		AC45EC612259037700A8E884 /* HapticService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
+		AC45EC632259042B00A8E884 /* SoundService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundService.swift; sourceTree = "<group>"; };
 		AC4AE89A223CB8DF002CF635 /* DisplayLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayLink.swift; sourceTree = "<group>"; };
 		AC4AE89C223CCB04002CF635 /* ChartValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartValuesView.swift; sourceTree = "<group>"; };
 		AC5EFB6A223A2D8A00979B60 /* ChartTimestampsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTimestampsView.swift; sourceTree = "<group>"; };
@@ -328,7 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				AC3B37F32236510C000AD635 /* AppDelegate.swift */,
-				ACE686972236BBB100724432 /* Statistics */,
+				AC45EC602259036400A8E884 /* Scenes */,
 				AC3B381422365970000AD635 /* Services */,
 				AC3B380D22365537000AD635 /* Model */,
 				AC3B382B22365BB1000AD635 /* Common */,
@@ -400,6 +404,8 @@
 				ACE686932236B60F00724432 /* Dependencies.swift */,
 				AC3B381522365987000AD635 /* ChartsService.swift */,
 				ACE6868B2236AFB200724432 /* SettingsService.swift */,
+				AC45EC632259042B00A8E884 /* SoundService.swift */,
+				AC45EC612259037700A8E884 /* HapticService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -485,6 +491,14 @@
 				AC3B3840223661E3000AD635 /* Bundle+Stub.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		AC45EC602259036400A8E884 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				ACE686972236BBB100724432 /* Statistics */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		ACB9B9C622397F3800B8E841 /* CoreAnimation */ = {
@@ -686,7 +700,9 @@
 				AC2542AC225812F100EE2021 /* CAShapeLayer+Extensions.swift in Sources */,
 				AC143B302236F1D700FEB9CD /* Label.swift in Sources */,
 				ACE6868A2236AD1000724432 /* Themeable.swift in Sources */,
+				AC45EC622259037700A8E884 /* HapticService.swift in Sources */,
 				ACE686832236A0B400724432 /* Theme+Factory.swift in Sources */,
+				AC45EC642259042B00A8E884 /* SoundService.swift in Sources */,
 				ACE6867922369EEF00724432 /* ViewController.swift in Sources */,
 				AC3B382922365B08000AD635 /* Optional+Extensions.swift in Sources */,
 				ACE6867F2236A09400724432 /* Theme.swift in Sources */,

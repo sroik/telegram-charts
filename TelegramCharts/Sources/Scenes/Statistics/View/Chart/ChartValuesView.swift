@@ -26,12 +26,15 @@ final class ChartValuesView: View {
         guard self.range != range else {
             return
         }
-        
+
         self.range = range
         updateValues(animated: true)
     }
 
     private func updateValues(animated: Bool) {
+        #warning("remove")
+        print("UPDATE VALUES")
+
         labels.enumerated().forEach { index, label in
             label.set(text: labelText(at: index), animated: animated)
         }

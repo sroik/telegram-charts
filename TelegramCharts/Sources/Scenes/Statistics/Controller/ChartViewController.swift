@@ -5,11 +5,16 @@
 import UIKit
 
 final class ChartViewController: ViewController {
-    init(chart: Chart) {
+    typealias Dependencies = SoundServiceContainer
+
+    init(dependencies: Dependencies, chart: Chart) {
         self.chart = chart
         self.mapView = ChartMapView(chart: chart)
         self.chartView = ChartView(chart: chart)
-        self.columnsView = ChartColumnsStackView(columns: chart.drawableColumns)
+        self.columnsView = ChartColumnsStackView(
+            sounds: dependencies.sounds,
+            columns: chart.drawableColumns
+        )
         super.init()
     }
 

@@ -48,7 +48,7 @@ final class StatisticsViewController: ViewController {
 
     private func chartViewController(with chart: Chart) -> ChartViewController {
         let height = cellHeight(with: chart)
-        let controller = ChartViewController(chart: chart)
+        let controller = ChartViewController(dependencies: dependencies, chart: chart)
         controller.view.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: height)
         return controller
     }
