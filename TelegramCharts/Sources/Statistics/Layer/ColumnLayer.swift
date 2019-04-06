@@ -75,7 +75,7 @@ final class ColumnLayer: Layer {
         let points = column.points(in: shapeLayer.bounds, range: range)
         let filteredPoint = points.dropClose(threshold: pointsThreshold)
         let path = CGPath.between(points: filteredPoint)
-        shapeLayer.set(path: path, animated: animated)
+        shapeLayer.update(path: path, animated: animated)
     }
 
     private func drawSelectedPoint(animated: Bool = false) {
@@ -86,7 +86,7 @@ final class ColumnLayer: Layer {
 
         let point = column.point(at: index, in: pointLayer.bounds, range: range)
         let path = CGPath.circle(center: point, radius: lineWidth * 1.5)
-        pointLayer.set(path: path, animated: animated)
+        pointLayer.update(path: path, animated: animated)
     }
 
     private func setup() {

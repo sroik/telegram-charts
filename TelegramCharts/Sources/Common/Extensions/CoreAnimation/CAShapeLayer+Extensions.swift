@@ -13,7 +13,7 @@ extension CAShapeLayer {
         return basicAnimation(for: .path)
     }
 
-    func set(
+    func update(
         path: CGPath,
         preservingAnimations: Bool = true,
         animated: Bool,
@@ -34,9 +34,13 @@ extension CAShapeLayer {
             return
         }
 
-        let scale = path.bounds.width / currentPath.bounds.width
+        let scale = path.bounds.maxX / currentPath.bounds.maxX
         let from = currentPath.scaled(x: scale)
         let duration = animation.leftTime
         animateValue(for: .path, from: from, to: path, duration: duration)
+    }
+
+    func set(path: CGPath, animated: Bool, duration: TimeInterval = .defaultDuration) {
+        set(value: path, for: .path, animated: animated, duration: duration)
     }
 }
