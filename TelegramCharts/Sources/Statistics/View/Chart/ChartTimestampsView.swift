@@ -7,7 +7,7 @@ import UIKit
 final class ChartTimestampsView: View {
     var minimumSpacing: CGFloat = 50.0 {
         didSet {
-            updateSpacing(animated: true)
+            update(animated: true)
         }
     }
 
@@ -20,131 +20,59 @@ final class ChartTimestampsView: View {
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
         line.frame = bounds.slice(at: .pixel, from: .minYEdge)
-        updateSpacing(animated: true)
+        displayLink.needsToDisplay = true
     }
 
     override func themeUp() {
         super.themeUp()
         backgroundColor = theme.color.placeholder
         line.backgroundColor = theme.color.line
-        labels.values.forEach { $0.textColor = theme.color.details }
+        rowView.theme = theme
     }
 
-    func updateSpacing(animated: Bool) {
+    func update(animated: Bool) {
+        if !bounds.isEmpty, fitLabelsNumber != rowView.count {
+            updateRowView(animated: animated)
+        }
+    }
+
+    private func updateRowView(animated: Bool) {
+        let oldRowView = rowView
+        rowView = ChartTimestampsRowView(itemWidth: minimumSpacing, timestamps: fitTimestamps)
+        rowView.theme = theme
+        rowView.fill(in: self)
+
+        switch rowView.count.compare(with: oldRowView.count) {
+        case .orderedDescending where animated:
+            rowView.fadeIn(animated: animated, then: oldRowView.removeFromSuperview)
+        case .orderedAscending where animated:
+            oldRowView.removeFromSuperview(animated: animated)
+        default:
+            oldRowView.removeFromSuperview()
+        }
+    }
+
+    private var fitTimestamps: [Timestamp] {
         guard !bounds.isEmpty else {
-            return
+            return []
         }
 
-        switch labelsNumber.compare(with: fitLabelsNumber) {
-        case .orderedAscending:
-            recursiveBisect(animated: animated)
-            updateFrames()
-        case .orderedDescending where labelsNumber > 1:
-            recursiveJoin(animated: false)
-            updateFrames()
-        case .orderedSame, .orderedDescending:
-            updateFrames()
-        }
-    }
-
-    private func recursiveBisect(animated: Bool) {
-        while labelsNumber < fitLabelsNumber {
-            bisect(animated: animated)
-        }
-    }
-
-    private func recursiveJoin(animated: Bool) {
-        while labelsNumber > fitLabelsNumber && labelsNumber > 1 {
-            join(animated: animated)
-        }
-    }
-
-    private func bisect(animated: Bool) {
-        labelsNumber *= 2
-        labels = labels.mapKeys { $0 * 2 + 1 }
-
-        (0 ..< labelsNumber).forEach { index in
-            guard labels[index] == nil else {
-                return
-            }
-
-            addLabel(at: index, animated: animated)
-        }
-    }
-
-    private func join(animated: Bool) {
-        (0 ..< labelsNumber).filter { $0.isEven }.forEach { index in
-            removeLabel(at: index, animated: animated)
+        let spacing = bounds.width / CGFloat(fitLabelsNumber)
+        let indices = (0 ..< fitLabelsNumber)
+        let stamps: [Timestamp] = indices.compactMap { index in
+            let position = CGFloat(index + 1) * spacing / bounds.width
+            return timestamps.element(nearestTo: position, strategy: .ceil)
         }
 
-        labelsNumber /= 2
-        labels = labels.mapKeys { $0 / 2 }
-    }
-
-    private func updateFrames() {
-        labels.forEach { index, label in
-            label.frame = labelFrame(at: index)
-        }
-    }
-
-    private func removeLabel(at index: Index, animated: Bool) {
-        guard let label = labels[index] else {
-            return
-        }
-
-        labels[index] = nil
-        label.removeFromSuperview(animated: animated)
-    }
-
-    private func addLabel(at index: Index, animated: Bool) {
-        guard labels[index] == nil else {
-            return
-        }
-
-        let label = buildLabel(at: index)
-        addSubview(label, animated: animated)
-        labels[index] = label
-    }
-
-    private func buildLabel(at index: Index) -> Label {
-        guard let timestamp = timestamp(at: index) else {
-            assertionFailureWrapper("invalid timestamp index")
-            return Label()
-        }
-
-        let label = buildLabel(for: timestamp)
-        label.frame = labelFrame(at: index)
-        return label
-    }
-
-    private func buildLabel(for timestamp: Timestamp) -> Label {
-        return Label.details(
-            text: Date(timestamp: timestamp).monthDayString,
-            color: theme.color.details,
-            alignment: .right
-        )
-    }
-
-    private func timestamp(at index: Index) -> Timestamp? {
-        guard !bounds.isEmpty else {
-            return timestamps.last
-        }
-
-        let position = CGFloat(index + 1) * spacing / bounds.width
-        return timestamps.element(nearestTo: position, strategy: .ceil)
-    }
-
-    private func labelFrame(at index: Index) -> CGRect {
-        return CGRect(
-            x: CGFloat(index) * spacing,
-            y: 0,
-            width: spacing,
-            height: bounds.height
-        )
+        return stamps
     }
 
     private func setup() {
         addSubview(line)
+
+        displayLink.start { [weak self] _ in
+            self?.update(animated: true)
+        }
     }
 
     private var fitLabelsNumber: Int {
@@ -153,12 +81,8 @@ final class ChartTimestampsView: View {
         return min(fitNumber, maxNumber).nearestPowerOfTwo ?? 1
     }
 
-    private var spacing: CGFloat {
-        return bounds.width / CGFloat(labelsNumber)
-    }
-
-    private var labelsNumber: Int = 1
-    private var labels: [Index: Label] = [:]
+    private let displayLink = DisplayLink(fps: 12)
+    private var rowView = ChartTimestampsRowView(itemWidth: 0, timestamps: [])
     private let timestamps: [Timestamp]
     private let line = UIView()
 }

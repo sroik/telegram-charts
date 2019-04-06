@@ -45,12 +45,11 @@ final class ChartViewController: ViewController {
             insets: UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
         )
 
-        displayLink.callback = { [weak self] _ in
+        displayLink.start { [weak self] _ in
             self?.updateChartRange()
         }
 
         updateChartRange()
-        displayLink.start()
     }
 
     override func themeUp() {
@@ -62,10 +61,7 @@ final class ChartViewController: ViewController {
     }
 
     private func updateChartRange() {
-        if needsToUpdateChartRange {
-            needsToUpdateChartRange = false
-            chartView.set(range: viewportRange, animated: true)
-        }
+        chartView.set(range: viewportRange, animated: true)
     }
 
     private var viewportRange: Range<Int> {
@@ -76,8 +72,7 @@ final class ChartViewController: ViewController {
             .clamped(from: 0, to: .max)
     }
 
-    private var needsToUpdateChartRange: Bool = true
-    private let displayLink = DisplayLink(fps: 24)
+    private let displayLink = DisplayLink(fps: 3)
     private let columnsView: ChartColumnsStackView
     private let chartView: ChartView
     private let mapView: ChartMapView
@@ -97,6 +92,6 @@ extension ChartViewController: ChartColumnsStackViewDelegate {
 extension ChartViewController: ChartMapViewDelegate {
     func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Range<CGFloat>) {
         chartView.viewport = viewport
-        needsToUpdateChartRange = true
+        displayLink.needsToDisplay = true
     }
 }

@@ -16,7 +16,8 @@ extension Label {
             text: text,
             color: color,
             font: UIFont.systemFont(ofSize: 10.5, weight: .light),
-            alignment: alignment
+            alignment: alignment,
+            fitsWidth: false
         )
     }
 
@@ -25,6 +26,7 @@ extension Label {
         color: UIColor? = .white,
         font: UIFont,
         alignment: NSTextAlignment = .center,
+        fitsWidth: Bool = true,
         numberOfLines: Int = 1
     ) -> Label {
         let label = Label()
@@ -33,7 +35,7 @@ extension Label {
         label.font = font
         label.textColor = color
         label.numberOfLines = numberOfLines
-        label.adjustsFontSizeToFitWidth = true
+        label.adjustsFontSizeToFitWidth = fitsWidth
         label.baselineAdjustment = .alignCenters
         return label
     }

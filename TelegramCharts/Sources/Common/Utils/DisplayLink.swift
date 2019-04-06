@@ -14,6 +14,15 @@ final class DisplayLink {
         }
     }
 
+    var needsToDisplay: Bool {
+        get {
+            return listener.needsToDisplay
+        }
+        set {
+            listener.needsToDisplay = newValue
+        }
+    }
+
     var isPaused: Bool {
         get {
             return displayLink.isPaused
@@ -38,6 +47,11 @@ final class DisplayLink {
         stop()
     }
 
+    func start(with callback: @escaping DisplayLinkListener.Callback) {
+        self.callback = callback
+        start()
+    }
+
     func start() {
         displayLink.preferredFramesPerSecond = fps
         displayLink.add(to: .main, forMode: .common)
@@ -57,6 +71,7 @@ final class DisplayLink {
 final class DisplayLinkListener {
     typealias Callback = (_ timestamp: TimeInterval) -> Void
 
+    var needsToDisplay: Bool = true
     var callback: Callback?
 
     init(callback: Callback? = nil) {
@@ -64,6 +79,9 @@ final class DisplayLinkListener {
     }
 
     @objc func displayLinkFired(_ displayLink: CADisplayLink) {
-        callback?(displayLink.timestamp)
+        if needsToDisplay {
+            callback?(displayLink.timestamp)
+            needsToDisplay = false
+        }
     }
 }

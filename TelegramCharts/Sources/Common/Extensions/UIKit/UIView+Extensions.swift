@@ -8,6 +8,19 @@ extension UIView {
     var isVisible: Bool {
         return !isHidden && alpha > .ulpOfOne
     }
+
+    func fadeIn(
+        animated: Bool,
+        duration: TimeInterval = .defaultDuration,
+        then completion: Completion? = nil
+    ) {
+        alpha = 0
+        UIView.animate(
+            withDuration: animated ? duration : 0,
+            animations: { self.alpha = 1 },
+            completion: { _ in completion?() }
+        )
+    }
 }
 
 extension UITableView {

@@ -23,6 +23,10 @@ final class ChartValuesView: View {
     }
 
     func set(range: Range<Int>, animated: Bool = false) {
+        guard self.range != range else {
+            return
+        }
+        
         self.range = range
         updateValues(animated: true)
     }
