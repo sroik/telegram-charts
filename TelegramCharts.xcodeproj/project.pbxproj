@@ -211,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				AC30992A2238F1AC00A04331 /* Chart */,
+				AC45EC682259117B00A8E884 /* Column */,
 				AC30992B2238F1B800A04331 /* Statistics */,
 				AC30992C2238F1C100A04331 /* Extensions */,
 			);
@@ -249,17 +250,9 @@
 			isa = PBXGroup;
 			children = (
 				AC143B432237A67D00FEB9CD /* ChartView.swift */,
-				AC143B4F2237CD8000FEB9CD /* ChartMapView.swift */,
-				AC143B512237F09500FEB9CD /* ChartMapOverlayView.swift */,
-				AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */,
-				AC5EFB6A223A2D8A00979B60 /* ChartTimestampsView.swift */,
-				AC45EC5E2258D7DE00A8E884 /* ChartTimestampsRowView.swift */,
-				AC4AE89C223CCB04002CF635 /* ChartValuesView.swift */,
-				ACAF2AFC223D895E00533F37 /* ChartGridView.swift */,
-				ACAF2AFF223D89C300533F37 /* ChartGridLayout.swift */,
-				ACAF2B01223E30CD00533F37 /* ChartValueCardView.swift */,
-				AC30992D2238F20700A04331 /* ChartColumnsStackView.swift */,
-				AC3099422239211800A04331 /* ChartColumnsStackViewCell.swift */,
+				AC45EC672259115400A8E884 /* Values */,
+				AC45EC652259113E00A8E884 /* Map */,
+				AC45EC662259114600A8E884 /* Timestamps */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -499,6 +492,45 @@
 				ACE686972236BBB100724432 /* Statistics */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		AC45EC652259113E00A8E884 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				AC143B4F2237CD8000FEB9CD /* ChartMapView.swift */,
+				AC143B512237F09500FEB9CD /* ChartMapOverlayView.swift */,
+				AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		AC45EC662259114600A8E884 /* Timestamps */ = {
+			isa = PBXGroup;
+			children = (
+				AC5EFB6A223A2D8A00979B60 /* ChartTimestampsView.swift */,
+				AC45EC5E2258D7DE00A8E884 /* ChartTimestampsRowView.swift */,
+			);
+			path = Timestamps;
+			sourceTree = "<group>";
+		};
+		AC45EC672259115400A8E884 /* Values */ = {
+			isa = PBXGroup;
+			children = (
+				ACAF2B01223E30CD00533F37 /* ChartValueCardView.swift */,
+				AC4AE89C223CCB04002CF635 /* ChartValuesView.swift */,
+				ACAF2AFC223D895E00533F37 /* ChartGridView.swift */,
+				ACAF2AFF223D89C300533F37 /* ChartGridLayout.swift */,
+			);
+			path = Values;
+			sourceTree = "<group>";
+		};
+		AC45EC682259117B00A8E884 /* Column */ = {
+			isa = PBXGroup;
+			children = (
+				AC30992D2238F20700A04331 /* ChartColumnsStackView.swift */,
+				AC3099422239211800A04331 /* ChartColumnsStackViewCell.swift */,
+			);
+			path = Column;
 			sourceTree = "<group>";
 		};
 		ACB9B9C622397F3800B8E841 /* CoreAnimation */ = {
