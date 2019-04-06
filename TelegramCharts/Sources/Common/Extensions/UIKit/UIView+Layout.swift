@@ -6,6 +6,8 @@ import Foundation
 import UIKit
 
 extension UIView {
+    typealias Completion = () -> Void
+
     /*
      It's not the best decision, but I didn't
      want to use SnapKit-like in this project
@@ -85,25 +87,31 @@ extension UIView {
 
     func removeFromSuperview(
         animated: Bool,
-        duration: TimeInterval = .defaultDuration
+        duration: TimeInterval = .defaultDuration,
+        then completion: Completion? = nil
     ) {
         UIView.animate(
             withDuration: animated ? duration : 0,
             animations: { self.alpha = 0 },
-            completion: { _ in self.removeFromSuperview() }
+            completion: { _ in
+                self.removeFromSuperview()
+                completion?()
+            }
         )
     }
 
     func addSubview(
         _ view: UIView,
         animated: Bool,
-        duration: TimeInterval = .defaultDuration
+        duration: TimeInterval = .defaultDuration,
+        then completion: Completion? = nil
     ) {
         view.alpha = 0
         addSubview(view)
         UIView.animate(
             withDuration: animated ? duration : 0,
-            animations: { view.alpha = 1 }
+            animations: { view.alpha = 1 },
+            completion: { _ in completion?() }
         )
     }
 }
