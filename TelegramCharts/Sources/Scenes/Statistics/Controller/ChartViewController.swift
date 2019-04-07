@@ -7,13 +7,17 @@ import UIKit
 class ChartViewController: ViewController {
     typealias Dependencies = SoundServiceContainer
 
+    var columnsViewSize: CGSize {
+        return columnsView.contentSize(fitting: CGRect.screen.width)
+    }
+
     init(dependencies: Dependencies, chart: Chart) {
         self.chart = chart
         self.mapView = ChartMapView(chart: chart)
         self.chartView = ChartBrowserView(chart: chart)
-        self.columnsView = ChartColumnsStateView(
-            sounds: dependencies.sounds,
-            columns: chart.drawableColumns
+        self.columnsView = ColumnsListView(
+            columns: chart.drawableColumns,
+            sounds: dependencies.sounds
         )
         super.init()
     }
@@ -27,7 +31,7 @@ class ChartViewController: ViewController {
             bottom: view.bottomAnchor,
             left: view.leftAnchor,
             right: view.rightAnchor,
-            height: 44 * CGFloat(chart.drawableColumns.count)
+            height: columnsViewSize.height
         )
 
         mapView.delegate = self
@@ -36,8 +40,8 @@ class ChartViewController: ViewController {
             bottom: columnsView.topAnchor,
             left: view.leftAnchor,
             right: view.rightAnchor,
-            insets: UIEdgeInsets(top: 0, left: 15, bottom: 10, right: 15),
-            height: 42
+            insets: UIEdgeInsets(right: 15, left: 15),
+            height: 40
         )
 
         chartView.clipsToBounds = true
@@ -84,14 +88,14 @@ class ChartViewController: ViewController {
     }
 
     private let displayLink = DisplayLink(fps: 2)
-    private let columnsView: ChartColumnsStateView
+    private let columnsView: ColumnsListView
     private let chartView: ChartBrowserView
     private let mapView: ChartMapView
     private let chart: Chart
 }
 
-extension ChartViewController: ChartColumnsStateViewDelegate {
-    func columnsView(_ view: ChartColumnsStateView, didEnable columns: [Column]) {
+extension ChartViewController: ColumnsStateViewDelegate {
+    func columnsView(_ view: ColumnsListView, didEnable columns: [Column]) {
         mapView.set(range: columns.range, animated: true)
         mapView.set(enabledColumns: Set(columns), animated: true)
 

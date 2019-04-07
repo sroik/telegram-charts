@@ -6,6 +6,7 @@ import Foundation
 
 enum Sound {
     case errorFeedback
+    case selectionFeedback
 }
 
 protocol SoundService {
@@ -17,6 +18,8 @@ final class SystemSoundService: SoundService {
         switch sound {
         case .errorFeedback:
             HapticService.feedback(with: .notification(.error))
+        case .selectionFeedback:
+            HapticService.feedback(with: .selection)
         }
     }
 }

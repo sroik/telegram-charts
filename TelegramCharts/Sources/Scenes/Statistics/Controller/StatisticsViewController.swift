@@ -39,14 +39,18 @@ final class StatisticsViewController: ViewController {
     }
 
     private func chartViewController(with chart: Chart) -> ChartViewController {
-        let height = cellHeight(with: chart)
         let controller = ChartViewController(dependencies: dependencies, chart: chart)
-        controller.view.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: height)
+        controller.view.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: view.bounds.width,
+            height: height(of: controller)
+        )
         return controller
     }
 
-    private func cellHeight(with chart: Chart) -> CGFloat {
-        return 440 + CGFloat(chart.drawableColumns.count) * 44
+    private func height(of controller: ChartViewController) -> CGFloat {
+        return 440 + controller.columnsViewSize.height
     }
 
     private lazy var tableView = UITableView.statistics()
@@ -79,11 +83,11 @@ extension StatisticsViewController: UITableViewDataSource {
 
 extension StatisticsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let chart = charts[safe: indexPath.row] else {
+        guard let controller = chartViewControllers[safe: indexPath.row] else {
             assertionFailureWrapper("invalid index path")
             return 0
         }
 
-        return cellHeight(with: chart)
+        return height(of: controller)
     }
 }

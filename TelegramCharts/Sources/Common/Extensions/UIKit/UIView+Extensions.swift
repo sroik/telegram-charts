@@ -46,16 +46,6 @@ extension UITableView {
     }
 }
 
-extension UILabel {
-    func set(text: String?, animated: Bool, duration: TimeInterval = 0.25) {
-        let transition = CATransition()
-        transition.type = .fade
-        transition.duration = animated ? duration : 0
-        self.text = text
-        layer.add(transition, forKey: nil)
-    }
-}
-
 extension UIStackView {
     var maxIntrinsicWidth: CGFloat {
         return arrangedSubviews

@@ -36,7 +36,7 @@ extension Theme {
 
 extension ThemeColor {
     var gridLine: UIColor {
-        return details.withAlphaComponent(0.25)
+        return details.withAlphaComponent(0.2)
     }
 }
 
