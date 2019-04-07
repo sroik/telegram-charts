@@ -43,7 +43,6 @@ extension ThemeColor {
         text: .black,
         details: UIColor(red: 109 / 255, green: 109 / 255, blue: 114 / 255, alpha: 1),
         line: UIColor(red: 207 / 255, green: 209 / 255, blue: 210 / 255, alpha: 1),
-        control: UIColor(red: 192 / 255, green: 209 / 255, blue: 225 / 255, alpha: 1),
         popup: UIColor(red: 243 / 255, green: 243 / 255, blue: 248 / 255, alpha: 1),
         popupText: UIColor(red: 109 / 255, green: 109 / 255, blue: 114 / 255, alpha: 1)
     )
@@ -56,7 +55,6 @@ extension ThemeColor {
         text: .white,
         details: UIColor(red: 133 / 255, green: 150 / 255, blue: 171 / 255, alpha: 1),
         line: UIColor(red: 18 / 255, green: 27 / 255, blue: 35 / 255, alpha: 1),
-        control: UIColor(red: 86 / 255, green: 98 / 255, blue: 109 / 255, alpha: 1),
         popup: UIColor(red: 25 / 255, green: 40 / 255, blue: 55 / 255, alpha: 1),
         popupText: .white
     )

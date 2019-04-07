@@ -12,10 +12,16 @@ final class ChartMapViewportView: View {
         case mid
     }
 
-    let knobWidth: CGFloat = 12
-    let lineWidth: CGFloat = 1.5
     let tapAreaInsets: UIEdgeInsets = UIEdgeInsets(repeated: -15)
     var selectedKnob: Knob = .none
+
+    var knobWidth: CGFloat {
+        return 10 + 2 * theme.knobBorderWidth
+    }
+
+    var lineWidth: CGFloat {
+        return 1 + theme.knobBorderWidth
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,9 +58,8 @@ final class ChartMapViewportView: View {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        let knobsFrame = bounds.inset(by: UIEdgeInsets(top: lineWidth, bottom: lineWidth))
-        leftKnob.frame = knobsFrame.slice(at: knobWidth, from: .minXEdge)
-        rightKnob.frame = knobsFrame.slice(at: knobWidth, from: .maxXEdge)
+        leftKnob.frame = bounds.slice(at: knobWidth, from: .minXEdge)
+        rightKnob.frame = bounds.slice(at: knobWidth, from: .maxXEdge)
         bottomLine.frame = bounds.slice(at: lineWidth, from: .maxYEdge)
         topLine.frame = bounds.slice(at: lineWidth, from: .minYEdge)
     }
@@ -63,15 +68,24 @@ final class ChartMapViewportView: View {
         layer.cornerRadius = 6
         layer.masksToBounds = true
 
-        rightKnob.contentMode = .center
-        leftKnob.contentMode = .center
-        addSubviews(topLine, bottomLine, rightKnob, leftKnob)
+        [leftKnob, rightKnob].forEach { view in
+            view.contentMode = .center
+        }
+
+        addSubviews(rightKnob, leftKnob, topLine, bottomLine)
     }
 
     override func themeUp() {
         super.themeUp()
+        setNeedsLayout()
+
+        [leftKnob, rightKnob, self].forEach { view in
+            view.layer.borderColor = theme.knobBorder.cgColor
+            view.layer.borderWidth = theme.knobBorderWidth
+        }
+
         [leftKnob, rightKnob, topLine, bottomLine].forEach { view in
-            view.backgroundColor = theme.color.control
+            view.backgroundColor = theme.knob
         }
     }
 
@@ -95,6 +109,29 @@ extension ChartMapViewportView.Knob {
         switch self {
         case .left, .right: return true
         case .mid, .none: return false
+        }
+    }
+}
+
+private extension Theme {
+    var knobBorderWidth: CGFloat {
+        switch self {
+        case .day: return 1
+        case .night: return 0
+        }
+    }
+
+    var knobBorder: UIColor {
+        switch self {
+        case .day: return .white
+        case .night: return .clear
+        }
+    }
+
+    var knob: UIColor {
+        switch self {
+        case .day: return UIColor(red: 192 / 255, green: 209 / 255, blue: 225 / 255, alpha: 1)
+        case .night: return UIColor(red: 86 / 255, green: 98 / 255, blue: 109 / 255, alpha: 1)
         }
     }
 }

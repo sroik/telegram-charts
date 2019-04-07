@@ -39,6 +39,7 @@ final class ChartMapOverlayView: View {
 
     override func themeUp() {
         super.themeUp()
+        layoutViewport()
         [leftSpaceView, rightSpaceView].forEach { view in
             view.backgroundColor = theme.color.background.withAlphaComponent(0.5)
         }

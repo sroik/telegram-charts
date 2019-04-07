@@ -17,7 +17,6 @@ struct ThemeColor {
     let text: UIColor
     let details: UIColor
     let line: UIColor
-    let control: UIColor
     let popup: UIColor
     let popupText: UIColor
 }

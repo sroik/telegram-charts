@@ -46,7 +46,7 @@ final class StatisticsViewController: ViewController {
     }
 
     private func cellHeight(with chart: Chart) -> CGFloat {
-        return 400 + CGFloat(chart.drawableColumns.count) * 44
+        return 440 + CGFloat(chart.drawableColumns.count) * 44
     }
 
     private lazy var tableView = UITableView.statistics()

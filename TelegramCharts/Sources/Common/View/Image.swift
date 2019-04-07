@@ -10,10 +10,10 @@ struct Image {
     }
 
     static var leftKnobArrow: UIImage? {
-        return UIImage(named: "knob_left_arrow")
+        return UIImage(named: "left_arrow")
     }
 
     static var rightKnobArrow: UIImage? {
-        return UIImage(named: "knob_right_arrow")
+        return UIImage(named: "right_arrow")
     }
 }
