@@ -36,7 +36,7 @@ final class ChartTimestampsRowView: View {
 
     private func buildLabel(for timestamp: Timestamp) -> Label {
         return Label.details(
-            text: Date(timestamp: timestamp).monthDayString,
+            text: Date(timestamp: timestamp).string(format: "d MMM"),
             color: theme.color.details,
             alignment: .right
         )

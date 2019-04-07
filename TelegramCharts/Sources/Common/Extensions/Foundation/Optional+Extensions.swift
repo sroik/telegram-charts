@@ -4,6 +4,10 @@
 
 import Foundation
 
+protocol Emptiable {
+    var isEmpty: Bool { get }
+}
+
 enum OptionalTypeError: Error {
     case unexpectedNil
 }
@@ -29,3 +33,15 @@ extension Optional {
         try transform(value)
     }
 }
+
+extension Optional where Wrapped: Emptiable {
+    var isEmptyOrNil: Bool {
+        switch self {
+        case .none: return true
+        case let .some(value): return value.isEmpty
+        }
+    }
+}
+
+extension String: Emptiable {}
+extension Array: Emptiable {}

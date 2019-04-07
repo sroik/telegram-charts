@@ -9,7 +9,7 @@ class ChartView: View {
 
     init(chart: Chart) {
         self.chart = chart
-        super.init(frame: .zero)
+        super.init(frame: .screen)
         setup()
     }
 
@@ -63,7 +63,6 @@ class ChartView: View {
     private func setup() {
         chart.drawableColumns.forEach { column in
             let layer = LineColumnLayer(column: column)
-            layer.frame = bounds
             columnLayers.append(layer)
             self.layer.addSublayer(layer)
         }

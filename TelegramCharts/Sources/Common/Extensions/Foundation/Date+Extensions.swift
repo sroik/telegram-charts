@@ -5,15 +5,9 @@
 import Foundation
 
 extension Date {
-    var monthDayString: String {
+    func string(format: String) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d"
-        return formatter.string(from: self)
-    }
-
-    var yearString: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy"
+        formatter.dateFormat = format
         return formatter.string(from: self)
     }
 

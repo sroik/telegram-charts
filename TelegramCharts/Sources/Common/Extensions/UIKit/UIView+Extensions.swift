@@ -57,7 +57,7 @@ extension UILabel {
 }
 
 extension UIStackView {
-    var intrinsicWidth: CGFloat {
+    var maxIntrinsicWidth: CGFloat {
         return arrangedSubviews
             .map { $0.intrinsicContentSize.width }
             .max() ?? 0

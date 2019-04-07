@@ -55,7 +55,7 @@ class ChartBrowserView: View, Viewportable {
     }
 
     private func deselectIndex() {
-        selectedIndex.apply { _ in select(index: nil) }
+        select(index: nil)
     }
 
     private func selectIndex(at point: CGPoint) {
