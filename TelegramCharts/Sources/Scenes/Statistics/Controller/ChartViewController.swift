@@ -11,7 +11,7 @@ class ChartViewController: ViewController {
         self.chart = chart
         self.mapView = ChartMapView(chart: chart)
         self.chartView = ChartBrowserView(chart: chart)
-        self.columnsView = ChartColumnsStackView(
+        self.columnsView = ChartColumnsStateView(
             sounds: dependencies.sounds,
             columns: chart.drawableColumns
         )
@@ -84,14 +84,14 @@ class ChartViewController: ViewController {
     }
 
     private let displayLink = DisplayLink(fps: 2)
-    private let columnsView: ChartColumnsStackView
+    private let columnsView: ChartColumnsStateView
     private let chartView: ChartBrowserView
     private let mapView: ChartMapView
     private let chart: Chart
 }
 
-extension ChartViewController: ChartColumnsStackViewDelegate {
-    func columnsView(_ view: ChartColumnsStackView, didChangeEnabledColumns columns: [Column]) {
+extension ChartViewController: ChartColumnsStateViewDelegate {
+    func columnsView(_ view: ChartColumnsStateView, didEnable columns: [Column]) {
         mapView.set(range: columns.range, animated: true)
         mapView.set(enabledColumns: Set(columns), animated: true)
 
