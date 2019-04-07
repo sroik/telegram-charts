@@ -4,24 +4,17 @@
 
 import UIKit
 
-final class ChartLayer: Layer {
-    init(chart: Chart?) {
+class ChartView: View {
+    let chart: Chart
+
+    init(chart: Chart) {
         self.chart = chart
-        super.init()
+        super.init(frame: .zero)
         setup()
     }
 
-    required convenience init?(coder aDecoder: NSCoder) {
-        self.init(chart: nil)
-    }
-
-    override init(layer: Any) {
-        chart = nil
-        super.init(layer: layer)
-    }
-
-    override func layoutSublayersOnBoundsChange() {
-        super.layoutSublayersOnBoundsChange()
+    override func layoutSubviewsOnBoundsChange() {
+        super.layoutSubviewsOnBoundsChange()
         columnLayers.forEach {
             $0.frame = bounds
         }
@@ -39,12 +32,6 @@ final class ChartLayer: Layer {
         }
     }
 
-    func set(pointsThreshold: CGFloat, animated: Bool = false) {
-        columnLayers.forEach {
-            $0.set(pointsThreshold: pointsThreshold, animated: animated)
-        }
-    }
-
     func set(range: Range<Int>, animated: Bool = false) {
         self.range = range
         columnLayers.forEach {
@@ -59,7 +46,13 @@ final class ChartLayer: Layer {
         }
     }
 
-    private func update(layer: ColumnLayer, animated: Bool) {
+    func set(pointsThreshold: CGFloat, animated: Bool = false) {
+        columnLayers.forEach {
+            $0.set(pointsThreshold: pointsThreshold, animated: animated)
+        }
+    }
+
+    func update(layer: LineColumnLayer, animated: Bool) {
         layer.set(
             value: enabledColumns.contains(layer.column) ? 1 : 0,
             for: .opacity,
@@ -68,15 +61,11 @@ final class ChartLayer: Layer {
     }
 
     private func setup() {
-        guard let chart = chart else {
-            return
-        }
-
         chart.drawableColumns.forEach { column in
-            let layer = ColumnLayer(column: column)
+            let layer = LineColumnLayer(column: column)
             layer.frame = bounds
             columnLayers.append(layer)
-            addSublayer(layer)
+            self.layer.addSublayer(layer)
         }
 
         set(enabledColumns: Set(chart.drawableColumns))
@@ -85,6 +74,5 @@ final class ChartLayer: Layer {
 
     private(set) var range: Range<Int> = .zero
     private(set) var enabledColumns: Set<Column> = []
-    private var columnLayers: [ColumnLayer] = []
-    private let chart: Chart?
+    private(set) var columnLayers: [LineColumnLayer] = []
 }

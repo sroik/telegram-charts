@@ -4,16 +4,16 @@
 
 import UIKit
 
-final class ChartTimestampsView: View {
+final class ChartTimestampsView: ViewportView {
     var minimumSpacing: CGFloat = 60.0 {
         didSet {
             update(animated: true)
         }
     }
 
-    init(timestamps: [Timestamp]) {
+    init(timestamps: [Timestamp], viewport: Range<CGFloat> = .zeroToOne) {
         self.timestamps = timestamps
-        super.init(frame: .screen)
+        super.init(viewport: viewport)
         setup()
     }
 
@@ -23,15 +23,20 @@ final class ChartTimestampsView: View {
         displayLink.needsToDisplay = true
     }
 
+    override func adaptViewport() {
+        super.adaptViewport()
+        displayLink.needsToDisplay = true
+    }
+
     override func themeUp() {
         super.themeUp()
         backgroundColor = theme.color.placeholder
-        line.backgroundColor = theme.color.details.withAlphaComponent(0.35)
+        line.backgroundColor = theme.color.gridLine
         rowView.theme = theme
     }
 
     func update(animated: Bool) {
-        if !bounds.isEmpty, fitLabelsNumber != rowView.count {
+        if !contentFrame.isEmpty, fitLabelsNumber != rowView.count {
             updateRowView(animated: animated)
         }
     }
@@ -40,7 +45,7 @@ final class ChartTimestampsView: View {
         let oldRowView = rowView
         rowView = ChartTimestampsRowView(itemWidth: minimumSpacing, timestamps: fitTimestamps)
         rowView.theme = theme
-        rowView.fill(in: self)
+        rowView.fill(in: contentView)
 
         switch rowView.count.compare(with: oldRowView.count) {
         case .orderedDescending where animated:
@@ -53,14 +58,14 @@ final class ChartTimestampsView: View {
     }
 
     private var fitTimestamps: [Timestamp] {
-        guard !bounds.isEmpty else {
+        guard !contentFrame.isEmpty else {
             return []
         }
 
-        let spacing = bounds.width / CGFloat(fitLabelsNumber)
+        let spacing = contentSize.width / CGFloat(fitLabelsNumber)
         let indices = (0 ..< fitLabelsNumber)
         let stamps: [Timestamp] = indices.compactMap { index in
-            let position = CGFloat(index + 1) * spacing / bounds.width
+            let position = CGFloat(index + 1) * spacing / contentSize.width
             return timestamps.element(nearestTo: position, strategy: .ceil)
         }
 
@@ -76,7 +81,7 @@ final class ChartTimestampsView: View {
     }
 
     private var fitLabelsNumber: Int {
-        let fitNumber = Int(bounds.width / minimumSpacing)
+        let fitNumber = Int(contentSize.width / minimumSpacing)
         let maxNumber = timestamps.count
         return min(fitNumber, maxNumber).nearestPowerOfTwo ?? 1
     }

@@ -34,6 +34,7 @@ class View: UIView, Themeable {
     }
 
     func themeUp() {
+        layer.sublayers?.theme(with: theme)
         subviews.theme(with: theme)
     }
 

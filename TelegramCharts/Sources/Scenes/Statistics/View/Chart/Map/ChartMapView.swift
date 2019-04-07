@@ -28,34 +28,34 @@ final class ChartMapView: View {
 
     init(chart: Chart) {
         self.chart = chart
-        self.chartLayer = ChartLayer(chart: chart)
+        self.chartView = ChartView(chart: chart)
         super.init(frame: .screen)
         setup()
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        chartLayer.frame = bounds
+        chartView.frame = bounds
         overlayView.frame = bounds
     }
 
     func set(range: Range<Int>, animated: Bool = false) {
-        chartLayer.set(range: range, animated: animated)
+        chartView.set(range: range, animated: animated)
     }
 
     func set(enabledColumns: Set<Column>, animated: Bool = false) {
-        chartLayer.set(enabledColumns: enabledColumns, animated: animated)
+        chartView.set(enabledColumns: enabledColumns, animated: animated)
     }
 
     private func setup() {
-        layer.addSublayer(chartLayer)
-        chartLayer.masksToBounds = true
-        chartLayer.set(lineWidth: 1)
-        chartLayer.set(pointsThreshold: 2)
+        addSubview(chartView)
+        chartView.clipsToBounds = true
+        chartView.set(lineWidth: 1)
+        chartView.set(pointsThreshold: 2)
         addSubviews(overlayView)
     }
 
     private let overlayView = ChartMapOverlayView()
-    private let chartLayer: ChartLayer
+    private let chartView: ChartView
     private let chart: Chart
 }

@@ -4,7 +4,7 @@
 
 import UIKit
 
-final class ChartGridView: View {
+class ChartGridView: View {
     init(layout: ChartGridLayout = .default, range: Range<Int>) {
         self.range = range
         self.layout = layout

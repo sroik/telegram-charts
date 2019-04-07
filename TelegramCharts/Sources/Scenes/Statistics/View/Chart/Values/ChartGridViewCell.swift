@@ -32,7 +32,7 @@ final class ChartGridViewCell: View, Updateable {
     override func themeUp() {
         super.themeUp()
         label.textColor = theme.color.details
-        line.backgroundColor = theme.color.details.withAlphaComponent(0.35)
+        line.backgroundColor = theme.color.gridLine
     }
 
     func updateValue() {
@@ -42,10 +42,6 @@ final class ChartGridViewCell: View, Updateable {
     private func setup() {
         addSubviews(line, label)
         updateValue()
-    }
-
-    private var lineColor: UIColor {
-        return theme.color.line.withAlphaComponent(0.35)
     }
 
     private let label = Label.details(alignment: .left)

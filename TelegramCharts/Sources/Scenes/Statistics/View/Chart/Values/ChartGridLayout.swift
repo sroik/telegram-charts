@@ -14,8 +14,8 @@ extension ChartGridLayout {
 
     func itemFrame(at index: Int, in rect: CGRect) -> CGRect {
         return CGRect(
-            x: 0,
-            y: CGFloat(index) * (itemHeight + spacing(in: rect)),
+            x: rect.minX,
+            y: rect.minY + CGFloat(index) * (itemHeight + spacing(in: rect)),
             width: rect.width,
             height: itemHeight
         )

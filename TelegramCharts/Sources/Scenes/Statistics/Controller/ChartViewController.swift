@@ -4,7 +4,7 @@
 
 import UIKit
 
-final class ChartViewController: ViewController {
+class ChartViewController: ViewController {
     typealias Dependencies = SoundServiceContainer
 
     init(dependencies: Dependencies, chart: Chart) {
@@ -30,7 +30,6 @@ final class ChartViewController: ViewController {
             height: 44 * CGFloat(chart.drawableColumns.count)
         )
 
-        mapView.viewport = chartView.viewport
         mapView.delegate = self
         mapView.anchor(
             in: view,
@@ -41,19 +40,21 @@ final class ChartViewController: ViewController {
             height: 42
         )
 
+        chartView.clipsToBounds = true
         chartView.anchor(
             in: view,
             top: view.topAnchor,
             bottom: mapView.topAnchor,
             left: view.leftAnchor,
             right: view.rightAnchor,
-            insets: UIEdgeInsets(top: 30, left: 15, bottom: 10, right: 15)
+            insets: UIEdgeInsets(top: 30, bottom: 10)
         )
 
         displayLink.start { [weak self] _ in
             self?.updateChartRange()
         }
 
+        updateChartViewport()
         updateChartRange(animated: false)
     }
 
@@ -63,6 +64,11 @@ final class ChartViewController: ViewController {
         mapView.theme = theme
         columnsView.theme = theme
         view.backgroundColor = theme.color.placeholder
+    }
+
+    private func updateChartViewport() {
+        chartView.viewport = mapView.viewport
+        displayLink.needsToDisplay = true
     }
 
     private func updateChartRange(animated: Bool = true) {
@@ -96,7 +102,6 @@ extension ChartViewController: ChartColumnsStackViewDelegate {
 
 extension ChartViewController: ChartMapViewDelegate {
     func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Range<CGFloat>) {
-        chartView.viewport = viewport
-        displayLink.needsToDisplay = true
+        updateChartViewport()
     }
 }

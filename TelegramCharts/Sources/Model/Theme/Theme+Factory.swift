@@ -35,6 +35,12 @@ extension Theme {
 }
 
 extension ThemeColor {
+    var gridLine: UIColor {
+        return details.withAlphaComponent(0.25)
+    }
+}
+
+extension ThemeColor {
     static let day = ThemeColor(
         background: UIColor(red: 239 / 255, green: 239 / 255, blue: 244 / 255, alpha: 1),
         placeholder: UIColor(red: 254 / 255, green: 254 / 255, blue: 254 / 255, alpha: 1),

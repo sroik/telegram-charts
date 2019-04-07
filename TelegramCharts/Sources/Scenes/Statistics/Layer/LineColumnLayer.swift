@@ -4,7 +4,7 @@
 
 import UIKit
 
-final class ColumnLayer: Layer {
+final class LineColumnLayer: Layer {
     var lineWidth: CGFloat = 2 {
         didSet {
             shapeLayer.lineWidth = lineWidth
@@ -67,7 +67,7 @@ final class ColumnLayer: Layer {
             drawLineColumn(animated: animated)
             drawSelectedPoint(animated: animated)
         default:
-            assertionFailureWrapper("column type is not supported yet")
+            assertionFailureWrapper("column type is not supported")
         }
     }
 
