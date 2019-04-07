@@ -46,7 +46,7 @@ final class StatisticsViewController: ViewController {
     }
 
     private func cellHeight(with chart: Chart) -> CGFloat {
-        return 380 + CGFloat(chart.drawableColumns.count) * 44
+        return 400 + CGFloat(chart.drawableColumns.count) * 44
     }
 
     private lazy var tableView = UITableView.statistics()
@@ -70,7 +70,7 @@ extension StatisticsViewController: UITableViewDataSource {
             return cell
         }
 
-        statisticsCell.title = "Followers"
+        statisticsCell.title = charts[safe: indexPath.row]?.title
         statisticsCell.theme = theme
         statisticsCell.controller = chartViewControllers[safe: indexPath.row]
         return statisticsCell

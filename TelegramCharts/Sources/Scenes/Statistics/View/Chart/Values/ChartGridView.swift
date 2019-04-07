@@ -4,56 +4,71 @@
 
 import UIKit
 
-final class ChartGridView: View, Rangeable {
-    var range: Range<Int>
-
+final class ChartGridView: View {
     init(layout: ChartGridLayout = .default, range: Range<Int>) {
-        self.layout = layout
         self.range = range
+        self.layout = layout
         super.init(frame: .zero)
+        setup()
     }
 
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
-        rebuildLines()
-    }
-
-    override func themeUp() {
-        super.themeUp()
-        lines.forEach { $0.backgroundColor = lineColor }
+        rebuildCells()
     }
 
     func set(range: Range<Int>, animated: Bool) {
-        ChartRangeAnimator(view: self).animate(to: range, animated: animated)
-    }
+        guard self.range != range else {
+            return
+        }
 
-    private func rebuildLines() {
-        lines.forEach { $0.removeFromSuperview() }
-        lines.removeAll()
-
-        (0 ..< linesNumber - 1).forEach { index in
-            let line = UIView()
-            line.backgroundColor = lineColor
-            line.frame = lineFrame(at: index)
-            addSubview(line)
-            lines.append(line)
+        let rangeScale = CGFloat(self.range.size) / CGFloat(range.size)
+        self.range = range
+        cells.enumerated().forEach { index, cell in
+            animator.update(
+                cell,
+                with: cellValue(at: index),
+                scale: rangeScale,
+                animated: animated
+            )
         }
     }
 
-    private func lineFrame(at index: Int) -> CGRect {
-        let frame = layout.itemFrame(at: index, in: bounds)
-        let pixelHeightFrame = frame.slice(at: .pixel, from: .maxYEdge)
-        return pixelHeightFrame
+    private func rebuildCells() {
+        guard !bounds.isEmpty else {
+            return
+        }
+
+        cells.forEach { $0.removeFromSuperview() }
+        cells.removeAll()
+
+        (0 ..< cellsNumber).forEach { index in
+            let cell = ChartGridViewCell(value: cellValue(at: index))
+            cell.isLineHidden = index == cellsNumber - 1
+            cell.frame = layout.itemFrame(at: index, in: bounds)
+            cell.theme = theme
+            cells.append(cell)
+            addSubview(cell)
+        }
     }
 
-    private var linesNumber: Int {
+    private func cellValue(at index: Int) -> Int {
+        let maxY = layout.itemFrame(at: index, in: bounds).maxY
+        let position = 1 - (maxY / bounds.height)
+        return range.value(at: position)
+    }
+
+    private func setup() {
+        isUserInteractionEnabled = false
+        clipsToBounds = true
+    }
+
+    private var cellsNumber: Int {
         return layout.itemsNumber(in: bounds)
     }
 
-    private var lineColor: UIColor {
-        return theme.color.line.withAlphaComponent(0.35)
-    }
-
-    private var lines: [UIView] = []
+    private let animator = ChartGridAnimator()
     private let layout: ChartGridLayout
+    private var cells: [ChartGridViewCell] = []
+    private var range: Range<Int>
 }

@@ -4,7 +4,10 @@
 
 import UIKit
 
-final class ChartBrowserView: View {
+class ChartBrowserView: View {
+    let timestampsHeight: CGFloat = 25
+    let chart: Chart
+
     var viewport: Range<CGFloat> {
         didSet {
             adaptViewport()
@@ -36,7 +39,6 @@ final class ChartBrowserView: View {
 
     func set(range: Range<Int>, animated: Bool = false) {
         chartLayer.set(range: range, animated: animated)
-        valuesView.set(range: range, animated: animated)
         gridView.set(range: range, animated: animated)
     }
 
@@ -47,14 +49,13 @@ final class ChartBrowserView: View {
     private func adaptViewport() {
         scrollView.contentSize = contentSize
         scrollView.contentOffset = CGPoint(x: contentSize.width * viewport.min, y: 0)
-
         chartLayer.frame = contentFrame.remainder(at: timestampsHeight, from: .maxYEdge)
         timestampsView.frame = contentFrame.slice(at: timestampsHeight, from: .maxYEdge)
-        displayValue(at: selectedIndex)
+        deselectIndex()
     }
 
-    private func selectValueCard() {
-        select(index: nil)
+    private func deselectIndex() {
+        selectedIndex.apply { _ in select(index: nil) }
     }
 
     private func selectIndex(at point: CGPoint) {
@@ -70,38 +71,37 @@ final class ChartBrowserView: View {
 
     private func displayValue(at index: Int?) {
         guard let index = index else {
-            selectedLine.isHidden = true
-            valueCard.isHidden = true
+            selectedLine.set(alpha: 0, duration: 0.2)
+            valueCard.set(alpha: 0, duration: 0.2)
             return
         }
 
         let stride = contentSize.width / CGFloat(chart.timestamps.count)
         let centerX = (CGFloat(index) + 0.5) * stride
+        let cardFrame = CGRect(midX: centerX, size: valueCard.intrinsicContentSize)
 
-        selectedLine.isHidden = false
+        selectedLine.set(alpha: 1, duration: 0.2)
         selectedLine.frame = CGRect(midX: centerX, width: .pixel, height: contentSize.height)
 
-        valueCard.isHidden = false
+        valueCard.set(alpha: 1, duration: 0.2)
         valueCard.index = index
-        valueCard.frame = CGRect(midX: centerX, size: valueCard.intrinsicContentSize)
+        valueCard.frame = convert(cardFrame, from: scrollView)
         limitValueCardFrame()
     }
 
     private func limitValueCardFrame() {
-        valueCard.frame = valueCard.frame.limited(with: scrollView.visibleRect)
+        let limits = UIEdgeInsets(left: 40).inset(bounds)
+        valueCard.frame = valueCard.frame.limited(with: limits)
     }
 
     private func setup() {
-        gridView.fill(in: self, insets: UIEdgeInsets(bottom: timestampsHeight))
         scrollView.fill(in: self)
-        valuesView.fill(in: valuesContainer)
-        valuesContainer.fill(in: self, insets: UIEdgeInsets(bottom: timestampsHeight))
-        valuesContainer.clipsToBounds = true
+        gridView.fill(in: self, insets: UIEdgeInsets(bottom: timestampsHeight))
+        addSubview(valueCard)
 
         scrollView.addSubview(selectedLine)
         scrollView.layer.addSublayer(chartLayer)
         scrollView.addSubview(timestampsView)
-        scrollView.addSubview(valueCard)
 
         set(enabledColumns: Set(chart.drawableColumns))
         set(range: chart.drawableColumns.range)
@@ -113,10 +113,10 @@ final class ChartBrowserView: View {
         let pan = UILongPressGestureRecognizer(target: self, action: #selector(onPan))
         pan.minimumPressDuration = 0.25
         pan.allowableMovement = CGRect.screen.diagonal
-        valuesContainer.addGestureRecognizer(pan)
+        scrollView.addGestureRecognizer(pan)
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTap))
-        valuesContainer.addGestureRecognizer(tap)
+        scrollView.addGestureRecognizer(tap)
     }
 
     private var contentFrame: CGRect {
@@ -130,7 +130,7 @@ final class ChartBrowserView: View {
     @objc private func onTap(_ recognizer: UITapGestureRecognizer) {
         let point = recognizer.location(in: scrollView)
         let isInCard = valueCard.frame.contains(point) && valueCard.isVisible
-        isInCard ? selectValueCard() : selectIndex(at: point)
+        isInCard ? deselectIndex() : selectIndex(at: point)
     }
 
     @objc private func onPan(_ recognizer: UILongPressGestureRecognizer) {
@@ -140,12 +140,8 @@ final class ChartBrowserView: View {
     private var selectedIndex: Int?
     private let selectedLine = UIView()
 
-    private let chart: Chart
-    private let timestampsHeight: CGFloat = 25
-    private let scrollView = UIScrollView.charts()
+    private lazy var scrollView = UIScrollView.charts()
     private lazy var valueCard = ChartValueCardView(chart: chart)
-    private lazy var valuesContainer = View()
-    private lazy var valuesView = ChartValuesView(range: chartLayer.range)
     private lazy var gridView = ChartGridView(range: chartLayer.range)
     private lazy var timestampsView = ChartTimestampsView(timestamps: chart.timestamps)
     private lazy var chartLayer = ChartLayer(chart: chart)

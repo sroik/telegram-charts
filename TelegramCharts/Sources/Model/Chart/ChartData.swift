@@ -5,6 +5,7 @@
 import Foundation
 
 struct ChartData: Decodable {
+    let title: String
     let columns: [[AnyDecodable]]
     let colors: [String: HexColor]
     let names: [String: String]

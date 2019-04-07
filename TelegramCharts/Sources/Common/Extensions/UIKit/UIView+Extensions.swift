@@ -19,9 +19,18 @@ extension UIView {
         then completion: Completion? = nil
     ) {
         alpha = 0
+        set(alpha: 1, animated: animated, duration: duration, then: completion)
+    }
+
+    func set(
+        alpha: CGFloat,
+        animated: Bool = true,
+        duration: TimeInterval = .defaultDuration,
+        then completion: Completion? = nil
+    ) {
         UIView.animate(
             withDuration: animated ? duration : 0,
-            animations: { self.alpha = 1 },
+            animations: { self.alpha = alpha },
             completion: { _ in completion?() }
         )
     }

@@ -15,7 +15,7 @@ extension Label {
         return primary(
             text: text,
             color: color,
-            font: UIFont.systemFont(ofSize: 10.5, weight: .light),
+            font: UIFont.systemFont(ofSize: 11, weight: .light),
             alignment: alignment,
             fitsWidth: false
         )

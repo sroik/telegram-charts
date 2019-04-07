@@ -18,5 +18,6 @@ struct Column: Hashable {
 }
 
 struct Chart: Hashable {
+    var title: String
     var columns: [Column]
 }

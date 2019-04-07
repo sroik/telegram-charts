@@ -12,11 +12,9 @@ final class ChartValueCardView: Control {
     }
 
     override var intrinsicContentSize: CGSize {
-        let labelsHeight = max(dateStackHeight, valuesStackHeight)
-        let labelsWidth = dateStackView.intrinsicWidth + valuesStackView.intrinsicWidth
         return CGSize(
-            width: insets.horizontal + labelsWidth + 10,
-            height: insets.vertical + labelsHeight
+            width: 145,
+            height: insets.vertical + max(dateStackHeight, valuesStackHeight)
         )
     }
 
@@ -55,7 +53,7 @@ final class ChartValueCardView: Control {
 
     private func setup() {
         isUserInteractionEnabled = false
-        layer.cornerRadius = 3
+        layer.cornerRadius = 6
         addSubview(dateStackView)
         addSubview(valuesStackView)
 

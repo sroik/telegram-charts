@@ -61,6 +61,6 @@ extension Chart {
             )
         }
 
-        self.init(columns: columns)
+        self.init(title: chartData.title, columns: columns)
     }
 }

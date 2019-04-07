@@ -5,7 +5,7 @@
 import UIKit
 
 final class ChartTimestampsView: View {
-    var minimumSpacing: CGFloat = 50.0 {
+    var minimumSpacing: CGFloat = 60.0 {
         didSet {
             update(animated: true)
         }
@@ -26,7 +26,7 @@ final class ChartTimestampsView: View {
     override func themeUp() {
         super.themeUp()
         backgroundColor = theme.color.placeholder
-        line.backgroundColor = theme.color.line
+        line.backgroundColor = theme.color.details.withAlphaComponent(0.35)
         rowView.theme = theme
     }
 
