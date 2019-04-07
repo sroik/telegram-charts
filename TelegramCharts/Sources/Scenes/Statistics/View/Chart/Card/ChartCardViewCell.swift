@@ -5,6 +5,7 @@
 import UIKit
 
 final class ChartCardViewCell: View {
+    let id: String?
     let summaryLabel: Label
     let titleLabel: Label
     let valueLabel: Label
@@ -13,12 +14,28 @@ final class ChartCardViewCell: View {
     var value: String? {
         didSet {
             valueLabel.text = value
+            setNeedsLayout()
+        }
+    }
+
+    var title: String? {
+        didSet {
+            titleLabel.text = title
+            setNeedsLayout()
         }
     }
 
     var summary: String? {
         didSet {
-            summaryLabel.text = value
+            summaryLabel.text = summary
+            setNeedsLayout()
+        }
+    }
+
+    var icon: UIImage? {
+        didSet {
+            iconView.image = icon
+            setNeedsLayout()
         }
     }
 
@@ -29,30 +46,32 @@ final class ChartCardViewCell: View {
     }
 
     override var intrinsicContentSize: CGSize {
-        let leftWidth = leftStack.intrinsicContentSize.width
-        let rightWidth = rightStack.intrinsicContentSize.width
+        let lablesWidth: CGFloat = [titleLabel, summaryLabel, iconView, valueLabel]
+            .map { $0.intrinsicContentSize }
+            .reduce(0) { $0 + $1.width }
+
         return CGSize(
-            width: leftWidth + rightWidth + spacing,
+            width: lablesWidth + 2 * spacing,
             height: UIView.noIntrinsicMetric
         )
     }
 
     init(
+        id: String? = nil,
         summary: String? = nil,
         title: String? = nil,
         value: String? = nil,
         valueColor: UIColor? = nil,
         icon: UIImage? = nil
     ) {
+        self.id = id
         self.summary = summary
         self.value = value
         self.valueColor = valueColor
-        self.valueLabel = Label.primary(text: value, font: UIFont.bold(size: 11))
-        self.summaryLabel = Label.primary(text: summary, font: UIFont.bold(size: 11))
-        self.titleLabel = Label.primary(text: title, font: UIFont.light(size: 11))
+        self.valueLabel = Label.primary(text: value, font: UIFont.bold(size: 12))
+        self.summaryLabel = Label.primary(text: summary, font: UIFont.bold(size: 12))
+        self.titleLabel = Label.primary(text: title, font: UIFont.regular(size: 12))
         self.iconView = UIImageView(image: icon)
-        self.leftStack = UIStackView(arrangedSubviews: [summaryLabel, titleLabel])
-        self.rightStack = UIStackView(arrangedSubviews: [valueLabel, iconView])
         super.init(frame: .zero)
         setup()
     }
@@ -65,33 +84,29 @@ final class ChartCardViewCell: View {
         valueLabel.textColor = valueColor ?? theme.color.popupText
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layout()
+    }
+
+    private func layout() {
+        let iconWidth = iconView.image?.size.width ?? 0
+        let summaryWidth = summaryLabel.intrinsicContentSize.width
+        let titleOffset = summaryWidth > 1 ? summaryWidth + spacing : 0
+
+        iconView.frame = bounds.slice(at: iconWidth, from: .maxXEdge)
+        valueLabel.frame = bounds.remainder(at: iconWidth, from: .maxXEdge)
+        summaryLabel.frame = bounds.slice(at: summaryWidth, from: .minXEdge)
+        titleLabel.frame = bounds.remainder(at: titleOffset, from: .minXEdge)
+    }
+
     private func setup() {
+        summaryLabel.textAlignment = .left
+        titleLabel.textAlignment = .left
+        valueLabel.textAlignment = .right
         iconView.contentMode = .center
-
-        leftStack.axis = .horizontal
-        leftStack.distribution = .fill
-        leftStack.alignment = .fill
-        leftStack.spacing = spacing
-        leftStack.anchor(
-            in: self,
-            top: topAnchor,
-            bottom: bottomAnchor,
-            left: leftAnchor
-        )
-
-        rightStack.axis = .horizontal
-        rightStack.distribution = .fill
-        rightStack.alignment = .fill
-        rightStack.spacing = spacing
-        rightStack.anchor(
-            in: self,
-            top: topAnchor,
-            bottom: bottomAnchor,
-            right: rightAnchor
-        )
+        addSubviews(summaryLabel, titleLabel, iconView, valueLabel)
     }
 
     private let spacing: CGFloat = 5
-    private let leftStack: UIStackView
-    private let rightStack: UIStackView
 }

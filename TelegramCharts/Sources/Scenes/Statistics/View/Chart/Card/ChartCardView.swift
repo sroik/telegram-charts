@@ -5,10 +5,6 @@
 import UIKit
 
 class ChartCardView: CardView {
-    let titleCell: ChartCardViewCell
-    let columnCells: [ChartCardViewCell]
-    let chart: Chart
-
     var index: Int = 0 {
         didSet {
             update()
@@ -18,17 +14,26 @@ class ChartCardView: CardView {
     init(chart: Chart) {
         self.chart = chart
         self.titleCell = ChartCardViewCell()
-        self.columnCells = []
-        super.init(items: [titleCell])
+        self.cells = chart.drawableColumns.map { ChartCardViewCell(id: $0.label) }
+        super.init(items: [titleCell] + cells)
     }
 
     private func update() {
         titleCell.summary = date?.string(format: "E, d MMM yyyy")
-//        chart.drawableColumns.forEach { column in
-//            if let value = column.values[safe: index] {
-//                labels[column.label]?.text = String(value)
-//            }
-//        }
+
+        chart.drawableColumns.forEach { column in
+            guard let cell = self.cell(withId: column.label) else {
+                return
+            }
+
+            cell.title = column.name
+            cell.valueColor = column.uiColor
+            cell.value = column.values[safe: index].flatMap { String($0) }
+        }
+    }
+
+    private func cell(withId id: String) -> ChartCardViewCell? {
+        return cells.first { $0.id == id }
     }
 
     private var date: Date? {
@@ -38,4 +43,8 @@ class ChartCardView: CardView {
     private var timestamp: Timestamp? {
         return chart.timestamps[safe: index]
     }
+
+    private let titleCell: ChartCardViewCell
+    private let cells: [ChartCardViewCell]
+    private let chart: Chart
 }

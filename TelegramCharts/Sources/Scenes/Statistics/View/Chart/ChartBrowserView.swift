@@ -76,22 +76,24 @@ class ChartBrowserView: View, Viewportable {
             return
         }
 
-        let stride = viewportView.contentSize.width / CGFloat(chart.timestamps.count)
-        let x = (CGFloat(index) + 0.5) * stride
-        let cardFrame = CGRect(midX: x, size: cardView.intrinsicContentSize)
-        let lineFrame = CGRect(midX: x, width: .pixel, height: viewportView.contentSize.height)
+        let contentSize = viewportView.contentSize
+        let stride = contentSize.width / CGFloat(chart.timestamps.count)
+        let centerX = (CGFloat(index) + 0.5) * stride
 
+        let lineFrame = CGRect(midX: centerX, width: .pixel, height: contentSize.height)
         selectedLine.set(alpha: 1, duration: 0.2)
         selectedLine.frame = convert(lineFrame, from: chartView)
 
         cardView.set(alpha: 1, duration: 0.2)
         cardView.index = index
+
+        let cardFrame = CGRect(midX: centerX, size: cardView.intrinsicContentSize)
         cardView.frame = convert(cardFrame, from: chartView)
         limitValueCardFrame()
     }
 
     private func limitValueCardFrame() {
-        let limits = UIEdgeInsets(left: 40).inset(bounds)
+        let limits = UIEdgeInsets(right: 15, left: 40).inset(bounds)
         cardView.frame = cardView.frame.limited(with: limits)
     }
 

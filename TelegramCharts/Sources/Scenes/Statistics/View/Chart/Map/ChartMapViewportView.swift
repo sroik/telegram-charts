@@ -70,6 +70,7 @@ final class ChartMapViewportView: View {
 
         [leftKnob, rightKnob].forEach { view in
             view.contentMode = .center
+            view.tintColor = .white
         }
 
         addSubviews(rightKnob, leftKnob, topLine, bottomLine)

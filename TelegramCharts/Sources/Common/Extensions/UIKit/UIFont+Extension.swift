@@ -12,4 +12,8 @@ extension UIFont {
     static func light(size: CGFloat) -> UIFont {
         return UIFont.systemFont(ofSize: size, weight: .light)
     }
+
+    static func regular(size: CGFloat) -> UIFont {
+        return UIFont.systemFont(ofSize: size, weight: .regular)
+    }
 }
