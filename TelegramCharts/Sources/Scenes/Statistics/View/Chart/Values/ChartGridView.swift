@@ -22,13 +22,15 @@ class ChartGridView: View {
             return
         }
 
-        let rangeScale = CGFloat(self.range.size) / CGFloat(range.size)
         self.range = range
         cells.enumerated().forEach { index, cell in
+            let value = cellValue(at: index)
+            let scale = CGFloat(cell.state.leftValue ?? value) / CGFloat(value)
+
             animator.update(
                 cell,
-                with: cellValue(at: index),
-                scale: rangeScale,
+                using: { $0.state.leftValue = value },
+                scale: scale,
                 animated: animated
             )
         }
@@ -43,8 +45,11 @@ class ChartGridView: View {
         cells.removeAll()
 
         (0 ..< cellsNumber).forEach { index in
-            let cell = ChartGridViewCell(value: cellValue(at: index))
-            cell.isLineHidden = index == cellsNumber - 1
+            var state = ChartGridViewCellState()
+            state.leftValue = cellValue(at: index)
+            state.hasLine = index < cellsNumber - 1
+
+            let cell = ChartGridViewCell(state: state)
             cell.frame = layout.itemFrame(at: index, in: bounds)
             cell.theme = theme
             cells.append(cell)

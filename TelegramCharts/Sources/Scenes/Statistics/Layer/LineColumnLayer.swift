@@ -39,7 +39,7 @@ final class LineColumnLayer: Layer {
         super.layoutSublayersOnBoundsChange()
         shapeLayer.frame = contentFrame
         pointLayer.frame = contentFrame
-        draw(animated: false)
+        redraw(animated: false)
     }
 
     override func themeUp() {
@@ -50,28 +50,23 @@ final class LineColumnLayer: Layer {
     func set(pointsThreshold: CGFloat, animated: Bool) {
         if self.pointsThreshold != pointsThreshold {
             self.pointsThreshold = pointsThreshold
-            draw(animated: animated)
+            redraw(animated: animated)
         }
     }
 
     func set(range: Range<Int>, animated: Bool) {
         if self.range != range {
             self.range = range
-            draw(animated: animated)
+            redraw(animated: animated)
         }
     }
 
-    func draw(animated: Bool) {
-        switch column.type {
-        case .line, .area, .bar:
-            drawLineColumn(animated: animated)
-            drawSelectedPoint(animated: animated)
-        case .timestamps:
-            assertionFailureWrapper("column type is not supported")
-        }
+    func redraw(animated: Bool) {
+        drawColumn(animated: animated)
+        drawSelectedPoint(animated: animated)
     }
 
-    private func drawLineColumn(animated: Bool) {
+    private func drawColumn(animated: Bool) {
         let points = column.points(in: shapeLayer.bounds, range: range)
         let filteredPoint = points.dropClose(threshold: pointsThreshold)
         let path = CGPath.between(points: filteredPoint)

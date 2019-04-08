@@ -86,7 +86,7 @@ final class ChartTimestampsView: ViewportView {
         return min(fitNumber, maxNumber).nearestPowerOfTwo ?? 1
     }
 
-    private let displayLink = DisplayLink(fps: 6)
+    private let displayLink = DisplayLink(fps: 3)
     private var rowView = ChartTimestampsRowView(itemWidth: 0, timestamps: [])
     private let timestamps: [Timestamp]
     private let line = UIView()

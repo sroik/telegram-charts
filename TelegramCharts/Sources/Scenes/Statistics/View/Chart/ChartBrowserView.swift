@@ -94,7 +94,7 @@ class ChartBrowserView: View, Viewportable {
     }
 
     private func limitValueCardFrame() {
-        let limits = UIEdgeInsets(right: 15, left: 40).inset(bounds)
+        let limits = UIEdgeInsets(right: 15, left: 50).inset(bounds)
         cardView.frame = cardView.frame.limited(with: limits)
     }
 

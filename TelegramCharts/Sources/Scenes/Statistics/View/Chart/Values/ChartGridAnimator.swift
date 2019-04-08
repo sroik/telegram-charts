@@ -4,45 +4,48 @@
 
 import UIKit
 
-protocol Updateable {
-    var value: Int { get set }
-}
-
-typealias UpdateableView = View & Updateable
-
 final class ChartGridAnimator {
-    func update(
-        _ view: UpdateableView?,
-        with value: Int,
+    typealias AnimationBlock<T> = (T) -> Void
+
+    func update<View: UIView>(
+        _ view: View,
+        using block: @escaping AnimationBlock<View>,
         scale: CGFloat,
         animated: Bool
     ) {
         switch scale {
         case -CGFloat.infinity ... 0.5:
-            update(view, with: value, translation: -55, animated: animated)
+            update(view, using: block, translation: -55, animated: animated)
         case 0.5 ... 0.9:
-            update(view, with: value, translation: -35, animated: animated)
+            update(view, using: block, translation: -35, animated: animated)
         case 1.1 ... 1.5:
-            update(view, with: value, translation: 35, animated: animated)
+            update(view, using: block, translation: 35, animated: animated)
         case 1.5 ... CGFloat.infinity:
-            update(view, with: value, translation: 55, animated: animated)
+            update(view, using: block, translation: 55, animated: animated)
         default:
-            update(view, with: value, translation: 0, animated: animated)
+            update(view, using: block, translation: 0, animated: animated)
         }
     }
 
-    func update(
-        _ view: UpdateableView?,
-        with value: Int,
+    func update<View: UIView>(
+        _ view: View,
+        using block: @escaping AnimationBlock<View>,
         translation: CGFloat,
         animated: Bool
     ) {
-        guard var view = view, value != view.value else {
+        guard animated, let parent = view.superview, !view.bounds.isEmpty else {
+            block(view)
             return
         }
 
-        guard animated, let parent = view.superview, !view.bounds.isEmpty else {
-            view.value = value
+        guard abs(translation) > .layoutEpsilon else {
+            UIView.transition(
+                with: view,
+                duration: .smoothDuration,
+                options: [.transitionCrossDissolve],
+                animations: { block(view) },
+                completion: nil
+            )
             return
         }
 
@@ -50,7 +53,7 @@ final class ChartGridAnimator {
         snapshot.frame = view.frame
         parent.addSubview(snapshot)
 
-        view.value = value
+        block(view)
         view.alpha = 0
         view.transform = CGAffineTransform(translationX: 0, y: translation)
 

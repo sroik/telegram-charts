@@ -39,7 +39,7 @@ extension String {
             self.init(format: "%.1fB", value.billions)
         case Int.million ... Int.billion:
             self.init(format: "%.1fM", value.millions)
-        case 2 * Int.thousand ... Int.million:
+        case Int.thousand ... Int.million:
             self.init(format: "%.1fK", value.thousands)
         default:
             self.init(value)

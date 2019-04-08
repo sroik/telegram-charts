@@ -4,21 +4,37 @@
 
 import UIKit
 
-final class ChartGridViewCell: View, Updateable {
-    var isLineHidden: Bool = false {
+struct ChartGridViewCellState {
+    var hasLine: Bool
+    var leftValue: Int?
+    var rightValue: Int?
+    var leftColor: UIColor?
+    var rightColor: UIColor?
+
+    init(
+        hasLine: Bool = true,
+        leftValue: Int? = nil,
+        rightValue: Int? = nil,
+        leftColor: UIColor? = nil,
+        rightColor: UIColor? = nil
+    ) {
+        self.hasLine = hasLine
+        self.leftValue = leftValue
+        self.rightValue = rightValue
+        self.leftColor = leftColor
+        self.rightColor = rightColor
+    }
+}
+
+final class ChartGridViewCell: View {
+    var state: ChartGridViewCellState {
         didSet {
-            line.isHidden = isLineHidden
+            updateState()
         }
     }
 
-    var value: Int {
-        didSet {
-            updateValue()
-        }
-    }
-
-    init(value: Int = 0) {
-        self.value = value
+    init(state: ChartGridViewCellState = ChartGridViewCellState()) {
+        self.state = state
         super.init(frame: .screen)
         setup()
     }
@@ -26,24 +42,31 @@ final class ChartGridViewCell: View, Updateable {
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
         line.frame = bounds.slice(at: .pixel, from: .maxYEdge)
-        label.frame = bounds
+        leftLabel.frame = bounds.slice(at: bounds.midX, from: .minXEdge)
+        rightLabel.frame = bounds.remainder(at: bounds.midX, from: .minXEdge)
     }
 
     override func themeUp() {
         super.themeUp()
-        label.textColor = theme.color.details
+        leftLabel.textColor = state.leftColor ?? theme.color.details
+        rightLabel.textColor = state.rightColor ?? theme.color.details
         line.backgroundColor = theme.color.gridLine
     }
 
-    func updateValue() {
-        label.text = String(columnValue: value)
+    func updateState() {
+        leftLabel.text = state.leftValue.flatMap { String(columnValue: $0) }
+        rightLabel.text = state.rightValue.flatMap { String(columnValue: $0) }
+        leftLabel.isHidden = state.leftValue == nil
+        rightLabel.isHidden = state.rightValue == nil
+        line.isHidden = !state.hasLine
     }
 
     private func setup() {
-        addSubviews(line, label)
-        updateValue()
+        addSubviews(line, leftLabel)
+        updateState()
     }
 
-    private let label = Label.details(alignment: .left)
+    private let leftLabel = Label.details(alignment: .left)
+    private let rightLabel = Label.details(alignment: .right)
     private let line = UIView()
 }
