@@ -35,11 +35,6 @@ class ChartBrowserView: View, Viewportable {
         selectedLine.backgroundColor = theme.color.gridLine
     }
 
-    func set(range: Range<Int>, animated: Bool = false) {
-        chartView.set(range: range, animated: animated)
-        gridView.set(range: range, animated: animated)
-    }
-
     func set(enabledColumns: Set<Column>, animated: Bool = false) {
         chartView.set(enabledColumns: enabledColumns, animated: animated)
     }
@@ -97,7 +92,6 @@ class ChartBrowserView: View, Viewportable {
     private func setup() {
         timestampsView.clipsToBounds = true
         addSubviews(selectedLine, viewportView, gridView, timestampsView, cardView)
-        set(enabledColumns: Set(chart.drawableColumns))
         setupGestures()
     }
 
