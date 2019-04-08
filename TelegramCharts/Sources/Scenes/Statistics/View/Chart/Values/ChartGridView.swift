@@ -22,18 +22,21 @@ class ChartGridView: View {
             return
         }
 
+        let rangeScale = CGFloat(self.range.mid) / CGFloat(range.mid)
         self.range = range
-        cells.enumerated().forEach { index, cell in
-            let value = cellValue(at: index)
-            let scale = CGFloat(cell.state.leftValue ?? value) / CGFloat(value)
 
+        cells.enumerated().forEach { index, cell in
             animator.update(
                 cell,
-                using: { $0.state.leftValue = value },
-                scale: scale,
+                using: { self.update(cell: $0, at: index) },
+                scale: rangeScale,
                 animated: animated
             )
         }
+    }
+
+    private func update(cell: ChartGridViewCell, at index: Index) {
+        cell.state.leftValue = cellValue(at: index)
     }
 
     private func rebuildCells() {

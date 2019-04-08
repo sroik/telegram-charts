@@ -40,11 +40,15 @@ extension Column {
     var cgColor: CGColor? {
         return uiColor?.cgColor
     }
+
+    func range(in viewport: Viewport) -> Range<Int> {
+        return values.range(in: viewport)
+    }
 }
 
 extension Array where Element == Column {
     var range: Range<Int> {
-        return range(in: Range(min: 0, max: 1))
+        return range(in: .zeroToOne)
     }
 
     func range(in viewport: Viewport) -> Range<Int> {
@@ -53,7 +57,7 @@ extension Array where Element == Column {
         }
 
         return dropFirst().reduce(first.values.range(in: viewport)) { r, c in
-            r.union(with: c.values.range(in: viewport))
+            r.union(with: c.range(in: viewport))
         }
     }
 }

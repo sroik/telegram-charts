@@ -10,6 +10,7 @@ protocol Viewportable {
 
 class ViewportView: View, Viewportable {
     let contentView: UIView
+    let displayLink = DisplayLink(fps: 6)
 
     var contentFrame: CGRect {
         return CGRect(origin: contentOffset, size: contentSize)
@@ -32,11 +33,15 @@ class ViewportView: View, Viewportable {
         }
     }
 
-    init(viewport: Viewport = .zeroToOne, content: UIView = UIView()) {
+    init(viewport: Viewport = .zeroToOne, content: UIView = View()) {
         self.viewport = viewport
         self.contentView = content
         super.init(frame: .screen)
-        addSubview(contentView)
+        setup()
+    }
+
+    deinit {
+        displayLink.stop()
     }
 
     override func layoutSubviewsOnBoundsChange() {
@@ -46,5 +51,18 @@ class ViewportView: View, Viewportable {
 
     func adaptViewport() {
         contentView.frame = contentFrame
+        displayLink.needsToDisplay = true
+    }
+
+    func display() {
+        /* meant to be inherited */
+    }
+
+    private func setup() {
+        addSubview(contentView)
+
+        displayLink.start { [weak self] _ in
+            self?.display()
+        }
     }
 }

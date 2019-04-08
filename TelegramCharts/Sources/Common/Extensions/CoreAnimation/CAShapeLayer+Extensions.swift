@@ -13,34 +13,38 @@ extension CAShapeLayer {
         return basicAnimation(for: .path)
     }
 
-    func update(
-        path: CGPath,
-        preservingAnimations: Bool = true,
-        animated: Bool,
-        duration: TimeInterval = .smoothDuration
-    ) {
-        guard !animated || duration < .ulpOfOne else {
+    /**
+     * updates column path preserving width.
+     * velocity in points per second
+     */
+    func update(path: CGPath, animated: Bool, velocity: CGFloat = 250) {
+        guard let current = presentedPath, !current.bounds.isEmpty else {
+            set(path: path, animated: false)
+            return
+        }
+
+        let deltaMinY = abs(path.bounds.minY - current.bounds.minY)
+        let deltaMaxY = abs(path.bounds.maxY - current.bounds.maxY)
+        let shift = max(deltaMaxY, deltaMinY)
+        let duration = TimeInterval(shift / velocity).clamped(from: 0.15, to: 0.35)
+
+        guard !animated else {
             set(value: path, for: .path, animated: animated, duration: duration)
             return
         }
 
-        guard
-            preservingAnimations,
-            let currentPath = presentedPath,
-            let animation = pathAnimation,
-            !currentPath.bounds.isEmpty
-        else {
+        guard let animation = pathAnimation else {
             set(value: path, for: .path, animated: false)
             return
         }
 
-        let scale = path.bounds.maxX / currentPath.bounds.maxX
-        let from = currentPath.scaled(x: scale)
-        let duration = animation.leftTime
-        animateValue(for: .path, from: from, to: path, duration: duration)
+        set(path: path, animated: true, duration: duration)
+        let scaleX = path.bounds.maxX / current.bounds.maxX
+        let from = current.scaled(x: scaleX)
+        animateValue(for: .path, from: from, to: path, duration: animation.leftTime)
     }
 
-    func set(path: CGPath, animated: Bool, duration: TimeInterval = .smoothDuration) {
+    func set(path: CGPath, animated: Bool, duration: TimeInterval = .defaultDuration) {
         set(value: path, for: .path, animated: animated, duration: duration)
     }
 }

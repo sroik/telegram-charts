@@ -4,71 +4,72 @@
 
 import UIKit
 
-class ChartView: View {
+class ChartView: ViewportView {
     let chart: Chart
 
-    init(chart: Chart) {
+    init(chart: Chart, viewport: Viewport = .zeroToOne) {
         self.chart = chart
-        super.init(frame: .screen)
+        super.init(viewport: viewport)
         setup()
     }
 
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
+        adaptRange(animated: false)
+    }
+
+    override func adaptViewport() {
+        super.adaptViewport()
         columnLayers.forEach {
-            $0.frame = bounds
+            $0.frame = contentView.bounds
         }
     }
 
+    override func display() {
+        super.display()
+        adaptRange(animated: true)
+    }
+
     func select(index: Int?) {
-        columnLayers.forEach {
-            $0.selectedIndex = index
+        columnLayers.forEach { layer in
+            layer.selectedIndex = index
+        }
+    }
+
+    func adaptRange(animated: Bool) {
+        let range = Array(enabledColumns).range(in: viewport)
+        columnLayers.forEach { layer in
+            layer.set(range: range, animated: animated)
+        }
+    }
+
+    func set(enabledColumns columns: Set<Column>, animated: Bool) {
+        enabledColumns = columns
+        adaptRange(animated: animated)
+
+        columnLayers.forEach { layer in
+            layer.set(
+                value: columns.contains(layer.column) ? 1 : 0,
+                for: .opacity,
+                animated: animated
+            )
         }
     }
 
     func set(lineWidth: CGFloat) {
-        columnLayers.forEach {
-            $0.lineWidth = lineWidth
+        columnLayers.forEach { layer in
+            layer.lineWidth = lineWidth
         }
-    }
-
-    func set(range: Range<Int>, animated: Bool = false) {
-        self.range = range
-        columnLayers.forEach {
-            $0.set(range: range, animated: animated)
-        }
-    }
-
-    func set(enabledColumns: Set<Column>, animated: Bool = false) {
-        self.enabledColumns = enabledColumns
-        columnLayers.forEach {
-            update(layer: $0, animated: animated)
-        }
-    }
-
-    func set(pointsThreshold: CGFloat, animated: Bool = false) {
-        columnLayers.forEach {
-            $0.set(pointsThreshold: pointsThreshold, animated: animated)
-        }
-    }
-
-    func update(layer: LineColumnLayer, animated: Bool) {
-        layer.set(
-            value: enabledColumns.contains(layer.column) ? 1 : 0,
-            for: .opacity,
-            animated: animated
-        )
     }
 
     private func setup() {
         chart.drawableColumns.forEach { column in
             let layer = LineColumnLayer(column: column)
             columnLayers.append(layer)
-            self.layer.addSublayer(layer)
+            contentView.layer.addSublayer(layer)
         }
 
-        set(enabledColumns: Set(chart.drawableColumns))
-        set(range: chart.drawableColumns.range)
+        set(enabledColumns: Set(chart.drawableColumns), animated: false)
     }
 
     private(set) var range: Range<Int> = .zero

@@ -19,7 +19,7 @@ extension CALayer {
         value: Any?,
         for keyPath: KeyPath,
         animated: Bool,
-        duration: TimeInterval = .smoothDuration
+        duration: TimeInterval = .defaultDuration
     ) {
         guard animated, duration > .ulpOfOne else {
             removeAnimation(forKey: keyPath)
@@ -80,12 +80,8 @@ extension CALayer {
 }
 
 extension TimeInterval {
-    static var smoothDuration: TimeInterval {
-        return 0.35
-    }
-
     static var fastDuration: TimeInterval {
-        return 0.2
+        return 0.15
     }
 
     static var defaultDuration: TimeInterval {

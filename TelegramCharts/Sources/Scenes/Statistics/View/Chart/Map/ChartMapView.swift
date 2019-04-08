@@ -26,9 +26,12 @@ final class ChartMapView: View {
         return overlayView.selectedKnob
     }
 
-    init(chart: Chart) {
-        self.chart = chart
-        self.chartView = ChartView(chart: chart)
+    convenience init(chart: Chart) {
+        self.init(chartView: ChartView(chart: chart))
+    }
+
+    init(chartView: ChartView) {
+        self.chartView = chartView
         super.init(frame: .screen)
         setup()
     }
@@ -41,19 +44,17 @@ final class ChartMapView: View {
 
     func set(enabledColumns columns: Set<Column>, animated: Bool = false) {
         chartView.set(enabledColumns: columns, animated: animated)
-        chartView.set(range: Array(columns).range, animated: animated)
     }
 
     private func setup() {
         addSubview(chartView)
+        chartView.viewport = .zeroToOne
         chartView.layer.cornerRadius = 6
         chartView.clipsToBounds = true
         chartView.set(lineWidth: 1)
-        chartView.set(pointsThreshold: 2)
         addSubviews(overlayView)
     }
 
     private let overlayView = ChartMapOverlayView()
     private let chartView: ChartView
-    private let chart: Chart
 }

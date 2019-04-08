@@ -11,8 +11,8 @@ extension Range {
         return Range(min: 0, max: 0)
     }
 
-    static var zeroToOne: Range<CGFloat> {
-        return Range<CGFloat>(min: 0, max: 1)
+    static var zeroToOne: Viewport {
+        return Viewport(min: 0, max: 1)
     }
 
     var size: T {

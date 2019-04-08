@@ -47,13 +47,6 @@ final class LineColumnLayer: Layer {
         pointLayer.fillColor = theme.color.placeholder.cgColor
     }
 
-    func set(pointsThreshold: CGFloat, animated: Bool) {
-        if self.pointsThreshold != pointsThreshold {
-            self.pointsThreshold = pointsThreshold
-            redraw(animated: animated)
-        }
-    }
-
     func set(range: Range<Int>, animated: Bool) {
         if self.range != range {
             self.range = range
@@ -68,8 +61,7 @@ final class LineColumnLayer: Layer {
 
     private func drawColumn(animated: Bool) {
         let points = column.points(in: shapeLayer.bounds, range: range)
-        let filteredPoint = points.dropClose(threshold: pointsThreshold)
-        let path = CGPath.between(points: filteredPoint)
+        let path = CGPath.between(points: points)
         shapeLayer.update(path: path, animated: animated)
     }
 
@@ -80,7 +72,7 @@ final class LineColumnLayer: Layer {
         }
 
         let point = column.point(at: index, in: pointLayer.bounds, range: range)
-        let path = CGPath.circle(center: point, radius: lineWidth * 1.5)
+        let path = CGPath.circle(center: point, radius: lineWidth * 1.75)
         pointLayer.update(path: path, animated: animated)
     }
 
@@ -104,7 +96,6 @@ final class LineColumnLayer: Layer {
         return UIEdgeInsets(top: lineWidth * 2, bottom: lineWidth * 2)
     }
 
-    private var pointsThreshold: CGFloat = .pointsEpsilon
     private var range: Range<Int> = .zero
     private let pointLayer = CAShapeLayer()
     private let shapeLayer = CAShapeLayer()

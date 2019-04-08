@@ -20,12 +20,11 @@ final class ChartTimestampsView: ViewportView {
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
         line.frame = bounds.slice(at: .pixel, from: .minYEdge)
-        displayLink.needsToDisplay = true
     }
 
-    override func adaptViewport() {
-        super.adaptViewport()
-        displayLink.needsToDisplay = true
+    override func display() {
+        super.display()
+        update(animated: true)
     }
 
     override func themeUp() {
@@ -74,10 +73,7 @@ final class ChartTimestampsView: ViewportView {
 
     private func setup() {
         addSubview(line)
-
-        displayLink.start { [weak self] _ in
-            self?.update(animated: true)
-        }
+        displayLink.fps = 4
     }
 
     private var fitLabelsNumber: Int {
@@ -86,7 +82,6 @@ final class ChartTimestampsView: ViewportView {
         return min(fitNumber, maxNumber).nearestPowerOfTwo ?? 1
     }
 
-    private let displayLink = DisplayLink(fps: 4)
     private var rowView = ChartTimestampsRowView(itemWidth: 0, timestamps: [])
     private let timestamps: [Timestamp]
     private let line = UIView()
