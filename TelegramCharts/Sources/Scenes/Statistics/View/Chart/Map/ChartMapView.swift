@@ -49,6 +49,7 @@ final class ChartMapView: View {
 
     private func setup() {
         addSubview(chartView)
+        chartView.layer.cornerRadius = 6
         chartView.clipsToBounds = true
         chartView.set(lineWidth: 1)
         chartView.set(pointsThreshold: 2)

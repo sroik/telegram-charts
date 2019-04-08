@@ -5,7 +5,7 @@
 import UIKit
 
 class ChartGridView: View {
-    init(layout: ChartGridLayout = .default, range: Range<Int>) {
+    init(layout: ChartGridLayout = .values, range: Range<Int>) {
         self.range = range
         self.layout = layout
         super.init(frame: .zero)
@@ -64,7 +64,7 @@ class ChartGridView: View {
     }
 
     private var cellsNumber: Int {
-        return layout.itemsNumber(in: bounds)
+        return layout.itemsNumber
     }
 
     private let animator = ChartGridAnimator()

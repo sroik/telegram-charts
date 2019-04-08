@@ -19,7 +19,7 @@ extension CALayer {
         value: Any?,
         for keyPath: KeyPath,
         animated: Bool,
-        duration: TimeInterval = .defaultDuration
+        duration: TimeInterval = .smoothDuration
     ) {
         guard animated, duration > .ulpOfOne else {
             removeAnimation(forKey: keyPath)
@@ -54,6 +54,17 @@ extension CALayer {
         add(animation, forKey: keyPath)
     }
 
+    func blink(scale: CGFloat, duration: TimeInterval = .defaultDuration) {
+        let animation = CAKeyframeAnimation(keyPath: .transform)
+        let start = transform
+        let end = CATransform3DScale(transform, scale, scale, 1)
+        animation.values = [start, end, start]
+        animation.duration = duration
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        removeAnimation(forKey: .transform)
+        add(animation, forKey: .transform)
+    }
+
     func shake(duration: TimeInterval = 0.5, translation: CGFloat = 10) {
         let animation = CAKeyframeAnimation(keyPath: .xTranslation)
         animation.duration = duration
@@ -69,8 +80,16 @@ extension CALayer {
 }
 
 extension TimeInterval {
-    static var defaultDuration: TimeInterval {
+    static var smoothDuration: TimeInterval {
         return 0.35
+    }
+
+    static var fastDuration: TimeInterval {
+        return 0.2
+    }
+
+    static var defaultDuration: TimeInterval {
+        return 0.25
     }
 }
 
@@ -78,4 +97,5 @@ extension CALayer.KeyPath {
     static let opacity = "opacity"
     static let path = "path"
     static let xTranslation = "transform.translation.x"
+    static let transform = "transform"
 }

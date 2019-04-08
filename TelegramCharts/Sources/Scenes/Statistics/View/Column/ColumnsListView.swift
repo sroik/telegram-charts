@@ -64,7 +64,7 @@ final class ColumnsListView: View {
         }
 
         sounds.play(.selectionFeedback)
-        cell.isSelected.toggle()
+        cell.toggle()
         delegate?.columnsView(self, didEnable: enabledColumns)
     }
 

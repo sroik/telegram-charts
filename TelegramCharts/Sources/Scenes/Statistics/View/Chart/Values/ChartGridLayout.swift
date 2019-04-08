@@ -6,32 +6,29 @@ import UIKit
 
 struct ChartGridLayout {
     let itemHeight: CGFloat
-    let minimumSpacing: CGFloat
+    let itemsNumber: Int
+    let insets: UIEdgeInsets
 }
 
 extension ChartGridLayout {
-    static let `default` = ChartGridLayout(itemHeight: 20, minimumSpacing: 30)
+    static let values = ChartGridLayout(
+        itemHeight: 20,
+        itemsNumber: 6,
+        insets: .zero
+    )
 
     func itemFrame(at index: Int, in rect: CGRect) -> CGRect {
         return CGRect(
-            x: rect.minX,
-            y: rect.minY + CGFloat(index) * (itemHeight + spacing(in: rect)),
-            width: rect.width,
+            x: rect.minX + insets.left,
+            y: rect.minY + insets.top + CGFloat(index) * (itemHeight + spacing(in: rect)),
+            width: rect.width - insets.horizontal,
             height: itemHeight
         )
     }
 
     func spacing(in rect: CGRect) -> CGFloat {
-        let items = itemsNumber(in: rect)
-        let itemsHeight = CGFloat(items) * itemHeight
-        let freeSpace = rect.height - itemsHeight
-        return freeSpace / CGFloat(items - 1)
-    }
-
-    func itemsNumber(in rect: CGRect) -> Int {
-        /* const 1 means that top item has no spacing  */
-        let freeSpace = rect.height - itemHeight
-        let cells = Int(freeSpace / (minimumSpacing + itemHeight))
-        return cells + 1
+        let itemsHeight = CGFloat(itemsNumber) * itemHeight
+        let freeSpace = rect.height - insets.vertical - itemsHeight
+        return freeSpace / CGFloat(itemsNumber - 1)
     }
 }

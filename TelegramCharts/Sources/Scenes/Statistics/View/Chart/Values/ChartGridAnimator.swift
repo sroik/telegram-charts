@@ -61,7 +61,7 @@ final class ChartGridAnimator {
             view.transform = .identity
         }
 
-        UIView.animate(withDuration: .defaultDuration, animations: animations) { _ in
+        UIView.animate(withDuration: .smoothDuration, animations: animations) { _ in
             snapshot.removeFromSuperview()
         }
     }

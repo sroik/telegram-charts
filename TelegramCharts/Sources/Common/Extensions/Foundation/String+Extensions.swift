@@ -8,7 +8,6 @@ extension Int {
     static let billion: Int = 1_000_000_000
     static let million: Int = 1_000_000
     static let thousand: Int = 1000
-    static let tenThousands: Int = 10000
 
     var billions: CGFloat {
         return CGFloat(self) / CGFloat(Int.billion)
@@ -21,10 +20,6 @@ extension Int {
     var thousands: CGFloat {
         return CGFloat(self) / CGFloat(Int.thousand)
     }
-
-    var tenThousands: CGFloat {
-        return CGFloat(self) / CGFloat(Int.tenThousands)
-    }
 }
 
 extension String {
@@ -34,10 +29,8 @@ extension String {
             self.init(format: "%.1fB", value.billions)
         case Int.million ... Int.billion:
             self.init(format: "%.1fM", value.millions)
-        case Int.tenThousands ... Int.million:
+        case 2 * Int.thousand ... Int.million:
             self.init(format: "%.1fK", value.thousands)
-        case Int.thousand ... Int.tenThousands:
-            self.init(value)
         default:
             self.init(value)
         }

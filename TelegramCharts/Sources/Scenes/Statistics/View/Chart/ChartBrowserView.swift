@@ -59,7 +59,8 @@ class ChartBrowserView: View, Viewportable {
     }
 
     private func selectIndex(at point: CGPoint) {
-        let position = point.x / viewportView.contentSize.width
+        let chartPoint = convert(point, to: chartView)
+        let position = chartPoint.x / viewportView.contentSize.width
         select(index: chart.timestamps.index(nearestTo: position, strategy: .ceil))
     }
 
@@ -117,13 +118,13 @@ class ChartBrowserView: View, Viewportable {
     }
 
     @objc private func onTap(_ recognizer: UITapGestureRecognizer) {
-        let point = recognizer.location(in: chartView)
+        let point = recognizer.location(in: self)
         let isInCard = cardView.frame.contains(point) && cardView.isVisible
         isInCard ? deselectIndex() : selectIndex(at: point)
     }
 
     @objc private func onPan(_ recognizer: UILongPressGestureRecognizer) {
-        selectIndex(at: recognizer.location(in: chartView))
+        selectIndex(at: recognizer.location(in: self))
     }
 
     private var selectedIndex: Int?

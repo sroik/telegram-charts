@@ -17,7 +17,7 @@ extension CAShapeLayer {
         path: CGPath,
         preservingAnimations: Bool = true,
         animated: Bool,
-        duration: TimeInterval = .defaultDuration
+        duration: TimeInterval = .smoothDuration
     ) {
         guard !animated || duration < .ulpOfOne else {
             set(value: path, for: .path, animated: animated, duration: duration)
@@ -40,7 +40,7 @@ extension CAShapeLayer {
         animateValue(for: .path, from: from, to: path, duration: duration)
     }
 
-    func set(path: CGPath, animated: Bool, duration: TimeInterval = .defaultDuration) {
+    func set(path: CGPath, animated: Bool, duration: TimeInterval = .smoothDuration) {
         set(value: path, for: .path, animated: animated, duration: duration)
     }
 }

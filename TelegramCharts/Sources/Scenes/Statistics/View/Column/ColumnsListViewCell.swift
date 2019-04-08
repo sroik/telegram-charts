@@ -5,12 +5,6 @@
 import UIKit
 
 final class ColumnsListViewCell: Control {
-    override var isSelected: Bool {
-        didSet {
-            update(animated: true)
-        }
-    }
-
     override var intrinsicContentSize: CGSize {
         let labelWidth = label.intrinsicContentSize.width
         let checkmarkWidth = checkmarkView.intrinsicContentSize.width
@@ -33,7 +27,31 @@ final class ColumnsListViewCell: Control {
         update(animated: false)
     }
 
-    private func update(animated: Bool) {
+    func toggle(animated: Bool = true) {
+        isSelected.toggle()
+        update(animated: animated)
+    }
+
+    func update(animated: Bool) {
+        guard animated, !bounds.isEmpty else {
+            update()
+            return
+        }
+
+        layer.blink(
+            scale: 0.9,
+            duration: .fastDuration
+        )
+
+        UIView.animate(
+            withDuration: .fastDuration,
+            delay: 0, options: .curveEaseInOut,
+            animations: update,
+            completion: nil
+        )
+    }
+
+    private func update() {
         checkmarkView.frame = checkmarkFrame
         label.frame = labelFrame
         label.textColor = isSelected ? .white : column.uiColor
@@ -48,7 +66,9 @@ final class ColumnsListViewCell: Control {
         checkmarkView.contentMode = .center
         checkmarkView.tintColor = .white
         label.text = column.name
+        label.contentMode = .center
         addSubviews(checkmarkView, label)
+        isSelected = true
     }
 
     private var labelFrame: CGRect {
