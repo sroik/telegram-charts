@@ -4,14 +4,14 @@
 
 import UIKit
 
-struct ChartGridLayout {
+struct GridLayout {
     let itemHeight: CGFloat
     let itemsNumber: Int
     let insets: UIEdgeInsets
 }
 
-extension ChartGridLayout {
-    static let values = ChartGridLayout(
+extension GridLayout {
+    static let values = GridLayout(
         itemHeight: 20,
         itemsNumber: 6,
         insets: .zero

@@ -9,8 +9,15 @@ protocol Viewportable {
 }
 
 class ViewportView: View, Viewportable {
-    let contentView: UIView
+    let contentView = View()
+    var autolayouts: Bool
     let displayLink = DisplayLink(fps: 6)
+
+    var viewport: Viewport {
+        didSet {
+            adaptViewport()
+        }
+    }
 
     var contentFrame: CGRect {
         return CGRect(origin: contentOffset, size: contentSize)
@@ -27,15 +34,9 @@ class ViewportView: View, Viewportable {
         )
     }
 
-    var viewport: Viewport {
-        didSet {
-            adaptViewport()
-        }
-    }
-
-    init(viewport: Viewport = .zeroToOne, content: UIView = View()) {
+    init(viewport: Viewport = .zeroToOne, autolayouts: Bool = true) {
         self.viewport = viewport
-        self.contentView = content
+        self.autolayouts = autolayouts
         super.init(frame: .screen)
         setup()
     }
@@ -50,7 +51,10 @@ class ViewportView: View, Viewportable {
     }
 
     func adaptViewport() {
-        contentView.frame = contentFrame
+        if autolayouts {
+            contentView.frame = contentFrame
+        }
+
         displayLink.needsToDisplay = true
     }
 
@@ -62,7 +66,11 @@ class ViewportView: View, Viewportable {
         addSubview(contentView)
 
         displayLink.start { [weak self] _ in
-            self?.display()
+            guard let self = self, !self.bounds.isEmpty else {
+                return
+            }
+
+            self.display()
         }
     }
 }

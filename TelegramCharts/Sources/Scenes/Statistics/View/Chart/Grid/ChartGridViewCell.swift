@@ -70,3 +70,9 @@ final class ChartGridViewCell: View {
     private let rightLabel = Label.details(alignment: .right)
     private let line = UIView()
 }
+
+extension ChartGridViewCell: Cloneable {
+    func clone() -> ChartGridViewCell {
+        return ChartGridViewCell(state: state)
+    }
+}

@@ -81,11 +81,15 @@ extension CALayer {
 
 extension TimeInterval {
     static var fastDuration: TimeInterval {
-        return 0.15
+        return 0.2
     }
 
     static var defaultDuration: TimeInterval {
         return 0.25
+    }
+
+    static var smoothDuration: TimeInterval {
+        return 0.35
     }
 }
 

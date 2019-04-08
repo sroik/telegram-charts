@@ -11,8 +11,8 @@ final class ChartTimestampsView: ViewportView {
         }
     }
 
-    init(timestamps: [Timestamp], viewport: Viewport = .zeroToOne) {
-        self.timestamps = timestamps
+    init(chart: Chart, viewport: Viewport = .zeroToOne) {
+        self.chart = chart
         super.init(viewport: viewport)
         setup()
     }
@@ -65,7 +65,7 @@ final class ChartTimestampsView: ViewportView {
         let indices = (0 ..< fitLabelsNumber)
         let stamps: [Timestamp] = indices.compactMap { index in
             let position = CGFloat(index + 1) * spacing / contentSize.width
-            return timestamps.element(nearestTo: position, strategy: .ceil)
+            return chart.timestamps.element(nearestTo: position, strategy: .ceil)
         }
 
         return stamps
@@ -78,11 +78,11 @@ final class ChartTimestampsView: ViewportView {
 
     private var fitLabelsNumber: Int {
         let fitNumber = Int(contentSize.width / minimumSpacing)
-        let maxNumber = timestamps.count
+        let maxNumber = chart.timestamps.count
         return min(fitNumber, maxNumber).nearestPowerOfTwo ?? 1
     }
 
     private var rowView = ChartTimestampsRowView(itemWidth: 0, timestamps: [])
-    private let timestamps: [Timestamp]
+    private let chart: Chart
     private let line = UIView()
 }

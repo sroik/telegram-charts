@@ -4,7 +4,7 @@
 
 import UIKit
 
-struct ColumnsListLayout {
+struct ShelfLayout {
     let verticalSpacing: CGFloat
     let horizontalSpacing: CGFloat
     let itemHeight: CGFloat
@@ -15,8 +15,8 @@ protocol Sizeable {
     var size: CGSize { get }
 }
 
-extension ColumnsListLayout {
-    static let `default` = ColumnsListLayout(
+extension ShelfLayout {
+    static let `default` = ShelfLayout(
         verticalSpacing: 10,
         horizontalSpacing: 10,
         itemHeight: 30,

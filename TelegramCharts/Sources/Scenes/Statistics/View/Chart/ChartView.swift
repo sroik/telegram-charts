@@ -72,7 +72,7 @@ class ChartView: ViewportView {
         set(enabledColumns: Set(chart.drawableColumns), animated: false)
     }
 
-    private(set) var range: Range<Int> = .zero
-    private(set) var enabledColumns: Set<Column> = []
-    private(set) var columnLayers: [LineColumnLayer] = []
+    private var range: Range<Int> = .zero
+    private var enabledColumns: Set<Column> = []
+    private var columnLayers: [LineColumnLayer] = []
 }

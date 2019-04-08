@@ -17,7 +17,7 @@ final class ColumnsListView: View {
 
     init(
         columns: [Column],
-        layout: ColumnsListLayout = .default,
+        layout: ShelfLayout = .default,
         sounds: SoundService
     ) {
         self.sounds = sounds
@@ -69,7 +69,7 @@ final class ColumnsListView: View {
     }
 
     private let cells: [ColumnsListViewCell]
-    private let layout: ColumnsListLayout
+    private let layout: ShelfLayout
     private let sounds: SoundService
     private let columns: [Column]
 }

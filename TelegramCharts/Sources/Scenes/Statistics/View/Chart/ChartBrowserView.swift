@@ -36,11 +36,13 @@ class ChartBrowserView: View, Viewportable {
 
     func set(enabledColumns: Set<Column>, animated: Bool = false) {
         chartView.set(enabledColumns: enabledColumns, animated: animated)
+        gridView.set(enabledColumns: enabledColumns, animated: animated)
     }
 
     func adaptViewport() {
         chartView.viewport = viewport
         timestampsView.viewport = viewport
+        gridView.viewport = viewport
         deselectIndex()
     }
 
@@ -117,9 +119,9 @@ class ChartBrowserView: View, Viewportable {
     private var selectedIndex: Int?
     private let selectedLine = UIView()
 
-    private lazy var gridView = ChartGridView(range: chartView.range)
+    private lazy var gridView = ChartGridView(chart: chart)
     private lazy var cardView = ChartCardView(chart: chart)
-    private lazy var timestampsView = ChartTimestampsView(timestamps: chart.timestamps)
+    private lazy var timestampsView = ChartTimestampsView(chart: chart)
     private lazy var chartView = ChartView(chart: chart)
     private let timestampsHeight: CGFloat = 25
 }

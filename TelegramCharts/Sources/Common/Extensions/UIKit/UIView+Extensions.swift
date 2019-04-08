@@ -9,10 +9,6 @@ extension UIView {
         return !isHidden && alpha > .ulpOfOne
     }
 
-    var snapshotView: UIView {
-        return snapshotView(afterScreenUpdates: false) ?? UIView()
-    }
-
     func fadeIn(
         animated: Bool,
         duration: TimeInterval = .defaultDuration,
