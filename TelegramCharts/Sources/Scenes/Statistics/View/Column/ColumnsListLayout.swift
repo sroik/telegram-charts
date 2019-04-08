@@ -20,7 +20,7 @@ extension ColumnsListLayout {
         verticalSpacing: 10,
         horizontalSpacing: 10,
         itemHeight: 30,
-        insets: UIEdgeInsets(repeated: 15)
+        insets: UIEdgeInsets(top: 0, left: 15, bottom: 15, right: 15)
     )
 
     func size(of items: [Sizeable], fitting width: CGFloat) -> CGSize {

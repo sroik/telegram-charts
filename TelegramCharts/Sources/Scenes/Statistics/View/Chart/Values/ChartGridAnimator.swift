@@ -20,9 +20,9 @@ final class ChartGridAnimator {
         switch scale {
         case -CGFloat.infinity ... 0.5:
             update(view, with: value, translation: -55, animated: animated)
-        case 0.5 ... 0.95:
+        case 0.5 ... 0.9:
             update(view, with: value, translation: -35, animated: animated)
-        case 1.05 ... 1.5:
+        case 1.1 ... 1.5:
             update(view, with: value, translation: 35, animated: animated)
         case 1.5 ... CGFloat.infinity:
             update(view, with: value, translation: 55, animated: animated)

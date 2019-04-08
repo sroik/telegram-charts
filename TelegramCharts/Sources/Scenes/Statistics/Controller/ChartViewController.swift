@@ -8,7 +8,11 @@ class ChartViewController: ViewController {
     typealias Dependencies = SoundServiceContainer
 
     var columnsViewSize: CGSize {
-        return columnsView.contentSize(fitting: CGRect.screen.width)
+        return hasColumnsList ? columnsView.size(fitting: CGRect.screen.width) : .zero
+    }
+
+    var hasColumnsList: Bool {
+        return chart.drawableColumns.count > 1
     }
 
     init(dependencies: Dependencies, chart: Chart) {
@@ -25,22 +29,25 @@ class ChartViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        columnsView.delegate = self
-        columnsView.anchor(
-            in: view,
-            bottom: view.bottomAnchor,
-            left: view.leftAnchor,
-            right: view.rightAnchor,
-            height: columnsViewSize.height
-        )
+        if hasColumnsList {
+            columnsView.delegate = self
+            columnsView.anchor(
+                in: view,
+                bottom: view.bottomAnchor,
+                left: view.leftAnchor,
+                right: view.rightAnchor,
+                height: columnsViewSize.height
+            )
+        }
 
         mapView.delegate = self
         mapView.anchor(
             in: view,
-            bottom: columnsView.topAnchor,
+            bottom: view.bottomAnchor,
             left: view.leftAnchor,
             right: view.rightAnchor,
-            insets: UIEdgeInsets(right: 15, left: 15),
+            bottomOffset: columnsViewSize.height,
+            insets: UIEdgeInsets(right: 15, bottom: 15, left: 15),
             height: 40
         )
 

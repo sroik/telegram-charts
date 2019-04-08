@@ -33,7 +33,7 @@ final class ColumnsListView: View {
         updateFrames()
     }
 
-    func contentSize(fitting width: CGFloat) -> CGSize {
+    func size(fitting width: CGFloat) -> CGSize {
         return layout.size(of: cells, fitting: width)
     }
 
