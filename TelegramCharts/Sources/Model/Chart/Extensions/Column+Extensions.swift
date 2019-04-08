@@ -47,7 +47,7 @@ extension Array where Element == Column {
         return range(in: Range(min: 0, max: 1))
     }
 
-    func range(in viewport: Range<CGFloat>) -> Range<Int> {
+    func range(in viewport: Viewport) -> Range<Int> {
         guard let first = first else {
             return .zero
         }

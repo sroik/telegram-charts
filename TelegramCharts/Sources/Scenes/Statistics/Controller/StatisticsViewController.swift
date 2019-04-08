@@ -46,7 +46,7 @@ final class StatisticsViewController: ViewController {
     }
 
     private func height(of controller: ChartViewController) -> CGFloat {
-        return 440 + controller.columnsViewSize.height
+        return 440 + controller.columnsListSize.height
     }
 
     private lazy var tableView = UITableView.statistics()

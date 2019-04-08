@@ -11,7 +11,7 @@ final class ChartTimestampsView: ViewportView {
         }
     }
 
-    init(timestamps: [Timestamp], viewport: Range<CGFloat> = .zeroToOne) {
+    init(timestamps: [Timestamp], viewport: Viewport = .zeroToOne) {
         self.timestamps = timestamps
         super.init(viewport: viewport)
         setup()
@@ -86,7 +86,7 @@ final class ChartTimestampsView: ViewportView {
         return min(fitNumber, maxNumber).nearestPowerOfTwo ?? 1
     }
 
-    private let displayLink = DisplayLink(fps: 3)
+    private let displayLink = DisplayLink(fps: 4)
     private var rowView = ChartTimestampsRowView(itemWidth: 0, timestamps: [])
     private let timestamps: [Timestamp]
     private let line = UIView()

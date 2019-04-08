@@ -61,6 +61,7 @@
 		AC5EFB72223B98EE00979B60 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB71223B98EE00979B60 /* Date+Extensions.swift */; };
 		AC5EFB74223BA02600979B60 /* Range+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB73223BA02600979B60 /* Range+Extensions.swift */; };
 		AC675E1E225B3F8800BF9380 /* charts in Resources */ = {isa = PBXBuildFile; fileRef = AC675E1D225B3F8800BF9380 /* charts */; };
+		AC675E22225B819A00BF9380 /* TimePeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC675E21225B819A00BF9380 /* TimePeriodView.swift */; };
 		AC7C1F1B2259C3BD00A095D6 /* ChartGridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F1A2259C3BD00A095D6 /* ChartGridViewCell.swift */; };
 		AC7C1F1D2259F86300A095D6 /* ViewportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F1C2259F86300A095D6 /* ViewportView.swift */; };
 		AC7C1F1F2259FA9100A095D6 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F1E2259FA9100A095D6 /* ChartView.swift */; };
@@ -158,6 +159,7 @@
 		AC5EFB71223B98EE00979B60 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		AC5EFB73223BA02600979B60 /* Range+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Range+Extensions.swift"; sourceTree = "<group>"; };
 		AC675E1D225B3F8800BF9380 /* charts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = charts; sourceTree = "<group>"; };
+		AC675E21225B819A00BF9380 /* TimePeriodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePeriodView.swift; sourceTree = "<group>"; };
 		AC7C1F1A2259C3BD00A095D6 /* ChartGridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGridViewCell.swift; sourceTree = "<group>"; };
 		AC7C1F1C2259F86300A095D6 /* ViewportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewportView.swift; sourceTree = "<group>"; };
 		AC7C1F1E2259FA9100A095D6 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				AC143B312236F36C00FEB9CD /* StatisticsTableViewCell.swift */,
+				AC675E21225B819A00BF9380 /* TimePeriodView.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -736,6 +739,7 @@
 				ACE686962236BB9500724432 /* StatisticsViewController.swift in Sources */,
 				AC143B4222379F9400FEB9CD /* ChartViewController.swift in Sources */,
 				AC7C1F2C225A89F400A095D6 /* ColumnsListViewCell.swift in Sources */,
+				AC675E22225B819A00BF9380 /* TimePeriodView.swift in Sources */,
 				ACE686942236B60F00724432 /* Dependencies.swift in Sources */,
 				AC143B572237F52D00FEB9CD /* ChartMapViewportView.swift in Sources */,
 				AC3B381622365987000AD635 /* ChartsService.swift in Sources */,

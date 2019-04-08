@@ -5,7 +5,7 @@
 import UIKit
 
 protocol ChartMapOverlayViewDelegate: AnyObject {
-    func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Range<CGFloat>)
+    func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Viewport)
 }
 
 final class ChartMapOverlayView: View {
@@ -17,7 +17,7 @@ final class ChartMapOverlayView: View {
      */
     var minSize: CGFloat = 0.075
 
-    var viewport: Range<CGFloat> = Range(min: 0.85, max: 1.0) {
+    var viewport: Viewport = Range(min: 0.85, max: 1.0) {
         didSet {
             layoutViewport()
         }
@@ -87,7 +87,7 @@ final class ChartMapOverlayView: View {
     }
 
     private func moveViewport(by delta: CGFloat) {
-        let movedViewport: Range<CGFloat>
+        let movedViewport: Viewport
         switch viewportView.selectedKnob {
         case .left:
             movedViewport = Range(

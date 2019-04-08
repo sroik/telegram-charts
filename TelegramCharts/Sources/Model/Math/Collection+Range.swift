@@ -9,7 +9,7 @@ extension Array where Element: Arithmetical {
         return range(in: Range(min: 0, max: 1))
     }
 
-    func range(in viewport: Range<CGFloat>) -> Range<Element> {
+    func range(in viewport: Viewport) -> Range<Element> {
         guard
             let from = index(nearestTo: viewport.min, strategy: .floor),
             let to = index(nearestTo: viewport.max, strategy: .ceil)
@@ -30,7 +30,7 @@ extension Array where Element: Arithmetical {
 }
 
 extension Collection where Index == Int {
-    func elements(in viewport: Range<CGFloat>) -> [Element] {
+    func elements(in viewport: Viewport) -> [Element] {
         guard
             let fromIndex = index(nearestTo: viewport.min, strategy: .floor),
             let toIndex = index(nearestTo: viewport.max, strategy: .ceil)

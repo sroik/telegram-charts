@@ -13,7 +13,7 @@ final class ChartMapView: View {
         }
     }
 
-    var viewport: Range<CGFloat> {
+    var viewport: Viewport {
         get {
             return overlayView.viewport
         }
@@ -39,12 +39,9 @@ final class ChartMapView: View {
         overlayView.frame = bounds
     }
 
-    func set(range: Range<Int>, animated: Bool = false) {
-        chartView.set(range: range, animated: animated)
-    }
-
-    func set(enabledColumns: Set<Column>, animated: Bool = false) {
-        chartView.set(enabledColumns: enabledColumns, animated: animated)
+    func set(enabledColumns columns: Set<Column>, animated: Bool = false) {
+        chartView.set(enabledColumns: columns, animated: animated)
+        chartView.set(range: Array(columns).range, animated: animated)
     }
 
     private func setup() {

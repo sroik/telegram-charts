@@ -15,7 +15,7 @@ extension UIView {
 
     func fadeIn(
         animated: Bool,
-        duration: TimeInterval = .smoothDuration,
+        duration: TimeInterval = .defaultDuration,
         then completion: Completion? = nil
     ) {
         alpha = 0

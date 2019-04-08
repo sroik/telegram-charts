@@ -30,7 +30,7 @@ extension ColumnsListLayout {
 
     func frames(of items: [Sizeable], fitting width: CGFloat) -> [CGRect] {
         var frames: [CGRect] = []
-        var origin = CGPoint(x: insets.left, y: insets.left)
+        var origin = CGPoint(x: insets.left, y: insets.top)
         let maxAllowedX = width - insets.right
 
         items.lazy.map { $0.size }.forEach { size in

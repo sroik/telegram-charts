@@ -8,14 +8,10 @@ class ChartBrowserView: View, Viewportable {
     let timestampsHeight: CGFloat = 25
     let chart: Chart
 
-    var viewport: Range<CGFloat> = .zeroToOne {
+    var viewport: Viewport = .zeroToOne {
         didSet {
             adaptViewport()
         }
-    }
-
-    var range: Range<Int> {
-        return chartView.range
     }
 
     init(chart: Chart) {
@@ -102,14 +98,12 @@ class ChartBrowserView: View, Viewportable {
         timestampsView.clipsToBounds = true
         addSubviews(selectedLine, viewportView, gridView, timestampsView, cardView)
         set(enabledColumns: Set(chart.drawableColumns))
-        set(range: chart.drawableColumns.range)
         setupGestures()
-        adaptViewport()
     }
 
     private func setupGestures() {
         let pan = UILongPressGestureRecognizer(target: self, action: #selector(onPan))
-        pan.minimumPressDuration = 0.25
+        pan.minimumPressDuration = 0.2
         pan.allowableMovement = CGRect.screen.diagonal
         chartView.addGestureRecognizer(pan)
 

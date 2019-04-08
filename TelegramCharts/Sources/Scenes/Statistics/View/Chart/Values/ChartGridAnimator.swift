@@ -41,7 +41,7 @@ final class ChartGridAnimator {
         guard abs(translation) > .layoutEpsilon else {
             UIView.transition(
                 with: view,
-                duration: .smoothDuration,
+                duration: .defaultDuration,
                 options: [.transitionCrossDissolve],
                 animations: { block(view) },
                 completion: nil
@@ -64,7 +64,7 @@ final class ChartGridAnimator {
             view.transform = .identity
         }
 
-        UIView.animate(withDuration: .smoothDuration, animations: animations) { _ in
+        UIView.animate(withDuration: .defaultDuration, animations: animations) { _ in
             snapshot.removeFromSuperview()
         }
     }

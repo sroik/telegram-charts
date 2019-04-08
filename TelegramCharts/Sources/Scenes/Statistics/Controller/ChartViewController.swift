@@ -7,7 +7,7 @@ import UIKit
 class ChartViewController: ViewController {
     typealias Dependencies = SoundServiceContainer
 
-    var columnsViewSize: CGSize {
+    var columnsListSize: CGSize {
         return hasColumnsList ? columnsView.size(fitting: CGRect.screen.width) : .zero
     }
 
@@ -29,44 +29,33 @@ class ChartViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if hasColumnsList {
-            columnsView.delegate = self
-            columnsView.anchor(
-                in: view,
-                bottom: view.bottomAnchor,
-                left: view.leftAnchor,
-                right: view.rightAnchor,
-                height: columnsViewSize.height
-            )
-        }
-
         mapView.delegate = self
-        mapView.anchor(
-            in: view,
-            bottom: view.bottomAnchor,
-            left: view.leftAnchor,
-            right: view.rightAnchor,
-            bottomOffset: columnsViewSize.height,
-            insets: UIEdgeInsets(right: 15, bottom: 15, left: 15),
-            height: 40
-        )
-
+        columnsView.delegate = self
         chartView.clipsToBounds = true
-        chartView.anchor(
-            in: view,
-            top: view.topAnchor,
-            bottom: mapView.topAnchor,
-            left: view.leftAnchor,
-            right: view.rightAnchor,
-            insets: UIEdgeInsets(top: 30, bottom: 10)
+        chartView.viewport = mapView.viewport
+
+        view.addSubviews(periodView, mapView, chartView, columnsView)
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        let columnsHeight = columnsListSize.height
+        columnsView.isHidden = !hasColumnsList
+        columnsView.frame = view.bounds.slice(at: columnsListSize.height, from: .maxYEdge)
+
+        let mapInsets = UIEdgeInsets(right: 15, bottom: columnsHeight + 15, left: 15)
+        mapView.frame = mapInsets.inset(view.bounds).slice(at: 40, from: .maxYEdge)
+
+        let periodInsets = UIEdgeInsets(right: 15, left: 15)
+        periodView.frame = periodInsets.inset(view.bounds).slice(at: 32, from: .minYEdge)
+
+        chartView.frame = CGRect(
+            x: 0,
+            y: periodView.frame.maxY,
+            width: view.bounds.width,
+            height: mapView.frame.minY - periodView.frame.maxY - 10
         )
-
-        displayLink.start { [weak self] _ in
-            self?.updateChartRange()
-        }
-
-        updateChartViewport()
-        updateChartRange(animated: false)
     }
 
     override func themeUp() {
@@ -79,22 +68,9 @@ class ChartViewController: ViewController {
 
     private func updateChartViewport() {
         chartView.viewport = mapView.viewport
-        displayLink.needsToDisplay = true
     }
 
-    private func updateChartRange(animated: Bool = true) {
-        chartView.set(range: viewportRange, animated: animated)
-    }
-
-    private var viewportRange: Range<Int> {
-        /* let's scale range a little to make it look better */
-        return columnsView.enabledColumns
-            .range(in: mapView.viewport)
-            .scaled(by: 1.1, from: .center)
-            .clamped(from: 0, to: .max)
-    }
-
-    private let displayLink = DisplayLink(fps: 2)
+    private let periodView = TimePeriodView()
     private let columnsView: ColumnsListView
     private let chartView: ChartBrowserView
     private let mapView: ChartMapView
@@ -103,16 +79,13 @@ class ChartViewController: ViewController {
 
 extension ChartViewController: ColumnsStateViewDelegate {
     func columnsView(_ view: ColumnsListView, didEnable columns: [Column]) {
-        mapView.set(range: columns.range, animated: true)
         mapView.set(enabledColumns: Set(columns), animated: true)
-
-        chartView.set(range: viewportRange, animated: true)
         chartView.set(enabledColumns: Set(columns), animated: true)
     }
 }
 
 extension ChartViewController: ChartMapViewDelegate {
-    func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Range<CGFloat>) {
+    func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Viewport) {
         updateChartViewport()
     }
 }

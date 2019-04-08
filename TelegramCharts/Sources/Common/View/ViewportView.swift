@@ -5,7 +5,7 @@
 import UIKit
 
 protocol Viewportable {
-    var viewport: Range<CGFloat> { get set }
+    var viewport: Viewport { get set }
 }
 
 class ViewportView: View, Viewportable {
@@ -26,13 +26,13 @@ class ViewportView: View, Viewportable {
         )
     }
 
-    var viewport: Range<CGFloat> {
+    var viewport: Viewport {
         didSet {
             adaptViewport()
         }
     }
 
-    init(viewport: Range<CGFloat> = .zeroToOne, content: UIView = UIView()) {
+    init(viewport: Viewport = .zeroToOne, content: UIView = UIView()) {
         self.viewport = viewport
         self.contentView = content
         super.init(frame: .screen)
