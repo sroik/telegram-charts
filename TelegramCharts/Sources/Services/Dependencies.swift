@@ -10,7 +10,7 @@ final class Dependencies {
     let sounds: SoundService
 
     init(
-        charts: ChartsService = BuiltinChartsService(file: "charts.json"),
+        charts: ChartsService = BuiltinChartsService(directory: "charts"),
         settings: SettingsService = LocalSettingsService(),
         sounds: SoundService = SystemSoundService()
     ) {

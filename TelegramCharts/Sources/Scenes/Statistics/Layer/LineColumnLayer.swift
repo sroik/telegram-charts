@@ -63,10 +63,10 @@ final class LineColumnLayer: Layer {
 
     func draw(animated: Bool) {
         switch column.type {
-        case .line:
+        case .line, .area, .bar:
             drawLineColumn(animated: animated)
             drawSelectedPoint(animated: animated)
-        default:
+        case .timestamps:
             assertionFailureWrapper("column type is not supported")
         }
     }

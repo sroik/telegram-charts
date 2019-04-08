@@ -26,17 +26,19 @@ extension Chart {
 }
 
 extension Chart {
-    static func charts(at url: URL) throws -> [Chart] {
+    static func chart(id: String, at url: URL) throws -> Chart {
         let data = try Data(contentsOf: url)
-        return try charts(with: data)
+        return try chart(id: id, data: data)
     }
 
-    static func charts(with data: Data) throws -> [Chart] {
-        let chartsData = try JSONDecoder().decode([ChartData].self, from: data)
-        return chartsData.compactMap { Chart(chartData: $0) }
+    static func chart(id: String, data: Data) throws -> Chart {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let chartData = try decoder.decode(ChartData.self, from: data)
+        return try Chart(id: id, data: chartData).get()
     }
 
-    init?(chartData: ChartData) {
+    init?(id: String, data chartData: ChartData) {
         let columns: [Column] = chartData.columns.compactMap { data in
             guard let label = data.first?.stringValue else {
                 assertionFailureWrapper("column has no label")
@@ -53,7 +55,7 @@ extension Chart {
             assertWrapper(values.count == headlessData.count, "invalid data")
 
             return Column(
-                label: label,
+                id: label,
                 type: type,
                 name: chartData.names[label],
                 color: chartData.colors[label],
@@ -61,6 +63,13 @@ extension Chart {
             )
         }
 
-        self.init(title: chartData.title, columns: columns)
+        self.init(
+            id: id,
+            title: chartData.title,
+            columns: columns,
+            percentage: chartData.percentage ?? false,
+            stacked: chartData.stacked ?? false,
+            yScaled: chartData.yScaled ?? false
+        )
     }
 }

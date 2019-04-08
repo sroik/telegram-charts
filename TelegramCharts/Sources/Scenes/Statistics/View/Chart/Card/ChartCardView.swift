@@ -14,7 +14,7 @@ class ChartCardView: CardView {
     init(chart: Chart) {
         self.chart = chart
         self.titleCell = ChartCardViewCell()
-        self.cells = chart.drawableColumns.map { ChartCardViewCell(id: $0.label) }
+        self.cells = chart.drawableColumns.map { ChartCardViewCell(id: $0.id) }
         super.init(items: [titleCell] + cells)
     }
 
@@ -22,7 +22,7 @@ class ChartCardView: CardView {
         titleCell.summary = date?.string(format: "E, d MMM yyyy")
 
         chart.drawableColumns.forEach { column in
-            guard let cell = self.cell(withId: column.label) else {
+            guard let cell = self.cell(withId: column.id) else {
                 return
             }
 

@@ -29,13 +29,9 @@ final class StatisticsViewController: ViewController {
     }
 
     private func loadCharts() {
-        do {
-            charts = try dependencies.charts.load()
-            chartViewControllers = charts.map(chartViewController(with:))
-            tableView.reloadData()
-        } catch {
-            assertionFailureWrapper("failed to load charts")
-        }
+        charts = dependencies.charts.charts()
+        chartViewControllers = charts.map(chartViewController(with:))
+        tableView.reloadData()
     }
 
     private func chartViewController(with chart: Chart) -> ChartViewController {

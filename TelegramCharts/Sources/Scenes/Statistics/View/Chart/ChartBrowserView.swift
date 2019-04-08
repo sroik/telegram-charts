@@ -130,8 +130,8 @@ class ChartBrowserView: View, Viewportable {
     private var selectedIndex: Int?
     private let selectedLine = UIView()
 
+    private(set) lazy var gridView = ChartGridView(range: chartView.range)
     private lazy var cardView = ChartCardView(chart: chart)
-    private lazy var gridView = ChartGridView(range: chartView.range)
     private lazy var timestampsView = ChartTimestampsView(timestamps: chart.timestamps)
     private lazy var chartView = ChartView(chart: chart)
     private lazy var viewportView = ViewportView(viewport: viewport, content: chartView)

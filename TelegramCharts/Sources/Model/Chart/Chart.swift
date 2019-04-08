@@ -7,10 +7,12 @@ import Foundation
 enum ColumnType: String, Codable {
     case timestamps = "x"
     case line
+    case area
+    case bar
 }
 
 struct Column: Hashable {
-    let label: String
+    let id: String
     let type: ColumnType
     let name: String?
     let color: HexColor?
@@ -18,6 +20,10 @@ struct Column: Hashable {
 }
 
 struct Chart: Hashable {
-    var title: String
-    var columns: [Column]
+    let id: String
+    let title: String?
+    let columns: [Column]
+    let percentage: Bool
+    let stacked: Bool
+    let yScaled: Bool
 }

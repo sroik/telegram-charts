@@ -7,14 +7,14 @@ import UIKit
 extension ColumnType {
     var isDrawable: Bool {
         switch self {
-        case .line: return true
+        case .line, .area, .bar: return true
         case .timestamps: return false
         }
     }
 
     var isTimestamps: Bool {
         switch self {
-        case .line: return false
+        case .line, .area, .bar: return false
         case .timestamps: return true
         }
     }
@@ -22,7 +22,7 @@ extension ColumnType {
 
 extension Column {
     static var empty = Column(
-        label: "",
+        id: "",
         type: .line,
         name: nil,
         color: nil,

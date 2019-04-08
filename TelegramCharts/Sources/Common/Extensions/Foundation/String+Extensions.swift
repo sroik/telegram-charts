@@ -23,6 +23,16 @@ extension Int {
 }
 
 extension String {
+    var basename: String {
+        return components(separatedBy: "/").last ?? ""
+    }
+
+    var ext: String {
+        let comps = components(separatedBy: ".")
+        let last = comps.count > 1 ? comps.last : nil
+        return last ?? ""
+    }
+
     init(columnValue value: Int) {
         switch abs(value) {
         case Int.billion ... Int.max:

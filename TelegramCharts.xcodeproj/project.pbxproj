@@ -35,7 +35,6 @@
 		AC32DCAA223C3F9100873B04 /* Collection+Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC32DCA9223C3F9100873B04 /* Collection+Range.swift */; };
 		AC3B37F42236510C000AD635 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B37F32236510C000AD635 /* AppDelegate.swift */; };
 		AC3B37FB2236510D000AD635 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC3B37FA2236510D000AD635 /* Assets.xcassets */; };
-		AC3B380A223651E4000AD635 /* charts.json in Resources */ = {isa = PBXBuildFile; fileRef = AC3B3809223651E4000AD635 /* charts.json */; };
 		AC3B380C2236526D000AD635 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC3B380B2236526D000AD635 /* LaunchScreen.storyboard */; };
 		AC3B380F22365543000AD635 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B380E22365543000AD635 /* Chart.swift */; };
 		AC3B381322365725000AD635 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B381222365725000AD635 /* UIColor+Hex.swift */; };
@@ -45,7 +44,7 @@
 		AC3B382E22365BCB000AD635 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B382D22365BCB000AD635 /* Operators.swift */; };
 		AC3B383022365C52000AD635 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B382F22365C52000AD635 /* Environment.swift */; };
 		AC3B383222365CF8000AD635 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B383122365CF8000AD635 /* Utils.swift */; };
-		AC3B38382236612C000AD635 /* test_charts.json in Resources */ = {isa = PBXBuildFile; fileRef = AC3B38372236612C000AD635 /* test_charts.json */; };
+		AC3B38382236612C000AD635 /* test_chart.json in Resources */ = {isa = PBXBuildFile; fileRef = AC3B38372236612C000AD635 /* test_chart.json */; };
 		AC3B384C223661E3000AD635 /* Bundle+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B3840223661E3000AD635 /* Bundle+Stub.swift */; };
 		AC3B3854223663D1000AD635 /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B3853223663D1000AD635 /* ChartData.swift */; };
 		AC3B3856223666C3000AD635 /* AnyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B3855223666C3000AD635 /* AnyDecodable.swift */; };
@@ -61,6 +60,7 @@
 		AC5EFB70223A946400979B60 /* Math+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB6F223A946400979B60 /* Math+Extensions.swift */; };
 		AC5EFB72223B98EE00979B60 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB71223B98EE00979B60 /* Date+Extensions.swift */; };
 		AC5EFB74223BA02600979B60 /* Range+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB73223BA02600979B60 /* Range+Extensions.swift */; };
+		AC675E1E225B3F8800BF9380 /* charts in Resources */ = {isa = PBXBuildFile; fileRef = AC675E1D225B3F8800BF9380 /* charts */; };
 		AC7C1F1B2259C3BD00A095D6 /* ChartGridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F1A2259C3BD00A095D6 /* ChartGridViewCell.swift */; };
 		AC7C1F1D2259F86300A095D6 /* ViewportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F1C2259F86300A095D6 /* ViewportView.swift */; };
 		AC7C1F1F2259FA9100A095D6 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F1E2259FA9100A095D6 /* ChartView.swift */; };
@@ -130,7 +130,6 @@
 		AC3B37F32236510C000AD635 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC3B37FA2236510D000AD635 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC3B37FF2236510D000AD635 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AC3B3809223651E4000AD635 /* charts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = charts.json; sourceTree = "<group>"; };
 		AC3B380B2236526D000AD635 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC3B380E22365543000AD635 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
 		AC3B381222365725000AD635 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
@@ -142,7 +141,7 @@
 		AC3B382D22365BCB000AD635 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		AC3B382F22365C52000AD635 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		AC3B383122365CF8000AD635 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		AC3B38372236612C000AD635 /* test_charts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test_charts.json; sourceTree = "<group>"; };
+		AC3B38372236612C000AD635 /* test_chart.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test_chart.json; sourceTree = "<group>"; };
 		AC3B3840223661E3000AD635 /* Bundle+Stub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Stub.swift"; sourceTree = "<group>"; };
 		AC3B3853223663D1000AD635 /* ChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
 		AC3B3855223666C3000AD635 /* AnyDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDecodable.swift; sourceTree = "<group>"; };
@@ -158,6 +157,7 @@
 		AC5EFB6F223A946400979B60 /* Math+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Math+Extensions.swift"; sourceTree = "<group>"; };
 		AC5EFB71223B98EE00979B60 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		AC5EFB73223BA02600979B60 /* Range+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Range+Extensions.swift"; sourceTree = "<group>"; };
+		AC675E1D225B3F8800BF9380 /* charts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = charts; sourceTree = "<group>"; };
 		AC7C1F1A2259C3BD00A095D6 /* ChartGridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGridViewCell.swift; sourceTree = "<group>"; };
 		AC7C1F1C2259F86300A095D6 /* ViewportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewportView.swift; sourceTree = "<group>"; };
 		AC7C1F1E2259FA9100A095D6 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
@@ -348,7 +348,7 @@
 		AC3B3806223651A8000AD635 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AC3B3808223651C8000AD635 /* Data */,
+				AC675E1D225B3F8800BF9380 /* charts */,
 				AC3099452239236300A04331 /* Images.xcassets */,
 			);
 			path = Resources;
@@ -362,14 +362,6 @@
 				AC3B380B2236526D000AD635 /* LaunchScreen.storyboard */,
 			);
 			path = SupportingFiles;
-			sourceTree = "<group>";
-		};
-		AC3B3808223651C8000AD635 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				AC3B3809223651E4000AD635 /* charts.json */,
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 		AC3B380D22365537000AD635 /* Model */ = {
@@ -486,7 +478,7 @@
 		AC3B383622366106000AD635 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AC3B38372236612C000AD635 /* test_charts.json */,
+				AC3B38372236612C000AD635 /* test_chart.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -698,8 +690,8 @@
 			files = (
 				AC3B380C2236526D000AD635 /* LaunchScreen.storyboard in Resources */,
 				AC3099462239236300A04331 /* Images.xcassets in Resources */,
-				AC3B380A223651E4000AD635 /* charts.json in Resources */,
 				AC3B37FB2236510D000AD635 /* Assets.xcassets in Resources */,
+				AC675E1E225B3F8800BF9380 /* charts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -707,7 +699,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC3B38382236612C000AD635 /* test_charts.json in Resources */,
+				AC3B38382236612C000AD635 /* test_chart.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
