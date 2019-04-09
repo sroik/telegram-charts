@@ -47,7 +47,7 @@ final class ChartMapOverlayView: View {
     }
 
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        return knob(at: point) != .none || bounds.contains(point)
+        return knob(at: point) != .none
     }
 
     private func setup() {

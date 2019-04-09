@@ -10,7 +10,9 @@ class BarChartView: ViewportView, ChartViewType {
     let layers: [BarColumnLayer]
 
     var selectedIndex: Int? {
-        didSet {}
+        didSet {
+            #warning("select")
+        }
     }
 
     init(chart: Chart) {

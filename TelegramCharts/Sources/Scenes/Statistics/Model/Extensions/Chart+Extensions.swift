@@ -33,15 +33,10 @@ extension Chart {
         return drawableColumn.type
     }
 
-    #warning("fix")
     func adjustedRange(of columns: [Column], in viewport: Viewport) -> Range<Int> {
         let ranges = columns.map { $0.range(in: viewport) }
-
-        guard stacked else {
-            return ranges.union()
-        }
-
-        return ranges.union()
+        let range = stacked ? ranges.stacked() : ranges.union()
+        return range
     }
 
     func adjustedRange(of column: Column, in viewport: Viewport) -> Range<Int> {
