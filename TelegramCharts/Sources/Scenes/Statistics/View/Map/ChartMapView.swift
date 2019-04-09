@@ -27,10 +27,10 @@ final class ChartMapView: View {
     }
 
     convenience init(chart: Chart) {
-        self.init(chartView: ChartView(chart: chart))
+        self.init(chartView: LineChartView(chart: chart))
     }
 
-    init(chartView: ChartView) {
+    init(chartView: LineChartView) {
         self.chartView = chartView
         super.init(frame: .screen)
         setup()
@@ -42,8 +42,8 @@ final class ChartMapView: View {
         overlayView.frame = bounds
     }
 
-    func set(enabledColumns columns: Set<Column>, animated: Bool = false) {
-        chartView.set(enabledColumns: columns, animated: animated)
+    func enable(columns: [Column], animated: Bool = false) {
+        chartView.enable(columns: columns, animated: animated)
     }
 
     private func setup() {
@@ -56,5 +56,5 @@ final class ChartMapView: View {
     }
 
     private let overlayView = ChartMapOverlayView()
-    private let chartView: ChartView
+    private let chartView: LineChartView
 }

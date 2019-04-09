@@ -4,8 +4,6 @@
 
 import UIKit
 
-typealias Viewport = Range<CGFloat>
-
 extension Range {
     static var zero: Range<T> {
         return Range(min: 0, max: 0)

@@ -15,11 +15,11 @@ final class ColumnsListView: View {
         return cells.filter { $0.isSelected }.map { $0.column }
     }
 
-    init(
-        columns: [Column],
-        layout: ShelfLayout = .default,
-        sounds: SoundService
-    ) {
+    convenience init(chart: Chart, layout: ShelfLayout = .default, sounds: SoundService) {
+        self.init(columns: chart.drawableColumns, layout: layout, sounds: sounds)
+    }
+
+    init(columns: [Column], layout: ShelfLayout = .default, sounds: SoundService) {
         self.sounds = sounds
         self.columns = columns
         self.layout = layout

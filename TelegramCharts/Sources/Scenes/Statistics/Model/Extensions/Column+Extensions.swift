@@ -47,10 +47,6 @@ extension Column {
 }
 
 extension Array where Element == Column {
-    var range: Range<Int> {
-        return range(in: .zeroToOne)
-    }
-
     func range(in viewport: Viewport) -> Range<Int> {
         guard let first = first else {
             return .zero

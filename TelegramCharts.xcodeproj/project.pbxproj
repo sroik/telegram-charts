@@ -14,7 +14,7 @@
 		AC143B3D223796BA00FEB9CD /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B3C223796BA00FEB9CD /* UIView+Extensions.swift */; };
 		AC143B4022379A9C00FEB9CD /* CGGeometry+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B3F22379A9C00FEB9CD /* CGGeometry+Extensions.swift */; };
 		AC143B4222379F9400FEB9CD /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B4122379F9400FEB9CD /* ChartViewController.swift */; };
-		AC143B442237A67D00FEB9CD /* ChartBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B432237A67D00FEB9CD /* ChartBrowserView.swift */; };
+		AC143B442237A67D00FEB9CD /* TimelineChartBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B432237A67D00FEB9CD /* TimelineChartBrowserView.swift */; };
 		AC143B482237AC1700FEB9CD /* Column+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B472237AC1700FEB9CD /* Column+Extensions.swift */; };
 		AC143B4A2237AD2F00FEB9CD /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B492237AD2F00FEB9CD /* Range.swift */; };
 		AC143B4C2237B43D00FEB9CD /* RangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B4B2237B43D00FEB9CD /* RangeTests.swift */; };
@@ -24,6 +24,9 @@
 		AC143B572237F52D00FEB9CD /* ChartMapViewportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */; };
 		AC16EA95225C705F009471D7 /* ChartViewControllerLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EA94225C705F009471D7 /* ChartViewControllerLayout.swift */; };
 		AC16EA97225C813A009471D7 /* Sizeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EA96225C813A009471D7 /* Sizeable.swift */; };
+		AC16EA9A225C8DD1009471D7 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EA99225C8DD1009471D7 /* ChartView.swift */; };
+		AC16EA9C225C8E4E009471D7 /* Viewport.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EA9B225C8E4E009471D7 /* Viewport.swift */; };
+		AC16EAA0225C9993009471D7 /* ChartBrowserFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EA9F225C9993009471D7 /* ChartBrowserFactory.swift */; };
 		AC2542A42257961F00EE2021 /* Bool+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2542A32257961F00EE2021 /* Bool+Extensions.swift */; };
 		AC2542A62257DA4E00EE2021 /* CAAnimation+Extenisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2542A52257DA4E00EE2021 /* CAAnimation+Extenisions.swift */; };
 		AC2542A82257F03400EE2021 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2542A72257F03400EE2021 /* String+Extensions.swift */; };
@@ -66,7 +69,7 @@
 		AC675E22225B819A00BF9380 /* TimePeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC675E21225B819A00BF9380 /* TimePeriodView.swift */; };
 		AC7C1F1B2259C3BD00A095D6 /* ChartGridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F1A2259C3BD00A095D6 /* ChartGridViewCell.swift */; };
 		AC7C1F1D2259F86300A095D6 /* ViewportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F1C2259F86300A095D6 /* ViewportView.swift */; };
-		AC7C1F1F2259FA9100A095D6 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F1E2259FA9100A095D6 /* ChartView.swift */; };
+		AC7C1F1F2259FA9100A095D6 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F1E2259FA9100A095D6 /* LineChartView.swift */; };
 		AC7C1F22225A0A8A00A095D6 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F21225A0A8A00A095D6 /* CardView.swift */; };
 		AC7C1F25225A119700A095D6 /* ChartCardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F24225A119700A095D6 /* ChartCardViewCell.swift */; };
 		AC7C1F27225A155100A095D6 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F26225A155100A095D6 /* UIFont+Extension.swift */; };
@@ -110,7 +113,7 @@
 		AC143B3C223796BA00FEB9CD /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		AC143B3F22379A9C00FEB9CD /* CGGeometry+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGGeometry+Extensions.swift"; sourceTree = "<group>"; };
 		AC143B4122379F9400FEB9CD /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
-		AC143B432237A67D00FEB9CD /* ChartBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartBrowserView.swift; sourceTree = "<group>"; };
+		AC143B432237A67D00FEB9CD /* TimelineChartBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineChartBrowserView.swift; sourceTree = "<group>"; };
 		AC143B472237AC1700FEB9CD /* Column+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Column+Extensions.swift"; sourceTree = "<group>"; };
 		AC143B492237AD2F00FEB9CD /* Range.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Range.swift; sourceTree = "<group>"; };
 		AC143B4B2237B43D00FEB9CD /* RangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeTests.swift; sourceTree = "<group>"; };
@@ -120,6 +123,9 @@
 		AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMapViewportView.swift; sourceTree = "<group>"; };
 		AC16EA94225C705F009471D7 /* ChartViewControllerLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewControllerLayout.swift; sourceTree = "<group>"; };
 		AC16EA96225C813A009471D7 /* Sizeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizeable.swift; sourceTree = "<group>"; };
+		AC16EA99225C8DD1009471D7 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		AC16EA9B225C8E4E009471D7 /* Viewport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Viewport.swift; sourceTree = "<group>"; };
+		AC16EA9F225C9993009471D7 /* ChartBrowserFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartBrowserFactory.swift; sourceTree = "<group>"; };
 		AC2542A32257961F00EE2021 /* Bool+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extensions.swift"; sourceTree = "<group>"; };
 		AC2542A52257DA4E00EE2021 /* CAAnimation+Extenisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAAnimation+Extenisions.swift"; sourceTree = "<group>"; };
 		AC2542A72257F03400EE2021 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -166,7 +172,7 @@
 		AC675E21225B819A00BF9380 /* TimePeriodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePeriodView.swift; sourceTree = "<group>"; };
 		AC7C1F1A2259C3BD00A095D6 /* ChartGridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGridViewCell.swift; sourceTree = "<group>"; };
 		AC7C1F1C2259F86300A095D6 /* ViewportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewportView.swift; sourceTree = "<group>"; };
-		AC7C1F1E2259FA9100A095D6 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		AC7C1F1E2259FA9100A095D6 /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
 		AC7C1F21225A0A8A00A095D6 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		AC7C1F24225A119700A095D6 /* ChartCardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCardViewCell.swift; sourceTree = "<group>"; };
 		AC7C1F26225A155100A095D6 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
@@ -235,7 +241,7 @@
 				AC45EC652259113E00A8E884 /* Map */,
 				AC45EC682259117B00A8E884 /* Column */,
 				AC30992B2238F1B800A04331 /* Statistics */,
-				AC30992C2238F1C100A04331 /* Extensions */,
+				AC30992C2238F1C100A04331 /* Factory */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -265,6 +271,7 @@
 				AC5EFB73223BA02600979B60 /* Range+Extensions.swift */,
 				AC143B492237AD2F00FEB9CD /* Range.swift */,
 				AC32DCA4223C2B1000873B04 /* Stride.swift */,
+				AC16EA9B225C8E4E009471D7 /* Viewport.swift */,
 			);
 			path = Math;
 			sourceTree = "<group>";
@@ -272,8 +279,9 @@
 		AC30992A2238F1AC00A04331 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
-				AC143B432237A67D00FEB9CD /* ChartBrowserView.swift */,
-				AC7C1F1E2259FA9100A095D6 /* ChartView.swift */,
+				AC143B432237A67D00FEB9CD /* TimelineChartBrowserView.swift */,
+				AC16EA99225C8DD1009471D7 /* ChartView.swift */,
+				AC7C1F1E2259FA9100A095D6 /* LineChartView.swift */,
 				AC3099442239211D00A04331 /* Layer */,
 			);
 			path = Chart;
@@ -288,12 +296,13 @@
 			path = Statistics;
 			sourceTree = "<group>";
 		};
-		AC30992C2238F1C100A04331 /* Extensions */ = {
+		AC30992C2238F1C100A04331 /* Factory */ = {
 			isa = PBXGroup;
 			children = (
+				AC16EA9F225C9993009471D7 /* ChartBrowserFactory.swift */,
 				AC143B3322378A9300FEB9CD /* UIView+Factory.swift */,
 			);
-			path = Extensions;
+			path = Factory;
 			sourceTree = "<group>";
 		};
 		AC3099442239211D00A04331 /* Layer */ = {
@@ -795,6 +804,7 @@
 				AC5EFB6B223A2D8A00979B60 /* ChartTimelineView.swift in Sources */,
 				AC3099482239254800A04331 /* Control.swift in Sources */,
 				AC3B3856223666C3000AD635 /* AnyDecodable.swift in Sources */,
+				AC16EA9C225C8E4E009471D7 /* Viewport.swift in Sources */,
 				AC45EC5F2258D7DE00A8E884 /* ChartTimelineRowView.swift in Sources */,
 				AC143B502237CD8000FEB9CD /* ChartMapView.swift in Sources */,
 				AC3B383022365C52000AD635 /* Environment.swift in Sources */,
@@ -804,15 +814,17 @@
 				AC143B4022379A9C00FEB9CD /* CGGeometry+Extensions.swift in Sources */,
 				AC143B3422378A9300FEB9CD /* UIView+Factory.swift in Sources */,
 				AC143B3D223796BA00FEB9CD /* UIView+Extensions.swift in Sources */,
-				AC143B442237A67D00FEB9CD /* ChartBrowserView.swift in Sources */,
+				AC143B442237A67D00FEB9CD /* TimelineChartBrowserView.swift in Sources */,
 				AC2542A82257F03400EE2021 /* String+Extensions.swift in Sources */,
 				AC32DCA7223C2B6D00873B04 /* Column+Points.swift in Sources */,
 				AC4AE89D223CCB04002CF635 /* ChartGridView.swift in Sources */,
+				AC16EAA0225C9993009471D7 /* ChartBrowserFactory.swift in Sources */,
+				AC16EA9A225C8DD1009471D7 /* ChartView.swift in Sources */,
 				AC3B380F22365543000AD635 /* Chart.swift in Sources */,
 				ACE686992236BED100724432 /* UIView+Layout.swift in Sources */,
 				AC16EA95225C705F009471D7 /* ChartViewControllerLayout.swift in Sources */,
 				AC7C1F27225A155100A095D6 /* UIFont+Extension.swift in Sources */,
-				AC7C1F1F2259FA9100A095D6 /* ChartView.swift in Sources */,
+				AC7C1F1F2259FA9100A095D6 /* LineChartView.swift in Sources */,
 				AC143B4A2237AD2F00FEB9CD /* Range.swift in Sources */,
 				AC143B482237AC1700FEB9CD /* Column+Extensions.swift in Sources */,
 				AC3B37F42236510C000AD635 /* AppDelegate.swift in Sources */,

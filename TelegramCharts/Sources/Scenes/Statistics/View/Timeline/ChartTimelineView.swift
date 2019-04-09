@@ -44,7 +44,7 @@ final class ChartTimelineView: ViewportView {
         }
     }
 
-    private func updateRowView(animated: Bool) {
+    func updateRowView(animated: Bool) {
         let oldRowView = rowView
         rowView = ChartTimelineRowView(itemWidth: minimumSpacing, timestamps: fitTimestamps)
         rowView.theme = theme

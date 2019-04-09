@@ -4,16 +4,20 @@
 
 import UIKit
 
-class ChartBrowserView: View, Viewportable {
-    var viewport: Viewport = .zeroToOne {
-        didSet {
-            adaptViewport()
-        }
-    }
-
-    init(chart: Chart) {
+class TimelineChartBrowserView: ViewportView, ChartBrowser {
+    init(
+        chart: Chart,
+        chartView: LineChartView,
+        gridView: ChartViewportableView,
+        timelineView: ChartTimelineView,
+        cardView: ChartCardView
+    ) {
+        self.chartView = chartView
+        self.gridView = gridView
+        self.timelineView = timelineView
+        self.cardView = cardView
         self.chart = chart
-        super.init(frame: .screen)
+        super.init(autolayouts: false)
         setup()
     }
 
@@ -21,10 +25,10 @@ class ChartBrowserView: View, Viewportable {
         super.layoutSubviewsOnBoundsChange()
 
         let timelineHeight = timelineView.intrinsicContentSize.height
-        workspace.frame = bounds.remainder(at: timelineHeight, from: .maxYEdge)
         timelineView.frame = insets.inset(bounds).slice(at: timelineHeight, from: .maxYEdge)
-        gridView.frame = workspace.bounds.inset(by: insets)
-        chartView.frame = workspace.bounds.inset(by: insets)
+        gridView.frame = insets.inset(bounds).remainder(at: timelineHeight, from: .maxYEdge)
+        chartContainer.frame = bounds.remainder(at: timelineHeight, from: .maxYEdge)
+        chartView.frame = chartContainer.bounds.inset(by: insets)
     }
 
     override func themeUp() {
@@ -32,16 +36,17 @@ class ChartBrowserView: View, Viewportable {
         pointLine.backgroundColor = theme.color.gridLine
     }
 
-    func set(enabledColumns: Set<Column>, animated: Bool = false) {
-        chartView.set(enabledColumns: enabledColumns, animated: animated)
-        gridView.set(enabledColumns: enabledColumns, animated: animated)
-    }
-
-    func adaptViewport() {
+    override func adaptViewport() {
+        super.adaptViewport()
+        deselectIndex(animated: true)
         chartView.viewport = viewport
         timelineView.viewport = viewport
         gridView.viewport = viewport
-        deselectIndex(animated: true)
+    }
+
+    func enable(columns: [Column], animated: Bool = false) {
+        chartView.enable(columns: columns, animated: animated)
+        gridView.enable(columns: columns, animated: animated)
     }
 
     private func deselectIndex(animated: Bool) {
@@ -56,28 +61,28 @@ class ChartBrowserView: View, Viewportable {
     }
 
     private func select(index: Int?, animated: Bool) {
-        selectedIndex = index
         chartView.select(index: index)
 
-        guard let index = selectedIndex else {
+        guard let index = index else {
             pointLine.set(alpha: 0, animated: animated)
             cardView.set(alpha: 0, animated: animated)
             return
         }
 
-        pointLine.set(alpha: 1, animated: animated)
         pointLine.set(frame: pointLineFrame, animated: animated)
+        pointLine.set(alpha: 1, animated: animated)
 
-        cardView.set(alpha: 1, animated: animated)
         cardView.index = index
         cardView.shift(to: cardFrame, animated: animated)
+        cardView.set(alpha: 1, animated: animated)
     }
 
     private func setup() {
+        gridView.clipsToBounds = true
         timelineView.clipsToBounds = true
-        workspace.clipsToBounds = true
-        workspace.addSubviews(chartView, gridView, cardView)
-        addSubviews(pointLine, workspace, timelineView)
+        chartContainer.clipsToBounds = true
+        chartContainer.addSubviews(chartView)
+        addSubviews(pointLine, chartContainer, gridView, cardView, timelineView)
         setupGestures()
     }
 
@@ -93,7 +98,7 @@ class ChartBrowserView: View, Viewportable {
 
     @objc private func onTap(_ recognizer: UITapGestureRecognizer) {
         let point = recognizer.location(in: self)
-        selectIndex(at: point, animated: false)
+        selectIndex(at: point, animated: cardView.isVisible)
     }
 
     @objc private func onPan(_ recognizer: UILongPressGestureRecognizer) {
@@ -120,7 +125,7 @@ class ChartBrowserView: View, Viewportable {
     }
 
     private var pointLineFrame: CGRect {
-        guard let index = selectedIndex else {
+        guard let index = chartView.selectedIndex else {
             return .zero
         }
 
@@ -131,14 +136,12 @@ class ChartBrowserView: View, Viewportable {
         return convert(frame, from: chartView.contentView)
     }
 
-    private var selectedIndex: Int?
+    private var gridView: ChartViewportableView
+    private let timelineView: ChartTimelineView
+    private let cardView: ChartCardView
     private let pointLine = UIView()
-
-    private lazy var workspace = View()
-    private lazy var gridView = ChartGridView(chart: chart)
-    private lazy var cardView = ChartCardView(chart: chart)
-    private lazy var timelineView = ChartTimelineView(chart: chart)
-    private lazy var chartView = ChartView(chart: chart)
+    private let chartView: LineChartView
+    private let chartContainer = View()
     private let insets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
     private let chart: Chart
 }

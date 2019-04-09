@@ -4,7 +4,7 @@
 
 import UIKit
 
-class ChartGridView: ViewportView {
+class ChartGridView: ViewportView, ChartViewportable {
     init(chart: Chart, layout: GridLayout = .values, viewport: Viewport = .zeroToOne) {
         self.chart = chart
         self.layout = layout
@@ -23,13 +23,13 @@ class ChartGridView: ViewportView {
         adaptRange(animated: true)
     }
 
-    func set(enabledColumns columns: Set<Column>, animated: Bool) {
+    func enable(columns: [Column], animated: Bool) {
         enabledColumns = columns
         adaptRange(animated: animated)
     }
 
     func adaptRange(animated: Bool) {
-        let range = Array(enabledColumns).range(in: viewport)
+        let range = enabledColumns.range(in: viewport)
 
         guard self.range != range else {
             return
@@ -79,11 +79,11 @@ class ChartGridView: ViewportView {
             addSubview(cell)
         }
 
-        set(enabledColumns: Set(chart.drawableColumns), animated: false)
+        enable(columns: chart.drawableColumns, animated: false)
     }
 
     private var range: Range<Int> = .zero
-    private var enabledColumns: Set<Column> = []
+    private var enabledColumns: [Column] = []
     private let animator = ShiftAnimator()
     private var cells: [ChartGridViewCell] = []
     private let layout: GridLayout

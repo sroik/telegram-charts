@@ -36,14 +36,10 @@ extension UIView {
         animated: Bool = true,
         duration: TimeInterval = .fastDuration
     ) {
-        guard frame.intersects(self.frame) else {
-            self.frame = frame
-            return
-        }
-
-        UIView.animate(
-            withDuration: animated ? duration : 0,
-            animations: { self.frame = frame }
+        set(
+            frame: frame,
+            animated: animated && frame.intersects(self.frame),
+            duration: duration
         )
     }
 
@@ -52,8 +48,13 @@ extension UIView {
         animated: Bool = true,
         duration: TimeInterval = .fastDuration
     ) {
+        guard animated else {
+            self.frame = frame
+            return
+        }
+
         UIView.animate(
-            withDuration: animated ? duration : 0,
+            withDuration: duration,
             animations: { self.frame = frame }
         )
     }

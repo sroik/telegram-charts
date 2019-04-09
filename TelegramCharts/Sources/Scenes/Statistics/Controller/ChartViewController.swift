@@ -14,24 +14,23 @@ class ChartViewController: ViewController {
         self.init(
             dependencies: dependencies,
             layout: ChartViewControllerLayout(chart: chart),
-            chart: chart
+            chart: chart,
+            chartView: ChartBrowserFactory.view(for: chart)
         )
     }
 
     init(
         dependencies: Dependencies,
         layout: ChartViewControllerLayout,
-        chart: Chart
+        chart: Chart,
+        chartView: ChartBrowserView
     ) {
         self.chart = chart
         self.layout = layout
+        self.chartView = chartView
         self.mapView = ChartMapView(chart: chart)
-        self.chartView = ChartBrowserView(chart: chart)
         self.periodView = TimePeriodView()
-        self.columnsView = ColumnsListView(
-            columns: chart.drawableColumns,
-            sounds: dependencies.sounds
-        )
+        self.columnsView = ColumnsListView(chart: chart, sounds: dependencies.sounds)
         super.init()
     }
 
@@ -64,16 +63,16 @@ class ChartViewController: ViewController {
         view.backgroundColor = theme.color.placeholder
     }
 
+    private var chartView: ChartBrowserView
     private let periodView: TimePeriodView
     private let columnsView: ColumnsListView
-    private let chartView: ChartBrowserView
     private let mapView: ChartMapView
 }
 
 extension ChartViewController: ColumnsStateViewDelegate {
     func columnsView(_ view: ColumnsListView, didEnable columns: [Column]) {
-        mapView.set(enabledColumns: Set(columns), animated: true)
-        chartView.set(enabledColumns: Set(columns), animated: true)
+        mapView.enable(columns: columns, animated: true)
+        chartView.enable(columns: columns, animated: true)
     }
 }
 

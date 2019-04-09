@@ -4,10 +4,6 @@
 
 import UIKit
 
-protocol Viewportable {
-    var viewport: Viewport { get set }
-}
-
 class ViewportView: View, Viewportable {
     let contentView = View()
     var autolayouts: Bool
