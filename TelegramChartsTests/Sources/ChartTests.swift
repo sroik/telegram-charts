@@ -45,7 +45,8 @@ class ChartTests: XCTestCase {
             ],
             percentage: true,
             stacked: true,
-            yScaled: true
+            yScaled: true,
+            expandable: true
         )
 
         XCTAssertEqual(chart, expected)

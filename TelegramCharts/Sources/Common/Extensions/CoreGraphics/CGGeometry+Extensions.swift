@@ -9,6 +9,10 @@ extension CGFloat {
         return 1e-2
     }
 
+    static var pointsEpsilon: CGFloat {
+        return 1e-1
+    }
+
     static var pixel: CGFloat {
         return 1.0 / UIScreen.main.scale
     }
@@ -27,6 +31,10 @@ extension CGPoint {
         let dx = x - to.x
         let dy = y - to.y
         return sqrt(dx * dx + dy * dy)
+    }
+
+    func isClose(to point: CGPoint, threshold: CGFloat) -> Bool {
+        return distance(to: point) <= threshold
     }
 }
 
@@ -174,5 +182,25 @@ extension UIEdgeInsets {
 
     func inset(_ rect: CGRect) -> CGRect {
         return rect.inset(by: self)
+    }
+}
+
+extension Array where Element == CGPoint {
+    func dropClose(threshold: CGFloat = .pointsEpsilon) -> [CGPoint] {
+        guard threshold > .ulpOfOne else {
+            return self
+        }
+
+        var result: [CGPoint] = []
+
+        forEach { point in
+            if let last = result.last, last.isClose(to: point, threshold: threshold) {
+                return
+            }
+
+            result.append(point)
+        }
+
+        return result
     }
 }

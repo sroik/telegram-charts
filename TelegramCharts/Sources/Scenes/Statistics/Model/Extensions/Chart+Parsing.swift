@@ -42,13 +42,15 @@ extension Chart {
             )
         }
 
+        #warning("fix is expandable")
         self.init(
             id: id,
             title: chartData.title,
             columns: columns,
             percentage: chartData.percentage ?? false,
             stacked: chartData.stacked ?? false,
-            yScaled: chartData.yScaled ?? false
+            yScaled: chartData.yScaled ?? false,
+            expandable: true
         )
     }
 }

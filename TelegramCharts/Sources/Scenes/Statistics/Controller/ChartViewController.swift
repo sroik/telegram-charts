@@ -40,6 +40,7 @@ class ChartViewController: ViewController {
         super.viewDidLoad()
         mapView.delegate = self
         columnsView.delegate = self
+        chartView.delegate = self
         chartView.viewport = mapView.viewport
         view.addSubviews(periodView, mapView, chartView, columnsView)
     }
@@ -81,5 +82,11 @@ extension ChartViewController: ColumnsStateViewDelegate {
 extension ChartViewController: ChartMapViewDelegate {
     func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Viewport) {
         chartView.viewport = mapView.viewport
+    }
+}
+
+extension ChartViewController: ChartBrowserDelegate {
+    func chartBrowser(_ view: ChartBrowserView, wantsToExpand index: Int) {
+        print("EXPAND")
     }
 }

@@ -61,7 +61,7 @@ final class LineColumnLayer: Layer {
 
     private func drawColumn(animated: Bool) {
         let points = column.points(in: shapeLayer.bounds, range: range)
-        let path = CGPath.between(points: points)
+        let path = CGPath.between(points: points.dropClose())
         shapeLayer.update(path: path, animated: animated)
     }
 

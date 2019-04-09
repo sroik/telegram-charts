@@ -5,6 +5,8 @@
 import UIKit
 
 class TimelineChartBrowserView: ViewportView, ChartBrowser {
+    weak var delegate: ChartBrowserDelegate?
+
     init(
         chart: Chart,
         chartView: LineChartView,
@@ -94,6 +96,7 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTap))
         chartView.addGestureRecognizer(tap)
+        cardView.addTarget(self, action: #selector(cardPressed), for: .touchUpInside)
     }
 
     @objc private func onTap(_ recognizer: UITapGestureRecognizer) {
@@ -104,6 +107,12 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
     @objc private func onPan(_ recognizer: UILongPressGestureRecognizer) {
         let point = recognizer.location(in: self)
         selectIndex(at: point, animated: cardView.isVisible)
+    }
+
+    @objc private func cardPressed() {
+        if let index = chartView.selectedIndex, chart.expandable {
+            delegate?.chartBrowser(self, wantsToExpand: index)
+        }
     }
 
     private var cardFrame: CGRect {

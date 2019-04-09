@@ -9,11 +9,11 @@ struct Image {
         return UIImage(named: "checkmark")
     }
 
-    static var leftKnobArrow: UIImage? {
+    static var leftArrow: UIImage? {
         return UIImage(named: "left_arrow")
     }
 
-    static var rightKnobArrow: UIImage? {
+    static var rightArrow: UIImage? {
         return UIImage(named: "right_arrow")
     }
 }

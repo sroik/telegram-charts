@@ -26,4 +26,5 @@ struct Chart: Hashable {
     let percentage: Bool
     let stacked: Bool
     let yScaled: Bool
+    let expandable: Bool
 }

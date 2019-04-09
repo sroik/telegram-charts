@@ -19,7 +19,8 @@ class ChartCardView: CardView {
     }
 
     private func update() {
-        titleCell.summary = date?.string(format: "E, d MMM yyyy")
+        titleCell.icon = titleIcon
+        titleCell.summary = title
 
         chart.drawableColumns.forEach { column in
             guard let cell = self.cell(withId: column.id) else {
@@ -34,6 +35,15 @@ class ChartCardView: CardView {
 
     private func cell(withId id: String) -> ChartCardViewCell? {
         return cells.first { $0.id == id }
+    }
+
+    private var titleIcon: UIImage? {
+        return chart.expandable ? Image.rightArrow : nil
+    }
+
+    private var title: String? {
+        let format = chart.expandable ? "E, d MMM yyyy" : "hh : mm"
+        return date?.string(format: format)
     }
 
     private var date: Date? {

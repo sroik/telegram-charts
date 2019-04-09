@@ -4,7 +4,7 @@
 
 import UIKit
 
-class CardView: View {
+class CardView: Control {
     let insets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
     let itemHeight: CGFloat = 20
     let stack: UIStackView
@@ -43,9 +43,9 @@ class CardView: View {
     }
 
     private func setup() {
-        isUserInteractionEnabled = false
         layer.cornerRadius = 6
 
+        stack.isUserInteractionEnabled = false
         stack.axis = .vertical
         stack.alignment = .fill
         stack.distribution = .fillEqually

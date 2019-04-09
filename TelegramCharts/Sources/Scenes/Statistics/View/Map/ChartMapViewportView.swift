@@ -99,8 +99,8 @@ final class ChartMapViewportView: View {
         )
     }
 
-    private let leftKnob = UIImageView(image: Image.leftKnobArrow)
-    private let rightKnob = UIImageView(image: Image.rightKnobArrow)
+    private let leftKnob = UIImageView(image: Image.leftArrow)
+    private let rightKnob = UIImageView(image: Image.rightArrow)
     private let topLine = UIView()
     private let bottomLine = UIView()
 }
