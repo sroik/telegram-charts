@@ -26,10 +26,6 @@ final class ChartMapView: View {
         return overlayView.selectedKnob
     }
 
-    convenience init(chart: Chart) {
-        self.init(chartView: LineChartView(chart: chart))
-    }
-
     init(chartView: LineChartView) {
         self.chartView = chartView
         super.init(frame: .screen)
@@ -51,7 +47,6 @@ final class ChartMapView: View {
         chartView.viewport = .zeroToOne
         chartView.layer.cornerRadius = 6
         chartView.clipsToBounds = true
-        chartView.set(lineWidth: 1)
         addSubviews(overlayView)
     }
 

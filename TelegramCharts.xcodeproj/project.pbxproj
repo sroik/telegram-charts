@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		AC143B302236F1D700FEB9CD /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B2F2236F1D700FEB9CD /* Label.swift */; };
 		AC143B322236F36C00FEB9CD /* StatisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B312236F36C00FEB9CD /* StatisticsTableViewCell.swift */; };
-		AC143B3422378A9300FEB9CD /* UIView+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B3322378A9300FEB9CD /* UIView+Factory.swift */; };
+		AC143B3422378A9300FEB9CD /* UITableView+Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B3322378A9300FEB9CD /* UITableView+Statistics.swift */; };
 		AC143B3A22378B7D00FEB9CD /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B3922378B7D00FEB9CD /* Placeholder.swift */; };
 		AC143B3D223796BA00FEB9CD /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B3C223796BA00FEB9CD /* UIView+Extensions.swift */; };
 		AC143B4022379A9C00FEB9CD /* CGGeometry+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B3F22379A9C00FEB9CD /* CGGeometry+Extensions.swift */; };
@@ -24,9 +24,14 @@
 		AC143B572237F52D00FEB9CD /* ChartMapViewportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */; };
 		AC16EA95225C705F009471D7 /* ChartViewControllerLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EA94225C705F009471D7 /* ChartViewControllerLayout.swift */; };
 		AC16EA97225C813A009471D7 /* Sizeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EA96225C813A009471D7 /* Sizeable.swift */; };
-		AC16EA9A225C8DD1009471D7 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EA99225C8DD1009471D7 /* ChartView.swift */; };
+		AC16EA9A225C8DD1009471D7 /* ChartViewAbstraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EA99225C8DD1009471D7 /* ChartViewAbstraction.swift */; };
 		AC16EA9C225C8E4E009471D7 /* Viewport.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EA9B225C8E4E009471D7 /* Viewport.swift */; };
 		AC16EAA0225C9993009471D7 /* ChartBrowserFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EA9F225C9993009471D7 /* ChartBrowserFactory.swift */; };
+		AC16EAA2225CA08D009471D7 /* ComparingLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EAA1225CA08D009471D7 /* ComparingLineChartView.swift */; };
+		AC16EAA5225CA356009471D7 /* ChartViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EAA4225CA356009471D7 /* ChartViewFactory.swift */; };
+		AC16EAA7225CA406009471D7 /* ChartGridViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EAA6225CA406009471D7 /* ChartGridViewFactory.swift */; };
+		AC16EAAB225CA5AB009471D7 /* ComparingChartGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EAAA225CA5AB009471D7 /* ComparingChartGridView.swift */; };
+		AC16EAAD225CA90F009471D7 /* Chart+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EAAC225CA90F009471D7 /* Chart+Extensions.swift */; };
 		AC2542A42257961F00EE2021 /* Bool+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2542A32257961F00EE2021 /* Bool+Extensions.swift */; };
 		AC2542A62257DA4E00EE2021 /* CAAnimation+Extenisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2542A52257DA4E00EE2021 /* CAAnimation+Extenisions.swift */; };
 		AC2542A82257F03400EE2021 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2542A72257F03400EE2021 /* String+Extensions.swift */; };
@@ -53,15 +58,15 @@
 		AC3B384C223661E3000AD635 /* Bundle+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B3840223661E3000AD635 /* Bundle+Stub.swift */; };
 		AC3B3854223663D1000AD635 /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B3853223663D1000AD635 /* ChartData.swift */; };
 		AC3B3856223666C3000AD635 /* AnyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B3855223666C3000AD635 /* AnyDecodable.swift */; };
-		AC3B385922366839000AD635 /* Chart+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B385822366839000AD635 /* Chart+Extensions.swift */; };
+		AC3B385922366839000AD635 /* Chart+Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B385822366839000AD635 /* Chart+Parsing.swift */; };
 		AC3B385B223682E0000AD635 /* ChartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3B385A223682E0000AD635 /* ChartTests.swift */; };
-		AC45EC5F2258D7DE00A8E884 /* ChartTimelineRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC45EC5E2258D7DE00A8E884 /* ChartTimelineRowView.swift */; };
+		AC45EC5F2258D7DE00A8E884 /* TimelineRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC45EC5E2258D7DE00A8E884 /* TimelineRowView.swift */; };
 		AC45EC622259037700A8E884 /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC45EC612259037700A8E884 /* HapticService.swift */; };
 		AC45EC642259042B00A8E884 /* SoundService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC45EC632259042B00A8E884 /* SoundService.swift */; };
 		AC45EC6A22591BBA00A8E884 /* ShiftAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC45EC6922591BBA00A8E884 /* ShiftAnimator.swift */; };
 		AC4AE89B223CB8DF002CF635 /* DisplayLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4AE89A223CB8DF002CF635 /* DisplayLink.swift */; };
-		AC4AE89D223CCB04002CF635 /* ChartGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4AE89C223CCB04002CF635 /* ChartGridView.swift */; };
-		AC5EFB6B223A2D8A00979B60 /* ChartTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB6A223A2D8A00979B60 /* ChartTimelineView.swift */; };
+		AC4AE89D223CCB04002CF635 /* RangeChartGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4AE89C223CCB04002CF635 /* RangeChartGridView.swift */; };
+		AC5EFB6B223A2D8A00979B60 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB6A223A2D8A00979B60 /* TimelineView.swift */; };
 		AC5EFB70223A946400979B60 /* Math+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB6F223A946400979B60 /* Math+Extensions.swift */; };
 		AC5EFB72223B98EE00979B60 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB71223B98EE00979B60 /* Date+Extensions.swift */; };
 		AC5EFB74223BA02600979B60 /* Range+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB73223BA02600979B60 /* Range+Extensions.swift */; };
@@ -108,7 +113,7 @@
 /* Begin PBXFileReference section */
 		AC143B2F2236F1D700FEB9CD /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		AC143B312236F36C00FEB9CD /* StatisticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsTableViewCell.swift; sourceTree = "<group>"; };
-		AC143B3322378A9300FEB9CD /* UIView+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Factory.swift"; sourceTree = "<group>"; };
+		AC143B3322378A9300FEB9CD /* UITableView+Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Statistics.swift"; sourceTree = "<group>"; };
 		AC143B3922378B7D00FEB9CD /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
 		AC143B3C223796BA00FEB9CD /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		AC143B3F22379A9C00FEB9CD /* CGGeometry+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGGeometry+Extensions.swift"; sourceTree = "<group>"; };
@@ -123,9 +128,14 @@
 		AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMapViewportView.swift; sourceTree = "<group>"; };
 		AC16EA94225C705F009471D7 /* ChartViewControllerLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewControllerLayout.swift; sourceTree = "<group>"; };
 		AC16EA96225C813A009471D7 /* Sizeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizeable.swift; sourceTree = "<group>"; };
-		AC16EA99225C8DD1009471D7 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		AC16EA99225C8DD1009471D7 /* ChartViewAbstraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewAbstraction.swift; sourceTree = "<group>"; };
 		AC16EA9B225C8E4E009471D7 /* Viewport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Viewport.swift; sourceTree = "<group>"; };
 		AC16EA9F225C9993009471D7 /* ChartBrowserFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartBrowserFactory.swift; sourceTree = "<group>"; };
+		AC16EAA1225CA08D009471D7 /* ComparingLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparingLineChartView.swift; sourceTree = "<group>"; };
+		AC16EAA4225CA356009471D7 /* ChartViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewFactory.swift; sourceTree = "<group>"; };
+		AC16EAA6225CA406009471D7 /* ChartGridViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGridViewFactory.swift; sourceTree = "<group>"; };
+		AC16EAAA225CA5AB009471D7 /* ComparingChartGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparingChartGridView.swift; sourceTree = "<group>"; };
+		AC16EAAC225CA90F009471D7 /* Chart+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart+Extensions.swift"; sourceTree = "<group>"; };
 		AC2542A32257961F00EE2021 /* Bool+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extensions.swift"; sourceTree = "<group>"; };
 		AC2542A52257DA4E00EE2021 /* CAAnimation+Extenisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAAnimation+Extenisions.swift"; sourceTree = "<group>"; };
 		AC2542A72257F03400EE2021 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -156,15 +166,15 @@
 		AC3B3840223661E3000AD635 /* Bundle+Stub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Stub.swift"; sourceTree = "<group>"; };
 		AC3B3853223663D1000AD635 /* ChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
 		AC3B3855223666C3000AD635 /* AnyDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDecodable.swift; sourceTree = "<group>"; };
-		AC3B385822366839000AD635 /* Chart+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart+Extensions.swift"; sourceTree = "<group>"; };
+		AC3B385822366839000AD635 /* Chart+Parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart+Parsing.swift"; sourceTree = "<group>"; };
 		AC3B385A223682E0000AD635 /* ChartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTests.swift; sourceTree = "<group>"; };
-		AC45EC5E2258D7DE00A8E884 /* ChartTimelineRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTimelineRowView.swift; sourceTree = "<group>"; };
+		AC45EC5E2258D7DE00A8E884 /* TimelineRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineRowView.swift; sourceTree = "<group>"; };
 		AC45EC612259037700A8E884 /* HapticService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
 		AC45EC632259042B00A8E884 /* SoundService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundService.swift; sourceTree = "<group>"; };
 		AC45EC6922591BBA00A8E884 /* ShiftAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftAnimator.swift; sourceTree = "<group>"; };
 		AC4AE89A223CB8DF002CF635 /* DisplayLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayLink.swift; sourceTree = "<group>"; };
-		AC4AE89C223CCB04002CF635 /* ChartGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGridView.swift; sourceTree = "<group>"; };
-		AC5EFB6A223A2D8A00979B60 /* ChartTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTimelineView.swift; sourceTree = "<group>"; };
+		AC4AE89C223CCB04002CF635 /* RangeChartGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeChartGridView.swift; sourceTree = "<group>"; };
+		AC5EFB6A223A2D8A00979B60 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		AC5EFB6F223A946400979B60 /* Math+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Math+Extensions.swift"; sourceTree = "<group>"; };
 		AC5EFB71223B98EE00979B60 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		AC5EFB73223BA02600979B60 /* Range+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Range+Extensions.swift"; sourceTree = "<group>"; };
@@ -234,6 +244,7 @@
 		AC143B3522378B2C00FEB9CD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AC16EAA3225CA0C2009471D7 /* Browser */,
 				AC30992A2238F1AC00A04331 /* Chart */,
 				AC7C1F20225A06FB00A095D6 /* Card */,
 				AC45EC672259115400A8E884 /* Grid */,
@@ -276,12 +287,19 @@
 			path = Math;
 			sourceTree = "<group>";
 		};
-		AC30992A2238F1AC00A04331 /* Chart */ = {
+		AC16EAA3225CA0C2009471D7 /* Browser */ = {
 			isa = PBXGroup;
 			children = (
 				AC143B432237A67D00FEB9CD /* TimelineChartBrowserView.swift */,
-				AC16EA99225C8DD1009471D7 /* ChartView.swift */,
+			);
+			path = Browser;
+			sourceTree = "<group>";
+		};
+		AC30992A2238F1AC00A04331 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
 				AC7C1F1E2259FA9100A095D6 /* LineChartView.swift */,
+				AC16EAA1225CA08D009471D7 /* ComparingLineChartView.swift */,
 				AC3099442239211D00A04331 /* Layer */,
 			);
 			path = Chart;
@@ -290,8 +308,8 @@
 		AC30992B2238F1B800A04331 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
+				AC143B3322378A9300FEB9CD /* UITableView+Statistics.swift */,
 				AC143B312236F36C00FEB9CD /* StatisticsTableViewCell.swift */,
-				AC675E21225B819A00BF9380 /* TimePeriodView.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -300,7 +318,9 @@
 			isa = PBXGroup;
 			children = (
 				AC16EA9F225C9993009471D7 /* ChartBrowserFactory.swift */,
-				AC143B3322378A9300FEB9CD /* UIView+Factory.swift */,
+				AC16EAA4225CA356009471D7 /* ChartViewFactory.swift */,
+				AC16EAA6225CA406009471D7 /* ChartGridViewFactory.swift */,
+				AC16EA99225C8DD1009471D7 /* ChartViewAbstraction.swift */,
 			);
 			path = Factory;
 			sourceTree = "<group>";
@@ -318,7 +338,8 @@
 			children = (
 				AC32DCA6223C2B6D00873B04 /* Column+Points.swift */,
 				AC143B472237AC1700FEB9CD /* Column+Extensions.swift */,
-				AC3B385822366839000AD635 /* Chart+Extensions.swift */,
+				AC3B385822366839000AD635 /* Chart+Parsing.swift */,
+				AC16EAAC225CA90F009471D7 /* Chart+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -531,8 +552,9 @@
 		AC45EC662259114600A8E884 /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
-				AC5EFB6A223A2D8A00979B60 /* ChartTimelineView.swift */,
-				AC45EC5E2258D7DE00A8E884 /* ChartTimelineRowView.swift */,
+				AC675E21225B819A00BF9380 /* TimePeriodView.swift */,
+				AC5EFB6A223A2D8A00979B60 /* TimelineView.swift */,
+				AC45EC5E2258D7DE00A8E884 /* TimelineRowView.swift */,
 			);
 			path = Timeline;
 			sourceTree = "<group>";
@@ -540,8 +562,9 @@
 		AC45EC672259115400A8E884 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
-				AC4AE89C223CCB04002CF635 /* ChartGridView.swift */,
 				AC7C1F1A2259C3BD00A095D6 /* ChartGridViewCell.swift */,
+				AC4AE89C223CCB04002CF635 /* RangeChartGridView.swift */,
+				AC16EAAA225CA5AB009471D7 /* ComparingChartGridView.swift */,
 			);
 			path = Grid;
 			sourceTree = "<group>";
@@ -777,7 +800,7 @@
 				AC5EFB70223A946400979B60 /* Math+Extensions.swift in Sources */,
 				ACB9B9C822397F5200B8E841 /* CALayer+Extensions.swift in Sources */,
 				AC143B322236F36C00FEB9CD /* StatisticsTableViewCell.swift in Sources */,
-				AC3B385922366839000AD635 /* Chart+Extensions.swift in Sources */,
+				AC3B385922366839000AD635 /* Chart+Parsing.swift in Sources */,
 				ACE686882236AB9400724432 /* View.swift in Sources */,
 				AC45EC6A22591BBA00A8E884 /* ShiftAnimator.swift in Sources */,
 				ACE6869B2236C01300724432 /* Reusable.swift in Sources */,
@@ -793,6 +816,7 @@
 				AC143B302236F1D700FEB9CD /* Label.swift in Sources */,
 				ACE6868A2236AD1000724432 /* Themeable.swift in Sources */,
 				AC45EC622259037700A8E884 /* HapticService.swift in Sources */,
+				AC16EAA7225CA406009471D7 /* ChartGridViewFactory.swift in Sources */,
 				ACE686832236A0B400724432 /* Theme+Factory.swift in Sources */,
 				AC45EC642259042B00A8E884 /* SoundService.swift in Sources */,
 				ACE6867922369EEF00724432 /* ViewController.swift in Sources */,
@@ -800,26 +824,29 @@
 				AC7C1F25225A119700A095D6 /* ChartCardViewCell.swift in Sources */,
 				ACE6867F2236A09400724432 /* Theme.swift in Sources */,
 				AC3B381322365725000AD635 /* UIColor+Hex.swift in Sources */,
+				AC16EAA2225CA08D009471D7 /* ComparingLineChartView.swift in Sources */,
 				AC3099292238F02B00A04331 /* Collection+Extensions.swift in Sources */,
-				AC5EFB6B223A2D8A00979B60 /* ChartTimelineView.swift in Sources */,
+				AC5EFB6B223A2D8A00979B60 /* TimelineView.swift in Sources */,
+				AC16EAA5225CA356009471D7 /* ChartViewFactory.swift in Sources */,
 				AC3099482239254800A04331 /* Control.swift in Sources */,
 				AC3B3856223666C3000AD635 /* AnyDecodable.swift in Sources */,
+				AC16EAAB225CA5AB009471D7 /* ComparingChartGridView.swift in Sources */,
 				AC16EA9C225C8E4E009471D7 /* Viewport.swift in Sources */,
-				AC45EC5F2258D7DE00A8E884 /* ChartTimelineRowView.swift in Sources */,
+				AC45EC5F2258D7DE00A8E884 /* TimelineRowView.swift in Sources */,
 				AC143B502237CD8000FEB9CD /* ChartMapView.swift in Sources */,
 				AC3B383022365C52000AD635 /* Environment.swift in Sources */,
 				ACD5EF8822573496003B09C3 /* Image.swift in Sources */,
 				ACAF2B00223D89C300533F37 /* GridLayout.swift in Sources */,
 				AC7C1F1D2259F86300A095D6 /* ViewportView.swift in Sources */,
 				AC143B4022379A9C00FEB9CD /* CGGeometry+Extensions.swift in Sources */,
-				AC143B3422378A9300FEB9CD /* UIView+Factory.swift in Sources */,
+				AC143B3422378A9300FEB9CD /* UITableView+Statistics.swift in Sources */,
 				AC143B3D223796BA00FEB9CD /* UIView+Extensions.swift in Sources */,
 				AC143B442237A67D00FEB9CD /* TimelineChartBrowserView.swift in Sources */,
 				AC2542A82257F03400EE2021 /* String+Extensions.swift in Sources */,
 				AC32DCA7223C2B6D00873B04 /* Column+Points.swift in Sources */,
-				AC4AE89D223CCB04002CF635 /* ChartGridView.swift in Sources */,
+				AC4AE89D223CCB04002CF635 /* RangeChartGridView.swift in Sources */,
 				AC16EAA0225C9993009471D7 /* ChartBrowserFactory.swift in Sources */,
-				AC16EA9A225C8DD1009471D7 /* ChartView.swift in Sources */,
+				AC16EA9A225C8DD1009471D7 /* ChartViewAbstraction.swift in Sources */,
 				AC3B380F22365543000AD635 /* Chart.swift in Sources */,
 				ACE686992236BED100724432 /* UIView+Layout.swift in Sources */,
 				AC16EA95225C705F009471D7 /* ChartViewControllerLayout.swift in Sources */,
@@ -840,6 +867,7 @@
 				ACE6868C2236AFB200724432 /* SettingsService.swift in Sources */,
 				AC143B3A22378B7D00FEB9CD /* Placeholder.swift in Sources */,
 				AC5EFB74223BA02600979B60 /* Range+Extensions.swift in Sources */,
+				AC16EAAD225CA90F009471D7 /* Chart+Extensions.swift in Sources */,
 				ACCAD327223AE13200A99436 /* Layer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

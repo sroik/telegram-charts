@@ -4,7 +4,7 @@
 
 import UIKit
 
-final class ChartTimelineRowView: View {
+final class TimelineRowView: View {
     var count: Int {
         return labels.count
     }

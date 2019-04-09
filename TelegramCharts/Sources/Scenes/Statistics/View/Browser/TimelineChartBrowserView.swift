@@ -9,7 +9,7 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
         chart: Chart,
         chartView: LineChartView,
         gridView: ChartViewportableView,
-        timelineView: ChartTimelineView,
+        timelineView: TimelineView,
         cardView: ChartCardView
     ) {
         self.chartView = chartView
@@ -137,7 +137,7 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
     }
 
     private var gridView: ChartViewportableView
-    private let timelineView: ChartTimelineView
+    private let timelineView: TimelineView
     private let cardView: ChartCardView
     private let pointLine = UIView()
     private let chartView: LineChartView

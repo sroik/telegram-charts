@@ -15,7 +15,8 @@ class ChartViewController: ViewController {
             dependencies: dependencies,
             layout: ChartViewControllerLayout(chart: chart),
             chart: chart,
-            chartView: ChartBrowserFactory.view(for: chart)
+            chartView: ChartBrowserFactory.view(with: chart),
+            mapView: ChartMapView(chartView: ChartViewFactory.view(with: chart))
         )
     }
 
@@ -23,12 +24,13 @@ class ChartViewController: ViewController {
         dependencies: Dependencies,
         layout: ChartViewControllerLayout,
         chart: Chart,
-        chartView: ChartBrowserView
+        chartView: ChartBrowserView,
+        mapView: ChartMapView
     ) {
         self.chart = chart
         self.layout = layout
         self.chartView = chartView
-        self.mapView = ChartMapView(chart: chart)
+        self.mapView = mapView
         self.periodView = TimePeriodView()
         self.columnsView = ColumnsListView(chart: chart, sounds: dependencies.sounds)
         super.init()

@@ -41,3 +41,15 @@ extension Collection where Index == Int {
         return Array(self[fromIndex ... toIndex])
     }
 }
+
+extension Array where Element == Range<Int> {
+    func union() -> Range<Int> {
+        guard let first = first else {
+            return .zero
+        }
+
+        return dropFirst().reduce(first) { result, range in
+            result.union(with: range)
+        }
+    }
+}

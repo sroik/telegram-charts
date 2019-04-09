@@ -4,10 +4,16 @@
 
 import UIKit
 
-class ChartGridView: ViewportView, ChartViewportable {
+class RangeChartGridView: ViewportView, ChartViewportable {
+    let animator = ShiftAnimator()
+    let cells: [ChartGridViewCell]
+    let layout: GridLayout
+    let chart: Chart
+
     init(chart: Chart, layout: GridLayout = .values, viewport: Viewport = .zeroToOne) {
         self.chart = chart
         self.layout = layout
+        self.cells = ChartGridViewCell.cells(count: layout.itemsNumber)
         super.init(viewport: viewport, autolayouts: false)
         setup()
     }
@@ -29,7 +35,7 @@ class ChartGridView: ViewportView, ChartViewportable {
     }
 
     func adaptRange(animated: Bool) {
-        let range = enabledColumns.range(in: viewport)
+        let range = chart.adjustedRange(of: enabledColumns, in: viewport)
 
         guard self.range != range else {
             return
@@ -48,44 +54,42 @@ class ChartGridView: ViewportView, ChartViewportable {
         }
     }
 
-    func update(cell: ChartGridViewCell, at index: Index) {
-        cell.state.leftValue = value(at: index, in: range)
-    }
-
-    func layoutCells() {
-        cells.enumerated().forEach { index, cell in
-            cell.frame = layout.itemFrame(at: index, in: bounds)
-        }
-    }
-
     func value(at index: Int, in range: Range<Int>) -> Int {
         let maxY = layout.itemFrame(at: index, in: bounds).maxY
         let position = 1 - (maxY / bounds.height)
         return range.value(at: position)
     }
 
+    private func update(cell: ChartGridViewCell, at index: Index) {
+        cell.state.leftValue = value(at: index, in: range)
+    }
+
+    private func layoutCells() {
+        cells.enumerated().forEach { index, cell in
+            cell.frame = layout.itemFrame(at: index, in: bounds)
+        }
+    }
+
     private func setup() {
         isUserInteractionEnabled = false
         clipsToBounds = true
         displayLink.fps = 2
+        cells.forEach(addSubview)
 
-        (0 ..< layout.itemsNumber).forEach { index in
-            var state = ChartGridViewCellState()
-            state.hasLine = index < layout.itemsNumber - 1
-
-            let cell = ChartGridViewCell(state: state)
-            cell.theme = theme
-            cells.append(cell)
-            addSubview(cell)
-        }
-
+        themeUp()
         enable(columns: chart.drawableColumns, animated: false)
     }
 
+    private(set) var enabledColumns: [Column] = []
     private var range: Range<Int> = .zero
-    private var enabledColumns: [Column] = []
-    private let animator = ShiftAnimator()
-    private var cells: [ChartGridViewCell] = []
-    private let layout: GridLayout
-    private let chart: Chart
+}
+
+extension ChartGridViewCell {
+    static func cells(count: Int) -> [ChartGridViewCell] {
+        return (0 ..< count).map { index in
+            var state = ChartGridViewCellState()
+            state.hasLine = index < count - 1
+            return ChartGridViewCell(state: state)
+        }
+    }
 }

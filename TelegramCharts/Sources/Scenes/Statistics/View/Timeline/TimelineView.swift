@@ -4,7 +4,7 @@
 
 import UIKit
 
-final class ChartTimelineView: ViewportView {
+final class TimelineView: ViewportView {
     override var intrinsicContentSize: CGSize {
         return CGSize(width: UIView.noIntrinsicMetric, height: 25)
     }
@@ -46,7 +46,7 @@ final class ChartTimelineView: ViewportView {
 
     func updateRowView(animated: Bool) {
         let oldRowView = rowView
-        rowView = ChartTimelineRowView(itemWidth: minimumSpacing, timestamps: fitTimestamps)
+        rowView = TimelineRowView(itemWidth: minimumSpacing, timestamps: fitTimestamps)
         rowView.theme = theme
         rowView.fill(in: contentView)
 
@@ -86,7 +86,7 @@ final class ChartTimelineView: ViewportView {
         return min(fitNumber, maxNumber).nearestPowerOfTwo ?? 1
     }
 
-    private var rowView = ChartTimelineRowView(itemWidth: 0, timestamps: [])
+    private var rowView = TimelineRowView(itemWidth: 0, timestamps: [])
     private let chart: Chart
     private let line = UIView()
 }

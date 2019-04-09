@@ -45,15 +45,3 @@ extension Column {
         return values.range(in: viewport)
     }
 }
-
-extension Array where Element == Column {
-    func range(in viewport: Viewport) -> Range<Int> {
-        guard let first = first else {
-            return .zero
-        }
-
-        return dropFirst().reduce(first.values.range(in: viewport)) { r, c in
-            r.union(with: c.range(in: viewport))
-        }
-    }
-}

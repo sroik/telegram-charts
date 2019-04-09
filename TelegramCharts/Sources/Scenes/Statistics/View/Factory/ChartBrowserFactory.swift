@@ -5,12 +5,12 @@
 import UIKit
 
 struct ChartBrowserFactory {
-    static func view(for chart: Chart) -> ChartBrowserView {
+    static func view(with chart: Chart) -> ChartBrowserView {
         return TimelineChartBrowserView(
             chart: chart,
-            chartView: LineChartView(chart: chart),
-            gridView: ChartGridView(chart: chart),
-            timelineView: ChartTimelineView(chart: chart),
+            chartView: ChartViewFactory.view(with: chart),
+            gridView: ChartGridViewFactory.view(with: chart),
+            timelineView: TimelineView(chart: chart),
             cardView: ChartCardView(chart: chart)
         )
     }

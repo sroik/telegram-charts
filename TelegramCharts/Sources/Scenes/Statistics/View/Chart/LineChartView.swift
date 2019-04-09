@@ -6,13 +6,15 @@ import UIKit
 
 class LineChartView: ViewportView, ChartViewportable {
     let chart: Chart
+    let layers: [LineColumnLayer]
 
     var selectedIndex: Int? {
-        return columnLayers.first?.selectedIndex
+        return layers.first?.selectedIndex
     }
 
     init(chart: Chart, viewport: Viewport = .zeroToOne) {
         self.chart = chart
+        self.layers = chart.drawableColumns.map { LineColumnLayer(column: $0) }
         super.init(viewport: viewport)
         setup()
     }
@@ -24,8 +26,8 @@ class LineChartView: ViewportView, ChartViewportable {
 
     override func adaptViewport() {
         super.adaptViewport()
-        columnLayers.forEach {
-            $0.frame = contentView.bounds
+        layers.forEach { layer in
+            layer.frame = contentView.bounds
         }
     }
 
@@ -34,24 +36,11 @@ class LineChartView: ViewportView, ChartViewportable {
         adaptRange(animated: true)
     }
 
-    func select(index: Int?) {
-        columnLayers.forEach { layer in
-            layer.selectedIndex = index
-        }
-    }
-
-    func adaptRange(animated: Bool) {
-        let range = enabledColumns.range(in: viewport)
-        columnLayers.forEach { layer in
-            layer.set(range: range, animated: animated)
-        }
-    }
-
     func enable(columns: [Column], animated: Bool) {
         enabledColumns = columns
         adaptRange(animated: animated)
 
-        columnLayers.forEach { layer in
+        layers.forEach { layer in
             layer.set(
                 value: columns.contains(layer.column) ? 1 : 0,
                 for: .opacity,
@@ -61,22 +50,29 @@ class LineChartView: ViewportView, ChartViewportable {
     }
 
     func set(lineWidth: CGFloat) {
-        columnLayers.forEach { layer in
+        layers.forEach { layer in
             layer.lineWidth = lineWidth
         }
     }
 
-    private func setup() {
-        chart.drawableColumns.forEach { column in
-            let layer = LineColumnLayer(column: column)
-            columnLayers.append(layer)
-            contentView.layer.addSublayer(layer)
+    func select(index: Int?) {
+        layers.forEach { layer in
+            layer.selectedIndex = index
         }
+    }
 
+    func adaptRange(animated: Bool) {
+        let range = chart.adjustedRange(of: enabledColumns, in: viewport)
+
+        layers.forEach { layer in
+            layer.set(range: range, animated: animated)
+        }
+    }
+
+    private func setup() {
+        layers.forEach(contentView.layer.addSublayer)
         enable(columns: chart.drawableColumns, animated: false)
     }
 
-    private var range: Range<Int> = .zero
-    private var enabledColumns: [Column] = []
-    private var columnLayers: [LineColumnLayer] = []
+    private(set) var enabledColumns: [Column] = []
 }
