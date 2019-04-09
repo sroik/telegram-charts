@@ -17,7 +17,7 @@ extension CAShapeLayer {
      * updates column path preserving width.
      * velocity in points per second
      */
-    func update(path: CGPath, animated: Bool, velocity: CGFloat = 250) {
+    func update(path: CGPath, animated: Bool, velocity: CGFloat = 300) {
         guard let current = presentedPath, !current.bounds.isEmpty else {
             set(path: path, animated: false)
             return
@@ -26,7 +26,7 @@ extension CAShapeLayer {
         let deltaMinY = abs(path.bounds.minY - current.bounds.minY)
         let deltaMaxY = abs(path.bounds.maxY - current.bounds.maxY)
         let shift = max(deltaMaxY, deltaMinY)
-        let duration = TimeInterval(shift / velocity).clamped(from: 0.15, to: 0.35)
+        let duration = TimeInterval(shift / velocity).clamped(from: 0.2, to: 0.35)
 
         guard !animated else {
             set(value: path, for: .path, animated: animated, duration: duration)

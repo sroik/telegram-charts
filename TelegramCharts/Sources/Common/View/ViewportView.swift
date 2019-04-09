@@ -11,7 +11,7 @@ protocol Viewportable {
 class ViewportView: View, Viewportable {
     let contentView = View()
     var autolayouts: Bool
-    let displayLink = DisplayLink(fps: 6)
+    let displayLink = DisplayLink(fps: 12)
 
     var viewport: Viewport {
         didSet {

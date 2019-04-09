@@ -21,7 +21,7 @@ extension UIView {
     func set(
         alpha: CGFloat,
         animated: Bool = true,
-        duration: TimeInterval = .defaultDuration,
+        duration: TimeInterval = .fastDuration,
         then completion: Completion? = nil
     ) {
         UIView.animate(

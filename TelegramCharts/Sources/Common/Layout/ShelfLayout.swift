@@ -20,7 +20,7 @@ extension ShelfLayout {
         verticalSpacing: 10,
         horizontalSpacing: 10,
         itemHeight: 30,
-        insets: UIEdgeInsets(top: 0, left: 15, bottom: 15, right: 15)
+        insets: UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0)
     )
 
     func size(of items: [Sizeable], fitting width: CGFloat) -> CGSize {

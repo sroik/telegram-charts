@@ -5,8 +5,6 @@
 import UIKit
 
 class ChartBrowserView: View, Viewportable {
-    let chart: Chart
-
     var viewport: Viewport = .zeroToOne {
         didSet {
             adaptViewport()
@@ -22,11 +20,11 @@ class ChartBrowserView: View, Viewportable {
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
 
-        let insets = UIEdgeInsets(right: 15, left: 15)
-        let contentFrame = bounds.inset(by: insets)
-        gridView.frame = contentFrame.remainder(at: timestampsHeight, from: .maxYEdge)
-        chartView.frame = contentFrame.remainder(at: timestampsHeight, from: .maxYEdge)
-        timestampsView.frame = contentFrame.slice(at: timestampsHeight, from: .maxYEdge)
+        let timelineHeight = timelineView.intrinsicContentSize.height
+        workspace.frame = bounds.remainder(at: timelineHeight, from: .maxYEdge)
+        timelineView.frame = insets.inset(bounds).slice(at: timelineHeight, from: .maxYEdge)
+        gridView.frame = workspace.bounds.inset(by: insets)
+        chartView.frame = workspace.bounds.inset(by: insets)
     }
 
     override func themeUp() {
@@ -41,7 +39,7 @@ class ChartBrowserView: View, Viewportable {
 
     func adaptViewport() {
         chartView.viewport = viewport
-        timestampsView.viewport = viewport
+        timelineView.viewport = viewport
         gridView.viewport = viewport
         deselectIndex()
     }
@@ -64,8 +62,8 @@ class ChartBrowserView: View, Viewportable {
 
     private func displayValue(at index: Int?) {
         guard let index = index else {
-            selectedLine.set(alpha: 0, duration: 0.2)
-            cardView.set(alpha: 0, duration: 0.2)
+            selectedLine.set(alpha: 0)
+            cardView.set(alpha: 0)
             return
         }
 
@@ -74,25 +72,28 @@ class ChartBrowserView: View, Viewportable {
         let centerX = (CGFloat(index) + 0.5) * stride
 
         let lineFrame = CGRect(midX: centerX, width: .pixel, height: contentSize.height)
-        selectedLine.set(alpha: 1, duration: 0.2)
+        selectedLine.set(alpha: 1)
         selectedLine.frame = convert(lineFrame, from: chartView.contentView)
 
-        cardView.set(alpha: 1, duration: 0.2)
+        cardView.set(alpha: 1)
         cardView.index = index
 
+        #warning("choose the correct frame")
         let cardFrame = CGRect(midX: centerX, size: cardView.intrinsicContentSize)
         cardView.frame = convert(cardFrame, from: chartView.contentView)
         limitValueCardFrame()
     }
 
     private func limitValueCardFrame() {
-        let limits = UIEdgeInsets(right: 15, left: 50).inset(bounds)
+        let limits = bounds.inset(by: UIEdgeInsets(left: 35)).inset(by: insets)
         cardView.frame = cardView.frame.limited(with: limits)
     }
 
     private func setup() {
-        timestampsView.clipsToBounds = true
-        addSubviews(selectedLine, chartView, gridView, timestampsView, cardView)
+        timelineView.clipsToBounds = true
+        workspace.clipsToBounds = true
+        workspace.addSubviews(selectedLine, chartView, gridView, cardView)
+        addSubviews(workspace, timelineView)
         setupGestures()
     }
 
@@ -119,9 +120,11 @@ class ChartBrowserView: View, Viewportable {
     private var selectedIndex: Int?
     private let selectedLine = UIView()
 
+    private lazy var workspace = View()
     private lazy var gridView = ChartGridView(chart: chart)
     private lazy var cardView = ChartCardView(chart: chart)
-    private lazy var timestampsView = ChartTimestampsView(chart: chart)
+    private lazy var timelineView = ChartTimelineView(chart: chart)
     private lazy var chartView = ChartView(chart: chart)
-    private let timestampsHeight: CGFloat = 25
+    private let insets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+    private let chart: Chart
 }

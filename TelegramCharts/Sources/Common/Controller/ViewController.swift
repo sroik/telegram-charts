@@ -48,6 +48,7 @@ class ViewController: UIViewController, Themeable {
     func themeUp() {
         setNeedsStatusBarAppearanceUpdate()
         view.backgroundColor = theme.color.background
+        view.subviews.theme(with: theme)
         children.theme(with: theme)
     }
 }

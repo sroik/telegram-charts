@@ -27,6 +27,7 @@ class ChartView: ViewportView {
 
     override func display() {
         super.display()
+        #warning("try to do it from parent")
         adaptRange(animated: true)
     }
 

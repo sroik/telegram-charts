@@ -7,18 +7,27 @@ import UIKit
 class ChartViewController: ViewController {
     typealias Dependencies = SoundServiceContainer
 
-    var columnsListSize: CGSize {
-        return hasColumnsList ? columnsView.size(fitting: CGRect.screen.width) : .zero
+    var layout: ChartViewControllerLayout
+    let chart: Chart
+
+    convenience init(dependencies: Dependencies, chart: Chart) {
+        self.init(
+            dependencies: dependencies,
+            layout: ChartViewControllerLayout(chart: chart),
+            chart: chart
+        )
     }
 
-    var hasColumnsList: Bool {
-        return chart.drawableColumns.count > 1
-    }
-
-    init(dependencies: Dependencies, chart: Chart) {
+    init(
+        dependencies: Dependencies,
+        layout: ChartViewControllerLayout,
+        chart: Chart
+    ) {
         self.chart = chart
+        self.layout = layout
         self.mapView = ChartMapView(chart: chart)
         self.chartView = ChartBrowserView(chart: chart)
+        self.periodView = TimePeriodView()
         self.columnsView = ColumnsListView(
             columns: chart.drawableColumns,
             sounds: dependencies.sounds
@@ -28,53 +37,37 @@ class ChartViewController: ViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         mapView.delegate = self
         columnsView.delegate = self
-        chartView.clipsToBounds = true
         chartView.viewport = mapView.viewport
-
         view.addSubviews(periodView, mapView, chartView, columnsView)
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        invalidateLayout()
 
-        let columnsHeight = columnsListSize.height
-        columnsView.isHidden = !hasColumnsList
-        columnsView.frame = view.bounds.slice(at: columnsListSize.height, from: .maxYEdge)
+        mapView.isHidden = !layout.hasMap
+        columnsView.isHidden = !layout.hasColumns
+        mapView.frame = layout.mapFrame(in: view.bounds)
+        columnsView.frame = layout.columnsFrame(in: view.bounds)
+        chartView.frame = layout.chartFrame(in: view.bounds)
+        periodView.frame = layout.periodFrame(in: view.bounds)
+    }
 
-        let mapInsets = UIEdgeInsets(right: 15, bottom: columnsHeight + 15, left: 15)
-        mapView.frame = mapInsets.inset(view.bounds).slice(at: 40, from: .maxYEdge)
-
-        let periodInsets = UIEdgeInsets(right: 15, left: 15)
-        periodView.frame = periodInsets.inset(view.bounds).slice(at: 32, from: .minYEdge)
-
-        chartView.frame = CGRect(
-            x: 0,
-            y: periodView.frame.maxY,
-            width: view.bounds.width,
-            height: mapView.frame.minY - periodView.frame.maxY - 10
-        )
+    func invalidateLayout() {
+        layout.columnsHeight = columnsView.size(fitting: CGRect.screen.width).height
     }
 
     override func themeUp() {
         super.themeUp()
-        chartView.theme = theme
-        mapView.theme = theme
-        columnsView.theme = theme
         view.backgroundColor = theme.color.placeholder
     }
 
-    private func updateChartViewport() {
-        chartView.viewport = mapView.viewport
-    }
-
-    private let periodView = TimePeriodView()
+    private let periodView: TimePeriodView
     private let columnsView: ColumnsListView
     private let chartView: ChartBrowserView
     private let mapView: ChartMapView
-    private let chart: Chart
 }
 
 extension ChartViewController: ColumnsStateViewDelegate {
@@ -86,6 +79,6 @@ extension ChartViewController: ColumnsStateViewDelegate {
 
 extension ChartViewController: ChartMapViewDelegate {
     func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Viewport) {
-        updateChartViewport()
+        chartView.viewport = mapView.viewport
     }
 }

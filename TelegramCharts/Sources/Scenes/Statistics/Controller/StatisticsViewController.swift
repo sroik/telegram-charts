@@ -36,17 +36,14 @@ final class StatisticsViewController: ViewController {
 
     private func chartViewController(with chart: Chart) -> ChartViewController {
         let controller = ChartViewController(dependencies: dependencies, chart: chart)
+        controller.invalidateLayout()
         controller.view.frame = CGRect(
             x: 0,
             y: 0,
             width: view.bounds.width,
-            height: height(of: controller)
+            height: controller.layout.contentHeight
         )
         return controller
-    }
-
-    private func height(of controller: ChartViewController) -> CGFloat {
-        return 440 + controller.columnsListSize.height
     }
 
     private lazy var tableView = UITableView.statistics()
@@ -84,6 +81,6 @@ extension StatisticsViewController: UITableViewDelegate {
             return 0
         }
 
-        return height(of: controller)
+        return controller.layout.contentHeight
     }
 }
