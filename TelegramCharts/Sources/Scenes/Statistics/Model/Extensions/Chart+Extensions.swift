@@ -33,18 +33,18 @@ extension Chart {
         return drawableColumn.type
     }
 
+    #warning("fix")
     func adjustedRange(of columns: [Column], in viewport: Viewport) -> Range<Int> {
-        return columns
-            .map { $0.range(in: viewport) }
-            .union()
-            .scaled(by: 1.1, from: .center)
-            .clamped(from: 0, to: .max)
+        let ranges = columns.map { $0.range(in: viewport) }
+
+        guard stacked else {
+            return ranges.union()
+        }
+
+        return ranges.union()
     }
 
     func adjustedRange(of column: Column, in viewport: Viewport) -> Range<Int> {
-        return column
-            .range(in: viewport)
-            .scaled(by: 1.1, from: .center)
-            .clamped(from: 0, to: .max)
+        return column.range(in: viewport)
     }
 }

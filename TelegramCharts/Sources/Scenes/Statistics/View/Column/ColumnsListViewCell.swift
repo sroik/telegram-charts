@@ -40,11 +40,11 @@ final class ColumnsListViewCell: Control {
 
         layer.blink(
             scale: 0.9,
-            duration: .fastDuration
+            duration: .defaultDuration
         )
 
         UIView.animate(
-            withDuration: .fastDuration,
+            withDuration: .defaultDuration,
             delay: 0, options: .curveEaseInOut,
             animations: update,
             completion: nil

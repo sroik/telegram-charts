@@ -40,7 +40,7 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
 
     override func adaptViewport() {
         super.adaptViewport()
-        deselectIndex(animated: true)
+        deselect(animated: true)
         chartView.viewport = viewport
         timelineView.viewport = viewport
         gridView.viewport = viewport
@@ -51,7 +51,7 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
         gridView.enable(columns: columns, animated: animated)
     }
 
-    private func deselectIndex(animated: Bool) {
+    func deselect(animated: Bool) {
         select(index: nil, animated: animated)
     }
 

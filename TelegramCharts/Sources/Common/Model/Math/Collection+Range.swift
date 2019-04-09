@@ -10,17 +10,16 @@ extension Array where Element: Arithmetical {
     }
 
     func range(in viewport: Viewport) -> Range<Element> {
+        let elements = self.elements(in: viewport)
+
         guard
-            let from = index(nearestTo: viewport.min, strategy: .floor),
-            let to = index(nearestTo: viewport.max, strategy: .ceil)
+            var min: Element = elements.first,
+            var max: Element = elements.first
         else {
             return .zero
         }
 
-        var min: Element = self[from]
-        var max: Element = self[from]
-
-        self[from ... to].forEach { element in
+        elements.forEach { element in
             min = Swift.min(min, element)
             max = Swift.max(max, element)
         }
@@ -29,8 +28,8 @@ extension Array where Element: Arithmetical {
     }
 }
 
-extension Collection where Index == Int {
-    func elements(in viewport: Viewport) -> [Element] {
+extension Array {
+    func elements(in viewport: Viewport) -> ArraySlice<Element> {
         guard
             let fromIndex = index(nearestTo: viewport.min, strategy: .floor),
             let toIndex = index(nearestTo: viewport.max, strategy: .ceil)
@@ -38,7 +37,7 @@ extension Collection where Index == Int {
             return []
         }
 
-        return Array(self[fromIndex ... toIndex])
+        return self[fromIndex ... toIndex]
     }
 }
 

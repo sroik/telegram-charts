@@ -14,6 +14,7 @@ protocol ChartBrowserDelegate: AnyObject {
 
 protocol ChartBrowser: ChartViewportable {
     var delegate: ChartBrowserDelegate? { get set }
+    func deselect(animated: Bool)
 }
 
 protocol ChartViewType: ChartViewportable {
@@ -23,7 +24,7 @@ protocol ChartViewType: ChartViewportable {
 
 typealias ChartViewportableView = View & ChartViewportable
 typealias ChartBrowserView = UIView & ChartBrowser
-typealias ChartView = UIView & ChartViewType
+typealias ChartView = ChartViewportableView & ChartViewType
 
 extension ChartViewType {
     var offset: CGFloat {

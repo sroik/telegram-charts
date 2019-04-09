@@ -84,6 +84,10 @@ extension ChartViewController: ColumnsListViewDelegate, ChartMapViewDelegate {
         chartView.viewport = mapView.viewport
         periodView.viewport = mapView.viewport
     }
+
+    func mapViewDidLongPress(_ view: ChartMapOverlayView) {
+        chartView.deselect(animated: true)
+    }
 }
 
 extension ChartViewController: ChartBrowserDelegate, TimePeriodViewDelegate {

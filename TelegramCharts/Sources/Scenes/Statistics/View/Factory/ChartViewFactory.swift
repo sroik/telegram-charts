@@ -5,9 +5,11 @@
 import UIKit
 
 struct ChartViewFactory {
-    static func view(with chart: Chart, isMap: Bool = false) -> LineChartView {
+    static func view(with chart: Chart, isMap: Bool = false) -> ChartView {
         switch chart.columnsType {
-        case .line, .area, .bar:
+        case .bar:
+            return BarChartView(chart: chart)
+        case .line, .area:
             return lineChartView(with: chart, isMap: isMap)
         case .timestamps:
             assertionFailureWrapper()

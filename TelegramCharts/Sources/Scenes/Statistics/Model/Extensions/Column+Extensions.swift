@@ -42,6 +42,16 @@ extension Column {
     }
 
     func range(in viewport: Viewport) -> Range<Int> {
-        return values.range(in: viewport)
+        switch type {
+        case .area, .bar:
+            return Range(
+                min: 0,
+                max: values.elements(in: viewport).max() ?? 0
+            )
+        case .line:
+            return values.range(in: viewport)
+        case .timestamps:
+            return .zero
+        }
     }
 }

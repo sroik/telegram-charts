@@ -13,3 +13,12 @@ struct ChartGridViewFactory {
         return RangeChartGridView(chart: chart)
     }
 }
+
+extension GridLayout {
+    static let values = GridLayout(
+        itemSide: .fixed(20),
+        itemsNumber: 6,
+        insets: .zero,
+        direction: .vertical
+    )
+}

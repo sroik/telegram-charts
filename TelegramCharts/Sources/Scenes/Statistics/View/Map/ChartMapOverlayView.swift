@@ -6,6 +6,7 @@ import UIKit
 
 protocol ChartMapOverlayViewDelegate: AnyObject {
     func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Viewport)
+    func mapViewDidLongPress(_ view: ChartMapOverlayView)
 }
 
 final class ChartMapOverlayView: View {
@@ -46,19 +47,24 @@ final class ChartMapOverlayView: View {
     }
 
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        return knob(at: point) != .none
+        return knob(at: point) != .none || bounds.contains(point)
     }
 
     private func setup() {
+        leftSpaceView.isUserInteractionEnabled = false
+        rightSpaceView.isUserInteractionEnabled = false
+
         workspace.addSubviews(leftSpaceView, rightSpaceView)
         workspace.layer.cornerRadius = 6
         workspace.layer.masksToBounds = true
-
         addSubviews(workspace, viewportView)
-        let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(onPan))
-        panRecognizer.delaysTouchesBegan = false
-        panRecognizer.cancelsTouchesInView = false
-        addGestureRecognizer(panRecognizer)
+
+        [panRecognizer, pressRecognizer].forEach { recognizer in
+            recognizer.cancelsTouchesInView = false
+            recognizer.delaysTouchesEnded = false
+            recognizer.delegate = self
+            addGestureRecognizer(recognizer)
+        }
     }
 
     private func layoutViewport() {
@@ -72,15 +78,13 @@ final class ChartMapOverlayView: View {
         )
 
         leftSpaceView.frame = CGRect(
-            x: 0,
-            y: 0,
+            x: 0, y: 0,
             width: viewportView.frame.minX + viewportView.knobWidth,
             height: bounds.height
         )
 
         rightSpaceView.frame = CGRect(
-            x: viewportView.frame.maxX - viewportView.knobWidth,
-            y: 0,
+            x: viewportView.frame.maxX - viewportView.knobWidth, y: 0,
             width: bounds.width - viewportView.frame.maxX + viewportView.knobWidth,
             height: bounds.height
         )
@@ -128,6 +132,10 @@ final class ChartMapOverlayView: View {
         recognizer.setTranslation(.zero, in: self)
     }
 
+    @objc private func onPress(_ recognizer: UILongPressGestureRecognizer) {
+        delegate?.mapViewDidLongPress(self)
+    }
+
     private func knob(at point: CGPoint) -> ChartMapViewportView.Knob {
         let viewportPoint = convert(point, to: viewportView)
         return viewportView.knob(at: viewportPoint)
@@ -150,8 +158,35 @@ final class ChartMapOverlayView: View {
         viewportView.selectedKnob = .none
     }
 
+    private lazy var panRecognizer = UIPanGestureRecognizer(
+        target: self,
+        action: #selector(onPan)
+    )
+
+    private lazy var pressRecognizer = UILongPressGestureRecognizer(
+        target: self,
+        action: #selector(onPress)
+    )
+
     private let workspace = UIView()
     private let viewportView = ChartMapViewportView(frame: .screen)
     private let leftSpaceView = UIView()
     private let rightSpaceView = UIView()
+}
+
+extension ChartMapOverlayView: UIGestureRecognizerDelegate {
+    func gestureRecognizer(
+        _ recognizer: UIGestureRecognizer,
+        shouldRecognizeSimultaneouslyWith other: UIGestureRecognizer
+    ) -> Bool {
+        if recognizer == panRecognizer, other == pressRecognizer {
+            return true
+        }
+
+        if recognizer == pressRecognizer, other == panRecognizer {
+            return true
+        }
+
+        return false
+    }
 }
