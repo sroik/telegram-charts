@@ -29,7 +29,7 @@ class ChartBrowserView: View, Viewportable {
 
     override func themeUp() {
         super.themeUp()
-        selectedLine.backgroundColor = theme.color.gridLine
+        pointLine.backgroundColor = theme.color.gridLine
     }
 
     func set(enabledColumns: Set<Column>, animated: Bool = false) {
@@ -41,59 +41,43 @@ class ChartBrowserView: View, Viewportable {
         chartView.viewport = viewport
         timelineView.viewport = viewport
         gridView.viewport = viewport
-        deselectIndex()
+        deselectIndex(animated: true)
     }
 
-    private func deselectIndex() {
-        select(index: nil)
+    private func deselectIndex(animated: Bool) {
+        select(index: nil, animated: animated)
     }
 
-    private func selectIndex(at point: CGPoint) {
+    private func selectIndex(at point: CGPoint, animated: Bool) {
         let chartPoint = convert(point, to: chartView.contentView)
         let position = chartPoint.x / chartView.contentSize.width
-        select(index: chart.timestamps.index(nearestTo: position, strategy: .ceil))
+        let index = chart.timestamps.index(nearestTo: position, strategy: .ceil)
+        select(index: index, animated: animated)
     }
 
-    private func select(index: Int?) {
+    private func select(index: Int?, animated: Bool) {
         selectedIndex = index
         chartView.select(index: index)
-        displayValue(at: index)
-    }
 
-    private func displayValue(at index: Int?) {
-        guard let index = index else {
-            selectedLine.set(alpha: 0)
-            cardView.set(alpha: 0)
+        guard let index = selectedIndex else {
+            pointLine.set(alpha: 0, animated: animated)
+            cardView.set(alpha: 0, animated: animated)
             return
         }
 
-        let contentSize = chartView.contentSize
-        let stride = contentSize.width / CGFloat(chart.timestamps.count)
-        let centerX = (CGFloat(index) + 0.5) * stride
+        pointLine.set(alpha: 1, animated: animated)
+        pointLine.set(frame: pointLineFrame, animated: animated)
 
-        let lineFrame = CGRect(midX: centerX, width: .pixel, height: contentSize.height)
-        selectedLine.set(alpha: 1)
-        selectedLine.frame = convert(lineFrame, from: chartView.contentView)
-
-        cardView.set(alpha: 1)
+        cardView.set(alpha: 1, animated: animated)
         cardView.index = index
-
-        #warning("choose the correct frame")
-        let cardFrame = CGRect(midX: centerX, size: cardView.intrinsicContentSize)
-        cardView.frame = convert(cardFrame, from: chartView.contentView)
-        limitValueCardFrame()
-    }
-
-    private func limitValueCardFrame() {
-        let limits = bounds.inset(by: UIEdgeInsets(left: 35)).inset(by: insets)
-        cardView.frame = cardView.frame.limited(with: limits)
+        cardView.shift(to: cardFrame, animated: animated)
     }
 
     private func setup() {
         timelineView.clipsToBounds = true
         workspace.clipsToBounds = true
-        workspace.addSubviews(selectedLine, chartView, gridView, cardView)
-        addSubviews(workspace, timelineView)
+        workspace.addSubviews(chartView, gridView, cardView)
+        addSubviews(pointLine, workspace, timelineView)
         setupGestures()
     }
 
@@ -109,16 +93,46 @@ class ChartBrowserView: View, Viewportable {
 
     @objc private func onTap(_ recognizer: UITapGestureRecognizer) {
         let point = recognizer.location(in: self)
-        let isInCard = cardView.frame.contains(point) && cardView.isVisible
-        isInCard ? deselectIndex() : selectIndex(at: point)
+        selectIndex(at: point, animated: false)
     }
 
     @objc private func onPan(_ recognizer: UILongPressGestureRecognizer) {
-        selectIndex(at: recognizer.location(in: self))
+        let point = recognizer.location(in: self)
+        selectIndex(at: point, animated: cardView.isVisible)
+    }
+
+    private var cardFrame: CGRect {
+        let lineFrame = pointLineFrame
+        let limits = bounds.inset(by: insets).inset(left: 35)
+        let leftSpace = lineFrame.minX - limits.minX
+        let rightSpace = limits.maxX - lineFrame.maxX
+        if leftSpace > rightSpace {
+            return CGRect(
+                maxX: lineFrame.minX - 10,
+                size: cardView.size
+            ).limited(with: limits)
+        } else {
+            return CGRect(
+                x: lineFrame.maxX + 10,
+                size: cardView.size
+            ).limited(with: limits)
+        }
+    }
+
+    private var pointLineFrame: CGRect {
+        guard let index = selectedIndex else {
+            return .zero
+        }
+
+        let chartSize = chartView.contentSize
+        let stride = chartSize.width / CGFloat(chart.timestamps.count)
+        let center = (CGFloat(index) + 0.5) * stride
+        let frame = CGRect(midX: center, width: .pixel, height: chartSize.height)
+        return convert(frame, from: chartView.contentView)
     }
 
     private var selectedIndex: Int?
-    private let selectedLine = UIView()
+    private let pointLine = UIView()
 
     private lazy var workspace = View()
     private lazy var gridView = ChartGridView(chart: chart)

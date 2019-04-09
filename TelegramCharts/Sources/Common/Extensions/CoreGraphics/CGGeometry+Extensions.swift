@@ -48,16 +48,20 @@ extension CGRect {
         return sqrt(width * width + height * height)
     }
 
-    init(midX: CGFloat, y: CGFloat = 0, size: CGSize) {
-        self.init(midX: midX, y: y, width: size.width, height: size.height)
+    init(x: CGFloat, y: CGFloat = 0, size: CGSize) {
+        self.init(x: x, y: y, width: size.width, height: size.height)
+    }
+
+    init(maxX: CGFloat, y: CGFloat = 0, size: CGSize) {
+        self.init(maxX: maxX, y: y, width: size.width, height: size.height)
+    }
+
+    init(maxX: CGFloat, y: CGFloat = 0, width: CGFloat = 0, height: CGFloat = 0) {
+        self.init(x: maxX - width, y: y, width: width, height: height)
     }
 
     init(midX: CGFloat, y: CGFloat = 0, width: CGFloat = 0, height: CGFloat = 0) {
         self.init(x: midX - width / 2, y: y, width: width, height: height)
-    }
-
-    init(x: CGFloat = 0, midY: CGFloat, width: CGFloat = 0, height: CGFloat = 0) {
-        self.init(x: x, y: midY - height / 2, width: width, height: height)
     }
 
     func distance(to rect: CGRect) -> CGFloat {
@@ -103,6 +107,20 @@ extension CGRect {
 
     func remainder(at distance: CGFloat, from edge: CGRectEdge) -> CGRect {
         return divided(atDistance: distance, from: edge).remainder
+    }
+
+    func inset(
+        top: CGFloat = 0,
+        left: CGFloat = 0,
+        bottom: CGFloat = 0,
+        right: CGFloat = 0
+    ) -> CGRect {
+        return UIEdgeInsets(
+            top: top,
+            left: left,
+            bottom: bottom,
+            right: right
+        ).inset(self)
     }
 }
 

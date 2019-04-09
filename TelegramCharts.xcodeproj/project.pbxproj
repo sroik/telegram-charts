@@ -23,6 +23,7 @@
 		AC143B522237F09500FEB9CD /* ChartMapOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B512237F09500FEB9CD /* ChartMapOverlayView.swift */; };
 		AC143B572237F52D00FEB9CD /* ChartMapViewportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */; };
 		AC16EA95225C705F009471D7 /* ChartViewControllerLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EA94225C705F009471D7 /* ChartViewControllerLayout.swift */; };
+		AC16EA97225C813A009471D7 /* Sizeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EA96225C813A009471D7 /* Sizeable.swift */; };
 		AC2542A42257961F00EE2021 /* Bool+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2542A32257961F00EE2021 /* Bool+Extensions.swift */; };
 		AC2542A62257DA4E00EE2021 /* CAAnimation+Extenisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2542A52257DA4E00EE2021 /* CAAnimation+Extenisions.swift */; };
 		AC2542A82257F03400EE2021 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2542A72257F03400EE2021 /* String+Extensions.swift */; };
@@ -118,6 +119,7 @@
 		AC143B512237F09500FEB9CD /* ChartMapOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMapOverlayView.swift; sourceTree = "<group>"; };
 		AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMapViewportView.swift; sourceTree = "<group>"; };
 		AC16EA94225C705F009471D7 /* ChartViewControllerLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewControllerLayout.swift; sourceTree = "<group>"; };
+		AC16EA96225C813A009471D7 /* Sizeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizeable.swift; sourceTree = "<group>"; };
 		AC2542A32257961F00EE2021 /* Bool+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extensions.swift"; sourceTree = "<group>"; };
 		AC2542A52257DA4E00EE2021 /* CAAnimation+Extenisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAAnimation+Extenisions.swift"; sourceTree = "<group>"; };
 		AC2542A72257F03400EE2021 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -557,6 +559,7 @@
 			children = (
 				AC7C1F29225A846300A095D6 /* ShelfLayout.swift */,
 				ACAF2AFF223D89C300533F37 /* GridLayout.swift */,
+				AC16EA96225C813A009471D7 /* Sizeable.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -775,6 +778,7 @@
 				ACAF2B02223E30CD00533F37 /* ChartCardView.swift in Sources */,
 				AC32DCAA223C3F9100873B04 /* Collection+Range.swift in Sources */,
 				AC2542A62257DA4E00EE2021 /* CAAnimation+Extenisions.swift in Sources */,
+				AC16EA97225C813A009471D7 /* Sizeable.swift in Sources */,
 				AC7C1F2A225A846300A095D6 /* ShelfLayout.swift in Sources */,
 				AC2542AC225812F100EE2021 /* CAShapeLayer+Extensions.swift in Sources */,
 				AC143B302236F1D700FEB9CD /* Label.swift in Sources */,

@@ -30,6 +30,33 @@ extension UIView {
             completion: { _ in completion?() }
         )
     }
+
+    func shift(
+        to frame: CGRect,
+        animated: Bool = true,
+        duration: TimeInterval = .fastDuration
+    ) {
+        guard frame.intersects(self.frame) else {
+            self.frame = frame
+            return
+        }
+
+        UIView.animate(
+            withDuration: animated ? duration : 0,
+            animations: { self.frame = frame }
+        )
+    }
+
+    func set(
+        frame: CGRect,
+        animated: Bool = true,
+        duration: TimeInterval = .fastDuration
+    ) {
+        UIView.animate(
+            withDuration: animated ? duration : 0,
+            animations: { self.frame = frame }
+        )
+    }
 }
 
 extension UITableView {

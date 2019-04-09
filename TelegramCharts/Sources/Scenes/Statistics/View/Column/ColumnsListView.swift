@@ -73,9 +73,3 @@ final class ColumnsListView: View {
     private let sounds: SoundService
     private let columns: [Column]
 }
-
-extension ColumnsListViewCell: Sizeable {
-    var size: CGSize {
-        return intrinsicContentSize
-    }
-}

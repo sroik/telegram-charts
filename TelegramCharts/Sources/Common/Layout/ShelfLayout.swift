@@ -11,10 +11,6 @@ struct ShelfLayout {
     let insets: UIEdgeInsets
 }
 
-protocol Sizeable {
-    var size: CGSize { get }
-}
-
 extension ShelfLayout {
     static let `default` = ShelfLayout(
         verticalSpacing: 10,
