@@ -4,7 +4,7 @@
 
 import UIKit
 
-final class Label: UILabel {}
+class Label: UILabel {}
 
 extension Label {
     static func details(

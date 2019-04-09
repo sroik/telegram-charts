@@ -6,7 +6,7 @@ import UIKit
 
 class CardView: Control {
     let insets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-    let itemHeight: CGFloat = 20
+    let itemHeight: CGFloat = 18
     let stack: UIStackView
 
     var items: [View] {

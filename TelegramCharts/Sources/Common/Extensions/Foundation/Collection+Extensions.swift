@@ -47,11 +47,3 @@ extension Collection where Index == Int {
         return self[safe: index]
     }
 }
-
-extension Dictionary {
-    func mapKeys<K: Hashable>(using block: (Key) -> K) -> [K: Value] {
-        return [K: Value](uniqueKeysWithValues: map { key, value in
-            (block(key), value)
-        })
-    }
-}

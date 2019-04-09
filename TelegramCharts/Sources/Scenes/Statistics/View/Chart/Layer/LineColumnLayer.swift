@@ -72,7 +72,7 @@ final class LineColumnLayer: Layer {
         }
 
         let point = column.point(at: index, in: pointLayer.bounds, range: range)
-        let path = CGPath.circle(center: point, radius: lineWidth * 1.75)
+        let path = CGPath.circle(center: point, radius: lineWidth * 1.5)
         pointLayer.update(path: path, animated: animated)
     }
 
