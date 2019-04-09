@@ -36,35 +36,30 @@ class RangeChartGridView: ViewportView, ChartViewportable {
 
     func adaptRange(animated: Bool) {
         let range = chart.adjustedRange(of: enabledColumns, in: viewport)
-
-        guard self.range != range else {
-            return
-        }
-
-        let rangeScale = CGFloat(self.range.mid) / CGFloat(range.mid)
+        let rangeMidScale = CGFloat(self.range.mid) / CGFloat(range.mid)
         self.range = range
 
         cells.enumerated().forEach { index, cell in
             animator.animate(
                 view: cell,
                 using: { self.update(cell: $0, at: index) },
-                scale: rangeScale,
+                scale: rangeMidScale,
                 animated: animated
             )
         }
     }
 
-    func value(at index: Int, in range: Range<Int>) -> Int {
-        let maxY = layout.itemFrame(at: index, in: bounds).maxY
-        let position = 1 - (maxY / bounds.height)
-        return range.value(at: position)
-    }
-
-    private func update(cell: ChartGridViewCell, at index: Index) {
+    func update(cell: ChartGridViewCell, at index: Index) {
         cell.state.leftValue = value(at: index, in: range)
     }
 
-    private func layoutCells() {
+    func value(at index: Int, in range: Range<Int>?) -> Int? {
+        let maxY = layout.itemFrame(at: index, in: bounds).maxY
+        let position = 1 - (maxY / bounds.height)
+        return range?.value(at: position)
+    }
+
+    func layoutCells() {
         cells.enumerated().forEach { index, cell in
             cell.frame = layout.itemFrame(at: index, in: bounds)
         }
@@ -81,7 +76,7 @@ class RangeChartGridView: ViewportView, ChartViewportable {
     }
 
     private(set) var enabledColumns: [Column] = []
-    private var range: Range<Int> = .zero
+    private(set) var range: Range<Int> = .zero
 }
 
 extension ChartGridViewCell {

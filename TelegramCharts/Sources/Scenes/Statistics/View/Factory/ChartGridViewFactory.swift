@@ -7,7 +7,7 @@ import UIKit
 struct ChartGridViewFactory {
     static func view(with chart: Chart) -> ChartViewportableView {
         if chart.yScaled {
-            return RangeChartGridView(chart: chart)
+            return ComparingChartGridView(chart: chart)
         }
 
         return RangeChartGridView(chart: chart)

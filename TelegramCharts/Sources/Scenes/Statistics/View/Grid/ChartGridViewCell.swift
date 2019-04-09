@@ -48,12 +48,13 @@ final class ChartGridViewCell: View {
 
     override func themeUp() {
         super.themeUp()
-        leftLabel.textColor = state.leftColor ?? theme.color.details
-        rightLabel.textColor = state.rightColor ?? theme.color.details
         line.backgroundColor = theme.color.gridLine
+        updateState()
     }
 
     func updateState() {
+        leftLabel.textColor = state.leftColor ?? theme.color.details
+        rightLabel.textColor = state.rightColor ?? theme.color.details
         leftLabel.text = state.leftValue.flatMap { String(columnValue: $0) }
         rightLabel.text = state.rightValue.flatMap { String(columnValue: $0) }
         leftLabel.isHidden = state.leftValue == nil
@@ -62,7 +63,7 @@ final class ChartGridViewCell: View {
     }
 
     private func setup() {
-        addSubviews(line, leftLabel)
+        addSubviews(line, leftLabel, rightLabel)
         updateState()
     }
 

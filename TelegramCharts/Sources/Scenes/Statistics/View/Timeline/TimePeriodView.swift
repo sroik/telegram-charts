@@ -4,9 +4,4 @@
 
 import UIKit
 
-final class TimePeriodView: View {
-    override func layoutSubviewsOnBoundsChange() {
-        super.layoutSubviewsOnBoundsChange()
-        backgroundColor = UIColor.yellow.withAlphaComponent(0.25)
-    }
-}
+final class TimePeriodView: View {}

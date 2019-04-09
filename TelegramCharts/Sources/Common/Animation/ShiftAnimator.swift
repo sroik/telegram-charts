@@ -13,10 +13,10 @@ typealias CloneableView = Cloneable & UIView
 final class ShiftAnimator {
     typealias AnimationBlock<T> = (T) -> Void
 
-    func update<View: CloneableView>(
-        _ view: View,
+    func animate<View: CloneableView>(
+        view: View,
         using block: @escaping AnimationBlock<View>,
-        shift: CGFloat,
+        shift: CGFloat = 0,
         animated: Bool
     ) {
         guard animated, let parent = view.superview, !view.bounds.isEmpty else {
@@ -61,8 +61,8 @@ final class ShiftAnimator {
         scale: CGFloat,
         animated: Bool
     ) {
-        update(
-            view,
+        animate(
+            view: view,
             using: block,
             shift: shift(for: scale),
             animated: animated

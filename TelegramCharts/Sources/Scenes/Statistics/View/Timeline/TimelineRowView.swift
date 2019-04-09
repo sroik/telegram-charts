@@ -35,10 +35,12 @@ final class TimelineRowView: View {
     }
 
     private func buildLabel(for timestamp: Timestamp) -> Label {
-        return Label.details(
+        return Label.primary(
             text: Date(timestamp: timestamp).string(format: "d MMM"),
             color: theme.color.details,
-            alignment: .right
+            font: UIFont.light(size: 11),
+            alignment: .right,
+            fitsWidth: false
         )
     }
 
