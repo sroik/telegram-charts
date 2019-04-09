@@ -29,11 +29,9 @@ class LineChartView: ViewportView, ChartViewType {
         adaptRange(animated: false)
     }
 
-    override func adaptViewport() {
-        super.adaptViewport()
-        layers.forEach { layer in
-            layer.frame = contentView.bounds
-        }
+    override func adaptViewportSize() {
+        super.adaptViewportSize()
+        layoutLayers()
     }
 
     override func display() {
@@ -71,6 +69,12 @@ class LineChartView: ViewportView, ChartViewType {
 
         layers.forEach { layer in
             layer.set(range: range, animated: animated)
+        }
+    }
+
+    func layoutLayers() {
+        layers.forEach { layer in
+            layer.frame = contentView.bounds
         }
     }
 

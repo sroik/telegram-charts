@@ -38,6 +38,14 @@ extension CGPoint {
     }
 }
 
+extension CGSize {
+    func isClose(to size: CGSize, threshold: CGFloat = .layoutEpsilon) -> Bool {
+        let widthDelta = abs(width - size.width)
+        let heightDelta = abs(height - size.height)
+        return (widthDelta + heightDelta) < threshold
+    }
+}
+
 extension CGRect {
     static var screen: CGRect {
         return UIScreen.main.bounds

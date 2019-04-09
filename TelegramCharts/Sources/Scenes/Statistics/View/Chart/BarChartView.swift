@@ -6,14 +6,18 @@ import UIKit
 
 class BarChartView: ViewportView, ChartViewType {
     let chart: Chart
+    let layout: GridLayout
+    let layers: [BarColumnLayer]
 
     var selectedIndex: Int? {
         didSet {}
     }
 
-    init(chart: Chart, viewport: Viewport = .zeroToOne) {
+    init(chart: Chart) {
         self.chart = chart
-        super.init(viewport: viewport)
+        self.layers = BarColumnLayer.layers(with: chart)
+        self.layout = GridLayout(itemsNumber: layers.count)
+        super.init()
         setup()
     }
 
@@ -22,9 +26,9 @@ class BarChartView: ViewportView, ChartViewType {
         adaptRange(animated: false)
     }
 
-    override func adaptViewport() {
-        super.adaptViewport()
-        /* do smth */
+    override func adaptViewportSize() {
+        super.adaptViewportSize()
+        layoutLayers()
     }
 
     override func display() {
@@ -39,13 +43,42 @@ class BarChartView: ViewportView, ChartViewType {
 
     func adaptRange(animated: Bool) {
         let range = chart.adjustedRange(of: enabledColumns, in: viewport)
-        /*  do smth */
+        layers.forEach { layer in
+            layer.set(range: range, animated: animated)
+        }
+    }
+
+    func layoutLayers() {
+        layers.enumerated().forEach { index, layer in
+            layer.set(frame: layout.itemFrame(at: index, in: contentView.bounds))
+        }
     }
 
     private func setup() {
-        contentView.backgroundColor = .blue
+        layers.forEach(contentView.layer.addSublayer)
         enable(columns: chart.drawableColumns, animated: false)
     }
 
     private(set) var enabledColumns: [Column] = []
+}
+
+private extension BarColumnLayer {
+    static func layers(with chart: Chart) -> [BarColumnLayer] {
+        return chart.timestamps.indices
+            .lazy
+            .map { BarColumnValue.values(of: chart, at: $0) }
+            .map { BarColumnLayer(values: $0) }
+    }
+}
+
+private extension BarColumnValue {
+    static func values(of chart: Chart, at index: Index) -> [BarColumnValue] {
+        return chart.columns.map { column in
+            BarColumnValue(
+                id: column.id,
+                value: column.values[safe: index] ?? 0,
+                color: column.cgColor
+            )
+        }
+    }
 }

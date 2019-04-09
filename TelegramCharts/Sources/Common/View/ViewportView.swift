@@ -46,11 +46,22 @@ class ViewportView: View, Viewportable {
     }
 
     func adaptViewport() {
-        if autolayouts {
-            contentView.frame = contentFrame
+        guard autolayouts else {
+            displayLink.needsToDisplay = true
+            return
         }
 
+        let isSizeChanged = !contentSize.isClose(to: contentView.bounds.size)
+        contentView.frame = contentFrame
         displayLink.needsToDisplay = true
+
+        if isSizeChanged {
+            adaptViewportSize()
+        }
+    }
+
+    func adaptViewportSize() {
+        /* meant to be inherited */
     }
 
     func display() {

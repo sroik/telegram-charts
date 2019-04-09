@@ -37,8 +37,8 @@ final class LineColumnLayer: Layer {
 
     override func layoutSublayersOnBoundsChange() {
         super.layoutSublayersOnBoundsChange()
-        shapeLayer.frame = contentFrame
-        pointLayer.frame = contentFrame
+        shapeLayer.set(frame: contentFrame)
+        pointLayer.set(frame: contentFrame)
         redraw(animated: false)
     }
 

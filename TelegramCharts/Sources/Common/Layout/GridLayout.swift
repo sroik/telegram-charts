@@ -9,6 +9,18 @@ struct GridLayout {
     let itemsNumber: Int
     let insets: UIEdgeInsets
     let direction: Direction
+
+    init(
+        itemSide: ItemSide = .flexible,
+        itemsNumber: Int,
+        insets: UIEdgeInsets = .zero,
+        direction: Direction = .horizontal
+    ) {
+        self.itemSide = itemSide
+        self.itemsNumber = itemsNumber
+        self.insets = insets
+        self.direction = direction
+    }
 }
 
 extension GridLayout {

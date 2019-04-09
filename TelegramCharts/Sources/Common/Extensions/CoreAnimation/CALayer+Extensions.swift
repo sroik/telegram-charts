@@ -7,12 +7,25 @@ import UIKit
 extension CALayer {
     typealias KeyPath = String
 
+    static func performWithoutAnimation(_ job: () -> Void) {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        job()
+        CATransaction.commit()
+    }
+
     func presentedValue(for keyPath: KeyPath) -> Any? {
         return presentation()?.value(forKeyPath: keyPath) ?? value(forKeyPath: keyPath)
     }
 
     func basicAnimation(for keyPath: KeyPath) -> CABasicAnimation? {
         return animation(forKey: keyPath) as? CABasicAnimation
+    }
+
+    func set(frame: CGRect) {
+        CALayer.performWithoutAnimation {
+            self.frame = frame
+        }
     }
 
     func set(

@@ -16,6 +16,7 @@ final class BarColumnLayer: Layer {
     init(values: [BarColumnValue]) {
         self.values = values
         super.init()
+        setup()
     }
 
     override init(layer: Any) {
@@ -27,10 +28,14 @@ final class BarColumnLayer: Layer {
         self.init(values: [])
     }
 
+    override func layoutSublayersOnBoundsChange() {
+        super.layoutSublayersOnBoundsChange()
+    }
+
     func set(range: Range<Int>, animated: Bool) {}
 
     private func setup() {
-        borderWidth = 1
+        backgroundColor = UIColor.green.cgColor
     }
 }
 
