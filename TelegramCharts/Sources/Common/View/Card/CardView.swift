@@ -38,7 +38,7 @@ class CardView: Control {
 
     override func themeUp() {
         super.themeUp()
-        backgroundColor = theme.color.popup
+        backgroundColor = theme.color.card
         items.forEach { $0.theme = theme }
     }
 

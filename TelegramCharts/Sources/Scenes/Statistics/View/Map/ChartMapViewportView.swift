@@ -86,7 +86,7 @@ final class ChartMapViewportView: View {
         }
 
         [leftKnob, rightKnob, topLine, bottomLine].forEach { view in
-            view.backgroundColor = theme.knob
+            view.backgroundColor = theme.color.mapKnob
         }
     }
 
@@ -126,13 +126,6 @@ private extension Theme {
         switch self {
         case .day: return .white
         case .night: return .clear
-        }
-    }
-
-    var knob: UIColor {
-        switch self {
-        case .day: return UIColor(red: 192 / 255, green: 209 / 255, blue: 225 / 255, alpha: 1)
-        case .night: return UIColor(red: 86 / 255, green: 98 / 255, blue: 109 / 255, alpha: 1)
         }
     }
 }

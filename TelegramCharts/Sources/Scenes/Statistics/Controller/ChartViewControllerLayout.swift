@@ -23,7 +23,7 @@ extension ChartViewControllerLayout {
             hasColumns: chart.drawableColumns.count > 1,
             columnsHeight: 0,
             periodHeight: 32,
-            chartHeight: 408
+            chartHeight: 355
         )
     }
 

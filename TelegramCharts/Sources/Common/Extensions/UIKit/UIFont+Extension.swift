@@ -5,8 +5,8 @@
 import UIKit
 
 extension UIFont {
-    static func bold(size: CGFloat) -> UIFont {
-        return UIFont.systemFont(ofSize: size, weight: .bold)
+    static func semibold(size: CGFloat) -> UIFont {
+        return UIFont.systemFont(ofSize: size, weight: .semibold)
     }
 
     static func light(size: CGFloat) -> UIFont {

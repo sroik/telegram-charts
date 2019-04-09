@@ -41,7 +41,7 @@ final class ChartMapOverlayView: View {
         super.themeUp()
         layoutViewport()
         [leftSpaceView, rightSpaceView].forEach { view in
-            view.backgroundColor = theme.color.background.withAlphaComponent(0.5)
+            view.backgroundColor = theme.color.mapDim
         }
     }
 

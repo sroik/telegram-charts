@@ -17,6 +17,10 @@ struct ThemeColor {
     let text: UIColor
     let details: UIColor
     let line: UIColor
-    let popup: UIColor
-    let popupText: UIColor
+    let gridLine: UIColor
+    let card: UIColor
+    let cardText: UIColor
+    let cardIcon: UIColor
+    let mapKnob: UIColor
+    let mapDim: UIColor
 }

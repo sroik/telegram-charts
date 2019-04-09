@@ -4,12 +4,12 @@
 
 import UIKit
 
-protocol ColumnsStateViewDelegate: AnyObject {
+protocol ColumnsListViewDelegate: AnyObject {
     func columnsView(_ view: ColumnsListView, didEnable columns: [Column])
 }
 
 final class ColumnsListView: View {
-    weak var delegate: ColumnsStateViewDelegate?
+    weak var delegate: ColumnsListViewDelegate?
 
     var enabledColumns: [Column] {
         return cells.filter { $0.isSelected }.map { $0.column }

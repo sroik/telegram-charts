@@ -31,7 +31,7 @@ class ChartViewController: ViewController {
         self.layout = layout
         self.chartView = chartView
         self.mapView = mapView
-        self.periodView = TimePeriodView()
+        self.periodView = TimePeriodView(chart: chart)
         self.columnsView = ColumnsListView(chart: chart, sounds: dependencies.sounds)
         super.init()
     }
@@ -41,6 +41,7 @@ class ChartViewController: ViewController {
         mapView.delegate = self
         columnsView.delegate = self
         chartView.delegate = self
+        periodView.delegate = self
         chartView.viewport = mapView.viewport
         view.addSubviews(periodView, mapView, chartView, columnsView)
     }
@@ -72,21 +73,23 @@ class ChartViewController: ViewController {
     private let mapView: ChartMapView
 }
 
-extension ChartViewController: ColumnsStateViewDelegate {
+extension ChartViewController: ColumnsListViewDelegate, ChartMapViewDelegate {
     func columnsView(_ view: ColumnsListView, didEnable columns: [Column]) {
         mapView.enable(columns: columns, animated: true)
         chartView.enable(columns: columns, animated: true)
     }
-}
 
-extension ChartViewController: ChartMapViewDelegate {
     func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Viewport) {
         chartView.viewport = mapView.viewport
     }
 }
 
-extension ChartViewController: ChartBrowserDelegate {
+extension ChartViewController: ChartBrowserDelegate, TimePeriodViewDelegate {
     func chartBrowser(_ view: ChartBrowserView, wantsToExpand index: Int) {
         print("EXPAND")
+    }
+
+    func periodViewWantsToFold(_ view: TimePeriodView) {
+        print("FOLD")
     }
 }

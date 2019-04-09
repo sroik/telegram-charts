@@ -41,7 +41,7 @@ final class ChartCardViewCell: View {
 
     var valueColor: UIColor? {
         didSet {
-            valueLabel.textColor = valueColor ?? theme.color.popupText
+            valueLabel.textColor = valueColor ?? theme.color.cardText
         }
     }
 
@@ -68,8 +68,8 @@ final class ChartCardViewCell: View {
         self.summary = summary
         self.value = value
         self.valueColor = valueColor
-        self.valueLabel = Label.primary(text: value, font: UIFont.bold(size: 12))
-        self.summaryLabel = Label.primary(text: summary, font: UIFont.bold(size: 12))
+        self.valueLabel = Label.primary(text: value, font: UIFont.semibold(size: 12))
+        self.summaryLabel = Label.primary(text: summary, font: UIFont.semibold(size: 12))
         self.titleLabel = Label.primary(text: title, font: UIFont.regular(size: 12))
         self.iconView = UIImageView(image: icon)
         super.init(frame: .zero)
@@ -78,10 +78,10 @@ final class ChartCardViewCell: View {
 
     override func themeUp() {
         super.themeUp()
-        summaryLabel.textColor = theme.color.popupText
-        titleLabel.textColor = theme.color.popupText
-        iconView.tintColor = theme.color.popupText.withAlphaComponent(0.5)
-        valueLabel.textColor = valueColor ?? theme.color.popupText
+        summaryLabel.textColor = theme.color.cardText
+        titleLabel.textColor = theme.color.cardText
+        iconView.tintColor = theme.color.cardIcon
+        valueLabel.textColor = valueColor ?? theme.color.cardText
     }
 
     override func layoutSubviews() {

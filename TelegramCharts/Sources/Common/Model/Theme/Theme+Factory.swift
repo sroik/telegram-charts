@@ -35,22 +35,20 @@ extension Theme {
 }
 
 extension ThemeColor {
-    var gridLine: UIColor {
-        return details.withAlphaComponent(0.2)
-    }
-}
-
-extension ThemeColor {
     static let day = ThemeColor(
         background: UIColor(red: 239 / 255, green: 239 / 255, blue: 244 / 255, alpha: 1),
         placeholder: UIColor(red: 254 / 255, green: 254 / 255, blue: 254 / 255, alpha: 1),
         navigation: UIColor(red: 247 / 255, green: 247 / 255, blue: 247 / 255, alpha: 1),
-        tint: UIColor(red: 1 / 255, green: 126 / 255, blue: 229 / 255, alpha: 1),
+        tint: UIColor(red: 16 / 255, green: 139 / 255, blue: 227 / 255, alpha: 1),
         text: .black,
         details: UIColor(red: 109 / 255, green: 109 / 255, blue: 114 / 255, alpha: 1),
         line: UIColor(red: 207 / 255, green: 209 / 255, blue: 210 / 255, alpha: 1),
-        popup: UIColor(red: 243 / 255, green: 243 / 255, blue: 248 / 255, alpha: 1),
-        popupText: UIColor(red: 109 / 255, green: 109 / 255, blue: 114 / 255, alpha: 1)
+        gridLine: UIColor(red: 24 / 255, green: 45 / 255, blue: 59 / 255, alpha: 0.2),
+        card: UIColor(red: 244 / 255, green: 244 / 255, blue: 247 / 255, alpha: 1),
+        cardText: UIColor(red: 109 / 255, green: 109 / 255, blue: 114 / 255, alpha: 1),
+        cardIcon: UIColor(red: 89 / 255, green: 96 / 255, blue: 109 / 255, alpha: 0.3),
+        mapKnob: UIColor(red: 192 / 255, green: 209 / 255, blue: 225 / 255, alpha: 1),
+        mapDim: UIColor(red: 226 / 255, green: 238 / 255, blue: 249 / 255, alpha: 0.6)
     )
 
     static let night = ThemeColor(
@@ -59,9 +57,13 @@ extension ThemeColor {
         navigation: UIColor(red: 33 / 255, green: 48 / 255, blue: 64 / 255, alpha: 1),
         tint: UIColor(red: 46 / 255, green: 166 / 255, blue: 254 / 255, alpha: 1),
         text: .white,
-        details: UIColor(red: 133 / 255, green: 150 / 255, blue: 171 / 255, alpha: 1),
+        details: UIColor(red: 141 / 255, green: 157 / 255, blue: 177 / 255, alpha: 1),
         line: UIColor(red: 18 / 255, green: 27 / 255, blue: 35 / 255, alpha: 1),
-        popup: UIColor(red: 25 / 255, green: 40 / 255, blue: 55 / 255, alpha: 1),
-        popupText: .white
+        gridLine: UIColor(red: 133 / 255, green: 150 / 255, blue: 171 / 255, alpha: 0.2),
+        card: UIColor(red: 25 / 255, green: 35 / 255, blue: 47 / 255, alpha: 1),
+        cardText: .white,
+        cardIcon: UIColor(red: 210 / 255, green: 213 / 255, blue: 215 / 255, alpha: 0.3),
+        mapKnob: UIColor(red: 86 / 255, green: 98 / 255, blue: 109 / 255, alpha: 1),
+        mapDim: UIColor(red: 24 / 255, green: 34 / 255, blue: 45 / 255, alpha: 0.6)
     )
 }
