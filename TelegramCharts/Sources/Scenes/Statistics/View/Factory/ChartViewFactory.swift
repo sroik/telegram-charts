@@ -5,11 +5,22 @@
 import UIKit
 
 struct ChartViewFactory {
-    static func view(with chart: Chart) -> LineChartView {
-        if chart.yScaled {
-            return ComparingLineChartView(chart: chart)
+    static func view(with chart: Chart, isMap: Bool = false) -> LineChartView {
+        switch chart.columnsType {
+        case .line, .area, .bar:
+            return lineChartView(with: chart, isMap: isMap)
+        case .timestamps:
+            assertionFailureWrapper()
+            return LineChartView(chart: chart)
         }
+    }
 
-        return LineChartView(chart: chart)
+    static func lineChartView(with chart: Chart, isMap: Bool) -> LineChartView {
+        let view = chart.yScaled ?
+            ComparingLineChartView(chart: chart) :
+            LineChartView(chart: chart)
+
+        view.set(lineWidth: isMap ? 1 : 2)
+        return view
     }
 }

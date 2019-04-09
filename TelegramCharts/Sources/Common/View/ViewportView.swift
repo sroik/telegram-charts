@@ -16,11 +16,10 @@ class ViewportView: View, Viewportable {
     }
 
     var contentFrame: CGRect {
-        return CGRect(origin: contentOffset, size: contentSize)
-    }
-
-    var contentOffset: CGPoint {
-        return CGPoint(x: -contentSize.width * viewport.min, y: 0)
+        return CGRect(
+            x: -contentSize.width * viewport.min,
+            size: contentSize
+        )
     }
 
     var contentSize: CGSize {

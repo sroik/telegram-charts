@@ -4,12 +4,17 @@
 
 import UIKit
 
-class LineChartView: ViewportView, ChartViewportable {
+class LineChartView: ViewportView, ChartViewType {
     let chart: Chart
     let layers: [LineColumnLayer]
 
     var selectedIndex: Int? {
-        return layers.first?.selectedIndex
+        get {
+            return layers.first?.selectedIndex
+        }
+        set {
+            select(index: newValue)
+        }
     }
 
     init(chart: Chart, viewport: Viewport = .zeroToOne) {

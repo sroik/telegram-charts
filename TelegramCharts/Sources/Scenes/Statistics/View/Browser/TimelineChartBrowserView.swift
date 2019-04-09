@@ -9,7 +9,7 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
 
     init(
         chart: Chart,
-        chartView: LineChartView,
+        chartView: ChartView,
         gridView: ChartViewportableView,
         timelineView: TimelineView,
         cardView: ChartCardView
@@ -56,14 +56,14 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
     }
 
     private func selectIndex(at point: CGPoint, animated: Bool) {
-        let chartPoint = convert(point, to: chartView.contentView)
-        let position = chartPoint.x / chartView.contentSize.width
+        let chartPoint = point.x - chartView.offset - insets.left
+        let position = chartPoint / chartView.contentSize.width
         let index = chart.timestamps.index(nearestTo: position, strategy: .ceil)
         select(index: index, animated: animated)
     }
 
     private func select(index: Int?, animated: Bool) {
-        chartView.select(index: index)
+        chartView.selectedIndex = index
 
         guard let index = index else {
             pointLine.set(alpha: 0, animated: animated)
@@ -92,10 +92,10 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
         let pan = UILongPressGestureRecognizer(target: self, action: #selector(onPan))
         pan.minimumPressDuration = 0.2
         pan.allowableMovement = CGRect.screen.diagonal
-        chartView.addGestureRecognizer(pan)
+        addGestureRecognizer(pan)
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTap))
-        chartView.addGestureRecognizer(tap)
+        addGestureRecognizer(tap)
         cardView.addTarget(self, action: #selector(cardPressed), for: .touchUpInside)
     }
 
@@ -140,16 +140,16 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
 
         let chartSize = chartView.contentSize
         let stride = chartSize.width / CGFloat(chart.timestamps.count)
-        let center = (CGFloat(index) + 0.5) * stride
-        let frame = CGRect(midX: center, width: .pixel, height: chartSize.height)
-        return convert(frame, from: chartView.contentView)
+        let inChartCenter = (CGFloat(index) + 0.5) * stride
+        let center = inChartCenter + chartView.offset + insets.left
+        return CGRect(midX: center, width: .pixel, height: chartSize.height)
     }
 
     private var gridView: ChartViewportableView
     private let timelineView: TimelineView
     private let cardView: ChartCardView
     private let pointLine = UIView()
-    private let chartView: LineChartView
+    private var chartView: ChartView
     private let chartContainer = View()
     private let insets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
     private let chart: Chart

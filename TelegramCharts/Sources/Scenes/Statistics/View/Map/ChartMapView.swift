@@ -26,7 +26,7 @@ final class ChartMapView: View {
         return overlayView.selectedKnob
     }
 
-    init(chartView: LineChartView) {
+    init(chartView: ChartViewportableView) {
         self.chartView = chartView
         super.init(frame: .screen)
         setup()
@@ -51,5 +51,5 @@ final class ChartMapView: View {
     }
 
     private let overlayView = ChartMapOverlayView()
-    private let chartView: LineChartView
+    private var chartView: ChartViewportableView
 }

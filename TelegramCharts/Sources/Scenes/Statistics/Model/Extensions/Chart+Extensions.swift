@@ -24,6 +24,15 @@ extension Chart {
         return columns.filter { $0.type.isDrawable }
     }
 
+    var columnsType: ColumnType {
+        guard let drawableColumn = drawableColumns.first else {
+            assertionFailureWrapper("no columns found")
+            return .line
+        }
+
+        return drawableColumn.type
+    }
+
     func adjustedRange(of columns: [Column], in viewport: Viewport) -> Range<Int> {
         return columns
             .map { $0.range(in: viewport) }

@@ -16,5 +16,17 @@ protocol ChartBrowser: ChartViewportable {
     var delegate: ChartBrowserDelegate? { get set }
 }
 
+protocol ChartViewType: ChartViewportable {
+    var selectedIndex: Int? { get set }
+    var contentSize: CGSize { get }
+}
+
 typealias ChartViewportableView = View & ChartViewportable
 typealias ChartBrowserView = UIView & ChartBrowser
+typealias ChartView = UIView & ChartViewType
+
+extension ChartViewType {
+    var offset: CGFloat {
+        return -contentSize.width * viewport.min
+    }
+}

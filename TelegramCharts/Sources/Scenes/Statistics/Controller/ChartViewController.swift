@@ -16,7 +16,7 @@ class ChartViewController: ViewController {
             layout: ChartViewControllerLayout(chart: chart),
             chart: chart,
             chartView: ChartBrowserFactory.view(with: chart),
-            mapView: ChartMapView(chartView: ChartViewFactory.view(with: chart))
+            mapView: ChartMapViewFactory.view(with: chart)
         )
     }
 
