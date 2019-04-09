@@ -27,6 +27,8 @@ final class TimePeriodView: View {
     override func themeUp() {
         super.themeUp()
         label.textColor = theme.color.text
+        label.backgroundColor = theme.color.placeholder
+        button.backgroundColor = theme.color.placeholder
         button.tintColor = theme.color.tint
         button.setTitleColor(theme.color.tint, for: .normal)
     }

@@ -7,7 +7,9 @@ import UIKit
 class View: UIView, Themeable {
     var theme: Theme = .day {
         didSet {
-            themeUp()
+            if oldValue != theme {
+                themeUp()
+            }
         }
     }
 

@@ -7,7 +7,9 @@ import UIKit
 class Layer: CALayer, Themeable {
     var theme: Theme = .day {
         didSet {
-            themeUp()
+            if oldValue != theme {
+                themeUp()
+            }
         }
     }
 

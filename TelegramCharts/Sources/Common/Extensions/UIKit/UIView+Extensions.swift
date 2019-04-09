@@ -60,16 +60,6 @@ extension UIView {
     }
 }
 
-extension UITableView {
-    typealias EnumerationBlock<C> = (C) -> Void
-
-    func forEachVisibleCell<C: UITableViewCell>(do block: EnumerationBlock<C>) {
-        visibleCells
-            .compactMap { $0 as? C }
-            .forEach { block($0) }
-    }
-}
-
 extension UIStackView {
     var maxIntrinsicWidth: CGFloat {
         return arrangedSubviews

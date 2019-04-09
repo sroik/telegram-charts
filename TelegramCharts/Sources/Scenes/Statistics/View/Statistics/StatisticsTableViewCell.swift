@@ -7,7 +7,9 @@ import UIKit
 final class StatisticsTableViewCell: UITableViewCell, Themeable {
     var theme: Theme = .day {
         didSet {
-            themeUp()
+            if oldValue != theme {
+                themeUp()
+            }
         }
     }
 
@@ -35,12 +37,6 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
         fatalError()
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        controller = nil
-        title = nil
-    }
-
     override func layoutSubviews() {
         super.layoutSubviews()
         label.frame = CGRect(x: 15, y: 15, width: bounds.width, height: 30)
@@ -66,7 +62,6 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
             return
         }
 
-        controller.theme = theme
         controller.view.frame = placeholder.bounds
         controller.hasSuperview.onFalse {
             placeholder.addSubview(controller.view)

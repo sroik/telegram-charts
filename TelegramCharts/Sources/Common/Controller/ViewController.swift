@@ -23,7 +23,9 @@ class ViewController: UIViewController, Themeable {
 
     var theme: Theme = .day {
         didSet {
-            themeUp()
+            if oldValue != theme {
+                themeUp()
+            }
         }
     }
 
@@ -45,10 +47,24 @@ class ViewController: UIViewController, Themeable {
         themeUp()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if laidoutBounds.distance(to: view.bounds) > .layoutEpsilon {
+            laidoutBounds = view.bounds
+            didLayoutSubviewsOnBoundsChange()
+        }
+    }
+
+    func didLayoutSubviewsOnBoundsChange() {
+        /* meant to be inherited */
+    }
+
     func themeUp() {
         setNeedsStatusBarAppearanceUpdate()
         view.backgroundColor = theme.color.background
         view.subviews.theme(with: theme)
         children.theme(with: theme)
     }
+
+    private var laidoutBounds: CGRect = .zero
 }

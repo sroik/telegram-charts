@@ -23,9 +23,8 @@ final class StatisticsViewController: ViewController {
     override func themeUp() {
         super.themeUp()
         tableView.backgroundColor = theme.color.background
-        tableView.forEachVisibleCell { (cell: StatisticsTableViewCell) in
-            cell.theme = theme
-        }
+        tableView.visibleCells.theme(with: theme)
+        chartViewControllers.theme(with: theme)
     }
 
     private func loadCharts() {
@@ -67,9 +66,9 @@ extension StatisticsViewController: UITableViewDataSource {
             return cell
         }
 
+        statisticsCell.controller = chartViewControllers[safe: indexPath.row]
         statisticsCell.title = charts[safe: indexPath.row]?.title
         statisticsCell.theme = theme
-        statisticsCell.controller = chartViewControllers[safe: indexPath.row]
         return statisticsCell
     }
 }

@@ -76,6 +76,7 @@ final class TimelineView: ViewportView {
     }
 
     private func setup() {
+        isUserInteractionEnabled = false
         addSubview(line)
         displayLink.fps = 4
     }

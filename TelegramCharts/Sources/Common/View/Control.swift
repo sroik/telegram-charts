@@ -7,7 +7,9 @@ import UIKit
 class Control: UIControl, Themeable {
     var theme: Theme = .day {
         didSet {
-            themeUp()
+            if oldValue != theme {
+                themeUp()
+            }
         }
     }
 

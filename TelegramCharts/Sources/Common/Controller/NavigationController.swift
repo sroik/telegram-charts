@@ -27,7 +27,9 @@ class NavigationController: UINavigationController {
 
     var theme: Theme = .day {
         didSet {
-            themeUp()
+            if oldValue != theme {
+                themeUp()
+            }
         }
     }
 
