@@ -28,8 +28,8 @@ final class ColumnsListView: View {
         setup()
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func layoutSubviewsOnBoundsChange() {
+        super.layoutSubviewsOnBoundsChange()
         updateFrames()
     }
 

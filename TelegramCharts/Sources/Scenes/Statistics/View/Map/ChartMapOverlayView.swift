@@ -32,8 +32,8 @@ final class ChartMapOverlayView: View {
         setup()
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func layoutSubviewsOnBoundsChange() {
+        super.layoutSubviewsOnBoundsChange()
         layoutViewport()
     }
 

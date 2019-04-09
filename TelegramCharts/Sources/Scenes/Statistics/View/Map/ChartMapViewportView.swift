@@ -56,8 +56,8 @@ final class ChartMapViewportView: View {
         return .mid
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func layoutSubviewsOnBoundsChange() {
+        super.layoutSubviewsOnBoundsChange()
         leftKnob.frame = bounds.slice(at: knobWidth, from: .minXEdge)
         rightKnob.frame = bounds.slice(at: knobWidth, from: .maxXEdge)
         bottomLine.frame = bounds.slice(at: lineWidth, from: .maxYEdge)

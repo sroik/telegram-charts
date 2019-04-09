@@ -31,8 +31,8 @@ class CardView: Control {
         setup()
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func layoutSubviewsOnBoundsChange() {
+        super.layoutSubviewsOnBoundsChange()
         stack.frame = bounds.inset(by: insets)
     }
 

@@ -10,8 +10,8 @@ class Placeholder: View {
         setup()
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func layoutSubviewsOnBoundsChange() {
+        super.layoutSubviewsOnBoundsChange()
         topLine.frame = bounds.slice(at: .pixel, from: .minYEdge)
         bottomLine.frame = bounds.slice(at: .pixel, from: .maxYEdge)
         bringSubviewToFront(topLine)

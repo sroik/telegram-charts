@@ -32,8 +32,8 @@ final class ChartMapView: View {
         setup()
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func layoutSubviewsOnBoundsChange() {
+        super.layoutSubviewsOnBoundsChange()
         chartView.frame = bounds
         overlayView.frame = bounds
     }

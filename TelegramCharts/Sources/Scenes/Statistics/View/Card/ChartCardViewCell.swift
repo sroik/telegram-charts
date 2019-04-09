@@ -84,8 +84,8 @@ final class ChartCardViewCell: View {
         valueLabel.textColor = valueColor ?? theme.color.cardText
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func layoutSubviewsOnBoundsChange() {
+        super.layoutSubviewsOnBoundsChange()
         layout()
     }
 

@@ -22,8 +22,8 @@ final class ColumnsListViewCell: Control {
         setup()
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func layoutSubviewsOnBoundsChange() {
+        super.layoutSubviewsOnBoundsChange()
         update(animated: false)
     }
 
