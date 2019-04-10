@@ -6,8 +6,13 @@ import UIKit
 
 final class RasterizedBarChartView: ViewportView, ChartViewType {
     let chart: Chart
-    var selectedIndex: Int?
     var minViewportSize: CGFloat
+
+    var selectedIndex: Int? {
+        didSet {
+            overlayView.selectedIndex = selectedIndex
+        }
+    }
 
     convenience init(chart: Chart, minViewportSize: CGFloat = 1) {
         self.init(
@@ -21,6 +26,7 @@ final class RasterizedBarChartView: ViewportView, ChartViewType {
         self.chart = chart
         self.renderer = renderer
         self.minViewportSize = minViewportSize
+        self.overlayView = BarChartOverlayView(chartLayout: renderer.layout)
         super.init(frame: .zero)
         setup()
     }
@@ -37,6 +43,7 @@ final class RasterizedBarChartView: ViewportView, ChartViewType {
 
     override func adaptViewportSize() {
         super.adaptViewportSize()
+        overlayView.bounds = contentView.bounds
         imageView.bounds = contentView.bounds
         imageView.center = CGPoint(x: imageView.bounds.midX, y: imageView.bounds.height)
     }
@@ -70,7 +77,7 @@ final class RasterizedBarChartView: ViewportView, ChartViewType {
     }
 
     private func setup() {
-        contentView.addSubview(imageView)
+        contentView.addSubviews(imageView, overlayView)
         enable(columns: chart.drawableColumns, animated: false)
     }
 
@@ -84,6 +91,7 @@ final class RasterizedBarChartView: ViewportView, ChartViewType {
     private var maxRange: Range<Int> = .zero
     private let renderer: BarChartRenderer
     private let imageView = UIImageView.pixelated()
+    private let overlayView: BarChartOverlayView
     private var enabledColumns: [Column] = []
 }
 
