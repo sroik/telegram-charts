@@ -48,8 +48,8 @@ final class ChartMapView: View {
         chartView.clipsToBounds = true
         addSubview(chartView)
 
-        overlayView.minSize = chartView.chart.minMapViewportSize
-        overlayView.maxSize = chartView.chart.maxMapViewportSize
+        overlayView.minSize = chartView.chart.minViewportSize
+        overlayView.maxSize = chartView.chart.maxViewportSize
         addSubviews(overlayView)
     }
 

@@ -7,9 +7,7 @@ import UIKit
 final class BarChartOverlayView: View {
     var selectedIndex: Int? {
         didSet {
-            if oldValue != selectedIndex {
-                update(animated: true)
-            }
+            update(animated: true)
         }
     }
 
@@ -21,41 +19,53 @@ final class BarChartOverlayView: View {
 
     override func themeUp() {
         super.themeUp()
-        leftView.backgroundColor = theme.color.placeholder.withAlphaComponent(0.5)
-        rightView.backgroundColor = theme.color.placeholder.withAlphaComponent(0.5)
+        let color = theme.color.placeholder.withAlphaComponent(0.5)
+        leftView.backgroundColor = color
+        rightView.backgroundColor = color
     }
 
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
-        update(animated: true)
+        update(animated: false)
     }
 
     private func update(animated: Bool) {
-        guard let index = selectedIndex else {
-            deselect(animated: animated)
-            return
+        selectedIndex == nil ?
+            fadeOut(animated: animated) :
+            fadeIn(animated: animated)
+
+        layout()
+    }
+
+    private func layout() {
+        if let index = selectedIndex {
+            layoutIndex = index
         }
 
-        layout(at: index)
+        let holeFrame = chartLayout.itemFrame(at: layoutIndex, in: bounds)
+        leftView.frame = bounds.slice(at: holeFrame.minX, from: .minXEdge).rounded()
+        rightView.frame = bounds.remainder(at: holeFrame.maxX, from: .minXEdge).rounded()
     }
 
-    private func layout(at index: Int) {
-        let holeFrame = chartLayout.itemFrame(at: index, in: bounds)
-        leftView.frame = bounds.slice(at: holeFrame.minX, from: .minXEdge)
-        rightView.frame = bounds.remainder(at: holeFrame.maxX, from: .minXEdge)
+    private func fadeIn(animated: Bool) {
+        leftView.set(alpha: 1, animated: animated)
+        rightView.set(alpha: 1, animated: animated)
     }
 
-    private func deselect(animated: Bool) {
-        
+    private func fadeOut(animated: Bool) {
+        leftView.set(alpha: 0, animated: animated)
+        rightView.set(alpha: 0, animated: animated)
     }
 
     private func setup() {
+        isUserInteractionEnabled = false
         addSubviews(leftView, rightView)
-        deselect(animated: false)
+        fadeOut(animated: false)
         themeUp()
     }
 
     private let chartLayout: GridLayout
     private let leftView = UIView()
     private let rightView = UIView()
+    private var layoutIndex: Int = 0
 }

@@ -52,7 +52,7 @@ extension ThemeColor {
     )
 
     static let night = ThemeColor(
-        background: UIColor(red: 24 / 255, green: 34 / 255, blue: 45 / 255, alpha: 1),
+        background: UIColor(red: 23 / 255, green: 34 / 255, blue: 45 / 255, alpha: 1),
         placeholder: UIColor(red: 33 / 255, green: 48 / 255, blue: 64 / 255, alpha: 1),
         navigation: UIColor(red: 33 / 255, green: 48 / 255, blue: 64 / 255, alpha: 1),
         tint: UIColor(red: 46 / 255, green: 166 / 255, blue: 254 / 255, alpha: 1),

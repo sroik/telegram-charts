@@ -18,9 +18,10 @@ class CardView: Control {
     }
 
     override var intrinsicContentSize: CGSize {
+        let itemsCount = stack.arrangedSubviews.filter { $0.isVisible }.count
         return CGSize(
             width: insets.horizontal + max(135, stack.maxIntrinsicWidth),
-            height: insets.vertical + CGFloat(items.count) * itemHeight
+            height: insets.vertical + CGFloat(itemsCount) * itemHeight
         )
     }
 
@@ -40,6 +41,12 @@ class CardView: Control {
         super.themeUp()
         backgroundColor = theme.color.card
         items.forEach { $0.theme = theme }
+    }
+
+    func layout(animated: Bool) {
+        UIView.animate(withDuration: animated ? .fastDuration : 0) {
+            self.stack.layoutIfNeeded()
+        }
     }
 
     private func setup() {

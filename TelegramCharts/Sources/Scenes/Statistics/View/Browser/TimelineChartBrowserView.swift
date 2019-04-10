@@ -49,6 +49,8 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
     func enable(columns: [Column], animated: Bool = false) {
         chartView.enable(columns: columns, animated: animated)
         gridView.enable(columns: columns, animated: animated)
+        cardView.enable(columns: columns, animated: animated)
+        layoutCard(animated: animated)
     }
 
     func deselect(animated: Bool) {
@@ -71,12 +73,15 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
             return
         }
 
-        pointLine.set(frame: pointLineFrame, animated: animated)
+        cardView.selectedIndex = index
+        layoutCard(animated: animated)
         pointLine.set(alpha: 1, animated: animated)
-
-        cardView.index = index
-        cardView.shift(to: cardFrame, animated: animated)
         cardView.set(alpha: 1, animated: animated)
+    }
+
+    private func layoutCard(animated: Bool) {
+        pointLine.set(frame: pointLineFrame, animated: animated)
+        cardView.shift(to: cardFrame, animated: animated)
     }
 
     private func setup() {
@@ -92,10 +97,10 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
         let pan = UILongPressGestureRecognizer(target: self, action: #selector(onPan))
         pan.minimumPressDuration = 0.2
         pan.allowableMovement = CGRect.screen.diagonal
-        addGestureRecognizer(pan)
+        chartContainer.addGestureRecognizer(pan)
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTap))
-        addGestureRecognizer(tap)
+        chartContainer.addGestureRecognizer(tap)
         cardView.addTarget(self, action: #selector(cardPressed), for: .touchUpInside)
     }
 
@@ -112,6 +117,8 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
     @objc private func cardPressed() {
         if let index = chartView.selectedIndex, chart.expandable {
             delegate?.chartBrowser(self, wantsToExpand: index)
+        } else {
+            deselect(animated: true)
         }
     }
 

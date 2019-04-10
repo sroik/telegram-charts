@@ -5,9 +5,9 @@
 import UIKit
 
 class ChartCardView: CardView {
-    var index: Int = 0 {
+    var selectedIndex: Int = 0 {
         didSet {
-            update()
+            update(animated: true)
         }
     }
 
@@ -16,25 +16,39 @@ class ChartCardView: CardView {
         self.titleCell = ChartCardViewCell()
         self.cells = chart.drawableColumns.map { ChartCardViewCell(id: $0.id) }
         super.init(items: [titleCell] + cells)
+        setup()
     }
 
-    private func update() {
+    func enable(columns: [Column], animated: Bool = false) {
+        enabledColumns = Set(columns.map { $0.id })
+        update(animated: animated)
+    }
+
+    private func update(animated: Bool) {
+        chart.drawableColumns.forEach { column in
+            if let cell = self.cell(withId: column.id) {
+                update(cell: cell, with: column)
+            }
+        }
+
         titleCell.icon = titleIcon
         titleCell.summary = title
+        layout(animated: animated)
+    }
 
-        chart.drawableColumns.forEach { column in
-            guard let cell = self.cell(withId: column.id) else {
-                return
-            }
-
-            cell.title = column.name
-            cell.valueColor = column.uiColor
-            cell.value = column.values[safe: index].flatMap { String($0) }
-        }
+    private func update(cell: ChartCardViewCell, with column: Column) {
+        cell.isHidden = !enabledColumns.contains(column.id)
+        cell.title = column.name
+        cell.valueColor = column.uiColor
+        cell.value = String(column.values[safe: selectedIndex] ?? 0)
     }
 
     private func cell(withId id: String) -> ChartCardViewCell? {
         return cells.first { $0.id == id }
+    }
+
+    private func setup() {
+        enable(columns: chart.drawableColumns)
     }
 
     private var titleIcon: UIImage? {
@@ -43,18 +57,16 @@ class ChartCardView: CardView {
 
     private var title: String? {
         let format = chart.expandable ? "E, d MMM yyyy" : "hh : mm"
-        return date?.string(format: format)
+        return selectedDate.string(format: format)
     }
 
-    private var date: Date? {
-        return timestamp.flatMap(Date.init(timestamp:))
+    private var selectedDate: Date {
+        let timestamp = chart.timestamps[safe: selectedIndex] ?? 0
+        return Date(timestamp: timestamp)
     }
 
-    private var timestamp: Timestamp? {
-        return chart.timestamps[safe: index]
-    }
-
+    private let chart: Chart
     private let titleCell: ChartCardViewCell
     private let cells: [ChartCardViewCell]
-    private let chart: Chart
+    private var enabledColumns: Set<String> = []
 }

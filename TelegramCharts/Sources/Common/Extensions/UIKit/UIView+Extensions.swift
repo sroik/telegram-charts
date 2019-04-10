@@ -55,7 +55,10 @@ extension UIView {
 
         UIView.animate(
             withDuration: duration,
-            animations: { self.frame = frame }
+            animations: {
+                self.frame = frame
+                self.layoutIfNeeded()
+            }
         )
     }
 }

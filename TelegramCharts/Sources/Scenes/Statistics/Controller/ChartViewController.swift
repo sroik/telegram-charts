@@ -80,11 +80,15 @@ extension ChartViewController: ColumnsListViewDelegate, ChartMapViewDelegate {
     }
 
     func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Viewport) {
-        chartView.viewport = mapView.viewport
         periodView.viewport = mapView.viewport
+        chartView.viewport = mapView.viewport
     }
 
     func mapViewDidLongPress(_ view: ChartMapOverlayView) {
+        chartView.deselect(animated: true)
+    }
+
+    func columnsViewDidLongPress(_ view: ColumnsListView) {
         chartView.deselect(animated: true)
     }
 }

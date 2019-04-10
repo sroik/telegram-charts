@@ -46,12 +46,12 @@ extension Chart {
     }
 
     /* I don't know the logic, so I'll just leave hardcoded numbers */
-    var minMapViewportSize: CGFloat {
+    var minViewportSize: CGFloat {
         let minDays = expandable ? 30 : 1
         return CGFloat(minDays) / CGFloat(days)
     }
 
-    var maxMapViewportSize: CGFloat {
+    var maxViewportSize: CGFloat {
         return 1.0
     }
 

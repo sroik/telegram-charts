@@ -7,16 +7,14 @@ import UIKit
 struct ChartViewFactory {
     static func view(with chart: Chart, isMap: Bool = false) -> ChartView {
         switch chart.columnsType {
-        case .bar where isMap:
-            return RasterizedBarChartView(chart: chart)
-        case .bar:
-            #warning("fixme")
-            return RasterizedBarChartView(
-                chart: chart,
-                minViewportSize: chart.minMapViewportSize
-            )
         case .line:
             return lineChartView(with: chart, isMap: isMap)
+        case .bar where isMap:
+            return RasterizedBarChartView(chart: chart)
+        case .bar where chart.stacked:
+            return BarChartView(chart: chart)
+        case .bar:
+            return RasterizedBarChartView(chart: chart, minViewportSize: chart.minViewportSize)
         case .area:
             #warning("fixme")
             return lineChartView(with: chart, isMap: isMap)

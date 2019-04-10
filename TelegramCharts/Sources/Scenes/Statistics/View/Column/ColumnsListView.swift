@@ -6,6 +6,7 @@ import UIKit
 
 protocol ColumnsListViewDelegate: AnyObject {
     func columnsView(_ view: ColumnsListView, didEnable columns: [Column])
+    func columnsViewDidLongPress(_ view: ColumnsListView)
 }
 
 final class ColumnsListView: View {
@@ -50,10 +51,19 @@ final class ColumnsListView: View {
             cell.isSelected = true
             addSubview(cell)
         }
+
+        addGestureRecognizer(UILongPressGestureRecognizer(
+            target: self,
+            action: #selector(onPress)
+        ))
     }
 
     private func canToggle(cell: ColumnsListViewCell) -> Bool {
         return !cell.isSelected || enabledColumns.count > 1
+    }
+
+    @objc private func onPress(_ recognizer: UILongPressGestureRecognizer) {
+        delegate?.columnsViewDidLongPress(self)
     }
 
     @objc private func cellPressed(_ cell: ColumnsListViewCell) {
