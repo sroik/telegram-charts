@@ -4,7 +4,7 @@
 
 import UIKit
 
-class StackedBarChartView: ViewportView, ChartViewType {
+class BarChartView: ViewportView, ChartViewType {
     let chart: Chart
     let layout: GridLayout
     let layers: [BarColumnLayer]

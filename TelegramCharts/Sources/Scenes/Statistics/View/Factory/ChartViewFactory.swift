@@ -7,8 +7,11 @@ import UIKit
 struct ChartViewFactory {
     static func view(with chart: Chart, isMap: Bool = false) -> ChartView {
         switch chart.columnsType {
+        case .bar where isMap:
+            #warning("do image based chart view")
+            return LineChartView(chart: chart)
         case .bar:
-            return StackedBarChartView(chart: chart)
+            return BarChartView(chart: chart)
         case .line, .area:
             return lineChartView(with: chart, isMap: isMap)
         case .timestamps:
