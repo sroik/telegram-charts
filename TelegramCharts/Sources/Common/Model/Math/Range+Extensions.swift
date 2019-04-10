@@ -13,6 +13,10 @@ extension Range {
         return Viewport(min: 0, max: 1)
     }
 
+    var isEmpty: Bool {
+        return min == max
+    }
+
     var size: T {
         return max - min
     }

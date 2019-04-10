@@ -38,7 +38,6 @@ extension CAShapeLayer {
             return
         }
 
-        set(path: path, animated: true, duration: duration)
         let scaleX = path.bounds.maxX / current.bounds.maxX
         let from = current.scaled(x: scaleX)
         animateValue(for: .path, from: from, to: path, duration: animation.leftTime)

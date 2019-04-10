@@ -74,7 +74,7 @@ class LineChartView: ViewportView, ChartViewType {
 
     func layoutLayers() {
         layers.forEach { layer in
-            layer.frame = contentView.bounds
+            layer.set(frame: contentView.bounds)
         }
     }
 

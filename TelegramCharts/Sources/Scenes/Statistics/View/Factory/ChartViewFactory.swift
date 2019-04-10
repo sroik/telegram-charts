@@ -8,7 +8,7 @@ struct ChartViewFactory {
     static func view(with chart: Chart, isMap: Bool = false) -> ChartView {
         switch chart.columnsType {
         case .bar:
-            return BarChartView(chart: chart)
+            return StackedBarChartView(chart: chart)
         case .line, .area:
             return lineChartView(with: chart, isMap: isMap)
         case .timestamps:

@@ -68,6 +68,10 @@ extension CGRect {
         self.init(x: x, y: y, width: size.width, height: size.height)
     }
 
+    init(x: CGFloat = 0, maxY: CGFloat, width: CGFloat = 0, height: CGFloat = 0) {
+        self.init(x: x, y: maxY - height, width: width, height: height)
+    }
+
     init(maxX: CGFloat, y: CGFloat = 0, size: CGSize) {
         self.init(maxX: maxX, y: y, width: size.width, height: size.height)
     }
