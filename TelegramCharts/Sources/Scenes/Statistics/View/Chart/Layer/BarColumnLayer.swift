@@ -59,10 +59,15 @@ class BarColumnLayer: Layer {
 
         for layer in layers {
             let ratio = CGFloat(layer.value.value) / maxValue
-            let height = layer.isEnabled ? bounds.height * ratio : 0
+            let ratioHeight = max(1, bounds.height * ratio)
+            let height = layer.isEnabled ? ratioHeight : 0
 
-            layer.frame = CGRect(maxY: maxY, width: bounds.width, height: height)
-            layer.isHidden = !layer.isEnabled
+            /* use int values to increase GPU performace */
+            layer.frame = CGRect(
+                maxY: maxY.ceiled(),
+                width: bounds.width.ceiled(),
+                height: height.ceiled()
+            )
 
             maxY -= height
         }
