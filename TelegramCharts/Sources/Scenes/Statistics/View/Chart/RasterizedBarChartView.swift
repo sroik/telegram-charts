@@ -53,24 +53,23 @@ final class RasterizedBarChartView: ViewportView, ChartViewType {
     }
 
     func render(animated: Bool) {
-        guard !bounds.isEmpty else {
-            return
+        renderer.render(columns: enabledColumns, size: maxContentSize) { [weak self] image in
+            self?.display(image: image, animated: animated)
         }
+    }
 
-        let image = renderer.render(columns: enabledColumns, size: maxContentSize)
+    private func display(image: UIImage, animated: Bool) {
         imageView.set(image: image, animated: animated)
         adaptRange(animated: animated)
     }
 
-    func adaptRange(animated: Bool) {
+    private func adaptRange(animated: Bool) {
         let range = chart.adjustedRange(of: enabledColumns, in: viewport)
         let scale = CGFloat(maxRange.size) / CGFloat(range.size)
-        print("adapt range with scale: ", scale)
-        imageView.transform = CGAffineTransform(scaleX: 1, y: scale)
+        imageView.layer.scale(byY: scale, animated: animated)
     }
 
     private func setup() {
-        displayLink.fps = 1
         contentView.addSubview(imageView)
         enable(columns: chart.drawableColumns, animated: false)
     }

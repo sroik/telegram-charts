@@ -7,6 +7,10 @@ import UIKit
 extension CALayer {
     typealias KeyPath = String
 
+    var presentedYScale: CGFloat {
+        return (presentedValue(for: .yScale) as? CGFloat) ?? 1
+    }
+
     func presentedValue(for keyPath: KeyPath) -> Any? {
         return presentation()?.value(forKeyPath: keyPath) ?? value(forKeyPath: keyPath)
     }
@@ -91,7 +95,13 @@ extension CALayer {
         add(animation, forKey: .xTranslation)
     }
 
-//    func scale(y: CGFloat, velocity: CGFloat = 20)
+    func scale(byY scale: CGFloat, animated: Bool, velocity: CGFloat = 750) {
+        let height = bounds.height * presentedYScale
+        let scaledHeight = bounds.height * scale
+        let delta = abs(scaledHeight - height)
+        let duration = TimeInterval(delta / velocity).clamped(from: 0.15, to: 0.35)
+        set(value: scale, for: .yScale, animated: animated, duration: duration)
+    }
 }
 
 extension TimeInterval {

@@ -17,7 +17,7 @@ final class BarChartRenderer {
     func render(columns: [Column], size: CGSize) -> UIImage {
         let rect = CGRect(origin: .zero, size: size)
         let format = UIGraphicsImageRendererFormat.defaultUnscaled()
-        let renderer = UIGraphicsImageRenderer(size: size, format: format)
+        let renderer = UIGraphicsImageRenderer(size: rect.size, format: format)
         return renderer.image { ctx in
             ctx.cgContext.setAllowsAntialiasing(false)
             render(columns: columns, in: rect, in: ctx)

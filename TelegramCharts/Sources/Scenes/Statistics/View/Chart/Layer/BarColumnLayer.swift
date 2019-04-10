@@ -62,7 +62,7 @@ class BarColumnLayer: Layer {
 
     private func setup() {
         isOpaque = true
-        layers.reversed().forEach(addSublayer)
+        layers.forEach(addSublayer)
         disableActions()
         themeUp()
     }

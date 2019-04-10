@@ -30,7 +30,8 @@ extension BarColumnValue {
     static func frames(
         of values: [BarColumnValue],
         in rect: CGRect,
-        range: Range<Int>
+        range: Range<Int>,
+        minHeight: CGFloat = 1.0
     ) -> [CGRect] {
         guard !range.isEmpty else {
             return values.map { _ in CGRect.zero }
@@ -41,7 +42,7 @@ extension BarColumnValue {
 
         for value in values {
             let ratio = CGFloat(value.value) / CGFloat(range.size)
-            let ratioHeight = rect.height * ratio
+            let ratioHeight = max(rect.height * ratio, minHeight)
             let height = value.isEnabled ? ratioHeight : 0
 
             let valueRect = CGRect(
