@@ -11,6 +11,18 @@ extension CALayer {
         return (presentedValue(for: .yScale) as? CGFloat) ?? 1
     }
 
+    func add(child: CALayer) {
+        if child.superlayer == nil {
+            addSublayer(child)
+        }
+    }
+
+    func dropFromParent() {
+        if superlayer != nil {
+            removeFromSuperlayer()
+        }
+    }
+
     func presentedValue(for keyPath: KeyPath) -> Any? {
         return presentation()?.value(forKeyPath: keyPath) ?? value(forKeyPath: keyPath)
     }

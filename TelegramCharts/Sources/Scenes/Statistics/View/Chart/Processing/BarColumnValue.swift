@@ -31,7 +31,7 @@ extension BarColumnValue {
         of values: [BarColumnValue],
         in rect: CGRect,
         range: Range<Int>,
-        minHeight: CGFloat = 1.0
+        minHeight: CGFloat = 0
     ) -> [CGRect] {
         guard !range.isEmpty else {
             return values.map { _ in CGRect.zero }

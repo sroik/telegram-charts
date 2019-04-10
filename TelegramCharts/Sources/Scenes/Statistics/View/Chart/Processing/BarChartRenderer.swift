@@ -8,6 +8,7 @@ final class BarChartRenderer {
     var queue = DispatchQueue(label: "com.sroik.rendering")
     let layout: GridLayout
     let chart: Chart
+    let scale: CGFloat = UIScreen.main.scale
 
     init(chart: Chart) {
         self.chart = chart
@@ -15,7 +16,7 @@ final class BarChartRenderer {
     }
 
     func render(columns: [Column], size: CGSize) -> UIImage {
-        let rect = CGRect(origin: .zero, size: size)
+        let rect = CGRect(origin: .zero, size: size * scale)
         let format = UIGraphicsImageRendererFormat.defaultUnscaled()
         let renderer = UIGraphicsImageRenderer(size: rect.size, format: format)
         return renderer.image { ctx in
@@ -34,7 +35,8 @@ final class BarChartRenderer {
                 values: BarColumnValue.values(of: columns, at: index),
                 range: range,
                 in: frame.rounded(),
-                in: context
+                in: context,
+                minHeight: scale
             )
         }
     }

@@ -52,7 +52,13 @@ class BarColumnLayer: Layer {
             return
         }
 
-        let frames = BarColumnValue.frames(of: values, in: bounds, range: range)
+        let frames = BarColumnValue.frames(
+            of: values,
+            in: bounds,
+            range: range,
+            minHeight: 1.0
+        )
+
         layers.enumerated().forEach { index, layer in
             let frame = (frames[safe: index] ?? .zero).rounded()
             layer.set(frame: frame, animated: animated)

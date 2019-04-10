@@ -5,8 +5,9 @@
 import UIKit
 
 final class RasterizedBarChartView: ViewportView, ChartViewType {
+    let imageView = UIImageView.pixelated()
+    let minViewportSize: CGFloat
     let chart: Chart
-    var minViewportSize: CGFloat
 
     var selectedIndex: Int? {
         didSet {
@@ -54,9 +55,10 @@ final class RasterizedBarChartView: ViewportView, ChartViewType {
     }
 
     func enable(columns: [Column], animated: Bool) {
+        animateColumns(from: enabledColumns, to: columns, animated: animated)
         enabledColumns = columns
         maxRange = chart.adjustedRange(of: columns)
-        render(animated: true)
+        render(animated: animated)
     }
 
     func render(animated: Bool) {
@@ -90,9 +92,9 @@ final class RasterizedBarChartView: ViewportView, ChartViewType {
 
     private var maxRange: Range<Int> = .zero
     private let renderer: BarChartRenderer
-    private let imageView = UIImageView.pixelated()
     private let overlayView: BarChartOverlayView
     private var enabledColumns: [Column] = []
+    private(set) lazy var barChartView = BarChartView(chart: chart)
 }
 
 private extension UIImageView {

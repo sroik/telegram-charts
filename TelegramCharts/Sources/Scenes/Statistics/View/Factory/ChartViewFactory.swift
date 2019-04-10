@@ -11,8 +11,6 @@ struct ChartViewFactory {
             return lineChartView(with: chart, isMap: isMap)
         case .bar where isMap:
             return RasterizedBarChartView(chart: chart)
-        case .bar where chart.stacked:
-            return BarChartView(chart: chart)
         case .bar:
             return RasterizedBarChartView(chart: chart, minViewportSize: chart.minViewportSize)
         case .area:

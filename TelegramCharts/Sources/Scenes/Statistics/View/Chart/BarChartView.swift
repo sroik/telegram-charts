@@ -21,6 +21,11 @@ class BarChartView: ViewportView, ChartViewType {
         setup()
     }
 
+    override func themeUp() {
+        super.themeUp()
+        contentView.backgroundColor = theme.color.placeholder
+    }
+
     override func adaptViewport() {
         super.adaptViewport()
         layoutLayers()
@@ -42,8 +47,13 @@ class BarChartView: ViewportView, ChartViewType {
     }
 
     func layoutLayers() {
-        forEachVisibleLayer { index, layer in
-            layer.frame = layerFrame(at: index)
+        layers.enumerated().forEach { index, layer in
+            if isVisible(layer: layer, at: index) {
+                contentView.layer.add(child: layer)
+                layer.frame = layerFrame(at: index)
+            } else {
+                layer.dropFromParent()
+            }
         }
     }
 
@@ -66,7 +76,6 @@ class BarChartView: ViewportView, ChartViewType {
     }
 
     private func setup() {
-        layers.forEach(contentView.layer.addSublayer)
         enable(columns: chart.drawableColumns, animated: false)
     }
 
