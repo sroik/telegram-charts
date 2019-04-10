@@ -26,7 +26,7 @@ final class ChartMapView: View {
         return overlayView.selectedKnob
     }
 
-    init(chartView: ChartViewportableView) {
+    init(chartView: ChartView) {
         self.chartView = chartView
         super.init(frame: .screen)
         setup()
@@ -43,13 +43,16 @@ final class ChartMapView: View {
     }
 
     private func setup() {
-        addSubview(chartView)
         chartView.viewport = .zeroToOne
         chartView.layer.cornerRadius = 6
         chartView.clipsToBounds = true
+        addSubview(chartView)
+
+        overlayView.minSize = chartView.chart.minMapViewportSize
+        overlayView.maxSize = chartView.chart.maxMapViewportSize
         addSubviews(overlayView)
     }
 
     private let overlayView = ChartMapOverlayView()
-    private var chartView: ChartViewportableView
+    private var chartView: ChartView
 }

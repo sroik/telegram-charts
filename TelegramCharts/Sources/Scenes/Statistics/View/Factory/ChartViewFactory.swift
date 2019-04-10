@@ -9,7 +9,7 @@ struct ChartViewFactory {
         switch chart.columnsType {
         case .bar where isMap:
             #warning("do image based chart view")
-            return LineChartView(chart: chart)
+            return BarChartView(chart: chart)
         case .bar:
             return BarChartView(chart: chart)
         case .line, .area:

@@ -20,6 +20,7 @@ protocol ChartBrowser: ChartViewportable {
 protocol ChartViewType: ChartViewportable {
     var selectedIndex: Int? { get set }
     var contentSize: CGSize { get }
+    var chart: Chart { get }
 }
 
 typealias ChartViewportableView = View & ChartViewportable

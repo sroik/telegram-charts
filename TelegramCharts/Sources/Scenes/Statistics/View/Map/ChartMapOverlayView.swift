@@ -11,14 +11,10 @@ protocol ChartMapOverlayViewDelegate: AnyObject {
 
 final class ChartMapOverlayView: View {
     weak var delegate: ChartMapOverlayViewDelegate?
+    var minSize: CGFloat = 0
+    var maxSize: CGFloat = 1.0
 
-    /*
-     I don't know the logic of it's size,
-     so I'll leave this hardcoded number for now
-     */
-    var minSize: CGFloat = 0.075
-
-    var viewport: Viewport = Range(min: 0.85, max: 1.0) {
+    var viewport: Viewport = Range(min: 0.9, max: 1.0) {
         didSet {
             layoutViewport()
         }
@@ -113,7 +109,7 @@ final class ChartMapOverlayView: View {
             return
         }
 
-        guard movedViewport.size > minSize else {
+        guard movedViewport.size > minSize, movedViewport.size < maxSize else {
             return
         }
 

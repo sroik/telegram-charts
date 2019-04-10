@@ -23,7 +23,8 @@ extension CALayer {
             KeyPath.bounds: NSNull(),
             KeyPath.path: NSNull(),
             KeyPath.position: NSNull(),
-            KeyPath.transform: NSNull()
+            KeyPath.transform: NSNull(),
+            KeyPath.backgroundColor: NSNull()
         ]
     }
 
@@ -112,4 +113,5 @@ extension CALayer.KeyPath {
     static let path = "path"
     static let xTranslation = "transform.translation.x"
     static let transform = "transform"
+    static let backgroundColor = "backgroundColor"
 }

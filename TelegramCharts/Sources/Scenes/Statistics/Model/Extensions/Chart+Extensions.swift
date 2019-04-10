@@ -2,7 +2,7 @@
 //  Copyright © 2019 sroik. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 typealias Timestamp = Int
 
@@ -31,6 +31,33 @@ extension Chart {
         }
 
         return drawableColumn.type
+    }
+
+    var minDate: Date {
+        return Date(timestamp: timestamps.first ?? 0)
+    }
+
+    var maxDate: Date {
+        return Date(timestamp: timestamps.last ?? 0)
+    }
+
+    var days: Int {
+        return Int(maxDate.timeIntervalSince(minDate) / .day)
+    }
+
+    /* I don't know the logic, so I'll just leave hardcoded numbers */
+    var minMapViewportSize: CGFloat {
+        let minDays = expandable ? 30 : 1
+        return CGFloat(minDays) / CGFloat(days)
+    }
+
+    var maxMapViewportSize: CGFloat {
+        switch columnsType {
+        case .bar:
+            return min(1, 120 / CGFloat(days))
+        case .area, .line, .timestamps:
+            return 1.0
+        }
     }
 
     func adjustedRange(of columns: [Column], in viewport: Viewport) -> Range<Int> {

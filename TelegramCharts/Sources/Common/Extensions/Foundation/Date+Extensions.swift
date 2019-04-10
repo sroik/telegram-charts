@@ -20,3 +20,17 @@ extension Date {
         self.init(timeIntervalSince1970: unix)
     }
 }
+
+extension TimeInterval {
+    static var day: TimeInterval {
+        return 24 * hour
+    }
+
+    static var hour: TimeInterval {
+        return 60 * minute
+    }
+
+    static var minute: TimeInterval {
+        return 60
+    }
+}
