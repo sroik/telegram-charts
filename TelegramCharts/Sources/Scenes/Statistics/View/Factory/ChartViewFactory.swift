@@ -8,8 +8,8 @@ struct ChartViewFactory {
     static func view(with chart: Chart, isMap: Bool = false) -> ChartView {
         switch chart.columnsType {
         case .bar where isMap:
-            #warning("do image based chart view")
-            return BarChartView(chart: chart)
+            let underlying = BarChartView(chart: chart)
+            return SnapshotChartView(chartView: underlying)
         case .bar:
             return BarChartView(chart: chart)
         case .line, .area:

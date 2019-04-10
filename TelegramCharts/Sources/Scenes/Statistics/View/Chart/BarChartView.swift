@@ -58,11 +58,12 @@ class BarChartView: ViewportView, ChartViewType {
 
     func layoutLayers() {
         layers.enumerated().forEach { index, layer in
-            layer.frame = layout.itemFrame(at: index, in: contentView.bounds)
+            layer.frame = layout.itemFrame(at: index, in: contentView.bounds).inflated()
         }
     }
 
     private func setup() {
+        displayLink.fps = 2
         layers.forEach(contentView.layer.addSublayer)
         enable(columns: chart.drawableColumns, animated: false)
     }

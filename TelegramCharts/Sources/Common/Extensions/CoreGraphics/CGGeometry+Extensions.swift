@@ -39,6 +39,10 @@ extension CGPoint {
 }
 
 extension CGSize {
+    static func * (lhs: CGSize, rhs: CGFloat) -> CGSize {
+        return CGSize(width: lhs.width * rhs, height: lhs.height * rhs)
+    }
+
     func isClose(to size: CGSize, threshold: CGFloat = .layoutEpsilon) -> Bool {
         let widthDelta = abs(width - size.width)
         let heightDelta = abs(height - size.height)
@@ -80,6 +84,10 @@ extension CGRect {
         self.init(x: maxX - width, y: y, width: width, height: height)
     }
 
+    init(x: CGFloat, y: CGFloat, maxX: CGFloat, maxY: CGFloat) {
+        self.init(x: x, y: y, width: maxX - x, height: maxY - y)
+    }
+
     init(midX: CGFloat, y: CGFloat = 0, width: CGFloat = 0, height: CGFloat = 0) {
         self.init(x: midX - width / 2, y: y, width: width, height: height)
     }
@@ -119,6 +127,15 @@ extension CGRect {
         }
 
         return result
+    }
+
+    func inflated() -> CGRect {
+        return CGRect(
+            x: floor(minX),
+            y: floor(minY),
+            maxX: ceil(maxX),
+            maxY: ceil(maxY)
+        )
     }
 
     func slice(at distance: CGFloat, from edge: CGRectEdge) -> CGRect {
