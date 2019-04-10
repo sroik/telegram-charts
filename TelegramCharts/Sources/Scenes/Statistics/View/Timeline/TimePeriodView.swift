@@ -70,34 +70,20 @@ final class TimePeriodView: View {
     }
 
     private var singleDayTitle: String {
-        return midDate.string(format: "EEEE, d MMM yyyy")
+        let period = chart.timePeriod(in: viewport)
+        return period.min.string(format: "EEEE, d MMM yyyy")
     }
 
     private var differentDaysTitle: String {
+        let period = chart.timePeriod(in: viewport)
         let format = "d MMM yyyy"
-        let min = midDate.string(format: format)
-        let max = maxDate.string(format: format)
+        let min = period.min.string(format: format)
+        let max = period.max.string(format: format)
         return "\(min) - \(max)"
     }
 
     private var isSingleDay: Bool {
-        return midDate.isSameDay(as: maxDate)
-    }
-
-    private var midDate: Date {
-        return Date(timestamp: minTimestamp)
-    }
-
-    private var maxDate: Date {
-        return Date(timestamp: maxTimestamp)
-    }
-
-    private var minTimestamp: Timestamp {
-        return chart.timestamps.element(nearestTo: viewport.min, strategy: .floor) ?? 0
-    }
-
-    private var maxTimestamp: Timestamp {
-        return chart.timestamps.element(nearestTo: viewport.max, strategy: .ceil) ?? 0
+        return chart.timePeriod(in: viewport).isSingleDay
     }
 
     private let chart: Chart
@@ -115,5 +101,11 @@ private extension Button {
             titleInsets: UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: 0),
             imageInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: spacing)
         )
+    }
+}
+
+private extension Range where T == Date {
+    var isSingleDay: Bool {
+        return min.isSameDay(as: max)
     }
 }

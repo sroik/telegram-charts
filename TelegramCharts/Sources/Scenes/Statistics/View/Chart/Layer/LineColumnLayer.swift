@@ -37,8 +37,8 @@ final class LineColumnLayer: Layer {
 
     override func layoutSublayersOnBoundsChange() {
         super.layoutSublayersOnBoundsChange()
-        shapeLayer.set(frame: contentFrame)
-        pointLayer.set(frame: contentFrame)
+        shapeLayer.frame = contentFrame
+        pointLayer.frame = contentFrame
         redraw(animated: false)
     }
 
@@ -77,14 +77,19 @@ final class LineColumnLayer: Layer {
     }
 
     private func setup() {
+        disableActions()
+
+        shapeLayer.disableActions()
         shapeLayer.lineWidth = lineWidth
         shapeLayer.lineCap = .round
         shapeLayer.lineJoin = .round
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.strokeColor = column.cgColor
+        addSublayer(shapeLayer)
+
+        pointLayer.disableActions()
         pointLayer.strokeColor = column.cgColor
         pointLayer.lineWidth = lineWidth
-        addSublayer(shapeLayer)
         addSublayer(pointLayer)
     }
 

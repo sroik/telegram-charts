@@ -42,4 +42,13 @@ extension Chart {
     func adjustedRange(of column: Column, in viewport: Viewport) -> Range<Int> {
         return column.range(in: viewport)
     }
+
+    func timePeriod(in viewport: Viewport) -> Range<Date> {
+        let min = timestamps.element(nearestTo: viewport.min, strategy: .floor) ?? 0
+        let max = timestamps.element(nearestTo: viewport.max, strategy: .ceil) ?? 0
+        return Range(
+            min: Date(timestamp: min),
+            max: Date(timestamp: max)
+        )
+    }
 }

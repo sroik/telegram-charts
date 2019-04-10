@@ -7,13 +7,6 @@ import UIKit
 extension CALayer {
     typealias KeyPath = String
 
-    static func performWithoutAnimation(_ job: () -> Void) {
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        job()
-        CATransaction.commit()
-    }
-
     func presentedValue(for keyPath: KeyPath) -> Any? {
         return presentation()?.value(forKeyPath: keyPath) ?? value(forKeyPath: keyPath)
     }
@@ -22,10 +15,16 @@ extension CALayer {
         return animation(forKey: keyPath) as? CABasicAnimation
     }
 
-    func set(frame: CGRect) {
-        CALayer.performWithoutAnimation {
-            self.frame = frame
-        }
+    func disableActions() {
+        actions = [
+            kCAOnOrderIn: NSNull(),
+            kCAOnOrderOut: NSNull(),
+            KeyPath.opacity: NSNull(),
+            KeyPath.bounds: NSNull(),
+            KeyPath.path: NSNull(),
+            KeyPath.position: NSNull(),
+            KeyPath.transform: NSNull()
+        ]
     }
 
     func set(
@@ -108,6 +107,8 @@ extension TimeInterval {
 
 extension CALayer.KeyPath {
     static let opacity = "opacity"
+    static let position = "position"
+    static let bounds = "bounds"
     static let path = "path"
     static let xTranslation = "transform.translation.x"
     static let transform = "transform"

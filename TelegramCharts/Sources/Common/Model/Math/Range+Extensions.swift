@@ -4,7 +4,17 @@
 
 import UIKit
 
-extension Range {
+protocol DoubleConvertible {
+    init(_ value: Double)
+}
+
+protocol Dividable {
+    static func / (lhs: Self, rhs: Self) -> Self
+}
+
+typealias Arithmetical = Numeric & Comparable & DoubleConvertible & Dividable
+
+extension Range where T: Arithmetical {
     static var zero: Range<T> {
         return Range(min: 0, max: 0)
     }
@@ -23,6 +33,14 @@ extension Range {
 
     var mid: T {
         return (max + min) / T(2)
+    }
+
+    init(mid: T, size: T) {
+        let halfSize = Swift.max(0, size) / T(2)
+        self.init(
+            min: mid - halfSize,
+            max: mid + halfSize
+        )
     }
 
     func union(with range: Range<T>) -> Range<T> {

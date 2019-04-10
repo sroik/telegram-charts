@@ -7,7 +7,7 @@ import UIKit
 class StackedBarChartView: ViewportView, ChartViewType {
     let chart: Chart
     let layout: GridLayout
-    let layers: [StackedBarColumnLayer]
+    let layers: [BarColumnLayer]
 
     var selectedIndex: Int? {
         didSet {
@@ -17,7 +17,7 @@ class StackedBarChartView: ViewportView, ChartViewType {
 
     init(chart: Chart) {
         self.chart = chart
-        self.layers = StackedBarColumnLayer.layers(with: chart)
+        self.layers = BarColumnLayer.layers(with: chart)
         self.layout = GridLayout(itemsNumber: layers.count)
         super.init()
         setup()
@@ -39,7 +39,7 @@ class StackedBarChartView: ViewportView, ChartViewType {
     }
 
     func enable(columns: [Column], animated: Bool) {
-        let columnsIds = columns.map { $0.id }
+        let columnsIds = Set(columns.map { $0.id })
         enabledColumns = columns
 
         layers.forEach { layer in
@@ -58,7 +58,7 @@ class StackedBarChartView: ViewportView, ChartViewType {
 
     func layoutLayers() {
         layers.enumerated().forEach { index, layer in
-            layer.set(frame: layout.itemFrame(at: index, in: contentView.bounds))
+            layer.frame = layout.itemFrame(at: index, in: contentView.bounds)
         }
     }
 
@@ -70,12 +70,12 @@ class StackedBarChartView: ViewportView, ChartViewType {
     private(set) var enabledColumns: [Column] = []
 }
 
-private extension StackedBarColumnLayer {
-    static func layers(with chart: Chart) -> [StackedBarColumnLayer] {
+private extension BarColumnLayer {
+    static func layers(with chart: Chart) -> [BarColumnLayer] {
         return chart.timestamps.indices
             .lazy
             .map { BarColumnValue.values(of: chart, at: $0) }
-            .map { StackedBarColumnLayer(values: $0) }
+            .map { BarColumnLayer(values: $0) }
     }
 }
 
