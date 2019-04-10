@@ -51,24 +51,23 @@ class BarChartView: ViewportView, ChartViewType {
 
     func adaptRange(animated: Bool) {
         let range = chart.adjustedRange(of: enabledColumns, in: viewport)
-        layers.forEach { layer in
-            layer.set(range: range, animated: animated)
-        }
+        layers.forEach { $0.set(range: range, animated: animated) }
     }
 
     func layoutLayers() {
         layers.enumerated().forEach { index, layer in
-            layer.frame = layout.itemFrame(at: index, in: contentView.bounds).rounded()
+            let rect = contentView.bounds
+            layer.frame = layout.itemFrame(at: index, in: rect).rounded()
         }
     }
 
     private func setup() {
-        displayLink.fps = 2
+        displayLink.fps = 1
         layers.forEach(contentView.layer.addSublayer)
         enable(columns: chart.drawableColumns, animated: false)
     }
 
-    private(set) var enabledColumns: [Column] = []
+    private var enabledColumns: [Column] = []
 }
 
 private extension BarColumnLayer {

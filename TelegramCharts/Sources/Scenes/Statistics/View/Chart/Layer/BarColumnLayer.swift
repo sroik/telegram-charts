@@ -36,8 +36,6 @@ class BarColumnLayer: Layer {
         self.values.enumerated().forEach { index, value in
             self.values[index].isEnabled = values.contains(value.id)
         }
-
-        draw(animated: animated)
     }
 
     func set(range: Range<Int>, animated: Bool) {
@@ -56,7 +54,8 @@ class BarColumnLayer: Layer {
 
         let frames = BarColumnValue.frames(of: values, in: bounds, range: range)
         layers.enumerated().forEach { index, layer in
-            layer.frame = (frames[safe: index] ?? .zero).rounded()
+            let frame = (frames[safe: index] ?? .zero).rounded()
+            layer.set(frame: frame, animated: animated)
         }
     }
 

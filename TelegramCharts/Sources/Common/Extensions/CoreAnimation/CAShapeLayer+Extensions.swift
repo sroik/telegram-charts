@@ -26,7 +26,7 @@ extension CAShapeLayer {
         let deltaMinY = abs(path.bounds.minY - current.bounds.minY)
         let deltaMaxY = abs(path.bounds.maxY - current.bounds.maxY)
         let shift = max(deltaMaxY, deltaMinY)
-        let duration = TimeInterval(shift / velocity).clamped(from: 0.15, to: 0.35)
+        let duration = TimeInterval(shift / velocity).clampedDuration
 
         guard !animated else {
             set(value: path, for: .path, animated: animated, duration: duration)

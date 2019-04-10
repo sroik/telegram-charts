@@ -99,8 +99,19 @@ extension CALayer {
         let height = bounds.height * presentedYScale
         let scaledHeight = bounds.height * scale
         let delta = abs(scaledHeight - height)
-        let duration = TimeInterval(delta / velocity).clamped(from: 0.15, to: 0.35)
+        let duration = TimeInterval(delta / velocity).clampedDuration
         set(value: scale, for: .yScale, animated: animated, duration: duration)
+    }
+
+    func set(
+        frame: CGRect,
+        animated: Bool,
+        duration: TimeInterval = .defaultDuration
+    ) {
+        let bounds = CGRect(origin: .zero, size: frame.size)
+        let center = CGPoint(x: frame.midX, y: frame.midY)
+        set(value: bounds, for: .bounds, animated: animated, duration: duration)
+        set(value: center, for: .position, animated: animated, duration: duration)
     }
 }
 
@@ -115,6 +126,10 @@ extension TimeInterval {
 
     static var smoothDuration: TimeInterval {
         return 0.35
+    }
+
+    var clampedDuration: TimeInterval {
+        return clamped(from: .fastDuration, to: .smoothDuration)
     }
 }
 
