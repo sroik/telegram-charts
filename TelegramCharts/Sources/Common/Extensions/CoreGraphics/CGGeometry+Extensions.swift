@@ -129,12 +129,12 @@ extension CGRect {
         return result
     }
 
-    func inflated() -> CGRect {
+    func rounded() -> CGRect {
         return CGRect(
-            x: floor(minX),
-            y: floor(minY),
-            maxX: ceil(maxX),
-            maxY: ceil(maxY)
+            x: minX.rounded(),
+            y: minY.rounded(),
+            maxX: maxX.rounded(),
+            maxY: maxY.rounded()
         )
     }
 

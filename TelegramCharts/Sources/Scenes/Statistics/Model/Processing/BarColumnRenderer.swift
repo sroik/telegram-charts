@@ -15,7 +15,7 @@ final class BarColumnRenderer {
         frames.enumerated().forEach { index, frame in
             let color = values[safe: index]?.color ?? UIColor.clear.cgColor
             context.cgContext.setFillColor(color)
-            context.fill(frame)
+            context.fill(frame.rounded())
         }
     }
 }

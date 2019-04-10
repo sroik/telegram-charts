@@ -51,17 +51,4 @@ extension Array where Element == Range<Int> {
             result.union(with: range)
         }
     }
-
-    func stacked() -> Range<Int> {
-        guard let first = first else {
-            return .zero
-        }
-
-        return dropFirst().reduce(first) { result, range in
-            Range<Int>(
-                min: Swift.min(result.min, range.min),
-                max: result.max + range.max
-            )
-        }
-    }
 }

@@ -54,4 +54,8 @@ extension Column {
             return .zero
         }
     }
+
+    func values(in viewport: Viewport) -> [Int] {
+        return Array(values.elements(in: viewport))
+    }
 }

@@ -5,12 +5,9 @@
 import UIKit
 
 class BarColumnLayer: Layer {
-    let layers: [BarColumnValueLayer]
-    let values: [BarColumnValue]
-
     init(values: [BarColumnValue]) {
         self.values = values
-        self.layers = values.map(BarColumnValueLayer.init(value:))
+        self.layers = values.map(CALayer.init(value:))
         super.init()
         setup()
     }
@@ -36,8 +33,8 @@ class BarColumnLayer: Layer {
     }
 
     func enable(values: Set<String>, animated: Bool) {
-        layers.forEach { layer in
-            layer.value.isEnabled = values.contains(layer.value.id)
+        self.values.enumerated().forEach { index, value in
+            self.values[index].isEnabled = values.contains(value.id)
         }
 
         draw(animated: animated)
@@ -59,7 +56,7 @@ class BarColumnLayer: Layer {
 
         let frames = BarColumnValue.frames(of: values, in: bounds, range: range)
         layers.enumerated().forEach { index, layer in
-            layer.frame = frames[safe: index] ?? .zero
+            layer.frame = (frames[safe: index] ?? .zero).rounded()
         }
     }
 
@@ -70,5 +67,16 @@ class BarColumnLayer: Layer {
         themeUp()
     }
 
+    private let layers: [CALayer]
+    private var values: [BarColumnValue]
     private var range: Range<Int> = .zero
+}
+
+extension CALayer {
+    convenience init(value: BarColumnValue) {
+        self.init()
+        isOpaque = true
+        backgroundColor = value.color
+        disableActions()
+    }
 }

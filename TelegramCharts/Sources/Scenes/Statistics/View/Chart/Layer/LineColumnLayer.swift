@@ -77,8 +77,6 @@ final class LineColumnLayer: Layer {
     }
 
     private func setup() {
-        disableActions()
-
         shapeLayer.disableActions()
         shapeLayer.lineWidth = lineWidth
         shapeLayer.lineCap = .round
@@ -91,6 +89,9 @@ final class LineColumnLayer: Layer {
         pointLayer.strokeColor = column.cgColor
         pointLayer.lineWidth = lineWidth
         addSublayer(pointLayer)
+
+        disableActions()
+        themeUp()
     }
 
     private var contentFrame: CGRect {

@@ -90,6 +90,8 @@ extension CALayer {
         removeAnimation(forKey: .xTranslation)
         add(animation, forKey: .xTranslation)
     }
+
+//    func scale(y: CGFloat, velocity: CGFloat = 20)
 }
 
 extension TimeInterval {
@@ -111,6 +113,7 @@ extension CALayer.KeyPath {
     static let position = "position"
     static let bounds = "bounds"
     static let path = "path"
+    static let yScale = "transform.scale.y"
     static let xTranslation = "transform.translation.x"
     static let transform = "transform"
     static let backgroundColor = "backgroundColor"

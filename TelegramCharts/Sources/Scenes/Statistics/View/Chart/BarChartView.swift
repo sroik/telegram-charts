@@ -51,6 +51,7 @@ class BarChartView: ViewportView, ChartViewType {
 
     func adaptRange(animated: Bool) {
         let range = chart.adjustedRange(of: enabledColumns, in: viewport)
+
         layers.forEach { layer in
             layer.set(range: range, animated: animated)
         }
@@ -58,7 +59,7 @@ class BarChartView: ViewportView, ChartViewType {
 
     func layoutLayers() {
         layers.enumerated().forEach { index, layer in
-            layer.frame = layout.itemFrame(at: index, in: contentView.bounds)
+            layer.frame = layout.itemFrame(at: index, in: contentView.bounds).rounded()
         }
     }
 

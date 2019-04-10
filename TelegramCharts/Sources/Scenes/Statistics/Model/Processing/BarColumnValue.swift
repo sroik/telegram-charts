@@ -32,32 +32,29 @@ extension BarColumnValue {
         in rect: CGRect,
         range: Range<Int>
     ) -> [CGRect] {
+        guard !range.isEmpty else {
+            return values.map { _ in CGRect.zero }
+        }
+
         var frames: [CGRect] = []
         var maxY = rect.maxY
 
         for value in values {
-            let height = value.height(in: rect, range: range)
+            let ratio = CGFloat(value.value) / CGFloat(range.size)
+            let ratioHeight = rect.height * ratio
+            let height = value.isEnabled ? ratioHeight : 0
+
             let valueRect = CGRect(
                 x: rect.minX,
                 maxY: maxY,
                 width: rect.width,
                 height: height
-            ).inflated()
+            )
 
             frames.append(valueRect)
             maxY -= height
         }
 
         return frames
-    }
-
-    func height(in rect: CGRect, range: Range<Int>) -> CGFloat {
-        guard !range.isEmpty else {
-            return 0
-        }
-
-        let ratio = CGFloat(value) / CGFloat(range.size)
-        let ratioHeight = rect.height * max(ratio, 0.025)
-        return isEnabled ? ratioHeight : 0
     }
 }

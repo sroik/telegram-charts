@@ -10,10 +10,15 @@ struct ChartViewFactory {
         case .bar where isMap:
             return RasterizedBarChartView(chart: chart)
         case .bar:
-            #warning("fix")
-//            return BarChartView(chart: chart)
+            #warning("fixme")
+            return RasterizedBarChartView(
+                chart: chart,
+                minViewportSize: chart.minMapViewportSize
+            )
+        case .line:
             return lineChartView(with: chart, isMap: isMap)
-        case .line, .area:
+        case .area:
+            #warning("fixme")
             return lineChartView(with: chart, isMap: isMap)
         case .timestamps:
             assertionFailureWrapper()
