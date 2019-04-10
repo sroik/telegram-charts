@@ -43,7 +43,7 @@ final class RasterizedBarChartView: ViewportView, ChartViewType {
 
     override func adaptViewportSize() {
         super.adaptViewportSize()
-        overlayView.bounds = contentView.bounds
+        overlayView.frame = contentView.bounds
         imageView.bounds = contentView.bounds
         imageView.center = CGPoint(x: imageView.bounds.midX, y: imageView.bounds.height)
     }

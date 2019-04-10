@@ -8,7 +8,7 @@ final class BarChartOverlayView: View {
     var selectedIndex: Int? {
         didSet {
             if oldValue != selectedIndex {
-                select(index: selectedIndex, animated: true)
+                update(animated: true)
             }
         }
     }
@@ -16,8 +16,7 @@ final class BarChartOverlayView: View {
     init(chartLayout: GridLayout) {
         self.chartLayout = chartLayout
         super.init(frame: .zero)
-        deselect(animated: false)
-        themeUp()
+        setup()
     }
 
     override func themeUp() {
@@ -26,22 +25,34 @@ final class BarChartOverlayView: View {
         rightView.backgroundColor = theme.color.placeholder.withAlphaComponent(0.5)
     }
 
-    private func select(index: Int?, animated: Bool) {
-        guard let index = index else {
+    override func layoutSubviewsOnBoundsChange() {
+        super.layoutSubviewsOnBoundsChange()
+        update(animated: true)
+    }
+
+    private func update(animated: Bool) {
+        guard let index = selectedIndex else {
             deselect(animated: animated)
             return
         }
 
+        layout(at: index)
+    }
+
+    private func layout(at index: Int) {
         let holeFrame = chartLayout.itemFrame(at: index, in: bounds)
         leftView.frame = bounds.slice(at: holeFrame.minX, from: .minXEdge)
         rightView.frame = bounds.remainder(at: holeFrame.maxX, from: .minXEdge)
-        addSubviews(leftView, rightView)
     }
 
     private func deselect(animated: Bool) {
-        selectedIndex = nil
-//        leftView.removeFromSuperview()
-//        rightView.removeFromSuperview()
+        
+    }
+
+    private func setup() {
+        addSubviews(leftView, rightView)
+        deselect(animated: false)
+        themeUp()
     }
 
     private let chartLayout: GridLayout
