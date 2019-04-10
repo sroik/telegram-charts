@@ -58,7 +58,7 @@ class BarChartView: ViewportView, ChartViewType {
 
     func layoutLayers() {
         layers.enumerated().forEach { index, layer in
-            layer.frame = layout.itemFrame(at: index, in: contentView.bounds).inflated()
+            layer.frame = layout.itemFrame(at: index, in: contentView.bounds)
         }
     }
 
@@ -74,20 +74,7 @@ class BarChartView: ViewportView, ChartViewType {
 private extension BarColumnLayer {
     static func layers(with chart: Chart) -> [BarColumnLayer] {
         return chart.timestamps.indices
-            .lazy
-            .map { BarColumnValue.values(of: chart, at: $0) }
+            .map { BarColumnValue.values(of: chart.drawableColumns, at: $0) }
             .map { BarColumnLayer(values: $0) }
-    }
-}
-
-private extension BarColumnValue {
-    static func values(of chart: Chart, at index: Index) -> [BarColumnValue] {
-        return chart.drawableColumns.map { column in
-            BarColumnValue(
-                id: column.id,
-                value: column.values[safe: index] ?? 0,
-                color: column.cgColor
-            )
-        }
     }
 }

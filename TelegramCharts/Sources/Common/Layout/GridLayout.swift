@@ -36,6 +36,12 @@ extension GridLayout {
 }
 
 extension GridLayout {
+    func itemFrames(in rect: CGRect) -> [CGRect] {
+        return (0 ..< itemsNumber).map {
+            itemFrame(at: $0, in: rect)
+        }
+    }
+
     func itemFrame(at index: Int, in rect: CGRect) -> CGRect {
         let side = self.itemSide(in: rect)
         let spacing = self.spacing(in: rect)

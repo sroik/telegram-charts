@@ -4,15 +4,12 @@
 
 import UIKit
 
-struct BarColumnValue: Hashable {
-    var id: String
-    var value: Int
-    var color: CGColor?
-}
-
 final class BarColumnValueLayer: CALayer {
-    let value: BarColumnValue
-    var isEnabled: Bool = true
+    var value: BarColumnValue {
+        didSet {
+            backgroundColor = value.color
+        }
+    }
 
     init(value: BarColumnValue) {
         self.value = value
@@ -33,11 +30,5 @@ final class BarColumnValueLayer: CALayer {
         isOpaque = true
         backgroundColor = value.color
         disableActions()
-    }
-}
-
-extension BarColumnValue {
-    static var empty: BarColumnValue {
-        return BarColumnValue(id: "", value: 0, color: nil)
     }
 }

@@ -36,10 +36,14 @@ class ViewportView: View, Viewportable {
         )
     }
 
-    init(viewport: Viewport = .zeroToOne, autolayouts: Bool = true) {
+    init(
+        frame: CGRect = .screen,
+        viewport: Viewport = .zeroToOne,
+        autolayouts: Bool = true
+    ) {
         self.viewport = viewport
         self.autolayouts = autolayouts
-        super.init(frame: .screen)
+        super.init(frame: frame)
         setup()
     }
 

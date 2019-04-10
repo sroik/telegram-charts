@@ -6,8 +6,10 @@ import UIKit
 
 class BarColumnLayer: Layer {
     let layers: [BarColumnValueLayer]
+    let values: [BarColumnValue]
 
     init(values: [BarColumnValue]) {
+        self.values = values
         self.layers = values.map(BarColumnValueLayer.init(value:))
         super.init()
         setup()
@@ -15,6 +17,7 @@ class BarColumnLayer: Layer {
 
     override init(layer: Any) {
         self.layers = []
+        self.values = []
         super.init(layer: layer)
     }
 
@@ -34,7 +37,7 @@ class BarColumnLayer: Layer {
 
     func enable(values: Set<String>, animated: Bool) {
         layers.forEach { layer in
-            layer.isEnabled = values.contains(layer.value.id)
+            layer.value.isEnabled = values.contains(layer.value.id)
         }
 
         draw(animated: animated)
@@ -54,15 +57,9 @@ class BarColumnLayer: Layer {
             return
         }
 
-        let maxValue = CGFloat(range.size)
-        var maxY = bounds.height
-
-        for layer in layers {
-            let ratio = CGFloat(layer.value.value) / maxValue
-            let ratioHeight = bounds.height * max(ratio, 0.025)
-            let height = layer.isEnabled ? ratioHeight : 0
-            layer.frame = CGRect(maxY: maxY, width: bounds.width, height: height).inflated()
-            maxY -= height
+        let frames = BarColumnValue.frames(of: values, in: bounds, range: range)
+        layers.enumerated().forEach { index, layer in
+            layer.frame = frames[safe: index] ?? .zero
         }
     }
 
@@ -71,12 +68,6 @@ class BarColumnLayer: Layer {
         layers.reversed().forEach(addSublayer)
         disableActions()
         themeUp()
-    }
-
-    private var stackedValue: Int {
-        return layers
-            .filter { $0.isEnabled }
-            .reduce(0) { $0 + $1.value.value }
     }
 
     private var range: Range<Int> = .zero
