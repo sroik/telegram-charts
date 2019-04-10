@@ -17,8 +17,7 @@ final class BarColumnValueLayer: CALayer {
     init(value: BarColumnValue) {
         self.value = value
         super.init()
-        isOpaque = true
-        backgroundColor = value.color
+        setup()
     }
 
     override init(layer: Any) {
@@ -33,6 +32,7 @@ final class BarColumnValueLayer: CALayer {
     private func setup() {
         isOpaque = true
         backgroundColor = value.color
+        disableActions()
     }
 }
 

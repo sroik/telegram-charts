@@ -54,15 +54,17 @@ class BarColumnLayer: Layer {
             return
         }
 
+        let maxValue = CGFloat(range.size)
         var maxY = bounds.height
-        let ratio = CGFloat(stackedValue) / CGFloat(range.size)
 
         for layer in layers {
-//            layer.frame = CGRect(
-//                maxY: bounds.height,
-//                width: bounds.width,
-//                height: bounds.height * ratio
-//            )
+            let ratio = CGFloat(layer.value.value) / maxValue
+            let height = layer.isEnabled ? bounds.height * ratio : 0
+
+            layer.frame = CGRect(maxY: maxY, width: bounds.width, height: height)
+            layer.isHidden = !layer.isEnabled
+
+            maxY -= height
         }
     }
 

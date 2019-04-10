@@ -44,7 +44,6 @@ class ChartViewController: ViewController {
         periodView.delegate = self
         chartView.viewport = mapView.viewport
         view.addSubviews(periodView, mapView, chartView, columnsView)
-        view.addSubviews(periodView, mapView, columnsView)
     }
 
     override func didLayoutSubviewsOnBoundsChange() {

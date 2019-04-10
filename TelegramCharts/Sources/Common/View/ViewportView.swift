@@ -15,6 +15,13 @@ class ViewportView: View, Viewportable {
         }
     }
 
+    var contentSize: CGSize {
+        return CGSize(
+            width: bounds.width / viewport.size,
+            height: bounds.height
+        )
+    }
+
     var contentFrame: CGRect {
         return CGRect(
             x: -contentSize.width * viewport.min,
@@ -22,10 +29,10 @@ class ViewportView: View, Viewportable {
         )
     }
 
-    var contentSize: CGSize {
-        return CGSize(
-            width: bounds.width / viewport.size,
-            height: bounds.height
+    var visibleRect: CGRect {
+        return CGRect(
+            x: contentSize.width * viewport.min,
+            size: bounds.size
         )
     }
 
