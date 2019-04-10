@@ -106,8 +106,13 @@ extension CALayer {
     func set(
         frame: CGRect,
         animated: Bool,
-        duration: TimeInterval = .defaultDuration
+        duration: TimeInterval = .smoothDuration
     ) {
+        guard animated, duration > .ulpOfOne else {
+            self.frame = frame
+            return
+        }
+
         let bounds = CGRect(origin: .zero, size: frame.size)
         let center = CGPoint(x: frame.midX, y: frame.midY)
         set(value: bounds, for: .bounds, animated: animated, duration: duration)

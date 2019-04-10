@@ -32,7 +32,7 @@ class BarColumnLayer: Layer {
         backgroundColor = theme.color.placeholder.cgColor
     }
 
-    func enable(values: Set<String>, animated: Bool) {
+    func enable(values: Set<String>) {
         self.values.enumerated().forEach { index, value in
             self.values[index].isEnabled = values.contains(value.id)
         }
@@ -76,6 +76,7 @@ extension CALayer {
         self.init()
         isOpaque = true
         backgroundColor = value.color
+        drawsAsynchronously = true
         disableActions()
     }
 }

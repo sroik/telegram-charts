@@ -5,15 +5,13 @@
 import UIKit
 
 class BarChartView: ViewportView, ChartViewType {
+    typealias EnumerationBlock = (_ index: Int, _ layer: BarColumnLayer) -> Void
+
+    var visibleInsets = UIEdgeInsets(right: -15, left: -15)
+    var selectedIndex: Int?
     let chart: Chart
     let layout: GridLayout
     let layers: [BarColumnLayer]
-
-    var selectedIndex: Int? {
-        didSet {
-            #warning("select")
-        }
-    }
 
     init(chart: Chart) {
         self.chart = chart
@@ -23,46 +21,51 @@ class BarChartView: ViewportView, ChartViewType {
         setup()
     }
 
-    override func layoutSubviewsOnBoundsChange() {
-        super.layoutSubviewsOnBoundsChange()
-        adaptRange(animated: false)
-    }
-
-    override func adaptViewportSize() {
-        super.adaptViewportSize()
+    override func adaptViewport() {
+        super.adaptViewport()
         layoutLayers()
-    }
-
-    override func display() {
-        super.display()
-        adaptRange(animated: true)
+        adaptRange(animated: false)
     }
 
     func enable(columns: [Column], animated: Bool) {
         let columnsIds = Set(columns.map { $0.id })
+        layers.forEach { $0.enable(values: columnsIds) }
         enabledColumns = columns
-
-        layers.forEach { layer in
-            layer.enable(values: columnsIds, animated: animated)
-        }
-
         adaptRange(animated: animated)
     }
 
     func adaptRange(animated: Bool) {
         let range = chart.adjustedRange(of: enabledColumns, in: viewport)
-        layers.forEach { $0.set(range: range, animated: animated) }
-    }
-
-    func layoutLayers() {
-        layers.enumerated().forEach { index, layer in
-            let rect = contentView.bounds
-            layer.frame = layout.itemFrame(at: index, in: rect).rounded()
+        forEachVisibleLayer { index, layer in
+            layer.set(range: range, animated: animated)
         }
     }
 
+    func layoutLayers() {
+        forEachVisibleLayer { index, layer in
+            layer.frame = layerFrame(at: index)
+        }
+    }
+
+    func forEachVisibleLayer(do block: EnumerationBlock) {
+        layers.enumerated().forEach { index, layer in
+            if isVisible(layer: layer, at: index) {
+                block(index, layer)
+            }
+        }
+    }
+
+    private func isVisible(layer: BarColumnLayer, at index: Int) -> Bool {
+        let visibleFrame = visibleInsets.inset(visibleRect)
+        let frame = layerFrame(at: index)
+        return visibleFrame.intersects(layer.frame) || visibleFrame.intersects(frame)
+    }
+
+    private func layerFrame(at index: Int) -> CGRect {
+        return layout.itemFrame(at: index, in: contentView.bounds).rounded()
+    }
+
     private func setup() {
-        displayLink.fps = 1
         layers.forEach(contentView.layer.addSublayer)
         enable(columns: chart.drawableColumns, animated: false)
     }
