@@ -8,7 +8,7 @@ final class BarChartRenderer {
     var queue = DispatchQueue(label: "com.sroik.rendering")
     let layout: GridLayout
     let chart: Chart
-    let scale: CGFloat = UIScreen.main.scale
+    let scale: CGFloat = 1
 
     init(chart: Chart) {
         self.chart = chart

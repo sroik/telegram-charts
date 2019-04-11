@@ -36,21 +36,23 @@ class RangeChartGridView: ViewportView, ChartViewportable {
 
     func adaptRange(animated: Bool) {
         let range = chart.adjustedRange(of: enabledColumns, in: viewport)
-        let rangeMidScale = CGFloat(self.range.mid) / CGFloat(range.mid)
-        self.range = range
 
+        guard self.range != range else {
+            return
+        }
+
+        self.range = range
         cells.enumerated().forEach { index, cell in
+            let value = self.value(at: index, in: range) ?? 0
+            let scale = CGFloat(value) / CGFloat(cell.state.leftValue ?? 0)
+
             animator.animate(
                 view: cell,
-                using: { self.update(cell: $0, at: index) },
-                scale: rangeMidScale,
+                using: { $0.state.leftValue = value },
+                scale: scale,
                 animated: animated
             )
         }
-    }
-
-    func update(cell: ChartGridViewCell, at index: Index) {
-        cell.state.leftValue = value(at: index, in: range)
     }
 
     func value(at index: Int, in range: Range<Int>?) -> Int? {

@@ -33,7 +33,7 @@ extension String {
         return last ?? ""
     }
 
-    init(columnValue value: Int) {
+    init(roundedValue value: Int) {
         switch abs(value) {
         case Int.billion ... Int.max:
             self.init(format: "%.1fB", value.billions)
@@ -44,5 +44,13 @@ extension String {
         default:
             self.init(value)
         }
+    }
+
+    init(value: Int) {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.groupingSeparator = " "
+        let string = formatter.string(for: NSNumber(value: value))
+        self = string ?? String(value)
     }
 }

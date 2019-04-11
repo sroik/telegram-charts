@@ -11,6 +11,13 @@ extension CALayer {
         return (presentedValue(for: .yScale) as? CGFloat) ?? 1
     }
 
+    static func performWithoutAnimation(_ animationlessBlock: () -> Void) {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        animationlessBlock()
+        CATransaction.commit()
+    }
+
     func add(child: CALayer) {
         if child.superlayer == nil {
             addSublayer(child)
@@ -23,12 +30,16 @@ extension CALayer {
         }
     }
 
-    func presentedValue(for keyPath: KeyPath) -> Any? {
-        return presentation()?.value(forKeyPath: keyPath) ?? value(forKeyPath: keyPath)
-    }
-
     func basicAnimation(for keyPath: KeyPath) -> CABasicAnimation? {
         return animation(forKey: keyPath) as? CABasicAnimation
+    }
+
+    func presentedValue(for keyPath: KeyPath) -> Any? {
+        if animation(forKey: keyPath) == nil {
+            return value(forKeyPath: keyPath)
+        }
+
+        return presentation()?.value(forKeyPath: keyPath) ?? value(forKeyPath: keyPath)
     }
 
     func disableActions() {
@@ -120,11 +131,6 @@ extension CALayer {
         animated: Bool,
         duration: TimeInterval = .smoothDuration
     ) {
-        guard animated, duration > .ulpOfOne else {
-            self.frame = frame
-            return
-        }
-
         let bounds = CGRect(origin: .zero, size: frame.size)
         let center = CGPoint(x: frame.midX, y: frame.midY)
         set(value: bounds, for: .bounds, animated: animated, duration: duration)

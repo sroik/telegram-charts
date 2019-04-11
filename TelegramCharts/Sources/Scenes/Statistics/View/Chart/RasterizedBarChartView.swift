@@ -6,6 +6,7 @@ import UIKit
 
 final class RasterizedBarChartView: ViewportView, ChartViewType {
     let imageView = UIImageView.pixelated()
+    let overlayView: BarChartOverlayView
     let minViewportSize: CGFloat
     let chart: Chart
 
@@ -42,9 +43,13 @@ final class RasterizedBarChartView: ViewportView, ChartViewType {
         render(animated: false)
     }
 
+    override func adaptViewport() {
+        super.adaptViewport()
+        overlayView.frame = contentView.frame
+    }
+
     override func adaptViewportSize() {
         super.adaptViewportSize()
-        overlayView.frame = contentView.bounds
         imageView.bounds = contentView.bounds
         imageView.center = CGPoint(x: imageView.bounds.midX, y: imageView.bounds.height)
     }
@@ -55,7 +60,7 @@ final class RasterizedBarChartView: ViewportView, ChartViewType {
     }
 
     func enable(columns: [Column], animated: Bool) {
-        animateColumns(from: enabledColumns, to: columns, animated: animated)
+        animator.animateColumns(from: enabledColumns, to: columns, animated: animated)
         enabledColumns = columns
         maxRange = chart.adjustedRange(of: columns)
         render(animated: animated)
@@ -79,7 +84,8 @@ final class RasterizedBarChartView: ViewportView, ChartViewType {
     }
 
     private func setup() {
-        contentView.addSubviews(imageView, overlayView)
+        contentView.addSubviews(imageView)
+        addSubview(overlayView)
         enable(columns: chart.drawableColumns, animated: false)
     }
 
@@ -92,9 +98,8 @@ final class RasterizedBarChartView: ViewportView, ChartViewType {
 
     private var maxRange: Range<Int> = .zero
     private let renderer: BarChartRenderer
-    private let overlayView: BarChartOverlayView
     private var enabledColumns: [Column] = []
-    private(set) lazy var barChartView = BarChartView(chart: chart)
+    private lazy var animator = RasterizedBarChartAnimator(target: self)
 }
 
 private extension UIImageView {

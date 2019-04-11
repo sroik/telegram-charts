@@ -42,7 +42,7 @@
 		AC16EAC8225E0772009471D7 /* BarColumnRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EAC7225E0772009471D7 /* BarColumnRenderer.swift */; };
 		AC16EACA225E3B1A009471D7 /* BarChartOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EAC9225E3B1A009471D7 /* BarChartOverlayView.swift */; };
 		AC16EACC225E80D3009471D7 /* DispatchQueue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EACB225E80D3009471D7 /* DispatchQueue+Extensions.swift */; };
-		AC16EACE225E8FC2009471D7 /* RasterizedBarChartView + Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EACD225E8FC2009471D7 /* RasterizedBarChartView + Animations.swift */; };
+		AC16EACE225E8FC2009471D7 /* RasterizedBarChartAnimatior.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EACD225E8FC2009471D7 /* RasterizedBarChartAnimatior.swift */; };
 		AC2542A42257961F00EE2021 /* Bool+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2542A32257961F00EE2021 /* Bool+Extensions.swift */; };
 		AC2542A62257DA4E00EE2021 /* CAAnimation+Extenisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2542A52257DA4E00EE2021 /* CAAnimation+Extenisions.swift */; };
 		AC2542A82257F03400EE2021 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2542A72257F03400EE2021 /* String+Extensions.swift */; };
@@ -157,7 +157,7 @@
 		AC16EAC7225E0772009471D7 /* BarColumnRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarColumnRenderer.swift; sourceTree = "<group>"; };
 		AC16EAC9225E3B1A009471D7 /* BarChartOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartOverlayView.swift; sourceTree = "<group>"; };
 		AC16EACB225E80D3009471D7 /* DispatchQueue+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extensions.swift"; sourceTree = "<group>"; };
-		AC16EACD225E8FC2009471D7 /* RasterizedBarChartView + Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RasterizedBarChartView + Animations.swift"; sourceTree = "<group>"; };
+		AC16EACD225E8FC2009471D7 /* RasterizedBarChartAnimatior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RasterizedBarChartAnimatior.swift; sourceTree = "<group>"; };
 		AC2542A32257961F00EE2021 /* Bool+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extensions.swift"; sourceTree = "<group>"; };
 		AC2542A52257DA4E00EE2021 /* CAAnimation+Extenisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAAnimation+Extenisions.swift"; sourceTree = "<group>"; };
 		AC2542A72257F03400EE2021 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -328,12 +328,12 @@
 			path = Processing;
 			sourceTree = "<group>";
 		};
-		AC16EACF225E8FEE009471D7 /* Extensions */ = {
+		AC16EACF225E8FEE009471D7 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
-				AC16EACD225E8FC2009471D7 /* RasterizedBarChartView + Animations.swift */,
+				AC16EACD225E8FC2009471D7 /* RasterizedBarChartAnimatior.swift */,
 			);
-			path = Extensions;
+			path = Animation;
 			sourceTree = "<group>";
 		};
 		AC30992A2238F1AC00A04331 /* Chart */ = {
@@ -346,7 +346,7 @@
 				AC16EAC9225E3B1A009471D7 /* BarChartOverlayView.swift */,
 				AC16EAC6225E0759009471D7 /* Processing */,
 				AC3099442239211D00A04331 /* Layer */,
-				AC16EACF225E8FEE009471D7 /* Extensions */,
+				AC16EACF225E8FEE009471D7 /* Animation */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -908,7 +908,7 @@
 				AC3B380F22365543000AD635 /* Chart.swift in Sources */,
 				ACE686992236BED100724432 /* UIView+Layout.swift in Sources */,
 				AC16EA95225C705F009471D7 /* ChartViewControllerLayout.swift in Sources */,
-				AC16EACE225E8FC2009471D7 /* RasterizedBarChartView + Animations.swift in Sources */,
+				AC16EACE225E8FC2009471D7 /* RasterizedBarChartAnimatior.swift in Sources */,
 				AC7C1F27225A155100A095D6 /* UIFont+Extension.swift in Sources */,
 				AC7C1F1F2259FA9100A095D6 /* LineChartView.swift in Sources */,
 				AC143B4A2237AD2F00FEB9CD /* Range.swift in Sources */,

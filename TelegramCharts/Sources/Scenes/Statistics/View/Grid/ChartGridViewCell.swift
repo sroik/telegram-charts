@@ -55,8 +55,8 @@ final class ChartGridViewCell: View {
     func updateState() {
         leftLabel.textColor = state.leftColor ?? theme.color.details
         rightLabel.textColor = state.rightColor ?? theme.color.details
-        leftLabel.text = state.leftValue.flatMap { String(columnValue: $0) }
-        rightLabel.text = state.rightValue.flatMap { String(columnValue: $0) }
+        leftLabel.text = state.leftValue.flatMap { String(roundedValue: $0) }
+        rightLabel.text = state.rightValue.flatMap { String(roundedValue: $0) }
         leftLabel.isHidden = state.leftValue == nil
         rightLabel.isHidden = state.rightValue == nil
         line.isHidden = !state.hasLine

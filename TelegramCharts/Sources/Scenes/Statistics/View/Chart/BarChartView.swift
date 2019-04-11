@@ -24,6 +24,7 @@ class BarChartView: ViewportView, ChartViewType {
     override func themeUp() {
         super.themeUp()
         contentView.backgroundColor = theme.color.placeholder
+        layers.forEach { $0.theme = theme }
     }
 
     override func adaptViewport() {
@@ -51,6 +52,7 @@ class BarChartView: ViewportView, ChartViewType {
             if isVisible(layer: layer, at: index) {
                 contentView.layer.add(child: layer)
                 layer.frame = layerFrame(at: index)
+                layer.draw(animated: false)
             } else {
                 layer.dropFromParent()
             }

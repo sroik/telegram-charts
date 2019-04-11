@@ -22,11 +22,6 @@ class BarColumnLayer: Layer {
         self.init(values: [])
     }
 
-    override func layoutSublayersOnBoundsChange() {
-        super.layoutSublayersOnBoundsChange()
-        draw(animated: false)
-    }
-
     override func themeUp() {
         super.themeUp()
         backgroundColor = theme.color.placeholder.cgColor
@@ -39,10 +34,6 @@ class BarColumnLayer: Layer {
     }
 
     func set(range: Range<Int>, animated: Bool) {
-        guard self.range != range else {
-            return
-        }
-
         self.range = range
         draw(animated: animated)
     }

@@ -40,7 +40,7 @@ class ChartCardView: CardView {
         cell.isHidden = !enabledColumns.contains(column.id)
         cell.title = column.name
         cell.valueColor = column.uiColor
-        cell.value = String(column.values[safe: selectedIndex] ?? 0)
+        cell.value = String(value: column.values[safe: selectedIndex] ?? 0)
     }
 
     private func cell(withId id: String) -> ChartCardViewCell? {

@@ -18,7 +18,7 @@ final class ComparingChartGridView: RangeChartGridView {
         }
     }
 
-    override func update(cell: ChartGridViewCell, at index: Index) {
+    private func update(cell: ChartGridViewCell, at index: Index) {
         var state = cell.state
         state.leftValue = value(at: index, in: leftRange)
         state.rightValue = value(at: index, in: rightRange)
