@@ -77,15 +77,11 @@ final class LineColumnLayer: Layer {
     }
 
     private func setup() {
-        shapeLayer.disableActions()
         shapeLayer.lineWidth = lineWidth
-        shapeLayer.lineCap = .round
-        shapeLayer.lineJoin = .round
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.strokeColor = column.cgColor
         addSublayer(shapeLayer)
 
-        pointLayer.disableActions()
         pointLayer.strokeColor = column.cgColor
         pointLayer.lineWidth = lineWidth
         addSublayer(pointLayer)
@@ -103,6 +99,6 @@ final class LineColumnLayer: Layer {
     }
 
     private var range: Range<Int> = .zero
-    private let pointLayer = CAShapeLayer()
-    private let shapeLayer = CAShapeLayer()
+    private let pointLayer = CAShapeLayer.rounded()
+    private let shapeLayer = CAShapeLayer.rounded()
 }

@@ -128,12 +128,14 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
         let rightSpace = limits.maxX - lineFrame.maxX
         if leftSpace > rightSpace {
             return CGRect(
-                maxX: lineFrame.minX - 10,
+                maxX: lineFrame.minX - 15,
+                y: 15,
                 size: cardView.size
             ).limited(with: limits)
         } else {
             return CGRect(
-                x: lineFrame.maxX + 10,
+                x: lineFrame.maxX + 15,
+                y: 15,
                 size: cardView.size
             ).limited(with: limits)
         }

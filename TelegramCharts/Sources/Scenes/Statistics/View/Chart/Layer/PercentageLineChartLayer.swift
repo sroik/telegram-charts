@@ -11,7 +11,7 @@ final class PercentageLineChartLayer: Layer {
 
     init(chartColumns: [Column]) {
         self.columns = StackedColumn.columns(with: chartColumns)
-        self.layers = chartColumns.map { CAShapeLayer(column: $0) }
+        self.layers = chartColumns.map { CAShapeLayer.rounded(fill: $0.cgColor) }
         super.init()
         setup()
     }
@@ -39,31 +39,66 @@ final class PercentageLineChartLayer: Layer {
 
     func enable(values: Set<String>, animated: Bool) {
         columns.transform { $1.enable(ids: values) }
+        invalidateCache()
         draw(animated: animated)
     }
 
     func draw(animated: Bool) {
-        backgroundColor = UIColor.yellow.cgColor
-        let spacing = bounds.width / CGFloat(columns.count)
-        var paths: [CGPath] = []
+        layers.enumerated().forEach { index, layer in
+            let points = layerPoints(at: index)
+            let path = layerPath(between: points)
+            layer.set(path: path, animated: animated)
+        }
+    }
+
+    private func layerPath(between points: [CGPoint]) -> CGPath {
+        let (bl, br) = (bounds.bottomLeft, bounds.bottomRight)
+        return CGPath.between(points: [bl] + points + [br])
+    }
+
+    private func layerPoints(at index: Int) -> [CGPoint] {
+        let spacing = bounds.width / CGFloat(columns.count - 1)
+        let points = columnsPoints.compactMap { $0[safe: index] }
+        return points.enumerated().map { index, point in
+            CGPoint(x: CGFloat(index) * spacing, y: point.y)
+        }
+    }
+
+    private func invalidateCache() {
+        cachedColumnsPoints = []
+        cachedHeight = 0
+    }
+
+    private func updateCachedColumnsPoints() {
+        guard !bounds.isEmpty, columns.count > 1 else {
+            return
+        }
+
+        cachedHeight = bounds.height
+        cachedColumnsPoints = columns.enumerated().map { index, column in
+            return column.percentagePoints(height: bounds.height)
+        }
     }
 
     private func setup() {
         isOpaque = true
-        layers.forEach(addSublayer)
+        layers.reversed().forEach(addSublayer)
         disableActions()
         themeUp()
     }
 
-    private let layers: [CALayer]
-    private var columns: [StackedColumn]
-}
-
-private extension CAShapeLayer {
-    convenience init(column: Column) {
-        self.init()
-        fillColor = column.cgColor
-        strokeColor = nil
-        disableActions()
+    private var columnsPoints: [[CGPoint]] {
+        isCacheOutdated.onTrue(do: updateCachedColumnsPoints)
+        return cachedColumnsPoints
     }
+
+    private var isCacheOutdated: Bool {
+        return abs(cachedHeight - bounds.height) > .ulpOfOne
+    }
+
+    private var cachedHeight: CGFloat = 0
+    private var cachedColumnsPoints: [[CGPoint]] = []
+
+    private var columns: [StackedColumn]
+    private let layers: [CAShapeLayer]
 }

@@ -5,6 +5,15 @@
 import UIKit
 
 extension CAShapeLayer {
+    static func rounded(fill: CGColor? = nil) -> CAShapeLayer {
+        let layer = CAShapeLayer()
+        layer.disableActions()
+        layer.fillColor = fill
+        layer.lineCap = .round
+        layer.lineJoin = .round
+        return layer
+    }
+
     var presentedPath: CGPath? {
         return presentation()?.path ?? path
     }

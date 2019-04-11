@@ -17,14 +17,6 @@ extension StackedColumn {
         return columns
     }
 
-    var stackedValue: Int {
-        return values
-            .lazy
-            .filter { $0.isEnabled }
-            .map { $0.value }
-            .reduce(0, +)
-    }
-
     init(columns: [Column], at index: Index) {
         self.init(index: index, values: columns.map { column in
             StackedColumnValue(
@@ -42,16 +34,24 @@ extension StackedColumn {
         }
     }
 
+    func stackedValue() -> Int {
+        return values
+            .lazy
+            .filter { $0.isEnabled }
+            .reduce(0) { $0 + $1.value }
+    }
+
     func percentagePoints(
-        x: CGFloat,
+        x: CGFloat = 0,
         height: CGFloat,
         minHeight: CGFloat = 0
     ) -> [CGPoint] {
-        guard height > 0, self.stackedValue > 0 else {
+        let stackedValue = self.stackedValue()
+
+        guard height > 0, stackedValue > 0 else {
             return values.map { _ in CGPoint.zero }
         }
 
-        let stackedValue = self.stackedValue
         var stackedHeight: CGFloat = 0
         var points: [CGPoint] = []
 
@@ -70,6 +70,8 @@ extension StackedColumn {
         maxValue: Int,
         minHeight: CGFloat = 0
     ) -> [CGRect] {
+        let stackedValue = self.stackedValue()
+
         guard maxValue > 0, stackedValue > 0 else {
             return values.map { _ in CGRect.zero }
         }

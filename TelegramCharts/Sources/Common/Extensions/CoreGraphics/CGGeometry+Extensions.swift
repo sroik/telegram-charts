@@ -64,6 +64,14 @@ extension CGRect {
         ]
     }
 
+    var bottomLeft: CGPoint {
+        return CGPoint(x: minX, y: maxY)
+    }
+
+    var bottomRight: CGPoint {
+        return CGPoint(x: maxX, y: maxY)
+    }
+
     var diagonal: CGFloat {
         return sqrt(width * width + height * height)
     }
