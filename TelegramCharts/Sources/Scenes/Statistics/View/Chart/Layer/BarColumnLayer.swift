@@ -5,7 +5,7 @@
 import UIKit
 
 class BarColumnLayer: Layer {
-    init(values: [BarColumnValue]) {
+    init(values: [StackedColumnValue]) {
         self.values = values
         self.layers = values.map(CALayer.init(value:))
         super.init()
@@ -33,21 +33,23 @@ class BarColumnLayer: Layer {
         }
     }
 
-    func set(range: Range<Int>, animated: Bool) {
+    func set(range: Range<Int>, maxRange: Range<Int>, animated: Bool) {
         self.range = range
+        self.maxRange = maxRange
         draw(animated: animated)
     }
 
     func draw(animated: Bool) {
-        guard !bounds.isEmpty, !range.isEmpty else {
+        guard !bounds.isEmpty, !range.isEmpty, !maxRange.isEmpty else {
             return
         }
 
-        let frames = BarColumnValue.frames(
+        let scale = CGFloat(maxRange.size) / CGFloat(range.size)
+        let frames = StackedColumnValue.barFrames(
             of: values,
             in: bounds,
             range: range,
-            minHeight: 1.0
+            minHeight: scale
         )
 
         layers.enumerated().forEach { index, layer in
@@ -64,12 +66,13 @@ class BarColumnLayer: Layer {
     }
 
     private let layers: [CALayer]
-    private var values: [BarColumnValue]
+    private var values: [StackedColumnValue]
     private var range: Range<Int> = .zero
+    private var maxRange: Range<Int> = .zero
 }
 
 extension CALayer {
-    convenience init(value: BarColumnValue) {
+    convenience init(value: StackedColumnValue) {
         self.init()
         isOpaque = true
         backgroundColor = value.color

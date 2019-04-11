@@ -9,11 +9,10 @@ class LineChartView: ViewportView, ChartViewType {
     let layers: [LineColumnLayer]
 
     var selectedIndex: Int? {
-        get {
-            return layers.first?.selectedIndex
-        }
-        set {
-            select(index: newValue)
+        didSet {
+            layers.forEach { layer in
+                layer.selectedIndex = selectedIndex
+            }
         }
     }
 
@@ -29,14 +28,16 @@ class LineChartView: ViewportView, ChartViewType {
         adaptRange(animated: false)
     }
 
-    override func adaptViewportSize() {
-        super.adaptViewportSize()
-        layoutLayers()
-    }
-
     override func display() {
         super.display()
         adaptRange(animated: true)
+    }
+
+    override func adaptViewportSize() {
+        super.adaptViewportSize()
+        layers.forEach { layer in
+            layer.frame = contentView.bounds
+        }
     }
 
     func enable(columns: [Column], animated: Bool) {
@@ -58,23 +59,11 @@ class LineChartView: ViewportView, ChartViewType {
         }
     }
 
-    func select(index: Int?) {
-        layers.forEach { layer in
-            layer.selectedIndex = index
-        }
-    }
-
     func adaptRange(animated: Bool) {
         let range = chart.adjustedRange(of: enabledColumns, in: viewport)
 
         layers.forEach { layer in
             layer.set(range: range, animated: animated)
-        }
-    }
-
-    func layoutLayers() {
-        layers.forEach { layer in
-            layer.frame = contentView.bounds
         }
     }
 

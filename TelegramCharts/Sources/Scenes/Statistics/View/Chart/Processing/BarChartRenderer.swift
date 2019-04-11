@@ -8,7 +8,7 @@ final class BarChartRenderer {
     var queue = DispatchQueue(label: "com.sroik.rendering")
     let layout: GridLayout
     let chart: Chart
-    let scale: CGFloat = 1
+    let scale: CGFloat = min(2, UIScreen.main.scale)
 
     init(chart: Chart) {
         self.chart = chart
@@ -32,7 +32,7 @@ final class BarChartRenderer {
 
         frames.enumerated().forEach { index, frame in
             BarColumnRenderer().render(
-                values: BarColumnValue.values(of: columns, at: index),
+                values: StackedColumnValue.values(of: columns, at: index),
                 range: range,
                 in: frame.rounded(),
                 in: context,

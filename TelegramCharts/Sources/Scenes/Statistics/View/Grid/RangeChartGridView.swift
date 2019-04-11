@@ -10,11 +10,11 @@ class RangeChartGridView: ViewportView, ChartViewportable {
     let layout: GridLayout
     let chart: Chart
 
-    init(chart: Chart, layout: GridLayout = .values, viewport: Viewport = .zeroToOne) {
+    init(chart: Chart, layout: GridLayout) {
         self.chart = chart
         self.layout = layout
         self.cells = ChartGridViewCell.cells(count: layout.itemsNumber)
-        super.init(viewport: viewport, autolayouts: false)
+        super.init(autolayouts: false)
         setup()
     }
 
@@ -34,8 +34,12 @@ class RangeChartGridView: ViewportView, ChartViewportable {
         adaptRange(animated: animated)
     }
 
+    func adaptedRange() -> Range<Int> {
+        return chart.adjustedRange(of: enabledColumns, in: viewport)
+    }
+
     func adaptRange(animated: Bool) {
-        let range = chart.adjustedRange(of: enabledColumns, in: viewport)
+        let range = adaptedRange()
 
         guard self.range != range else {
             return
@@ -67,14 +71,14 @@ class RangeChartGridView: ViewportView, ChartViewportable {
         }
     }
 
-    private func setup() {
+    func setup() {
         isUserInteractionEnabled = false
         clipsToBounds = true
         displayLink.fps = 2
         cells.forEach(addSubview)
 
-        themeUp()
         enable(columns: chart.drawableColumns, animated: false)
+        themeUp()
     }
 
     private(set) var enabledColumns: [Column] = []

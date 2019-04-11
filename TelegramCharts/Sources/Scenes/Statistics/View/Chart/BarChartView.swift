@@ -41,9 +41,10 @@ class BarChartView: ViewportView, ChartViewType {
     }
 
     func adaptRange(animated: Bool) {
+        let maxRange = chart.adjustedRange(of: enabledColumns)
         let range = chart.adjustedRange(of: enabledColumns, in: viewport)
         forEachVisibleLayer { index, layer in
-            layer.set(range: range, animated: animated)
+            layer.set(range: range, maxRange: maxRange, animated: animated)
         }
     }
 
@@ -87,7 +88,7 @@ class BarChartView: ViewportView, ChartViewType {
 private extension BarColumnLayer {
     static func layers(with chart: Chart) -> [BarColumnLayer] {
         return chart.timestamps.indices
-            .map { BarColumnValue.values(of: chart.drawableColumns, at: $0) }
+            .map { StackedColumnValue.values(of: chart.drawableColumns, at: $0) }
             .map { BarColumnLayer(values: $0) }
     }
 }

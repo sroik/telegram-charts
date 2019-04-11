@@ -85,7 +85,6 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
     }
 
     private func setup() {
-        gridView.clipsToBounds = true
         timelineView.clipsToBounds = true
         chartContainer.clipsToBounds = true
         chartContainer.addSubviews(chartView)

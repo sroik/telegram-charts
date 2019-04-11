@@ -6,11 +6,15 @@ import UIKit
 
 struct ChartGridViewFactory {
     static func view(with chart: Chart) -> ChartViewportableView {
-        if chart.yScaled {
-            return ComparingChartGridView(chart: chart)
+        if chart.percentage {
+            return PercentageChartGridView(chart: chart)
         }
 
-        return RangeChartGridView(chart: chart)
+        if chart.yScaled {
+            return ComparingChartGridView(chart: chart, layout: .values)
+        }
+
+        return RangeChartGridView(chart: chart, layout: .values)
     }
 }
 

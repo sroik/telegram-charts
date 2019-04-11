@@ -14,8 +14,7 @@ struct ChartViewFactory {
         case .bar:
             return RasterizedBarChartView(chart: chart, minViewportSize: chart.minViewportSize)
         case .area:
-            #warning("fixme")
-            return lineChartView(with: chart, isMap: isMap)
+            return PercentageLineChartView(chart: chart)
         case .timestamps:
             assertionFailureWrapper()
             return LineChartView(chart: chart)

@@ -17,13 +17,13 @@ struct ChartViewControllerLayout {
 extension ChartViewControllerLayout {
     init(chart: Chart) {
         self.init(
-            insets: UIEdgeInsets(top: 7, left: 15, bottom: 15, right: 15),
+            insets: UIEdgeInsets(top: 0, left: 15, bottom: 15, right: 15),
             hasMap: true,
             mapHeight: 40,
             hasColumns: chart.drawableColumns.count > 1,
             columnsHeight: 0,
-            periodHeight: 25,
-            chartHeight: 355
+            periodHeight: 40,
+            chartHeight: 350
         )
     }
 

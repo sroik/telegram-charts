@@ -4,21 +4,14 @@
 
 import UIKit
 
-struct BarColumnValue: Hashable {
-    var id: String
-    var value: Int
-    var color: CGColor?
-    var isEnabled: Bool
-}
-
-extension BarColumnValue {
-    static var empty: BarColumnValue {
-        return BarColumnValue(id: "", value: 0, color: nil, isEnabled: true)
+extension StackedColumnValue {
+    static var empty: StackedColumnValue {
+        return StackedColumnValue(id: "", value: 0)
     }
 
-    static func values(of columns: [Column], at index: Index) -> [BarColumnValue] {
+    static func values(of columns: [Column], at index: Index) -> [StackedColumnValue] {
         return columns.map { column in
-            BarColumnValue(
+            StackedColumnValue(
                 id: column.id,
                 value: column.values[safe: index] ?? 0,
                 color: column.cgColor,
@@ -27,8 +20,8 @@ extension BarColumnValue {
         }
     }
 
-    static func frames(
-        of values: [BarColumnValue],
+    static func barFrames(
+        of values: [StackedColumnValue],
         in rect: CGRect,
         range: Range<Int>,
         minHeight: CGFloat = 0
@@ -38,7 +31,7 @@ extension BarColumnValue {
         }
 
         var frames: [CGRect] = []
-        var maxY = rect.maxY
+        var stackedHeight: CGFloat = 0
 
         for value in values {
             let ratio = CGFloat(value.value) / CGFloat(range.size)
@@ -47,13 +40,13 @@ extension BarColumnValue {
 
             let valueRect = CGRect(
                 x: rect.minX,
-                maxY: maxY,
+                maxY: rect.maxY - stackedHeight,
                 width: rect.width,
                 height: height
             )
 
             frames.append(valueRect)
-            maxY -= height
+            stackedHeight += height
         }
 
         return frames

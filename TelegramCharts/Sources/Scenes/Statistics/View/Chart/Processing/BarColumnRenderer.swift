@@ -6,13 +6,13 @@ import UIKit
 
 final class BarColumnRenderer {
     func render(
-        values: [BarColumnValue],
+        values: [StackedColumnValue],
         range: Range<Int>,
         in rect: CGRect,
         in context: UIGraphicsRendererContext,
         minHeight: CGFloat = 0
     ) {
-        let frames = BarColumnValue.frames(
+        let frames = StackedColumnValue.barFrames(
             of: values,
             in: rect,
             range: range,

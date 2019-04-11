@@ -34,7 +34,7 @@ final class RasterizedBarChartAnimator {
 
     private func invalidateTimer() {
         let timer = Timer(timeInterval: duration, repeats: false) { [weak self] _ in
-            self?.chartView.removeFromSuperview(animated: true)
+            self?.chartView.removeFromSuperview(animated: true, duration: .fastDuration)
         }
 
         RunLoop.main.add(timer, forMode: .common)
