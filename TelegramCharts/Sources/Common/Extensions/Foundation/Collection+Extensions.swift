@@ -47,3 +47,11 @@ extension Collection where Index == Int {
         return self[safe: index]
     }
 }
+
+extension Array {
+    mutating func transform(using block: (Int, inout Element) -> Void) {
+        indices.forEach { idx in
+            block(idx, &self[idx])
+        }
+    }
+}

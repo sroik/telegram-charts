@@ -32,7 +32,7 @@ final class BarChartRenderer {
 
         frames.enumerated().forEach { index, frame in
             BarColumnRenderer().render(
-                values: StackedColumnValue.values(of: columns, at: index),
+                column: StackedColumn(columns: columns, at: index),
                 range: range,
                 in: frame.rounded(),
                 in: context,

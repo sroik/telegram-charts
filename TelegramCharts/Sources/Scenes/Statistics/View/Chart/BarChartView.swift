@@ -87,8 +87,8 @@ class BarChartView: ViewportView, ChartViewType {
 
 private extension BarColumnLayer {
     static func layers(with chart: Chart) -> [BarColumnLayer] {
-        return chart.timestamps.indices
-            .map { StackedColumnValue.values(of: chart.drawableColumns, at: $0) }
-            .map { BarColumnLayer(values: $0) }
+        return StackedColumn.columns(with: chart.drawableColumns).map {
+            BarColumnLayer(column: $0)
+        }
     }
 }

@@ -22,3 +22,8 @@ struct StackedColumnValue: Hashable {
         self.isEnabled = isEnabled
     }
 }
+
+struct StackedColumn: Hashable {
+    var index: Int
+    var values: [StackedColumnValue]
+}

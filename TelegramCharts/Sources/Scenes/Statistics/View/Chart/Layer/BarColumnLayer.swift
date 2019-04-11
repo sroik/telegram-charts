@@ -5,21 +5,21 @@
 import UIKit
 
 class BarColumnLayer: Layer {
-    init(values: [StackedColumnValue]) {
-        self.values = values
-        self.layers = values.map(CALayer.init(value:))
+    init(column: StackedColumn) {
+        self.column = column
+        self.layers = column.values.map(CALayer.init(value:))
         super.init()
         setup()
     }
 
     override init(layer: Any) {
         self.layers = []
-        self.values = []
+        self.column = .empty
         super.init(layer: layer)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        self.init(values: [])
+        self.init(column: .empty)
     }
 
     override func themeUp() {
@@ -28,9 +28,7 @@ class BarColumnLayer: Layer {
     }
 
     func enable(values: Set<String>) {
-        self.values.enumerated().forEach { index, value in
-            self.values[index].isEnabled = values.contains(value.id)
-        }
+        column.enable(ids: values)
     }
 
     func set(range: Range<Int>, maxRange: Range<Int>, animated: Bool) {
@@ -45,12 +43,7 @@ class BarColumnLayer: Layer {
         }
 
         let scale = CGFloat(maxRange.size) / CGFloat(range.size)
-        let frames = StackedColumnValue.barFrames(
-            of: values,
-            in: bounds,
-            range: range,
-            minHeight: scale
-        )
+        let frames = column.barFrames(in: bounds, maxValue: range.max, minHeight: scale)
 
         layers.enumerated().forEach { index, layer in
             let frame = (frames[safe: index] ?? .zero).rounded()
@@ -66,17 +59,16 @@ class BarColumnLayer: Layer {
     }
 
     private let layers: [CALayer]
-    private var values: [StackedColumnValue]
+    private var column: StackedColumn
     private var range: Range<Int> = .zero
     private var maxRange: Range<Int> = .zero
 }
 
-extension CALayer {
+private extension CALayer {
     convenience init(value: StackedColumnValue) {
         self.init()
         isOpaque = true
         backgroundColor = value.color
-        drawsAsynchronously = true
         disableActions()
     }
 }

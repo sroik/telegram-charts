@@ -9,6 +9,7 @@ class PercentageLineChartView: ViewportView, ChartViewType {
     let chart: Chart
 
     init(chart: Chart) {
+        self.chartLayer = PercentageLineChartLayer(chart: chart)
         self.chart = chart
         super.init()
         setup()
@@ -16,16 +17,20 @@ class PercentageLineChartView: ViewportView, ChartViewType {
 
     override func adaptViewportSize() {
         super.adaptViewportSize()
+        chartLayer.frame = contentView.bounds
     }
 
     func enable(columns: [Column], animated: Bool) {
-        enabledColumns = columns
-        /* do smth */
+        chartLayer.enable(
+            values: Set(columns.map { $0.id }),
+            animated: animated
+        )
     }
 
     private func setup() {
+        contentView.layer.addSublayer(chartLayer)
         enable(columns: chart.drawableColumns, animated: false)
     }
 
-    private(set) var enabledColumns: [Column] = []
+    let chartLayer: PercentageLineChartLayer
 }
