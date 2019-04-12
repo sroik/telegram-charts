@@ -32,10 +32,9 @@ class BarChartView: ViewportView, ChartViewType {
         layoutLayers()
     }
 
-    func enable(columns: [Column], animated: Bool) {
-        let columnsIds = Set(columns.map { $0.id })
-        layers.forEach { $0.enable(values: columnsIds) }
-        enabledColumns = columns
+    func enable(columns: [String], animated: Bool) {
+        layers.forEach { $0.enable(values: Set(columns)) }
+        enabledColumns = chart.columns(with: columns)
         adaptRange(animated: animated)
     }
 
@@ -78,7 +77,7 @@ class BarChartView: ViewportView, ChartViewType {
     }
 
     private func setup() {
-        enable(columns: chart.drawableColumns, animated: false)
+        enable(columns: chart.drawableColumns.ids, animated: false)
     }
 
     private var enabledColumns: [Column] = []

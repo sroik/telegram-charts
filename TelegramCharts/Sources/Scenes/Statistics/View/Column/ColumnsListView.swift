@@ -34,10 +34,9 @@ final class ColumnsListView: View {
         updateFrames()
     }
 
-    func enable(columns: [Column], animated: Bool) {
-        let ids = Set(columns.map { $0.id })
+    func enable(columns: [String], animated: Bool) {
         cells.forEach { cell in
-            if cell.isSelected != ids.contains(cell.column.id) {
+            if cell.isSelected != columns.contains(cell.column.id) {
                 cell.toggle(animated: animated)
             }
         }

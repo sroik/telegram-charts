@@ -5,7 +5,7 @@
 import UIKit
 
 protocol ChartViewportable: Viewportable {
-    func enable(columns: [Column], animated: Bool)
+    func enable(columns: [String], animated: Bool)
 }
 
 protocol ChartBrowserDelegate: AnyObject {

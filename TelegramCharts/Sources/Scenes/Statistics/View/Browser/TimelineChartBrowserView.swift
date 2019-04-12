@@ -55,7 +55,7 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
         gridView.viewport = viewport
     }
 
-    func enable(columns: [Column], animated: Bool = false) {
+    func enable(columns: [String], animated: Bool = false) {
         chartView.enable(columns: columns, animated: animated)
         gridView.enable(columns: columns, animated: animated)
         cardView.enable(columns: columns, animated: animated)

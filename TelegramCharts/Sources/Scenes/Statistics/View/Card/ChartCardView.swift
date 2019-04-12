@@ -23,8 +23,8 @@ class ChartCardView: CardView {
         setup()
     }
 
-    func enable(columns: [Column], animated: Bool = false) {
-        enabledColumnsIds = Set(columns.map { $0.id })
+    func enable(columns: [String], animated: Bool = false) {
+        enabledColumnsIds = Set(columns)
         update(animated: animated)
     }
 
@@ -52,7 +52,7 @@ class ChartCardView: CardView {
     }
 
     private func setup() {
-        enable(columns: chart.drawableColumns)
+        enable(columns: chart.drawableColumns.ids)
     }
 
     private var titleIcon: UIImage? {

@@ -20,6 +20,16 @@ class ChartViewController: ViewController {
     let dependencies: Dependencies
     let chart: Chart
 
+    convenience init(dependencies: Dependencies, chart: Chart) {
+        self.init(
+            dependencies: dependencies,
+            layout: ChartViewControllerLayout(chart: chart),
+            chart: chart,
+            chartView: ChartBrowserFactory.view(with: chart),
+            mapView: ChartMapViewFactory.view(with: chart)
+        )
+    }
+
     init(
         dependencies: Dependencies,
         layout: ChartViewControllerLayout,
@@ -69,26 +79,14 @@ class ChartViewController: ViewController {
         mapView.viewport = viewport
     }
 
-    func enable(columns: [Column], animated: Bool = false) {
+    func enable(columns: [String], animated: Bool = false) {
         mapView.enable(columns: columns, animated: animated)
         chartView.enable(columns: columns, animated: animated)
         columnsView.enable(columns: columns, animated: animated)
     }
 
     func expand(at index: Int, in viewport: Viewport) {
-        guard let chart = dependencies.charts.expanded(chart: chart, at: index) else {
-            assertionFailureWrapper("failed to expand chart", self.chart.title)
-            return
-        }
-
-        let controller = ChartViewControllerFactory.controller(
-            with: chart,
-            dependencies: dependencies
-        )
-
-        controller.theme = theme
-        controller.delegate = self
-        add(child: controller)
+        assertionFailureWrapper("not implemente")
     }
 
     override func themeUp() {
@@ -97,15 +95,13 @@ class ChartViewController: ViewController {
     }
 }
 
-extension ChartViewController: ChartViewControllerDelegate {
-    func chartViewControllerWantsToFold(_ controller: ChartViewController) {
-        controller.dropFromParent()
-    }
-}
-
 extension ChartViewController: ColumnsListViewDelegate, ChartMapViewDelegate {
+    var enabledColumns: [Column] {
+        return columnsView.enabledColumns
+    }
+
     func columnsView(_ view: ColumnsListView, didEnable columns: [Column]) {
-        enable(columns: columns, animated: true)
+        enable(columns: columns.ids, animated: true)
     }
 
     func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Viewport) {

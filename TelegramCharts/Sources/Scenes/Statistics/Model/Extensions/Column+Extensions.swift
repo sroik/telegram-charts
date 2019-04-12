@@ -59,3 +59,9 @@ extension Column {
         return Array(values.elements(in: viewport))
     }
 }
+
+extension Array where Element == Column {
+    var ids: [String] {
+        return map { $0.id }
+    }
+}

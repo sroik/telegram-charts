@@ -38,7 +38,7 @@ final class ChartMapView: View {
         overlayView.frame = bounds
     }
 
-    func enable(columns: [Column], animated: Bool = false) {
+    func enable(columns: [String], animated: Bool = false) {
         chartView.enable(columns: columns, animated: animated)
     }
 

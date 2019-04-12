@@ -59,10 +59,10 @@ final class RasterizedBarChartView: ViewportView, ChartViewType {
         adaptRange(animated: true)
     }
 
-    func enable(columns: [Column], animated: Bool) {
-        animator.animateColumns(from: enabledColumns, to: columns, animated: animated)
-        enabledColumns = columns
-        maxRange = chart.adjustedRange(of: columns)
+    func enable(columns: [String], animated: Bool) {
+        animator.animateColumns(from: enabledColumns.ids, to: columns, animated: animated)
+        enabledColumns = chart.columns(with: columns)
+        maxRange = chart.adjustedRange(of: enabledColumns)
         render(animated: animated)
     }
 
@@ -86,7 +86,7 @@ final class RasterizedBarChartView: ViewportView, ChartViewType {
     private func setup() {
         contentView.addSubviews(imageView)
         addSubview(overlayView)
-        enable(columns: chart.drawableColumns, animated: false)
+        enable(columns: chart.drawableColumns.ids, animated: false)
     }
 
     private var maxContentSize: CGSize {

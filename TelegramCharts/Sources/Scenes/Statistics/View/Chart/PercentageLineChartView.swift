@@ -20,16 +20,16 @@ class PercentageLineChartView: ViewportView, ChartViewType {
         chartLayer.frame = contentView.bounds
     }
 
-    func enable(columns: [Column], animated: Bool) {
+    func enable(columns: [String], animated: Bool) {
         chartLayer.enable(
-            values: Set(columns.map { $0.id }),
+            values: Set(columns),
             animated: animated
         )
     }
 
     private func setup() {
         contentView.layer.addSublayer(chartLayer)
-        enable(columns: chart.drawableColumns, animated: false)
+        enable(columns: chart.drawableColumns.ids, animated: false)
     }
 
     let chartLayer: PercentageLineChartLayer

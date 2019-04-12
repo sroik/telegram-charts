@@ -13,7 +13,7 @@ final class RasterizedBarChartAnimator {
         self.chartView = BarChartView(chart: target.chart)
     }
 
-    func animateColumns(from: [Column], to: [Column], animated: Bool) {
+    func animateColumns(from: [String], to: [String], animated: Bool) {
         guard animated, let target = target, target.minViewportSize < 1 else {
             return
         }

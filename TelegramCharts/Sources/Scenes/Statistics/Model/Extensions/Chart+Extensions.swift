@@ -65,6 +65,14 @@ extension Chart {
         )
     }
 
+    func columns(with ids: [String]) -> [Column] {
+        return ids.compactMap(columns(with:))
+    }
+
+    func columns(with id: String) -> Column? {
+        return columns.first { $0.id == id }
+    }
+
     func adjustedRange(of columns: [Column], in viewport: Viewport = .zeroToOne) -> Range<Int> {
         let range = stacked ?
             stackedRange(of: columns, in: viewport) :

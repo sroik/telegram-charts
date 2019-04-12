@@ -40,13 +40,13 @@ class LineChartView: ViewportView, ChartViewType {
         }
     }
 
-    func enable(columns: [Column], animated: Bool) {
-        enabledColumns = columns
+    func enable(columns: [String], animated: Bool) {
+        enabledColumns = chart.columns(with: columns)
         adaptRange(animated: animated)
 
         layers.forEach { layer in
             layer.set(
-                value: columns.contains(layer.column) ? 1 : 0,
+                value: columns.contains(layer.column.id) ? 1 : 0,
                 for: .opacity,
                 animated: animated
             )
@@ -69,7 +69,7 @@ class LineChartView: ViewportView, ChartViewType {
 
     private func setup() {
         layers.forEach(contentView.layer.addSublayer)
-        enable(columns: chart.drawableColumns, animated: false)
+        enable(columns: chart.drawableColumns.ids, animated: false)
     }
 
     private(set) var enabledColumns: [Column] = []

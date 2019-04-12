@@ -37,13 +37,6 @@ extension UIViewController {
         didMove(toParent: nil)
     }
 
-    func with(_ delegate: UIViewControllerTransitioningDelegate, _ block: () -> Void) {
-        let currentDelegate = transitioningDelegate
-        transitioningDelegate = delegate
-        block()
-        transitioningDelegate = currentDelegate
-    }
-
     func add(
         child: UIViewController,
         withAnimator animator: LayoutAnimator,

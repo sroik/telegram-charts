@@ -29,8 +29,8 @@ class RangeChartGridView: ViewportView, ChartViewportable {
         adaptRange(animated: true)
     }
 
-    func enable(columns: [Column], animated: Bool) {
-        enabledColumns = columns
+    func enable(columns: [String], animated: Bool) {
+        enabledColumns = chart.columns(with: columns)
         adaptRange(animated: animated)
     }
 
@@ -72,7 +72,7 @@ class RangeChartGridView: ViewportView, ChartViewportable {
         cells.forEach(addSubview)
 
         themeUp()
-        enable(columns: chart.drawableColumns, animated: false)
+        enable(columns: chart.drawableColumns.ids, animated: false)
     }
 
     private(set) var enabledColumns: [Column] = []
