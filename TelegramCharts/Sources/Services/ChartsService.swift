@@ -15,6 +15,7 @@ protocol ChartsService {
      for that and it's not the purpose of this contest
      */
     func charts() -> [Chart]
+    func expanded(chart: Chart, at index: Int) -> Chart?
 }
 
 final class BuiltinChartsService: ChartsService {
@@ -36,14 +37,36 @@ final class BuiltinChartsService: ChartsService {
             return chart(
                 id: subdir,
                 in: "\(directory)/\(subdir)",
-                basename: basename
+                basename: basename,
+                expandable: true
             )
         }
 
         return charts
     }
 
-    private func chart(id: String, in directory: String, basename: String) -> Chart? {
+    func expanded(chart: Chart, at index: Int) -> Chart? {
+        guard let timestamp = chart.timestamps[safe: index] else {
+            return nil
+        }
+
+        let date = Date(timestamp: timestamp)
+        let month = date.string(format: "yyyy-MM")
+        let day = date.string(format: "dd")
+        return self.chart(
+            id: "\(chart.id)-\(month)-\(day)",
+            in: "\(directory)/\(chart.id)/\(month)",
+            basename: day,
+            expandable: false
+        )
+    }
+
+    private func chart(
+        id: String,
+        in directory: String,
+        basename: String,
+        expandable: Bool
+    ) -> Chart? {
         guard let url = bundle.url(
             forResource: basename,
             withExtension: "json",
@@ -54,7 +77,7 @@ final class BuiltinChartsService: ChartsService {
         }
 
         do {
-            return try Chart.chart(id: directory.basename, at: url)
+            return try Chart.chart(id: id, at: url, expandable: expandable)
         } catch {
             assertionFailureWrapper("failed to parse chart", error.localizedDescription)
             return nil

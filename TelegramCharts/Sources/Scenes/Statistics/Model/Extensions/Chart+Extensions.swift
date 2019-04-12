@@ -42,13 +42,14 @@ extension Chart {
     }
 
     var days: Int {
-        return Int(maxDate.timeIntervalSince(minDate) / .day)
+        return Int(ceil(maxDate.timeIntervalSince(minDate) / .day))
     }
 
     /* I don't know the logic, so I'll just leave hardcoded numbers */
     var minViewportSize: CGFloat {
         let minDays = expandable ? 30 : 1
-        return CGFloat(minDays) / CGFloat(days)
+        let size = CGFloat(minDays) / CGFloat(days)
+        return size.clamped(from: 0, to: 1)
     }
 
     var maxViewportSize: CGFloat {

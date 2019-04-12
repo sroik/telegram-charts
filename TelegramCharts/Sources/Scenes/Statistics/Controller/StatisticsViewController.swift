@@ -34,7 +34,10 @@ final class StatisticsViewController: ViewController {
     }
 
     private func chartViewController(with chart: Chart) -> ChartViewController {
-        let controller = ChartViewController(dependencies: dependencies, chart: chart)
+        let controller = ChartViewControllerFactory.controller(
+            with: chart,
+            dependencies: dependencies
+        )
         controller.invalidateLayout()
         controller.view.frame = CGRect(
             x: 0,

@@ -93,6 +93,8 @@
 		AC71BD0E226072BC00AD85AD /* CGFloat+Percent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC71BD0D226072BC00AD85AD /* CGFloat+Percent.swift */; };
 		AC71BD102260742A00AD85AD /* Array+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC71BD0F2260742A00AD85AD /* Array+Random.swift */; };
 		AC71BD1222608E2800AD85AD /* CALayer+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC71BD1122608E2800AD85AD /* CALayer+Animations.swift */; };
+		AC71BD172260D9E700AD85AD /* ChartViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC71BD162260D9E700AD85AD /* ChartViewControllerFactory.swift */; };
+		AC71BD192260DCE800AD85AD /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC71BD182260DCE800AD85AD /* UIViewController+Extensions.swift */; };
 		AC7C1F1B2259C3BD00A095D6 /* ChartGridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F1A2259C3BD00A095D6 /* ChartGridViewCell.swift */; };
 		AC7C1F1D2259F86300A095D6 /* ViewportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F1C2259F86300A095D6 /* ViewportView.swift */; };
 		AC7C1F1F2259FA9100A095D6 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F1E2259FA9100A095D6 /* LineChartView.swift */; };
@@ -222,6 +224,8 @@
 		AC71BD0D226072BC00AD85AD /* CGFloat+Percent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Percent.swift"; sourceTree = "<group>"; };
 		AC71BD0F2260742A00AD85AD /* Array+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Random.swift"; sourceTree = "<group>"; };
 		AC71BD1122608E2800AD85AD /* CALayer+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Animations.swift"; sourceTree = "<group>"; };
+		AC71BD162260D9E700AD85AD /* ChartViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewControllerFactory.swift; sourceTree = "<group>"; };
+		AC71BD182260DCE800AD85AD /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		AC7C1F1A2259C3BD00A095D6 /* ChartGridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGridViewCell.swift; sourceTree = "<group>"; };
 		AC7C1F1C2259F86300A095D6 /* ViewportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewportView.swift; sourceTree = "<group>"; };
 		AC7C1F1E2259FA9100A095D6 /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
@@ -287,6 +291,7 @@
 		AC143B3522378B2C00FEB9CD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AC30992C2238F1C100A04331 /* Factory */,
 				AC16EAA3225CA0C2009471D7 /* Browser */,
 				AC30992A2238F1AC00A04331 /* Chart */,
 				AC7C1F20225A06FB00A095D6 /* Card */,
@@ -295,7 +300,6 @@
 				AC45EC652259113E00A8E884 /* Map */,
 				AC45EC682259117B00A8E884 /* Column */,
 				AC30992B2238F1B800A04331 /* Statistics */,
-				AC30992C2238F1C100A04331 /* Factory */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -306,6 +310,7 @@
 				ACE686952236BB9500724432 /* StatisticsViewController.swift */,
 				AC143B4122379F9400FEB9CD /* ChartViewController.swift */,
 				AC16EA94225C705F009471D7 /* ChartViewControllerLayout.swift */,
+				AC71BD162260D9E700AD85AD /* ChartViewControllerFactory.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -491,6 +496,7 @@
 				ACE686982236BED100724432 /* UIView+Layout.swift */,
 				AC143B3C223796BA00FEB9CD /* UIView+Extensions.swift */,
 				AC7C1F26225A155100A095D6 /* UIFont+Extension.swift */,
+				AC71BD182260DCE800AD85AD /* UIViewController+Extensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -889,11 +895,13 @@
 				AC4BB449225F165600D72E00 /* PercentageChartGridView.swift in Sources */,
 				AC3B3854223663D1000AD635 /* ChartData.swift in Sources */,
 				AC16EAC8225E0772009471D7 /* BarColumnRenderer.swift in Sources */,
+				AC71BD192260DCE800AD85AD /* UIViewController+Extensions.swift in Sources */,
 				AC143B4E2237C94400FEB9CD /* LineColumnLayer.swift in Sources */,
 				AC30992E2238F20700A04331 /* ColumnsListView.swift in Sources */,
 				ACAF2B02223E30CD00533F37 /* ChartCardView.swift in Sources */,
 				AC32DCAA223C3F9100873B04 /* Collection+Range.swift in Sources */,
 				AC2542A62257DA4E00EE2021 /* CAAnimation+Extenisions.swift in Sources */,
+				AC71BD172260D9E700AD85AD /* ChartViewControllerFactory.swift in Sources */,
 				AC16EA97225C813A009471D7 /* Sizeable.swift in Sources */,
 				AC7C1F2A225A846300A095D6 /* ShelfLayout.swift in Sources */,
 				AC2542AC225812F100EE2021 /* CAShapeLayer+Extensions.swift in Sources */,

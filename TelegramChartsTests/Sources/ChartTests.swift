@@ -9,7 +9,7 @@ import XCTest
 class ChartTests: XCTestCase {
     func testCorrectParsing() throws {
         let url = try Bundle.test.url(forResource: "test_chart", withExtension: "json").get()
-        let chart = try Chart.chart(id: "id", at: url)
+        let chart = try Chart.chart(id: "id", at: url, expandable: true)
 
         let expected = Chart(
             id: "id",

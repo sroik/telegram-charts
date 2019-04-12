@@ -86,35 +86,29 @@ final class ChartMapOverlayView: View {
         )
     }
 
+    private func isValid(viewport: Viewport) -> Bool {
+        return viewport.size > minSize && viewport.size < maxSize
+    }
+
     private func moveViewport(by delta: CGFloat) {
-        let movedViewport: Viewport
+        let moved: Viewport
         switch viewportView.selectedKnob {
-        case .left:
-            movedViewport = Range(
-                min: max(0, viewport.min + delta),
-                max: viewport.max
-            )
-        case .right:
-            movedViewport = Range(
-                min: viewport.min,
-                max: min(1, viewport.max + delta)
-            )
         case .mid:
             let halfSize = viewport.size / 2
-            movedViewport = Range(
-                mid: (viewport.mid + delta).clamped(from: halfSize, to: 1 - halfSize),
-                size: viewport.size
-            )
+            let mid = (viewport.mid + delta).clamped(from: halfSize, to: 1 - halfSize)
+            moved = Range(mid: mid, size: viewport.size)
+        case .left:
+            moved = Range(min: max(0, viewport.min + delta), max: viewport.max)
+        case .right:
+            moved = Range(min: viewport.min, max: min(1, viewport.max + delta))
         case .none:
             return
         }
 
-        guard movedViewport.size > minSize, movedViewport.size < maxSize else {
-            return
+        if isValid(viewport: moved) || selectedKnob == .mid {
+            viewport = moved
+            delegate?.mapView(self, didChageViewportTo: viewport)
         }
-
-        viewport = movedViewport
-        delegate?.mapView(self, didChageViewportTo: viewport)
     }
 
     @objc private func onPan(_ recognizer: UIPanGestureRecognizer) {

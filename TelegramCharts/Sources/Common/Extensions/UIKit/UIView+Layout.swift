@@ -30,7 +30,7 @@ extension UIView {
     ) {
         translatesAutoresizingMaskIntoConstraints = false
 
-        if let view = view {
+        if let view = view, superview != view {
             view.addSubview(self)
         }
 

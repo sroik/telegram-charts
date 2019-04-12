@@ -4,21 +4,21 @@
 
 import UIKit
 
+protocol ChartViewControllerDelegate: AnyObject {
+    func chartViewControllerWantsToFold(_ controller: ChartViewController)
+}
+
 class ChartViewController: ViewController {
-    typealias Dependencies = SoundServiceContainer
+    typealias Dependencies = SoundServiceContainer & ChartsServiceContainer
 
+    weak var delegate: ChartViewControllerDelegate?
     var layout: ChartViewControllerLayout
+    var chartView: ChartBrowserView
+    let columnsView: ColumnsListView
+    let periodView: TimePeriodView
+    let mapView: ChartMapView
+    let dependencies: Dependencies
     let chart: Chart
-
-    convenience init(dependencies: Dependencies, chart: Chart) {
-        self.init(
-            dependencies: dependencies,
-            layout: ChartViewControllerLayout(chart: chart),
-            chart: chart,
-            chartView: ChartBrowserFactory.view(with: chart),
-            mapView: ChartMapViewFactory.view(with: chart)
-        )
-    }
 
     init(
         dependencies: Dependencies,
@@ -29,8 +29,9 @@ class ChartViewController: ViewController {
     ) {
         self.chart = chart
         self.layout = layout
-        self.chartView = chartView
         self.mapView = mapView
+        self.chartView = chartView
+        self.dependencies = dependencies
         self.periodView = TimePeriodView(chart: chart)
         self.columnsView = ColumnsListView(chart: chart, sounds: dependencies.sounds)
         super.init()
@@ -62,15 +63,32 @@ class ChartViewController: ViewController {
         layout.columnsHeight = columnsView.size(fitting: CGRect.screen.width).height
     }
 
+    func expand(at index: Int, in viewport: Viewport) {
+        guard let chart = dependencies.charts.expanded(chart: chart, at: index) else {
+            assertionFailureWrapper("failed to expand chart", self.chart.title)
+            return
+        }
+
+        let controller = ChartViewControllerFactory.controller(
+            with: chart,
+            dependencies: dependencies
+        )
+
+        controller.delegate = self
+        controller.theme = theme
+        add(child: controller)
+    }
+
     override func themeUp() {
         super.themeUp()
         view.backgroundColor = theme.color.placeholder
     }
+}
 
-    private var chartView: ChartBrowserView
-    private let periodView: TimePeriodView
-    private let columnsView: ColumnsListView
-    private let mapView: ChartMapView
+extension ChartViewController: ChartViewControllerDelegate {
+    func chartViewControllerWantsToFold(_ controller: ChartViewController) {
+        controller.dropFromParent()
+    }
 }
 
 extension ChartViewController: ColumnsListViewDelegate, ChartMapViewDelegate {
@@ -95,10 +113,10 @@ extension ChartViewController: ColumnsListViewDelegate, ChartMapViewDelegate {
 
 extension ChartViewController: ChartBrowserDelegate, TimePeriodViewDelegate {
     func chartBrowser(_ view: ChartBrowserView, wantsToExpand index: Int) {
-        print("EXPAND")
+        expand(at: index, in: mapView.viewport)
     }
 
     func periodViewWantsToFold(_ view: TimePeriodView) {
-        print("FOLD")
+        delegate?.chartViewControllerWantsToFold(self)
     }
 }

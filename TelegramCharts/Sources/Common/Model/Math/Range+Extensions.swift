@@ -43,6 +43,13 @@ extension Range where T: Arithmetical {
         )
     }
 
+    init(max: T, size: T) {
+        self.init(
+            min: max - size,
+            max: max
+        )
+    }
+
     func union(with range: Range<T>) -> Range<T> {
         return Range(
             min: Swift.min(min, range.min),
