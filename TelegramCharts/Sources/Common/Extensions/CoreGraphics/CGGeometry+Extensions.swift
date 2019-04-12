@@ -64,6 +64,10 @@ extension CGRect {
         ]
     }
 
+    var originless: CGRect {
+        return CGRect(origin: .zero, size: size)
+    }
+
     var bottomLeft: CGPoint {
         return CGPoint(x: minX, y: maxY)
     }

@@ -5,10 +5,6 @@
 import UIKit
 
 final class TimelineView: ViewportView {
-    override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIView.noIntrinsicMetric, height: 25)
-    }
-
     var minimumSpacing: CGFloat = 60.0 {
         didSet {
             update(animated: true)

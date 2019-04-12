@@ -131,9 +131,8 @@ extension CALayer {
         animated: Bool,
         duration: TimeInterval = .smoothDuration
     ) {
-        let bounds = CGRect(origin: .zero, size: frame.size)
         let center = CGPoint(x: frame.midX, y: frame.midY)
-        set(value: bounds, for: .bounds, animated: animated, duration: duration)
+        set(value: frame.originless, for: .bounds, animated: animated, duration: duration)
         set(value: center, for: .position, animated: animated, duration: duration)
     }
 }

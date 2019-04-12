@@ -5,6 +5,10 @@
 import UIKit
 
 class ChartCardView: CardView {
+    let chart: Chart
+    let titleCell: ChartCardViewCell
+    let cells: [ChartCardViewCell]
+
     var selectedIndex: Int = 0 {
         didSet {
             update(animated: true)
@@ -20,11 +24,11 @@ class ChartCardView: CardView {
     }
 
     func enable(columns: [Column], animated: Bool = false) {
-        enabledColumns = Set(columns.map { $0.id })
+        enabledColumnsIds = Set(columns.map { $0.id })
         update(animated: animated)
     }
 
-    private func update(animated: Bool) {
+    func update(animated: Bool) {
         chart.drawableColumns.forEach { column in
             if let cell = self.cell(withId: column.id) {
                 update(cell: cell, with: column)
@@ -36,14 +40,14 @@ class ChartCardView: CardView {
         layout(animated: animated)
     }
 
-    private func update(cell: ChartCardViewCell, with column: Column) {
-        cell.isHidden = !enabledColumns.contains(column.id)
+    func update(cell: ChartCardViewCell, with column: Column) {
+        cell.isHidden = !enabledColumnsIds.contains(column.id)
         cell.title = column.name
         cell.valueColor = column.uiColor
         cell.value = String(value: column.values[safe: selectedIndex] ?? 0)
     }
 
-    private func cell(withId id: String) -> ChartCardViewCell? {
+    func cell(withId id: String) -> ChartCardViewCell? {
         return cells.first { $0.id == id }
     }
 
@@ -65,8 +69,5 @@ class ChartCardView: CardView {
         return Date(timestamp: timestamp)
     }
 
-    private let chart: Chart
-    private let titleCell: ChartCardViewCell
-    private let cells: [ChartCardViewCell]
-    private var enabledColumns: Set<String> = []
+    private(set) var enabledColumnsIds: Set<String> = []
 }

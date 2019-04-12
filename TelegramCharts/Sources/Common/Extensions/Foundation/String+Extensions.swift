@@ -53,4 +53,13 @@ extension String {
         let string = formatter.string(for: NSNumber(value: value))
         self = string ?? String(value)
     }
+
+    init(percent: CGFloat) {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
+        formatter.formatWidth = 3
+        let number = NSNumber(value: Double(percent))
+        let string = formatter.string(for: number)
+        self = string ?? String(Int(percent * 100))
+    }
 }

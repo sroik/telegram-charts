@@ -41,6 +41,17 @@ extension StackedColumn {
             .reduce(0) { $0 + $1.value }
     }
 
+    func percents() -> [CGFloat] {
+        let stackedValue = self.stackedValue()
+        guard stackedValue > 0 else {
+            return values.map { _ in 0 }
+        }
+
+        return values.map {
+            $0.isEnabled ? CGFloat($0.value) / CGFloat(stackedValue) : 0
+        }
+    }
+
     func percentagePoints(
         x: CGFloat = 0,
         height: CGFloat,

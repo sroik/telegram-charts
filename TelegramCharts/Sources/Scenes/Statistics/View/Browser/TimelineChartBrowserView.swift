@@ -6,9 +6,18 @@ import UIKit
 
 class TimelineChartBrowserView: ViewportView, ChartBrowser {
     weak var delegate: ChartBrowserDelegate?
+    var gridView: ChartViewportableView
+    var chartView: ChartView
+    let timelineView: TimelineView
+    let pointLine = UIView()
+    let cardView: ChartCardView
+    let chartContainer = View()
+    let layout: TimelineChartBrowserLayout
+    let chart: Chart
 
     init(
         chart: Chart,
+        layout: TimelineChartBrowserLayout,
         chartView: ChartView,
         gridView: ChartViewportableView,
         timelineView: TimelineView,
@@ -19,6 +28,7 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
         self.timelineView = timelineView
         self.cardView = cardView
         self.chart = chart
+        self.layout = layout
         super.init(autolayouts: false)
         setup()
     }
@@ -26,11 +36,10 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
 
-        let timelineHeight = timelineView.intrinsicContentSize.height
-        timelineView.frame = insets.inset(bounds).slice(at: timelineHeight, from: .maxYEdge)
-        gridView.frame = insets.inset(bounds).remainder(at: timelineHeight, from: .maxYEdge)
-        chartContainer.frame = bounds.remainder(at: timelineHeight, from: .maxYEdge)
-        chartView.frame = chartContainer.bounds.inset(by: insets)
+        timelineView.frame = layout.timelineFrame(in: bounds)
+        gridView.frame = layout.gridFrame(in: bounds)
+        chartContainer.frame = layout.chartContainerFrame(in: bounds)
+        chartView.frame = layout.chartFrame(in: bounds)
     }
 
     override func themeUp() {
@@ -58,7 +67,7 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
     }
 
     private func selectIndex(at point: CGPoint, animated: Bool) {
-        let chartPoint = point.x - chartView.offset - insets.left
+        let chartPoint = point.x - chartView.offset - layout.insets.left
         let position = chartPoint / chartView.contentSize.width
         let index = chart.timestamps.index(nearestTo: position, strategy: .ceil)
         select(index: index, animated: animated)
@@ -80,7 +89,7 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
     }
 
     private func layoutCard(animated: Bool) {
-        pointLine.set(frame: pointLineFrame, animated: animated)
+        pointLine.set(frame: lineFrame, animated: animated)
         cardView.shift(to: cardFrame, animated: animated)
     }
 
@@ -88,11 +97,9 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
         timelineView.clipsToBounds = true
         chartContainer.clipsToBounds = true
         chartContainer.addSubviews(chartView)
-        addSubviews(pointLine, chartContainer, gridView, cardView, timelineView)
-        setupGestures()
-    }
+        addSubviews(chartContainer, gridView, cardView, timelineView)
+        insertSubview(pointLine, at: layout.isLineOnTop ? 2 : 0)
 
-    private func setupGestures() {
         let pan = UILongPressGestureRecognizer(target: self, action: #selector(onPan))
         pan.minimumPressDuration = 0.2
         pan.allowableMovement = CGRect.screen.diagonal
@@ -122,26 +129,10 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
     }
 
     private var cardFrame: CGRect {
-        let lineFrame = pointLineFrame
-        let limits = bounds.inset(by: insets).inset(left: 35)
-        let leftSpace = lineFrame.minX - limits.minX
-        let rightSpace = limits.maxX - lineFrame.maxX
-        if leftSpace > rightSpace {
-            return CGRect(
-                maxX: lineFrame.minX - 15,
-                y: 15,
-                size: cardView.size
-            ).limited(with: limits)
-        } else {
-            return CGRect(
-                x: lineFrame.maxX + 15,
-                y: 15,
-                size: cardView.size
-            ).limited(with: limits)
-        }
+        return layout.cardFrame(size: cardView.size, in: bounds, lineCenter: lineFrame.midX)
     }
 
-    private var pointLineFrame: CGRect {
+    private var lineFrame: CGRect {
         guard let index = chartView.selectedIndex else {
             return .zero
         }
@@ -149,16 +140,7 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
         let chartSize = chartView.contentSize
         let stride = chartSize.width / CGFloat(chart.timestamps.count)
         let inChartCenter = (CGFloat(index) + 0.5) * stride
-        let center = inChartCenter + chartView.offset + insets.left
-        return CGRect(midX: center, width: .pixel, height: chartSize.height)
+        let center = inChartCenter + chartView.offset + layout.insets.left
+        return layout.lineFrame(in: bounds, centerX: center)
     }
-
-    private var gridView: ChartViewportableView
-    private let timelineView: TimelineView
-    private let cardView: ChartCardView
-    private let pointLine = UIView()
-    private var chartView: ChartView
-    private let chartContainer = View()
-    private let insets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
-    private let chart: Chart
 }

@@ -81,6 +81,8 @@
 		AC4BB463225F774000D72E00 /* StackedColumn+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BB462225F774000D72E00 /* StackedColumn+Extensions.swift */; };
 		AC4BB465225F7EFD00D72E00 /* PercentageLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BB464225F7EFD00D72E00 /* PercentageLineChartView.swift */; };
 		AC4BB467225F85AC00D72E00 /* PercentageLineChartLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BB466225F85AC00D72E00 /* PercentageLineChartLayer.swift */; };
+		AC5BCD0C226049CC007C06E4 /* TimelineChartBrowserLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5BCD0B226049CC007C06E4 /* TimelineChartBrowserLayout.swift */; };
+		AC5BCD0E2260530E007C06E4 /* StackedChartCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5BCD0D2260530E007C06E4 /* StackedChartCardView.swift */; };
 		AC5EFB6B223A2D8A00979B60 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB6A223A2D8A00979B60 /* TimelineView.swift */; };
 		AC5EFB70223A946400979B60 /* Math+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB6F223A946400979B60 /* Math+Extensions.swift */; };
 		AC5EFB72223B98EE00979B60 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB71223B98EE00979B60 /* Date+Extensions.swift */; };
@@ -204,6 +206,8 @@
 		AC4BB462225F774000D72E00 /* StackedColumn+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StackedColumn+Extensions.swift"; sourceTree = "<group>"; };
 		AC4BB464225F7EFD00D72E00 /* PercentageLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentageLineChartView.swift; sourceTree = "<group>"; };
 		AC4BB466225F85AC00D72E00 /* PercentageLineChartLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentageLineChartLayer.swift; sourceTree = "<group>"; };
+		AC5BCD0B226049CC007C06E4 /* TimelineChartBrowserLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineChartBrowserLayout.swift; sourceTree = "<group>"; };
+		AC5BCD0D2260530E007C06E4 /* StackedChartCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedChartCardView.swift; sourceTree = "<group>"; };
 		AC5EFB6A223A2D8A00979B60 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		AC5EFB6F223A946400979B60 /* Math+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Math+Extensions.swift"; sourceTree = "<group>"; };
 		AC5EFB71223B98EE00979B60 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -322,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				AC143B432237A67D00FEB9CD /* TimelineChartBrowserView.swift */,
+				AC5BCD0B226049CC007C06E4 /* TimelineChartBrowserLayout.swift */,
 			);
 			path = Browser;
 			sourceTree = "<group>";
@@ -668,6 +673,7 @@
 		AC7C1F20225A06FB00A095D6 /* Card */ = {
 			isa = PBXGroup;
 			children = (
+				AC5BCD0D2260530E007C06E4 /* StackedChartCardView.swift */,
 				ACAF2B01223E30CD00533F37 /* ChartCardView.swift */,
 				AC7C1F24225A119700A095D6 /* ChartCardViewCell.swift */,
 			);
@@ -890,6 +896,7 @@
 				AC143B302236F1D700FEB9CD /* Label.swift in Sources */,
 				ACE6868A2236AD1000724432 /* Themeable.swift in Sources */,
 				AC45EC622259037700A8E884 /* HapticService.swift in Sources */,
+				AC5BCD0E2260530E007C06E4 /* StackedChartCardView.swift in Sources */,
 				AC16EAA7225CA406009471D7 /* ChartGridViewFactory.swift in Sources */,
 				AC16EAC3225DFB97009471D7 /* StackedColumn.swift in Sources */,
 				ACE686832236A0B400724432 /* Theme+Factory.swift in Sources */,
@@ -929,6 +936,7 @@
 				AC16EAA0225C9993009471D7 /* ChartBrowserFactory.swift in Sources */,
 				AC16EA9A225C8DD1009471D7 /* ChartViewAbstraction.swift in Sources */,
 				AC3B380F22365543000AD635 /* Chart.swift in Sources */,
+				AC5BCD0C226049CC007C06E4 /* TimelineChartBrowserLayout.swift in Sources */,
 				ACE686992236BED100724432 /* UIView+Layout.swift in Sources */,
 				AC16EA95225C705F009471D7 /* ChartViewControllerLayout.swift in Sources */,
 				AC16EACE225E8FC2009471D7 /* RasterizedBarChartAnimatior.swift in Sources */,

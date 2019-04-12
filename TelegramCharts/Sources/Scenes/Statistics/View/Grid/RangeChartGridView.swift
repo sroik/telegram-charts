@@ -20,8 +20,8 @@ class RangeChartGridView: ViewportView, ChartViewportable {
 
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
-        adaptRange(animated: false)
         layoutCells()
+        adaptRange(animated: false)
     }
 
     override func display() {
@@ -39,13 +39,7 @@ class RangeChartGridView: ViewportView, ChartViewportable {
     }
 
     func adaptRange(animated: Bool) {
-        let range = adaptedRange()
-
-        guard self.range != range else {
-            return
-        }
-
-        self.range = range
+        range = adaptedRange()
         cells.enumerated().forEach { index, cell in
             let value = self.value(at: index, in: range) ?? 0
             let scale = CGFloat(value) / CGFloat(cell.state.leftValue ?? 0)
@@ -77,8 +71,8 @@ class RangeChartGridView: ViewportView, ChartViewportable {
         displayLink.fps = 2
         cells.forEach(addSubview)
 
-        enable(columns: chart.drawableColumns, animated: false)
         themeUp()
+        enable(columns: chart.drawableColumns, animated: false)
     }
 
     private(set) var enabledColumns: [Column] = []
