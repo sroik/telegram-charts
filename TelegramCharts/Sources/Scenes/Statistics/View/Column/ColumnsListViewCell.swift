@@ -39,7 +39,7 @@ final class ColumnsListViewCell: Control {
         }
 
         layer.blink(
-            scale: 0.9,
+            scale: 0.875,
             duration: .defaultDuration
         )
 
@@ -52,10 +52,16 @@ final class ColumnsListViewCell: Control {
     }
 
     private func update() {
+        let tintColor = isSelected ? .white : column.uiColor
+        let scale: CGFloat = isSelected ? 1 : 0.75
+
+        checkmarkView.alpha = isSelected ? 1 : 0
+        checkmarkView.transform = CGAffineTransform(scaleX: scale, y: scale)
         checkmarkView.frame = checkmarkFrame
+        checkmarkView.tintColor = tintColor
+
+        label.textColor = tintColor
         label.frame = labelFrame
-        label.textColor = isSelected ? .white : column.uiColor
-        checkmarkView.isHidden = !isSelected
         backgroundColor = isSelected ? column.uiColor : .clear
     }
 

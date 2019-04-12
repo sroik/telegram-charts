@@ -30,7 +30,6 @@ class BarChartView: ViewportView, ChartViewType {
     override func adaptViewport() {
         super.adaptViewport()
         layoutLayers()
-        adaptRange(animated: false)
     }
 
     func enable(columns: [Column], animated: Bool) {

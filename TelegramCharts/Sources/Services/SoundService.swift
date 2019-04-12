@@ -5,8 +5,7 @@
 import Foundation
 
 enum Sound {
-    case errorFeedback
-    case selectionFeedback
+    case haptic(event: HapticService.Event)
 }
 
 protocol SoundService {
@@ -16,10 +15,10 @@ protocol SoundService {
 final class SystemSoundService: SoundService {
     func play(_ sound: Sound) {
         switch sound {
-        case .errorFeedback:
-            HapticService.feedback(with: .notification(.error))
-        case .selectionFeedback:
-            HapticService.feedback(with: .selection)
+        case let .haptic(event):
+            hapticService.feedback(with: event)
         }
     }
+
+    private let hapticService = HapticService()
 }

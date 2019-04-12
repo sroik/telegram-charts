@@ -47,13 +47,13 @@ class BarColumnLayer: Layer {
 
         layers.enumerated().forEach { index, layer in
             let frame = (frames[safe: index] ?? .zero).rounded()
-            layer.set(frame: frame, animated: animated)
+            layer.spring(to: frame, animated: animated)
         }
     }
 
     private func setup() {
         isOpaque = true
-        layers.forEach(addSublayer)
+        layers.reversed().forEach(addSublayer)
         disableActions()
         themeUp()
     }

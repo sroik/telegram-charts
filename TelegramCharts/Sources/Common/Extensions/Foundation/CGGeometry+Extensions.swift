@@ -76,6 +76,10 @@ extension CGRect {
         return CGPoint(x: maxX, y: maxY)
     }
 
+    var center: CGPoint {
+        return CGPoint(x: midX, y: midY)
+    }
+
     var diagonal: CGFloat {
         return sqrt(width * width + height * height)
     }

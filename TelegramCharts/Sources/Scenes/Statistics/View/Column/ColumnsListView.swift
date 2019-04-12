@@ -79,12 +79,12 @@ final class ColumnsListView: View {
 
     @objc private func cellPressed(_ cell: ColumnsListViewCell) {
         guard canToggle(cell: cell) else {
-            sounds.play(.errorFeedback)
+            sounds.play(.haptic(event: .notification(.error)))
             cell.layer.shake()
             return
         }
 
-        sounds.play(.selectionFeedback)
+        sounds.play(.haptic(event: .selection))
         cell.toggle()
         delegate?.columnsView(self, didEnable: enabledColumns)
     }

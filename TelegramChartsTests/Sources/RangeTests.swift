@@ -53,11 +53,3 @@ class RangeTests: XCTestCase {
         XCTAssertEqual(range.clamped(from: 0, to: 5), TelegramCharts.Range<Int>(min: 0, max: 5))
     }
 }
-
-private extension Array where Element == Int {
-    static func random(count: Int, min: Int = 1, max: Int = 100) -> [Int] {
-        return (0 ..< count).map { _ in
-            Int.random(in: min ... max)
-        }
-    }
-}

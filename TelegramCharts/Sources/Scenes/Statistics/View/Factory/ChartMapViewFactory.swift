@@ -6,7 +6,8 @@ import UIKit
 
 struct ChartMapViewFactory {
     static func view(with chart: Chart) -> ChartMapView {
-        let chartView = ChartViewFactory.view(with: chart, isMap: true)
-        return ChartMapView(chartView: chartView)
+        return ChartMapView(
+            chartView: ChartViewFactory.view(with: chart, isMap: true)
+        )
     }
 }

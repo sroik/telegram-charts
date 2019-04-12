@@ -6,7 +6,6 @@ import UIKit
 
 final class RasterizedBarChartAnimator {
     weak var target: RasterizedBarChartView?
-    let duration: TimeInterval = .smoothDuration
     let chartView: BarChartView
 
     init(target: RasterizedBarChartView) {
@@ -29,12 +28,14 @@ final class RasterizedBarChartAnimator {
         chartView.viewport = target.viewport
         chartView.enable(columns: from, animated: false)
         chartView.enable(columns: to, animated: true)
+        isAnimating = true
         invalidateTimer()
     }
 
     private func invalidateTimer() {
-        let timer = Timer(timeInterval: duration, repeats: false) { [weak self] _ in
+        let timer = Timer(timeInterval: duration * 0.5, repeats: false) { [weak self] _ in
             self?.chartView.removeFromSuperview()
+            self?.isAnimating = false
         }
 
         RunLoop.main.add(timer, forMode: .common)
@@ -42,5 +43,7 @@ final class RasterizedBarChartAnimator {
         self.timer = timer
     }
 
+    private let duration = CASpringAnimation(keyPath: .bounds).settlingDuration
     private var timer: Timer?
+    private var isAnimating: Bool = false
 }

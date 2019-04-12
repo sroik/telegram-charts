@@ -22,8 +22,9 @@ class StackedChartCardView: ChartCardView {
             return
         }
 
-        let percentages = selectedStackedColumn.percents()
-        zip(cells, percentages).forEach { cell, percent in
+        let percents = selectedStackedColumn.percents()
+        let roundedPercents = CGFloat.rounded(percents: percents)
+        zip(cells, roundedPercents).forEach { cell, percent in
             cell.summary = String(percent: percent)
         }
     }

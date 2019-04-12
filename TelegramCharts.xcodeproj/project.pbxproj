@@ -89,6 +89,10 @@
 		AC5EFB74223BA02600979B60 /* Range+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB73223BA02600979B60 /* Range+Extensions.swift */; };
 		AC675E1E225B3F8800BF9380 /* charts in Resources */ = {isa = PBXBuildFile; fileRef = AC675E1D225B3F8800BF9380 /* charts */; };
 		AC675E22225B819A00BF9380 /* TimePeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC675E21225B819A00BF9380 /* TimePeriodView.swift */; };
+		AC71BD0C2260727C00AD85AD /* PercentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC71BD0B2260727C00AD85AD /* PercentsTests.swift */; };
+		AC71BD0E226072BC00AD85AD /* CGFloat+Percent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC71BD0D226072BC00AD85AD /* CGFloat+Percent.swift */; };
+		AC71BD102260742A00AD85AD /* Array+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC71BD0F2260742A00AD85AD /* Array+Random.swift */; };
+		AC71BD1222608E2800AD85AD /* CALayer+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC71BD1122608E2800AD85AD /* CALayer+Animations.swift */; };
 		AC7C1F1B2259C3BD00A095D6 /* ChartGridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F1A2259C3BD00A095D6 /* ChartGridViewCell.swift */; };
 		AC7C1F1D2259F86300A095D6 /* ViewportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F1C2259F86300A095D6 /* ViewportView.swift */; };
 		AC7C1F1F2259FA9100A095D6 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C1F1E2259FA9100A095D6 /* LineChartView.swift */; };
@@ -214,6 +218,10 @@
 		AC5EFB73223BA02600979B60 /* Range+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Range+Extensions.swift"; sourceTree = "<group>"; };
 		AC675E1D225B3F8800BF9380 /* charts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = charts; sourceTree = "<group>"; };
 		AC675E21225B819A00BF9380 /* TimePeriodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePeriodView.swift; sourceTree = "<group>"; };
+		AC71BD0B2260727C00AD85AD /* PercentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentsTests.swift; sourceTree = "<group>"; };
+		AC71BD0D226072BC00AD85AD /* CGFloat+Percent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Percent.swift"; sourceTree = "<group>"; };
+		AC71BD0F2260742A00AD85AD /* Array+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Random.swift"; sourceTree = "<group>"; };
+		AC71BD1122608E2800AD85AD /* CALayer+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Animations.swift"; sourceTree = "<group>"; };
 		AC7C1F1A2259C3BD00A095D6 /* ChartGridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGridViewCell.swift; sourceTree = "<group>"; };
 		AC7C1F1C2259F86300A095D6 /* ViewportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewportView.swift; sourceTree = "<group>"; };
 		AC7C1F1E2259FA9100A095D6 /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
@@ -300,14 +308,6 @@
 				AC16EA94225C705F009471D7 /* ChartViewControllerLayout.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		AC143B3E22379A8D00FEB9CD /* CoreGraphics */ = {
-			isa = PBXGroup;
-			children = (
-				AC143B3F22379A9C00FEB9CD /* CGGeometry+Extensions.swift */,
-			);
-			path = CoreGraphics;
 			sourceTree = "<group>";
 		};
 		AC143B532237F0F400FEB9CD /* Math */ = {
@@ -478,7 +478,6 @@
 			isa = PBXGroup;
 			children = (
 				ACB9B9C622397F3800B8E841 /* CoreAnimation */,
-				AC143B3E22379A8D00FEB9CD /* CoreGraphics */,
 				AC3B382722365AFC000AD635 /* Foundation */,
 				AC3B38112236571E000AD635 /* UIKit */,
 			);
@@ -526,6 +525,7 @@
 				AC3B385A223682E0000AD635 /* ChartTests.swift */,
 				AC143B4B2237B43D00FEB9CD /* RangeTests.swift */,
 				ACAF2B05223E63A000533F37 /* CGGeometryExtensionsTests.swift */,
+				AC71BD0B2260727C00AD85AD /* PercentsTests.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -541,6 +541,8 @@
 		AC3B382722365AFC000AD635 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				AC143B3F22379A9C00FEB9CD /* CGGeometry+Extensions.swift */,
+				AC71BD0D226072BC00AD85AD /* CGFloat+Percent.swift */,
 				AC3B382822365B08000AD635 /* Optional+Extensions.swift */,
 				AC3099282238F02B00A04331 /* Collection+Extensions.swift */,
 				AC5EFB6F223A946400979B60 /* Math+Extensions.swift */,
@@ -591,6 +593,7 @@
 			isa = PBXGroup;
 			children = (
 				AC3B3840223661E3000AD635 /* Bundle+Stub.swift */,
+				AC71BD0F2260742A00AD85AD /* Array+Random.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -692,6 +695,7 @@
 			isa = PBXGroup;
 			children = (
 				AC2542AB225812F100EE2021 /* CAShapeLayer+Extensions.swift */,
+				AC71BD1122608E2800AD85AD /* CALayer+Animations.swift */,
 				ACB9B9C722397F5200B8E841 /* CALayer+Extensions.swift */,
 				AC2542A52257DA4E00EE2021 /* CAAnimation+Extenisions.swift */,
 			);
@@ -939,7 +943,9 @@
 				AC5BCD0C226049CC007C06E4 /* TimelineChartBrowserLayout.swift in Sources */,
 				ACE686992236BED100724432 /* UIView+Layout.swift in Sources */,
 				AC16EA95225C705F009471D7 /* ChartViewControllerLayout.swift in Sources */,
+				AC71BD0E226072BC00AD85AD /* CGFloat+Percent.swift in Sources */,
 				AC16EACE225E8FC2009471D7 /* RasterizedBarChartAnimatior.swift in Sources */,
+				AC71BD1222608E2800AD85AD /* CALayer+Animations.swift in Sources */,
 				AC7C1F27225A155100A095D6 /* UIFont+Extension.swift in Sources */,
 				AC7C1F1F2259FA9100A095D6 /* LineChartView.swift in Sources */,
 				AC143B4A2237AD2F00FEB9CD /* Range.swift in Sources */,
@@ -972,7 +978,9 @@
 				AC3B381E22365A71000AD635 /* UIColorHexTests.swift in Sources */,
 				AC3B384C223661E3000AD635 /* Bundle+Stub.swift in Sources */,
 				ACAF2B06223E63A000533F37 /* CGGeometryExtensionsTests.swift in Sources */,
+				AC71BD0C2260727C00AD85AD /* PercentsTests.swift in Sources */,
 				AC143B4C2237B43D00FEB9CD /* RangeTests.swift in Sources */,
+				AC71BD102260742A00AD85AD /* Array+Random.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

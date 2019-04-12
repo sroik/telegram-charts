@@ -47,7 +47,7 @@ final class PercentageLineChartLayer: Layer {
         layers.enumerated().forEach { index, layer in
             let points = layerPoints(at: index)
             let path = layerPath(between: points)
-            layer.set(path: path, animated: animated)
+            layer.set(value: path, for: .path, animated: animated, timing: .easeInEaseOut)
         }
     }
 
