@@ -69,13 +69,30 @@ extension UIImageView {
         animated: Bool = true,
         duration: TimeInterval = .defaultDuration
     ) {
-        self.image = image
-
         if animated {
             let transition = CATransition()
             transition.duration = duration
+            transition.type = .fade
             layer.add(transition, forKey: nil)
         }
+        self.image = image
+    }
+}
+
+extension UILabel {
+    func set(
+        text: String,
+        animated: Bool = true,
+        duration: TimeInterval = .defaultDuration
+    ) {
+        if animated {
+            let transition = CATransition()
+            transition.duration = duration
+            transition.type = .fade
+            layer.add(transition, forKey: nil)
+        }
+
+        self.text = text
     }
 }
 

@@ -43,7 +43,7 @@ class ChartViewController: ViewController {
         columnsView.delegate = self
         chartView.delegate = self
         periodView.delegate = self
-        chartView.viewport = mapView.viewport
+        set(viewport: mapView.viewport)
         view.addSubviews(periodView, mapView, chartView, columnsView)
     }
 
@@ -63,6 +63,18 @@ class ChartViewController: ViewController {
         layout.columnsHeight = columnsView.size(fitting: CGRect.screen.width).height
     }
 
+    func set(viewport: Viewport) {
+        periodView.viewport = mapView.viewport
+        chartView.viewport = mapView.viewport
+        mapView.viewport = viewport
+    }
+
+    func enable(columns: [Column], animated: Bool = false) {
+        mapView.enable(columns: columns, animated: animated)
+        chartView.enable(columns: columns, animated: animated)
+        columnsView.enable(columns: columns, animated: animated)
+    }
+
     func expand(at index: Int, in viewport: Viewport) {
         guard let chart = dependencies.charts.expanded(chart: chart, at: index) else {
             assertionFailureWrapper("failed to expand chart", self.chart.title)
@@ -74,8 +86,8 @@ class ChartViewController: ViewController {
             dependencies: dependencies
         )
 
-        controller.delegate = self
         controller.theme = theme
+        controller.delegate = self
         add(child: controller)
     }
 
@@ -93,13 +105,11 @@ extension ChartViewController: ChartViewControllerDelegate {
 
 extension ChartViewController: ColumnsListViewDelegate, ChartMapViewDelegate {
     func columnsView(_ view: ColumnsListView, didEnable columns: [Column]) {
-        mapView.enable(columns: columns, animated: true)
-        chartView.enable(columns: columns, animated: true)
+        enable(columns: columns, animated: true)
     }
 
     func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Viewport) {
-        periodView.viewport = mapView.viewport
-        chartView.viewport = mapView.viewport
+        set(viewport: viewport)
     }
 
     func mapViewDidLongPress(_ view: ChartMapOverlayView) {

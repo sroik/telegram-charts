@@ -9,9 +9,10 @@ final class TimelineRowView: View {
         return labels.count
     }
 
-    init(itemWidth: CGFloat, timestamps: [Timestamp]) {
+    init(itemWidth: CGFloat, timestamps: [Timestamp], format: String) {
         self.timestamps = timestamps
         self.itemWidth = itemWidth
+        self.format = format
         super.init(frame: .screen)
         setup()
     }
@@ -36,7 +37,7 @@ final class TimelineRowView: View {
 
     private func buildLabel(for timestamp: Timestamp) -> Label {
         return Label.primary(
-            text: Date(timestamp: timestamp).string(format: "d MMM"),
+            text: Date(timestamp: timestamp).string(format: format),
             color: theme.color.details,
             font: UIFont.light(size: 11),
             alignment: .right,
@@ -65,6 +66,7 @@ final class TimelineRowView: View {
         return bounds.width / CGFloat(labels.count)
     }
 
+    private let format: String
     private let itemWidth: CGFloat
     private let timestamps: [Timestamp]
     private var labels: [Label] = []

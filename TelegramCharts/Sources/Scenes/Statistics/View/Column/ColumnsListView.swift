@@ -34,6 +34,15 @@ final class ColumnsListView: View {
         updateFrames()
     }
 
+    func enable(columns: [Column], animated: Bool) {
+        let ids = Set(columns.map { $0.id })
+        cells.forEach { cell in
+            if cell.isSelected != ids.contains(cell.column.id) {
+                cell.toggle(animated: animated)
+            }
+        }
+    }
+
     func size(fitting width: CGFloat) -> CGSize {
         return layout.size(of: cells, fitting: width)
     }

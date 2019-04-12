@@ -47,8 +47,8 @@ extension Chart {
 
     /* I don't know the logic, so I'll just leave hardcoded numbers */
     var minViewportSize: CGFloat {
-        let minDays = expandable ? 30 : 1
-        let size = CGFloat(minDays) / CGFloat(days)
+        let minDays: CGFloat = expandable ? 30 : 0.75
+        let size = minDays / CGFloat(days)
         return size.clamped(from: 0, to: 1)
     }
 

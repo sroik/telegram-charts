@@ -39,7 +39,7 @@ final class TimePeriodView: View {
     }
 
     func update() {
-        label.text = isSingleDay ? singleDayTitle : differentDaysTitle
+        label.set(text: isSingleDay ? singleDayTitle : differentDaysTitle)
         button.isHidden = chart.expandable
         layout()
     }

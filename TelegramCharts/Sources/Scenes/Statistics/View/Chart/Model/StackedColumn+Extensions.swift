@@ -60,7 +60,9 @@ extension StackedColumn {
         let stackedValue = self.stackedValue()
 
         guard height > 0, stackedValue > 0 else {
-            return values.map { _ in CGPoint.zero }
+            return values.map { _ in
+                CGPoint(x: x, y: height)
+            }
         }
 
         var stackedHeight: CGFloat = 0
@@ -68,7 +70,8 @@ extension StackedColumn {
 
         for value in values {
             let ratio = CGFloat(value.value) / CGFloat(stackedValue)
-            let valueHeight = max(height * ratio, minHeight)
+            let minValueHeight = value.value > 0 ? minHeight : 0
+            let valueHeight = max(height * ratio, minValueHeight)
             stackedHeight += value.isEnabled ? valueHeight : 0
             points.append(CGPoint(x: x, y: height - stackedHeight))
         }
@@ -84,7 +87,9 @@ extension StackedColumn {
         let stackedValue = self.stackedValue()
 
         guard maxValue > 0, stackedValue > 0 else {
-            return values.map { _ in CGRect.zero }
+            return values.map { _ in
+                CGRect(x: rect.minX, y: rect.maxY, width: rect.width, height: 0)
+            }
         }
 
         let heightPortion = CGFloat(stackedValue) / CGFloat(maxValue)

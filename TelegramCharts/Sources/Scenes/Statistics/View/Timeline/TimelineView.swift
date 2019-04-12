@@ -42,7 +42,12 @@ final class TimelineView: ViewportView {
 
     func updateRowView(animated: Bool) {
         let oldRowView = rowView
-        rowView = TimelineRowView(itemWidth: minimumSpacing, timestamps: fitTimestamps)
+        rowView = TimelineRowView(
+            itemWidth: minimumSpacing,
+            timestamps: fitTimestamps,
+            format: chart.expandable ? "d MMM" : "hh:mm"
+        )
+
         rowView.theme = theme
         rowView.fill(in: contentView)
 
@@ -83,7 +88,7 @@ final class TimelineView: ViewportView {
         return min(fitNumber, maxNumber).nearestPowerOfTwo ?? 1
     }
 
-    private var rowView = TimelineRowView(itemWidth: 0, timestamps: [])
+    private var rowView = TimelineRowView(itemWidth: 0, timestamps: [], format: "")
     private let chart: Chart
     private let line = UIView()
 }

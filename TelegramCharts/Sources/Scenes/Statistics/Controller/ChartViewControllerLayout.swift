@@ -41,7 +41,7 @@ extension ChartViewControllerLayout {
     }
 
     func mapFrame(in rect: CGRect) -> CGRect {
-        let mapInsets = UIEdgeInsets(bottom: hasMap ? actualColumnsHeight : 0)
+        let mapInsets = UIEdgeInsets(bottom: hasColumns ? actualColumnsHeight : 0)
         return rect
             .inset(by: insets)
             .inset(by: mapInsets)

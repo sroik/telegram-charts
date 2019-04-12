@@ -122,6 +122,7 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
 
     @objc private func cardPressed() {
         if let index = chartView.selectedIndex, chart.expandable {
+            deselect(animated: true)
             delegate?.chartBrowser(self, wantsToExpand: index)
         } else {
             deselect(animated: true)
