@@ -39,6 +39,7 @@ class CardView: Control {
 
     override func themeUp() {
         super.themeUp()
+        layer.cornerRadius = theme.state.cornerRadius
         backgroundColor = theme.color.card
         items.forEach { $0.theme = theme }
     }
@@ -50,8 +51,6 @@ class CardView: Control {
     }
 
     private func setup() {
-        layer.cornerRadius = 6
-
         stack.isUserInteractionEnabled = false
         stack.axis = .vertical
         stack.alignment = .fill

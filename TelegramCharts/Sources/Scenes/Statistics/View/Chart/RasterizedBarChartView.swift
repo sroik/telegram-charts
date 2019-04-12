@@ -60,10 +60,11 @@ final class RasterizedBarChartView: ViewportView, ChartViewType {
     }
 
     func enable(columns: [String], animated: Bool) {
-        animator.animateColumns(from: enabledColumns.ids, to: columns, animated: animated)
+        let ids = enabledColumns.ids
+        let started = animator.animateColumns(from: ids, to: columns, animated: animated)
         enabledColumns = chart.columns(with: columns)
         maxRange = chart.adjustedRange(of: enabledColumns)
-        render(animated: animated)
+        render(animated: animated && !started)
     }
 
     func render(animated: Bool) {

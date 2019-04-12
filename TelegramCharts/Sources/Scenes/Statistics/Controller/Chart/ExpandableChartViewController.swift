@@ -18,14 +18,20 @@ class ExpandableChartViewController: ChartViewController {
 
         controller.theme = theme
         controller.delegate = self
-        controller.enable(columns: enabledColumns.ids)
+        moveState(from: self, to: controller)
         add(child: controller, withAnimator: CrossDissolveLayoutAnimator())
+    }
+
+    func moveState(from: ChartViewController, to: ChartViewController) {
+        if from.chart.columns.ids == to.chart.columns.ids {
+            to.enable(columns: from.columnsView.enabledColumns.ids)
+        }
     }
 }
 
 extension ExpandableChartViewController: ChartViewControllerDelegate {
     func chartViewControllerWantsToFold(_ controller: ChartViewController) {
-        enable(columns: controller.enabledColumns.ids, animated: false)
+        moveState(from: controller, to: self)
         controller.dropFromParent(withAnimator: CrossDissolveLayoutAnimator())
     }
 }

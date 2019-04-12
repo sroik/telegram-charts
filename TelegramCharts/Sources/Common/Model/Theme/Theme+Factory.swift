@@ -12,6 +12,13 @@ extension Theme {
         }
     }
 
+    var state: ThemeState {
+        switch self {
+        case .day: return .day
+        case .night: return .night
+        }
+    }
+
     var rotated: Theme {
         switch self {
         case .day: return .night
@@ -32,6 +39,11 @@ extension Theme {
         case .night: return "Night"
         }
     }
+}
+
+extension ThemeState {
+    static let day = ThemeState(cornerRadius: 6)
+    static let night = ThemeState(cornerRadius: 6)
 }
 
 extension ThemeColor {

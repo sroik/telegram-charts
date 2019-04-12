@@ -68,7 +68,7 @@ extension GridLayout {
         switch itemSide {
         case let .fixed(itemSide):
             let itemsSize = CGFloat(itemsNumber) * itemSide
-            let freeSpace = rect.height - insets.vertical - itemsSize
+            let freeSpace = directedSide(of: rect) - insets.vertical - itemsSize
             return freeSpace / CGFloat(itemsNumber - 1)
         case .flexible:
             return 0

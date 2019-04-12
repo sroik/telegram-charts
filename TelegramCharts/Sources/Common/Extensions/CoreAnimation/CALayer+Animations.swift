@@ -52,7 +52,7 @@ extension CALayer {
 
     @discardableResult
     func springValue(for keyPath: KeyPath, from: Any?, to: Any?) -> TimeInterval {
-        let animation = CASpringAnimation.default(for: keyPath)
+        let animation = CABasicAnimation.maybeSpring(for: keyPath)
         animation.fromValue = from
         animation.toValue = to
         removeAnimation(forKey: keyPath)
@@ -136,8 +136,18 @@ extension TimeInterval {
     }
 }
 
-extension CASpringAnimation {
-    static func `default`(for keyPath: CALayer.KeyPath) -> CASpringAnimation {
+extension CABasicAnimation {
+    static func maybeSpring(
+        for keyPath: CALayer.KeyPath
+    ) -> CABasicAnimation {
+        guard Device.isFast else {
+            let animation = CABasicAnimation(keyPath: keyPath)
+            animation.timingFunction = .easeInEaseOut
+            animation.duration = .smoothDuration
+            animation.beginTime = CACurrentMediaTime()
+            return animation
+        }
+
         let animation = CASpringAnimation(keyPath: keyPath)
         animation.initialVelocity = 10
         animation.damping = 20

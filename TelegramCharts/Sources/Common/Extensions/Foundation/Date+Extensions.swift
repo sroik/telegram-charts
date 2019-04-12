@@ -5,14 +5,22 @@
 import Foundation
 
 extension Date {
+    var nearestHour: Date {
+        return rounded(by: .hour)
+    }
+
+    func rounded(by interval: TimeInterval) -> Date {
+        let count = (timeIntervalSinceReferenceDate / interval).rounded(.toNearestOrEven)
+        let stamp = count * interval
+        return Date(timeIntervalSince1970: stamp)
+    }
+
     func string(format: String) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = format
-        return formatter.string(from: self)
+        return DateFormatter(format: format).string(from: self)
     }
 
     func isSameDay(as date: Date) -> Bool {
-        return Calendar.current.isDate(self, inSameDayAs: date)
+        return Calendar.local.isDate(self, inSameDayAs: date)
     }
 
     init(timestamp: Timestamp) {
@@ -33,4 +41,35 @@ extension TimeInterval {
     static var minute: TimeInterval {
         return 60
     }
+}
+
+extension DateFormatter {
+    convenience init(format: String) {
+        self.init()
+        dateFormat = format
+        timeZone = .utc
+    }
+}
+
+extension Calendar {
+    static var local: Calendar = {
+        var calendar = Calendar.current
+        calendar.timeZone = .utc
+        return calendar
+    }()
+}
+
+/*
+ * I'm not sure I need this logic.
+ * Just want the charts to look pretty
+ */
+extension TimeZone {
+    static var utc: TimeZone = {
+        guard let utc = TimeZone(identifier: "UTC") else {
+            assertionFailureWrapper("failed to init utc time zone")
+            return .current
+        }
+
+        return utc
+    }()
 }

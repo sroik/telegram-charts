@@ -69,7 +69,7 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
     private func selectIndex(at point: CGPoint, animated: Bool) {
         let chartPoint = point.x - chartView.offset - layout.insets.left
         let position = chartPoint / chartView.contentSize.width
-        let index = chart.timestamps.index(nearestTo: position, strategy: .ceil)
+        let index = chart.timestamps.index(nearestTo: position, rule: .up)
         select(index: index, animated: animated)
     }
 

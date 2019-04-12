@@ -96,10 +96,6 @@ class ChartViewController: ViewController {
 }
 
 extension ChartViewController: ColumnsListViewDelegate, ChartMapViewDelegate {
-    var enabledColumns: [Column] {
-        return columnsView.enabledColumns
-    }
-
     func columnsView(_ view: ColumnsListView, didEnable columns: [Column]) {
         enable(columns: columns.ids, animated: true)
     }

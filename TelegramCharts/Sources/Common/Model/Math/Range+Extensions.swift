@@ -43,6 +43,13 @@ extension Range where T: Arithmetical {
         )
     }
 
+    init(min: T, size: T) {
+        self.init(
+            min: min,
+            max: min + size
+        )
+    }
+
     init(max: T, size: T) {
         self.init(
             min: max - size,

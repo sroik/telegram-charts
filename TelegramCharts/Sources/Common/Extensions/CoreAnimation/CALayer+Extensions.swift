@@ -18,13 +18,13 @@ extension CALayer {
         CATransaction.commit()
     }
 
-    func add(child: CALayer) {
-        if child.superlayer == nil {
+    func addSublayerIfNeeded(_ child: CALayer) {
+        if child.superlayer != self {
             addSublayer(child)
         }
     }
 
-    func dropFromParent() {
+    func removeFromSuperlayerIfNeeded() {
         if superlayer != nil {
             removeFromSuperlayer()
         }

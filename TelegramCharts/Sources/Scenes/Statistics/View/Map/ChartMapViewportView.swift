@@ -65,9 +65,6 @@ final class ChartMapViewportView: View {
     }
 
     private func setup() {
-        layer.cornerRadius = 6
-        layer.masksToBounds = true
-
         [leftKnob, rightKnob].forEach { view in
             view.contentMode = .center
             view.tintColor = .white
@@ -79,6 +76,9 @@ final class ChartMapViewportView: View {
     override func themeUp() {
         super.themeUp()
         setNeedsLayout()
+
+        layer.cornerRadius = theme.state.cornerRadius
+        layer.masksToBounds = true
 
         [leftKnob, rightKnob, self].forEach { view in
             view.layer.borderColor = theme.knobBorder.cgColor

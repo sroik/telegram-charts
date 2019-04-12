@@ -86,6 +86,18 @@ extension UIView {
         subviews.forEach(addSubview(_:))
     }
 
+    func addSubviewIfNeeded(_ subview: UIView) {
+        if subview.superview != self {
+            addSubview(subview)
+        }
+    }
+
+    func removeFromSuperviewIfNeeded() {
+        if superview != nil {
+            removeFromSuperview()
+        }
+    }
+
     func removeFromSuperview(
         animated: Bool,
         duration: TimeInterval = .defaultDuration,

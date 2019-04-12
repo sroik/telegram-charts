@@ -60,7 +60,7 @@ class ChartCardView: CardView {
     }
 
     private var title: String? {
-        let format = chart.expandable ? "E, d MMM yyyy" : "hh:mm"
+        let format = chart.expandable ? "E, d MMM yyyy" : "HH:mm"
         return selectedDate.string(format: format)
     }
 

@@ -4,20 +4,6 @@
 
 import UIKit
 
-enum RoundStrategy {
-    case round
-    case ceil
-    case floor
-
-    func round(_ value: CGFloat) -> CGFloat {
-        switch self {
-        case .ceil: return value.ceiled()
-        case .floor: return value.floored()
-        case .round: return value.rounded()
-        }
-    }
-}
-
 extension Collection {
     subscript(safe index: Index) -> Iterator.Element? {
         return indices.contains(index) ? self[index] : nil
@@ -25,22 +11,25 @@ extension Collection {
 }
 
 extension Collection where Index == Int {
-    func index(nearestTo zeroToOnePosition: CGFloat, strategy: RoundStrategy) -> Int? {
+    func index(
+        nearestTo zeroToOnePosition: CGFloat,
+        rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero
+    ) -> Int? {
         guard !isEmpty else {
             return nil
         }
 
         let floatingIndex = CGFloat(count) * zeroToOnePosition - 1
-        let index = Int(strategy.round(floatingIndex))
+        let index = Int(floatingIndex.rounded(rule))
         let clampedIndex = index.clamped(from: 0, to: count - 1)
         return clampedIndex
     }
 
     func element(
         nearestTo zeroToOnePosition: CGFloat,
-        strategy: RoundStrategy
+        rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero
     ) -> Iterator.Element? {
-        guard let index = index(nearestTo: zeroToOnePosition, strategy: strategy) else {
+        guard let index = index(nearestTo: zeroToOnePosition, rule: rule) else {
             return nil
         }
 

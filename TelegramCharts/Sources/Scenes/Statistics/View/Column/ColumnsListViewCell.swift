@@ -66,7 +66,7 @@ final class ColumnsListViewCell: Control {
     }
 
     private func setup() {
-        layer.cornerRadius = 6
+        layer.cornerRadius = theme.state.cornerRadius
         layer.borderWidth = 1.5
         layer.borderColor = column.cgColor
         checkmarkView.contentMode = .center

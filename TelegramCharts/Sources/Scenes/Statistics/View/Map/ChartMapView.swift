@@ -26,6 +26,10 @@ final class ChartMapView: View {
         return overlayView.selectedKnob
     }
 
+    var chart: Chart {
+        return chartView.chart
+    }
+
     init(chartView: ChartView) {
         self.chartView = chartView
         super.init(frame: .screen)
@@ -44,13 +48,12 @@ final class ChartMapView: View {
 
     private func setup() {
         chartView.viewport = .zeroToOne
-        chartView.layer.cornerRadius = 6
+        chartView.layer.cornerRadius = theme.state.cornerRadius
         chartView.clipsToBounds = true
         addSubview(chartView)
 
-        overlayView.minSize = chartView.chart.minViewportSize
-        overlayView.maxSize = chartView.chart.maxViewportSize
-        overlayView.viewport = Range(max: 1, size: overlayView.minSize)
+        overlayView.minSize = chart.minViewportSize
+        overlayView.viewport = Range(max: 1, size: chart.preferredViewportSize)
         addSubviews(overlayView)
     }
 

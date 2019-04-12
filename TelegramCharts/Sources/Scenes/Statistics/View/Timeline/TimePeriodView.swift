@@ -71,14 +71,13 @@ final class TimePeriodView: View {
 
     private var singleDayTitle: String {
         let period = chart.timePeriod(in: viewport)
-        return period.min.string(format: "EEEE, d MMM yyyy")
+        return singleDayFormatter.string(from: period.min)
     }
 
     private var differentDaysTitle: String {
         let period = chart.timePeriod(in: viewport)
-        let format = "d MMM yyyy"
-        let min = period.min.string(format: format)
-        let max = period.max.string(format: format)
+        let min = differentDaysFormatter.string(from: period.min)
+        let max = differentDaysFormatter.string(from: period.max)
         return "\(min) - \(max)"
     }
 
@@ -88,6 +87,8 @@ final class TimePeriodView: View {
 
     private let chart: Chart
     private let spacing: CGFloat = 5
+    private let singleDayFormatter = DateFormatter(format: "EEEE, d MMM yyyy")
+    private let differentDaysFormatter = DateFormatter(format: "d MMM yyyy")
     private lazy var label = Label.primary(font: UIFont.semibold(size: 13))
     private lazy var button = Button.fold(spacing: spacing)
 }

@@ -31,8 +31,8 @@ extension Array where Element: Arithmetical {
 extension Array {
     func elements(in viewport: Viewport) -> ArraySlice<Element> {
         guard
-            let fromIndex = index(nearestTo: viewport.min, strategy: .floor),
-            let toIndex = index(nearestTo: viewport.max, strategy: .ceil)
+            let fromIndex = index(nearestTo: viewport.min, rule: .down),
+            let toIndex = index(nearestTo: viewport.max, rule: .up)
         else {
             return []
         }

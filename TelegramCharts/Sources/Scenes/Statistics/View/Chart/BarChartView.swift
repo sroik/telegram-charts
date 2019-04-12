@@ -48,28 +48,32 @@ class BarChartView: ViewportView, ChartViewType {
 
     func layoutLayers() {
         layers.enumerated().forEach { index, layer in
-            if isVisible(layer: layer, at: index) {
-                contentView.layer.add(child: layer)
-                layer.frame = layerFrame(at: index)
-                layer.draw(animated: false)
-            } else {
-                layer.dropFromParent()
+            guard isVisibleLayer(at: index) else {
+                layer.removeFromSuperlayerIfNeeded()
+                return
             }
+
+            contentView.layer.addSublayerIfNeeded(layer)
+            layer.frame = layerFrame(at: index)
+            layer.draw(animated: false)
         }
+    }
+
+    func visibleLayersNumber() -> Int {
+        return layers.indices.filter(isVisibleLayer).count
     }
 
     func forEachVisibleLayer(do block: EnumerationBlock) {
         layers.enumerated().forEach { index, layer in
-            if isVisible(layer: layer, at: index) {
+            if isVisibleLayer(at: index) {
                 block(index, layer)
             }
         }
     }
 
-    private func isVisible(layer: BarColumnLayer, at index: Int) -> Bool {
-        let visibleFrame = visibleInsets.inset(visibleRect)
+    private func isVisibleLayer(at index: Int) -> Bool {
         let frame = layerFrame(at: index)
-        return visibleFrame.intersects(layer.frame) || visibleFrame.intersects(frame)
+        return visibleInsets.inset(visibleRect).intersects(frame)
     }
 
     private func layerFrame(at index: Int) -> CGRect {

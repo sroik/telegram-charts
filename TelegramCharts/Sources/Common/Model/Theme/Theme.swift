@@ -24,3 +24,7 @@ struct ThemeColor {
     let mapKnob: UIColor
     let mapDim: UIColor
 }
+
+struct ThemeState {
+    let cornerRadius: CGFloat
+}
