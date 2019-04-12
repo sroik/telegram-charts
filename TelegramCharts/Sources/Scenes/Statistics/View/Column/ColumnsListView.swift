@@ -52,10 +52,13 @@ final class ColumnsListView: View {
             addSubview(cell)
         }
 
-        addGestureRecognizer(UILongPressGestureRecognizer(
-            target: self,
-            action: #selector(onPress)
-        ))
+        let press = UILongPressGestureRecognizer(target: self, action: #selector(onPress))
+        press.minimumPressDuration = 0.25
+        addGestureRecognizer(press)
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(onTap))
+        tap.cancelsTouchesInView = false
+        addGestureRecognizer(tap)
     }
 
     private func canToggle(cell: ColumnsListViewCell) -> Bool {
@@ -64,6 +67,14 @@ final class ColumnsListView: View {
 
     @objc private func onPress(_ recognizer: UILongPressGestureRecognizer) {
         delegate?.columnsViewDidLongPress(self)
+    }
+
+    @objc private func onTap(_ recognizer: UIGestureRecognizer) {
+        let point = recognizer.location(in: self)
+        let isNotInCell = cells.allSatisfy { !$0.frame.contains(point) }
+        if isNotInCell {
+            delegate?.columnsViewDidLongPress(self)
+        }
     }
 
     @objc private func cellPressed(_ cell: ColumnsListViewCell) {

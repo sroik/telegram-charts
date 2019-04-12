@@ -43,7 +43,7 @@ final class ChartMapOverlayView: View {
     }
 
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        return knob(at: point) != .none
+        return knob(at: point) != .none || bounds.contains(point)
     }
 
     private func setup() {
@@ -55,7 +55,7 @@ final class ChartMapOverlayView: View {
         workspace.layer.masksToBounds = true
         addSubviews(workspace, viewportView)
 
-        [panRecognizer, pressRecognizer].forEach { recognizer in
+        [panRecognizer, pressRecognizer, tapRecognizer].forEach { recognizer in
             recognizer.cancelsTouchesInView = false
             recognizer.delaysTouchesEnded = false
             recognizer.delegate = self
@@ -154,6 +154,11 @@ final class ChartMapOverlayView: View {
         viewportView.selectedKnob = .none
     }
 
+    private lazy var tapRecognizer = UITapGestureRecognizer(
+        target: self,
+        action: #selector(onPress)
+    )
+
     private lazy var panRecognizer = UIPanGestureRecognizer(
         target: self,
         action: #selector(onPan)
@@ -171,6 +176,15 @@ final class ChartMapOverlayView: View {
 }
 
 extension ChartMapOverlayView: UIGestureRecognizerDelegate {
+    override func gestureRecognizerShouldBegin(_ recognizer: UIGestureRecognizer) -> Bool {
+        guard recognizer == panRecognizer else {
+            return true
+        }
+
+        let velocity = panRecognizer.velocity(in: self)
+        return abs(velocity.x) > abs(velocity.y)
+    }
+
     func gestureRecognizer(
         _ recognizer: UIGestureRecognizer,
         shouldRecognizeSimultaneouslyWith other: UIGestureRecognizer
