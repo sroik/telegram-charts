@@ -15,6 +15,7 @@ struct ThemeColor {
     let navigation: UIColor
     let tint: UIColor
     let text: UIColor
+    let header: UIColor
     let details: UIColor
     let line: UIColor
     let gridLine: UIColor

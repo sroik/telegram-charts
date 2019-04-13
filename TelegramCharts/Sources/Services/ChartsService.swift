@@ -46,7 +46,20 @@ final class BuiltinChartsService: ChartsService {
     }
 
     func expanded(chart: Chart, at index: Int) -> Chart? {
+        if chart.percentage {
+            return daysExpanded(chart: chart, at: index)
+        } else {
+            return hoursExpanded(chart: chart, at: index)
+        }
+    }
+
+    private func daysExpanded(chart: Chart, at index: Int) -> Chart? {
+        return nil
+    }
+
+    private func hoursExpanded(chart: Chart, at index: Int) -> Chart? {
         guard let timestamp = chart.timestamps[safe: index] else {
+            assertionFailureWrapper("invalid index to expand", String(index))
             return nil
         }
 

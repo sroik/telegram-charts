@@ -25,7 +25,6 @@ extension UIViewController {
         child.willMove(toParent: self)
         view.addSubview(child.view)
         child.view.frame = view.bounds
-        child.view.layoutIfNeeded()
         addChild(child)
         child.didMove(toParent: self)
     }

@@ -19,12 +19,13 @@ struct ChartViewControllerFactory {
 
     static func controller(
         expandedFrom expandable: ExpandableChartViewController,
-        at index: Int,
+        at timestamp: Timestamp,
         with chart: Chart,
         dependencies: Dependencies
     ) -> ChartViewController {
+        let viewport = chart.viewport(toCover: timestamp)
         let controller = ChartViewController(dependencies: dependencies, chart: chart)
-        controller.set(viewport: Range(mid: 0.5, size: chart.preferredViewportSize))
+        controller.set(viewport: viewport)
         expandable.moveState(from: expandable, to: controller)
         return controller
     }

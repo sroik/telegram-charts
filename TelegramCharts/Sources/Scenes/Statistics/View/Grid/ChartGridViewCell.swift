@@ -74,6 +74,8 @@ final class ChartGridViewCell: View {
 
 extension ChartGridViewCell: Cloneable {
     func clone() -> ChartGridViewCell {
-        return ChartGridViewCell(state: state)
+        let cell = ChartGridViewCell(state: state)
+        cell.theme = theme
+        return cell
     }
 }

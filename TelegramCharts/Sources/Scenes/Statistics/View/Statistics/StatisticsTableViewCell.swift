@@ -58,7 +58,7 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
         placeholder.theme = theme
         controller?.theme = theme
         backgroundColor = .clear
-        label.textColor = theme.color.details
+        label.textColor = theme.color.header
         label.backgroundColor = theme.color.background
     }
 

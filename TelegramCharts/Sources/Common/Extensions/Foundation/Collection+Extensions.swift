@@ -37,6 +37,27 @@ extension Collection where Index == Int {
     }
 }
 
+extension Array where Element == Int {
+    func indexOfNearest(to element: Element) -> Int? {
+        guard count > 0 else {
+            return nil
+        }
+
+        var nearestIndex = 0
+        var nearestDistance: Int = .max
+
+        enumerated().forEach { index, e in
+            let distance: Int = abs(element - e)
+            if distance < nearestDistance {
+                nearestDistance = distance
+                nearestIndex = index
+            }
+        }
+
+        return nearestIndex
+    }
+}
+
 extension Array {
     mutating func transform(using block: (Int, inout Element) -> Void) {
         indices.forEach { idx in

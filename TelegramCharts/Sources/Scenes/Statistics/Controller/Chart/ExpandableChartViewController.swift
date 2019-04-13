@@ -6,6 +6,11 @@ import UIKit
 
 class ExpandableChartViewController: ChartViewController {
     override func expand(at index: Int) {
+        guard let timestamp = chart.timestamps[safe: index] else {
+            assertionFailureWrapper("invalid index to expand", String(index))
+            return
+        }
+
         guard let chart = dependencies.charts.expanded(chart: chart, at: index) else {
             assertionFailureWrapper("failed to expand chart", self.chart.title)
             return
@@ -13,7 +18,7 @@ class ExpandableChartViewController: ChartViewController {
 
         let controller = ChartViewControllerFactory.controller(
             expandedFrom: self,
-            at: index,
+            at: timestamp,
             with: chart,
             dependencies: dependencies
         )

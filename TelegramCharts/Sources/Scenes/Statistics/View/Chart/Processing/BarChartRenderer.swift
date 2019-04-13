@@ -32,9 +32,12 @@ final class BarChartRenderer {
         let frames = layout.itemFrames(in: rect)
 
         frames.enumerated().forEach { index, frame in
+            let column = StackedColumn(columns: columns, at: index)
+            let maxValue = chart.percentage ? column.stackedValue() : range.max
+
             BarColumnRenderer().render(
-                column: StackedColumn(columns: columns, at: index),
-                maxValue: range.max,
+                column: column,
+                maxValue: maxValue,
                 in: inflatesFrames ? frame.inflated() : frame.rounded(),
                 in: context,
                 minHeight: scale

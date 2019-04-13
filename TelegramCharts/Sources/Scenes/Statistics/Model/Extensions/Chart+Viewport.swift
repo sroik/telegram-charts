@@ -27,4 +27,14 @@ extension Chart {
         let size = days / CGFloat(self.days)
         return size.clamped(from: 0, to: 1)
     }
+
+    func viewport(toCover day: Timestamp) -> Viewport {
+        let viewportSize = viewportSizeToCover(days: 1)
+        let nearestIndex = timestamps.indexOfNearest(to: day) ?? 0
+        let min = CGFloat(nearestIndex) / CGFloat(timestamps.count)
+        return Viewport(
+            min: min.clamped(from: 0, to: 1 - viewportSize),
+            size: viewportSize
+        )
+    }
 }
