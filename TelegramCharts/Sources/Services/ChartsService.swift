@@ -54,9 +54,14 @@ final class BuiltinChartsService: ChartsService {
     }
 
     private func daysExpanded(chart: Chart, at index: Int, days: Int) -> Chart {
+        let range = Range(mid: index, size: days).limited(
+            from: 0,
+            to: chart.timestamps.count - 1
+        )
+
         return chart.with(
             id: "\(chart.id)-\(index)",
-            timestampsRange: Range(min: 0, max: 6),
+            timestampsRange: range,
             expandable: false
         )
     }

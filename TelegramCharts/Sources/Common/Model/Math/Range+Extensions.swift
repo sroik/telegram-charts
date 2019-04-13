@@ -70,6 +70,22 @@ extension Range where T: Arithmetical {
             max: max.clamped(from: from, to: to)
         )
     }
+
+    func limited(from: T, to: T) -> Range<T> {
+        guard size < to - from else {
+            return Range(min: from, max: to)
+        }
+
+        if from > min {
+            return Range(min: from, size: size)
+        }
+
+        if to < max {
+            return Range(max: to, size: size)
+        }
+
+        return self
+    }
 }
 
 extension Range where T == Int {

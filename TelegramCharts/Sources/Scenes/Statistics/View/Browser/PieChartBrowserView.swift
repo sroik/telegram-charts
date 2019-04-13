@@ -8,13 +8,21 @@ final class PieChartBrowserView: View, ChartBrowser {
     let chartView: PieChartView
 
     var viewport: Viewport {
-        didSet {}
+        didSet {
+            adaptViewport()
+        }
     }
 
     init(chartView: PieChartView) {
         self.chartView = chartView
         self.viewport = .zeroToOne
         super.init(frame: .zero)
+        setup()
+    }
+
+    override func layoutSubviewsOnBoundsChange() {
+        super.layoutSubviewsOnBoundsChange()
+        chartView.frame = bounds
     }
 
     override func themeUp() {
@@ -26,5 +34,7 @@ final class PieChartBrowserView: View, ChartBrowser {
     func adaptViewport() {}
     func deselect(animated: Bool) {}
 
-    private func setup() {}
+    private func setup() {
+        addSubview(chartView)
+    }
 }

@@ -50,6 +50,37 @@ class RangeTests: XCTestCase {
 
     func testClamped() {
         let range = TelegramCharts.Range<Int>(min: -2, max: 10)
-        XCTAssertEqual(range.clamped(from: 0, to: 5), TelegramCharts.Range<Int>(min: 0, max: 5))
+        XCTAssertEqual(
+            range.clamped(from: 0, to: 5),
+            TelegramCharts.Range<Int>(min: 0, max: 5)
+        )
+    }
+
+    func testLimited() {
+        let range = TelegramCharts.Range<Int>(min: 5, max: 12)
+        XCTAssertEqual(
+            range.limited(from: 0, to: 10),
+            TelegramCharts.Range<Int>(min: 3, max: 10)
+        )
+
+        XCTAssertEqual(
+            range.limited(from: 13, to: 15),
+            TelegramCharts.Range<Int>(min: 13, max: 15)
+        )
+
+        XCTAssertEqual(
+            range.limited(from: 10, to: 20),
+            TelegramCharts.Range<Int>(min: 10, max: 17)
+        )
+
+        XCTAssertEqual(
+            range.limited(from: 7, to: 12),
+            TelegramCharts.Range<Int>(min: 7, max: 12)
+        )
+
+        XCTAssertEqual(
+            range.limited(from: 5, to: 10),
+            TelegramCharts.Range<Int>(min: 5, max: 10)
+        )
     }
 }
