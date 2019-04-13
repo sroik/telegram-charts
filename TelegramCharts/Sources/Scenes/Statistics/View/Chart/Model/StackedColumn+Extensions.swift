@@ -4,7 +4,11 @@
 
 import UIKit
 
+typealias PieSlice = Range<CGFloat>
+
 extension StackedColumn {
+    typealias Slice = Range<CGFloat>
+
     static var empty: StackedColumn {
         return StackedColumn(index: 0, values: [])
     }
@@ -52,31 +56,41 @@ extension StackedColumn {
         }
     }
 
+    func pieSlices() -> [PieSlice] {
+        return slices(height: 2 * .pi)
+    }
+
+    func slices(height: CGFloat, minHeight: CGFloat = 0) -> [Slice] {
+        let stackedValue = self.stackedValue()
+
+        guard height > 0, stackedValue > 0 else {
+            return values.map { _ in .zero }
+        }
+
+        var stackedHeight: CGFloat = 0
+        var slices: [Slice] = []
+
+        for value in values {
+            let ratio = CGFloat(value.value) / CGFloat(stackedValue)
+            let minValueHeight = value.value > 0 ? minHeight : 0
+            let ratioHeight = max(height * ratio, minValueHeight)
+            let valueHeight = value.isEnabled ? ratioHeight : 0
+
+            slices.append(Slice(min: stackedHeight, size: valueHeight))
+            stackedHeight += valueHeight
+        }
+
+        return slices
+    }
+
     func percentagePoints(
         x: CGFloat = 0,
         height: CGFloat,
         minHeight: CGFloat = 0
     ) -> [CGPoint] {
-        let stackedValue = self.stackedValue()
-
-        guard height > 0, stackedValue > 0 else {
-            return values.map { _ in
-                CGPoint(x: x, y: height)
-            }
+        return slices(height: height, minHeight: minHeight).map { slice in
+            CGPoint(x: x, y: height - slice.max)
         }
-
-        var stackedHeight: CGFloat = 0
-        var points: [CGPoint] = []
-
-        for value in values {
-            let ratio = CGFloat(value.value) / CGFloat(stackedValue)
-            let minValueHeight = value.value > 0 ? minHeight : 0
-            let valueHeight = max(height * ratio, minValueHeight)
-            stackedHeight += value.isEnabled ? valueHeight : 0
-            points.append(CGPoint(x: x, y: height - stackedHeight))
-        }
-
-        return points
     }
 
     func barFrames(
@@ -84,40 +98,16 @@ extension StackedColumn {
         maxValue: Int,
         minHeight: CGFloat = 0
     ) -> [CGRect] {
-        let stackedValue = self.stackedValue()
-
-        guard maxValue > 0, stackedValue > 0 else {
-            return values.map { _ in
-                CGRect(x: rect.minX, y: rect.maxY, width: rect.width, height: 0)
-            }
-        }
-
-        let heightPortion = CGFloat(stackedValue) / CGFloat(maxValue)
+        let heightPortion = maxValue > 0 ? CGFloat(stackedValue()) / CGFloat(maxValue) : 0
         let filledHeight = heightPortion * rect.height
-        let minY = rect.maxY - filledHeight
 
-        let origins = percentagePoints(
-            x: rect.minX,
-            height: filledHeight,
-            minHeight: minHeight
-        )
-
-        var frames: [CGRect] = []
-        var previousOriginY = filledHeight
-
-        for origin in origins {
-            let height = previousOriginY - origin.y
-            let frame = CGRect(
-                x: origin.x,
-                y: minY + origin.y,
+        return slices(height: filledHeight, minHeight: minHeight).map { slice in
+            CGRect(
+                x: rect.minX,
+                y: rect.maxY - slice.max,
                 width: rect.width,
-                height: height
+                height: slice.size
             )
-
-            previousOriginY = origin.y
-            frames.append(frame)
         }
-
-        return frames
     }
 }

@@ -32,5 +32,5 @@ class PercentageLineChartView: ViewportView, TimelineChartViewType {
         enable(columns: chart.drawableColumns.ids, animated: false)
     }
 
-    let chartLayer: PercentageLineChartLayer
+    private let chartLayer: PercentageLineChartLayer
 }

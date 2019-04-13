@@ -47,6 +47,10 @@ extension CGRect {
         return UIScreen.main.bounds
     }
 
+    var minSide: CGFloat {
+        return min(size.width, size.height)
+    }
+
     var vertices: [CGPoint] {
         return [
             CGPoint(x: minX, y: minY),

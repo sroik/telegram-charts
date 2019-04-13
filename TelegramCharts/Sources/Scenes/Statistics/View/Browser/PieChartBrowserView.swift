@@ -2,12 +2,13 @@
 //  Copyright © 2019 sroik. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 final class PieChartBrowserView: View, ChartBrowser {
     let chartView: PieChartView
+    let insets: UIEdgeInsets
 
-    var viewport: Viewport {
+    var viewport: Viewport = .zeroToOne {
         didSet {
             adaptViewport()
         }
@@ -15,14 +16,14 @@ final class PieChartBrowserView: View, ChartBrowser {
 
     init(chartView: PieChartView) {
         self.chartView = chartView
-        self.viewport = .zeroToOne
+        self.insets = UIEdgeInsets(repeated: 15)
         super.init(frame: .zero)
         setup()
     }
 
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
-        chartView.frame = bounds
+        chartView.frame = insets.inset(bounds)
     }
 
     override func themeUp() {
@@ -30,9 +31,17 @@ final class PieChartBrowserView: View, ChartBrowser {
         backgroundColor = theme.color.placeholder
     }
 
-    func enable(columns: [String], animated: Bool) {}
-    func adaptViewport() {}
-    func deselect(animated: Bool) {}
+    func enable(columns: [String], animated: Bool) {
+        chartView.enable(columns: columns, animated: animated)
+    }
+
+    func adaptViewport() {
+        chartView.viewport = viewport
+    }
+
+    func deselect(animated: Bool) {
+        print("CARD REMOVAL")
+    }
 
     private func setup() {
         addSubview(chartView)

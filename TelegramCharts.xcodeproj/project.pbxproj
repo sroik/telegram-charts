@@ -87,6 +87,8 @@
 		AC5261E82262602000272B05 /* CollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5261E72262602000272B05 /* CollectionExtensionsTests.swift */; };
 		AC5261EA22626D0600272B05 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5261E922626D0600272B05 /* PieChartView.swift */; };
 		AC5261EC2262700000272B05 /* PieChartBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5261EB2262700000272B05 /* PieChartBrowserView.swift */; };
+		AC5261EE2262828100272B05 /* PieChartLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5261ED2262828100272B05 /* PieChartLayer.swift */; };
+		AC5261F0226288DC00272B05 /* StackedColumnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5261EF226288DC00272B05 /* StackedColumnTests.swift */; };
 		AC5BCD0C226049CC007C06E4 /* TimelineChartBrowserLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5BCD0B226049CC007C06E4 /* TimelineChartBrowserLayout.swift */; };
 		AC5BCD0E2260530E007C06E4 /* StackedChartCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5BCD0D2260530E007C06E4 /* StackedChartCardView.swift */; };
 		AC5EFB6B223A2D8A00979B60 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB6A223A2D8A00979B60 /* TimelineView.swift */; };
@@ -227,6 +229,8 @@
 		AC5261E72262602000272B05 /* CollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtensionsTests.swift; sourceTree = "<group>"; };
 		AC5261E922626D0600272B05 /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		AC5261EB2262700000272B05 /* PieChartBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartBrowserView.swift; sourceTree = "<group>"; };
+		AC5261ED2262828100272B05 /* PieChartLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartLayer.swift; sourceTree = "<group>"; };
+		AC5261EF226288DC00272B05 /* StackedColumnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedColumnTests.swift; sourceTree = "<group>"; };
 		AC5BCD0B226049CC007C06E4 /* TimelineChartBrowserLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineChartBrowserLayout.swift; sourceTree = "<group>"; };
 		AC5BCD0D2260530E007C06E4 /* StackedChartCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedChartCardView.swift; sourceTree = "<group>"; };
 		AC5EFB6A223A2D8A00979B60 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
@@ -416,6 +420,7 @@
 				AC143B4D2237C94400FEB9CD /* LineColumnLayer.swift */,
 				AC16EAB4225D0DA7009471D7 /* BarColumnLayer.swift */,
 				AC4BB466225F85AC00D72E00 /* PercentageLineChartLayer.swift */,
+				AC5261ED2262828100272B05 /* PieChartLayer.swift */,
 			);
 			path = Layer;
 			sourceTree = "<group>";
@@ -554,6 +559,7 @@
 				ACAF2B05223E63A000533F37 /* CGGeometryExtensionsTests.swift */,
 				AC71BD0B2260727C00AD85AD /* PercentsTests.swift */,
 				AC5261E72262602000272B05 /* CollectionExtensionsTests.swift */,
+				AC5261EF226288DC00272B05 /* StackedColumnTests.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -1010,6 +1016,7 @@
 				AC3B37F42236510C000AD635 /* AppDelegate.swift in Sources */,
 				AC143B522237F09500FEB9CD /* ChartMapOverlayView.swift in Sources */,
 				AC7C1F1B2259C3BD00A095D6 /* ChartGridViewCell.swift in Sources */,
+				AC5261EE2262828100272B05 /* PieChartLayer.swift in Sources */,
 				AC5EFB72223B98EE00979B60 /* Date+Extensions.swift in Sources */,
 				AC16EACC225E80D3009471D7 /* DispatchQueue+Extensions.swift in Sources */,
 				AC4BB465225F7EFD00D72E00 /* PercentageLineChartView.swift in Sources */,
@@ -1036,6 +1043,7 @@
 				AC3B385B223682E0000AD635 /* ChartTests.swift in Sources */,
 				AC5261E82262602000272B05 /* CollectionExtensionsTests.swift in Sources */,
 				AC3B381E22365A71000AD635 /* UIColorHexTests.swift in Sources */,
+				AC5261F0226288DC00272B05 /* StackedColumnTests.swift in Sources */,
 				AC3B384C223661E3000AD635 /* Bundle+Stub.swift in Sources */,
 				ACAF2B06223E63A000533F37 /* CGGeometryExtensionsTests.swift in Sources */,
 				AC71BD0C2260727C00AD85AD /* PercentsTests.swift in Sources */,
