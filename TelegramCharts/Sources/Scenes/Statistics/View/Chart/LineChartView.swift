@@ -4,7 +4,7 @@
 
 import UIKit
 
-class LineChartView: ViewportView, ChartViewType {
+class LineChartView: ViewportView, TimelineChartViewType {
     let chart: Chart
     let layers: [LineColumnLayer]
 

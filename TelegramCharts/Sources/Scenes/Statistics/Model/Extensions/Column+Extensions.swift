@@ -58,6 +58,11 @@ extension Column {
     func values(in viewport: Viewport) -> [Int] {
         return Array(values.elements(in: viewport))
     }
+
+    func with(valuesRange: Range<Int>) -> Column {
+        let slice = values.elements(from: valuesRange.min, to: valuesRange.max)
+        return Column(id: id, type: type, name: name, color: color, values: Array(slice))
+    }
 }
 
 extension Array where Element == Column {

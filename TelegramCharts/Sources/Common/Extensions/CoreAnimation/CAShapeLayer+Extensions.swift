@@ -26,7 +26,7 @@ extension CAShapeLayer {
      * updates column path preserving width.
      * velocity in points per second
      */
-    func update(path: CGPath, animated: Bool, velocity: CGFloat = 300) {
+    func update(path: CGPath, animated: Bool, velocity: CGFloat = 250) {
         guard let current = presentedPath, !current.bounds.isEmpty else {
             set(value: path, for: .path, animated: false)
             return

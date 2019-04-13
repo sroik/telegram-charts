@@ -5,7 +5,14 @@
 import UIKit
 
 class ExpandableChartViewController: ChartViewController {
-    override func expand(at index: Int) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if var expandableView = (chartView as? ExpandableChartBrowserView) {
+            expandableView.delegate = self
+        }
+    }
+
+    func expand(at index: Int) {
         guard let timestamp = chart.timestamps[safe: index] else {
             assertionFailureWrapper("invalid index to expand", String(index))
             return
@@ -40,5 +47,11 @@ extension ExpandableChartViewController: ChartViewControllerDelegate {
     func chartViewControllerWantsToFold(_ controller: ChartViewController) {
         moveState(from: controller, to: self)
         controller.dropFromParent(withAnimator: CrossDissolveLayoutAnimator())
+    }
+}
+
+extension ExpandableChartViewController: ChartBrowserDelegate {
+    func chartBrowser(_ view: ChartBrowserView, wantsToExpand index: Int) {
+        expand(at: index)
     }
 }

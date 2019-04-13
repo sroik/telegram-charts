@@ -11,7 +11,7 @@ extension UIView {
 
     func fadeIn(
         animated: Bool,
-        duration: TimeInterval = .defaultDuration,
+        duration: TimeInterval = .fastDuration,
         then completion: Completion? = nil
     ) {
         alpha = 0
@@ -24,8 +24,13 @@ extension UIView {
         duration: TimeInterval = .fastDuration,
         then completion: Completion? = nil
     ) {
+        guard animated else {
+            self.alpha = alpha
+            return
+        }
+
         UIView.animate(
-            withDuration: animated ? duration : 0,
+            withDuration: duration,
             animations: { self.alpha = alpha },
             completion: { _ in completion?() }
         )
@@ -61,6 +66,26 @@ extension UIView {
             }
         )
     }
+
+    func removeFromSuperview(
+        animated: Bool,
+        duration: TimeInterval = .fastDuration,
+        then completion: Completion? = nil
+    ) {
+        guard animated else {
+            removeFromSuperview()
+            return
+        }
+
+        UIView.animate(
+            withDuration: duration,
+            animations: { self.alpha = 0 },
+            completion: { _ in
+                self.removeFromSuperview()
+                completion?()
+            }
+        )
+    }
 }
 
 extension UIImageView {
@@ -75,6 +100,7 @@ extension UIImageView {
             transition.type = .fade
             layer.add(transition, forKey: nil)
         }
+
         self.image = image
     }
 }

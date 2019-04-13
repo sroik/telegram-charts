@@ -7,7 +7,7 @@ import UIKit
 struct ChartMapViewFactory {
     static func view(with chart: Chart) -> ChartMapView {
         return ChartMapView(
-            chartView: ChartViewFactory.view(with: chart, isMap: true)
+            chartView: ChartViewFactory.timelineView(with: chart, isMap: true)
         )
     }
 }

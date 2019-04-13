@@ -52,4 +52,16 @@ extension Chart {
             expandable: expandable
         )
     }
+
+    func with(id: String, timestampsRange: Range<Int>, expandable: Bool) -> Chart {
+        return Chart(
+            id: id,
+            title: title,
+            columns: columns.map { $0.with(valuesRange: timestampsRange) },
+            percentage: percentage,
+            stacked: stacked,
+            yScaled: yScaled,
+            expandable: expandable
+        )
+    }
 }

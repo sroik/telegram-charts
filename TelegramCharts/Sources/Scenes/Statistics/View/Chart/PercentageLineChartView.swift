@@ -4,7 +4,7 @@
 
 import UIKit
 
-class PercentageLineChartView: ViewportView, ChartViewType {
+class PercentageLineChartView: ViewportView, TimelineChartViewType {
     var selectedIndex: Int?
     let chart: Chart
 

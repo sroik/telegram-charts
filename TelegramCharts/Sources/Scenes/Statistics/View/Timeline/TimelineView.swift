@@ -33,6 +33,7 @@ final class TimelineView: ViewportView {
     override func adaptViewport() {
         super.adaptViewport()
         rowView.visibleRect = visibleRect
+        removingView?.visibleRect = visibleRect
     }
 
     override func display() {
@@ -47,8 +48,8 @@ final class TimelineView: ViewportView {
     }
 
     func updateRowView(animated: Bool) {
-        let oldRowView = rowView
-        oldRowView.layer.removeAllAnimations()
+        removingView = rowView
+        rowView.removeFromSuperview(animated: animated)
 
         rowView = TimelineRowView(
             itemWidth: minimumSpacing,
@@ -59,15 +60,7 @@ final class TimelineView: ViewportView {
         rowView.fill(in: contentView)
         rowView.theme = theme
         rowView.visibleRect = visibleRect
-
-        switch rowView.count.compare(with: oldRowView.count) {
-        case .orderedDescending where animated:
-            rowView.fadeIn(animated: animated, then: oldRowView.removeFromSuperview)
-        case .orderedAscending where animated:
-            oldRowView.removeFromSuperview(animated: animated)
-        default:
-            oldRowView.removeFromSuperview()
-        }
+        rowView.fadeIn(animated: animated)
     }
 
     private var fitTimestamps: [Timestamp] {
@@ -86,7 +79,7 @@ final class TimelineView: ViewportView {
 
     private func setup() {
         isUserInteractionEnabled = false
-        displayLink.fps = 4
+        displayLink.fps = 5
         addSubview(line)
     }
 
@@ -97,6 +90,7 @@ final class TimelineView: ViewportView {
         return (clamped.nearestPowerOfTwo ?? 0) + 1
     }
 
+    private var removingView: TimelineRowView?
     private var rowView = TimelineRowView(itemWidth: 0, timestamps: [], format: "")
     private let chart: Chart
     private let line = UIView()

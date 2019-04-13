@@ -47,14 +47,18 @@ final class BuiltinChartsService: ChartsService {
 
     func expanded(chart: Chart, at index: Int) -> Chart? {
         if chart.percentage {
-            return daysExpanded(chart: chart, at: index)
+            return daysExpanded(chart: chart, at: index, days: daysToExpand)
         } else {
             return hoursExpanded(chart: chart, at: index)
         }
     }
 
-    private func daysExpanded(chart: Chart, at index: Int) -> Chart? {
-        return nil
+    private func daysExpanded(chart: Chart, at index: Int, days: Int) -> Chart {
+        return chart.with(
+            id: "\(chart.id)-\(index)",
+            timestampsRange: Range(min: 0, max: 6),
+            expandable: false
+        )
     }
 
     private func hoursExpanded(chart: Chart, at index: Int) -> Chart? {
@@ -120,6 +124,7 @@ final class BuiltinChartsService: ChartsService {
         }
     }
 
+    private let daysToExpand: Int = 7
     private let basename: String
     private let directory: String
     private let bundle: Bundle

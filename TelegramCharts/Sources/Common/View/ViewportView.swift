@@ -7,7 +7,7 @@ import UIKit
 class ViewportView: View, Viewportable {
     let contentView = View()
     var autolayouts: Bool
-    let displayLink = DisplayLink(fps: 9)
+    let displayLink = DisplayLink(fps: 8)
 
     var viewport: Viewport {
         didSet {

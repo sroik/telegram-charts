@@ -17,6 +17,14 @@ final class TimePeriodView: View {
         }
     }
 
+    var isSingleDay: Bool {
+        return timePeriod.isSingleDay
+    }
+
+    var timePeriod: Range<Date> {
+        return chart.timePeriod(in: viewport)
+    }
+
     init(chart: Chart, viewport: Viewport = .zeroToOne) {
         self.viewport = viewport
         self.chart = chart
@@ -70,19 +78,14 @@ final class TimePeriodView: View {
     }
 
     private var singleDayTitle: String {
-        let period = chart.timePeriod(in: viewport)
-        return singleDayFormatter.string(from: period.mid)
+        return singleDayFormatter.string(from: timePeriod.mid)
     }
 
     private var differentDaysTitle: String {
-        let period = chart.timePeriod(in: viewport)
+        let period = timePeriod
         let min = differentDaysFormatter.string(from: period.min)
         let max = differentDaysFormatter.string(from: period.max)
         return "\(min) - \(max)"
-    }
-
-    private var isSingleDay: Bool {
-        return chart.timePeriod(in: viewport).isSingleDay
     }
 
     private let chart: Chart
@@ -107,6 +110,10 @@ private extension Button {
 
 private extension Range where T == Date {
     var isSingleDay: Bool {
+        return min.isSameDay(as: max)
+    }
+
+    var isAlmostSingleDay: Bool {
         /* Just to make it look more pretty */
         return (min + .hour).isSameDay(as: max - .hour)
     }
@@ -115,5 +122,16 @@ private extension Range where T == Date {
         let minInterval = min.timeIntervalSince1970
         let maxInterval = max.timeIntervalSince1970
         return Date(timeIntervalSince1970: (minInterval + maxInterval) / 2)
+    }
+}
+
+private extension Chart {
+    func timePeriod(in viewport: Viewport) -> Range<Date> {
+        let min = timestamps.element(nearestTo: viewport.min, rule: .up) ?? 0
+        let max = timestamps.element(nearestTo: viewport.max, rule: .down) ?? 0
+        return Range(
+            min: Date(timestamp: min),
+            max: Date(timestamp: max)
+        )
     }
 }

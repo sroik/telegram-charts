@@ -83,6 +83,10 @@
 		AC4BB467225F85AC00D72E00 /* PercentageLineChartLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BB466225F85AC00D72E00 /* PercentageLineChartLayer.swift */; };
 		AC5261E22261D38500272B05 /* Chart+Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5261E12261D38500272B05 /* Chart+Range.swift */; };
 		AC5261E42261D3D700272B05 /* Chart+Viewport.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5261E32261D3D700272B05 /* Chart+Viewport.swift */; };
+		AC5261E62262132800272B05 /* ChartMapInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5261E52262132800272B05 /* ChartMapInteractor.swift */; };
+		AC5261E82262602000272B05 /* CollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5261E72262602000272B05 /* CollectionExtensionsTests.swift */; };
+		AC5261EA22626D0600272B05 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5261E922626D0600272B05 /* PieChartView.swift */; };
+		AC5261EC2262700000272B05 /* PieChartBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5261EB2262700000272B05 /* PieChartBrowserView.swift */; };
 		AC5BCD0C226049CC007C06E4 /* TimelineChartBrowserLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5BCD0B226049CC007C06E4 /* TimelineChartBrowserLayout.swift */; };
 		AC5BCD0E2260530E007C06E4 /* StackedChartCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5BCD0D2260530E007C06E4 /* StackedChartCardView.swift */; };
 		AC5EFB6B223A2D8A00979B60 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB6A223A2D8A00979B60 /* TimelineView.swift */; };
@@ -219,6 +223,10 @@
 		AC4BB466225F85AC00D72E00 /* PercentageLineChartLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentageLineChartLayer.swift; sourceTree = "<group>"; };
 		AC5261E12261D38500272B05 /* Chart+Range.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart+Range.swift"; sourceTree = "<group>"; };
 		AC5261E32261D3D700272B05 /* Chart+Viewport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart+Viewport.swift"; sourceTree = "<group>"; };
+		AC5261E52262132800272B05 /* ChartMapInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMapInteractor.swift; sourceTree = "<group>"; };
+		AC5261E72262602000272B05 /* CollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtensionsTests.swift; sourceTree = "<group>"; };
+		AC5261E922626D0600272B05 /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
+		AC5261EB2262700000272B05 /* PieChartBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartBrowserView.swift; sourceTree = "<group>"; };
 		AC5BCD0B226049CC007C06E4 /* TimelineChartBrowserLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineChartBrowserLayout.swift; sourceTree = "<group>"; };
 		AC5BCD0D2260530E007C06E4 /* StackedChartCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedChartCardView.swift; sourceTree = "<group>"; };
 		AC5EFB6A223A2D8A00979B60 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
@@ -339,6 +347,7 @@
 		AC16EAA3225CA0C2009471D7 /* Browser */ = {
 			isa = PBXGroup;
 			children = (
+				AC5261EB2262700000272B05 /* PieChartBrowserView.swift */,
 				AC143B432237A67D00FEB9CD /* TimelineChartBrowserView.swift */,
 				AC5BCD0B226049CC007C06E4 /* TimelineChartBrowserLayout.swift */,
 			);
@@ -371,6 +380,7 @@
 				AC16EAC0225DE85B009471D7 /* RasterizedBarChartView.swift */,
 				AC16EAB8225D18F3009471D7 /* BarChartView.swift */,
 				AC16EAC9225E3B1A009471D7 /* BarChartOverlayView.swift */,
+				AC5261E922626D0600272B05 /* PieChartView.swift */,
 				AC3099442239211D00A04331 /* Layer */,
 				AC16EAC6225E0759009471D7 /* Model */,
 				AC4BB461225F76D900D72E00 /* Processing */,
@@ -543,6 +553,7 @@
 				AC143B4B2237B43D00FEB9CD /* RangeTests.swift */,
 				ACAF2B05223E63A000533F37 /* CGGeometryExtensionsTests.swift */,
 				AC71BD0B2260727C00AD85AD /* PercentsTests.swift */,
+				AC5261E72262602000272B05 /* CollectionExtensionsTests.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -630,6 +641,7 @@
 				AC143B4F2237CD8000FEB9CD /* ChartMapView.swift */,
 				AC143B512237F09500FEB9CD /* ChartMapOverlayView.swift */,
 				AC143B562237F52D00FEB9CD /* ChartMapViewportView.swift */,
+				AC5261E52262132800272B05 /* ChartMapInteractor.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -967,6 +979,7 @@
 				AC3B383022365C52000AD635 /* Environment.swift in Sources */,
 				ACD5EF8822573496003B09C3 /* Image.swift in Sources */,
 				ACC91734226119CA00FD5015 /* ExpandableChartViewController.swift in Sources */,
+				AC5261EA22626D0600272B05 /* PieChartView.swift in Sources */,
 				ACAF2B00223D89C300533F37 /* GridLayout.swift in Sources */,
 				AC7C1F1D2259F86300A095D6 /* ViewportView.swift in Sources */,
 				AC143B4022379A9C00FEB9CD /* CGGeometry+Extensions.swift in Sources */,
@@ -985,6 +998,7 @@
 				AC3B380F22365543000AD635 /* Chart.swift in Sources */,
 				AC5BCD0C226049CC007C06E4 /* TimelineChartBrowserLayout.swift in Sources */,
 				ACE686992236BED100724432 /* UIView+Layout.swift in Sources */,
+				AC5261E62262132800272B05 /* ChartMapInteractor.swift in Sources */,
 				AC16EA95225C705F009471D7 /* ChartViewControllerLayout.swift in Sources */,
 				AC71BD0E226072BC00AD85AD /* CGFloat+Percent.swift in Sources */,
 				AC16EACE225E8FC2009471D7 /* RasterizedBarChartAnimatior.swift in Sources */,
@@ -1002,6 +1016,7 @@
 				ACE6867C22369EEF00724432 /* NavigationController.swift in Sources */,
 				AC3B382E22365BCB000AD635 /* Operators.swift in Sources */,
 				AC32DCA5223C2B1000873B04 /* Stride.swift in Sources */,
+				AC5261EC2262700000272B05 /* PieChartBrowserView.swift in Sources */,
 				AC2542A42257961F00EE2021 /* Bool+Extensions.swift in Sources */,
 				AC7C1F22225A0A8A00A095D6 /* CardView.swift in Sources */,
 				AC3B383222365CF8000AD635 /* Utils.swift in Sources */,
@@ -1019,6 +1034,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC3B385B223682E0000AD635 /* ChartTests.swift in Sources */,
+				AC5261E82262602000272B05 /* CollectionExtensionsTests.swift in Sources */,
 				AC3B381E22365A71000AD635 /* UIColorHexTests.swift in Sources */,
 				AC3B384C223661E3000AD635 /* Bundle+Stub.swift in Sources */,
 				ACAF2B06223E63A000533F37 /* CGGeometryExtensionsTests.swift in Sources */,

@@ -4,10 +4,10 @@
 
 import UIKit
 
-class TimelineChartBrowserView: ViewportView, ChartBrowser {
+class TimelineChartBrowserView: ViewportView, ExpandableChartBrowser {
     weak var delegate: ChartBrowserDelegate?
     var gridView: ChartViewportableView
-    var chartView: ChartView
+    var chartView: TimelineChartView
     let timelineView: TimelineView
     let pointLine = UIView()
     let cardView: ChartCardView
@@ -18,7 +18,7 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
     init(
         chart: Chart,
         layout: TimelineChartBrowserLayout,
-        chartView: ChartView,
+        chartView: TimelineChartView,
         gridView: ChartViewportableView,
         timelineView: TimelineView,
         cardView: ChartCardView
@@ -45,6 +45,7 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
     override func themeUp() {
         super.themeUp()
         pointLine.backgroundColor = theme.color.gridLine
+        backgroundColor = theme.color.placeholder
     }
 
     override func adaptViewport() {
@@ -69,7 +70,7 @@ class TimelineChartBrowserView: ViewportView, ChartBrowser {
     private func selectIndex(at point: CGPoint, animated: Bool) {
         let chartPoint = point.x - chartView.offset - layout.insets.left
         let position = chartPoint / chartView.contentSize.width
-        let index = chart.timestamps.index(nearestTo: position, rule: .up)
+        let index = chart.timestamps.index(nearestTo: position)
         select(index: index, animated: animated)
     }
 

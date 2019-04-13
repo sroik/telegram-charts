@@ -13,6 +13,18 @@ extension Column {
         )
     }
 
+    func notClosePoints(in rect: CGRect, range: Range<Int>) -> [CGPoint] {
+        let stride = self.stride(in: rect, range: range)
+        var points: [CGPoint] = []
+        values.indices.forEach { index in
+            let point = self.point(at: index, in: rect, range: range, stride: stride)
+            if let last = points.last, last.isClose(to: point) { return }
+            points.append(point)
+        }
+
+        return points
+    }
+
     func points(in rect: CGRect, range: Range<Int>) -> [CGPoint] {
         let stride = self.stride(in: rect, range: range)
         return values.indices.map { index in

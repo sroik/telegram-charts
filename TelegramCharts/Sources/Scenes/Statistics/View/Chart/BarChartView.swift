@@ -4,7 +4,7 @@
 
 import UIKit
 
-class BarChartView: ViewportView, ChartViewType {
+class BarChartView: ViewportView, TimelineChartViewType {
     typealias EnumerationBlock = (_ index: Int, _ layer: BarColumnLayer) -> Void
 
     var visibleInsets = UIEdgeInsets(right: -15, left: -15)
@@ -41,8 +41,14 @@ class BarChartView: ViewportView, ChartViewType {
     func adaptRange(animated: Bool) {
         let maxRange = chart.adjustedRange(of: enabledColumns)
         let range = chart.adjustedRange(of: enabledColumns, in: viewport)
+        let rangeScale = CGFloat(maxRange.size) / CGFloat(range.size)
+
         forEachVisibleLayer { index, layer in
-            layer.set(range: range, maxRange: maxRange, animated: animated)
+            layer.set(
+                maxValue: chart.percentage ? layer.stackedValue() : range.max,
+                minHeight: rangeScale,
+                animated: animated
+            )
         }
     }
 

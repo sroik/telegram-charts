@@ -4,24 +4,11 @@
 
 import UIKit
 
-protocol ChartMapOverlayViewDelegate: AnyObject {
-    func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Viewport)
-    func mapViewDidLongPress(_ view: ChartMapOverlayView)
-}
-
 final class ChartMapOverlayView: View {
-    weak var delegate: ChartMapOverlayViewDelegate?
-    var minSize: CGFloat = 0
-    var maxSize: CGFloat = 1.0
-
     var viewport: Viewport = Range(min: 0.9, max: 1.0) {
         didSet {
             layoutViewport()
         }
-    }
-
-    var selectedKnob: ChartMapViewportView.Knob {
-        return viewportView.selectedKnob
     }
 
     override init(frame: CGRect) {
@@ -46,24 +33,7 @@ final class ChartMapOverlayView: View {
         return knob(at: point) != .none || bounds.contains(point)
     }
 
-    private func setup() {
-        leftSpaceView.isUserInteractionEnabled = false
-        rightSpaceView.isUserInteractionEnabled = false
-
-        workspace.addSubviews(leftSpaceView, rightSpaceView)
-        workspace.layer.cornerRadius = theme.state.cornerRadius
-        workspace.layer.masksToBounds = true
-        addSubviews(workspace, viewportView)
-
-        [panRecognizer, pressRecognizer, tapRecognizer].forEach { recognizer in
-            recognizer.cancelsTouchesInView = false
-            recognizer.delaysTouchesEnded = false
-            recognizer.delegate = self
-            addGestureRecognizer(recognizer)
-        }
-    }
-
-    private func layoutViewport() {
+    func layoutViewport() {
         workspace.frame = bounds
 
         viewportView.frame = CGRect(
@@ -86,107 +56,23 @@ final class ChartMapOverlayView: View {
         )
     }
 
-    private func moveViewport(by delta: CGFloat) {
-        var moved: Viewport
-        switch viewportView.selectedKnob {
-        case .mid:
-            let halfSize = viewport.size / 2
-            let mid = (viewport.mid + delta).clamped(from: halfSize, to: 1 - halfSize)
-            moved = Range(mid: mid, size: viewport.size)
-        case .left:
-            let min = (viewport.min + delta).clamped(from: 0, to: viewport.max - minSize)
-            moved = Range(min: min, max: viewport.max)
-        case .right:
-            let max = (viewport.max + delta).clamped(from: viewport.min + minSize, to: 1)
-            moved = Range(min: viewport.min, max: max)
-        case .none:
-            return
-        }
+    private func setup() {
+        leftSpaceView.isUserInteractionEnabled = false
+        rightSpaceView.isUserInteractionEnabled = false
 
-        viewport = moved
-        delegate?.mapView(self, didChageViewportTo: viewport)
+        workspace.addSubviews(leftSpaceView, rightSpaceView)
+        workspace.layer.cornerRadius = theme.state.cornerRadius
+        workspace.layer.masksToBounds = true
+        addSubviews(workspace, viewportView)
     }
 
-    @objc private func onPan(_ recognizer: UIPanGestureRecognizer) {
-        guard !bounds.isEmpty, recognizer.state == .changed else {
-            return
-        }
-
-        let translation = recognizer.translation(in: self).x
-        let delta = translation / bounds.width
-        moveViewport(by: delta)
-        recognizer.setTranslation(.zero, in: self)
-    }
-
-    @objc private func onPress(_ recognizer: UILongPressGestureRecognizer) {
-        delegate?.mapViewDidLongPress(self)
-    }
-
-    private func knob(at point: CGPoint) -> ChartMapViewportView.Knob {
+    func knob(at point: CGPoint) -> ChartMapViewportView.Knob {
         let viewportPoint = convert(point, to: viewportView)
         return viewportView.knob(at: viewportPoint)
     }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        if let point = touches.first?.location(in: self) {
-            viewportView.selectedKnob = knob(at: point)
-        }
-    }
-
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        viewportView.selectedKnob = .none
-    }
-
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesCancelled(touches, with: event)
-        viewportView.selectedKnob = .none
-    }
-
-    private lazy var tapRecognizer = UITapGestureRecognizer(
-        target: self,
-        action: #selector(onPress)
-    )
-
-    private lazy var panRecognizer = UIPanGestureRecognizer(
-        target: self,
-        action: #selector(onPan)
-    )
-
-    private lazy var pressRecognizer = UILongPressGestureRecognizer(
-        target: self,
-        action: #selector(onPress)
-    )
 
     private let workspace = UIView()
     private let viewportView = ChartMapViewportView(frame: .screen)
     private let leftSpaceView = UIView()
     private let rightSpaceView = UIView()
-}
-
-extension ChartMapOverlayView: UIGestureRecognizerDelegate {
-    override func gestureRecognizerShouldBegin(_ recognizer: UIGestureRecognizer) -> Bool {
-        guard recognizer == panRecognizer else {
-            return true
-        }
-
-        let velocity = panRecognizer.velocity(in: self)
-        return abs(velocity.x) > abs(velocity.y)
-    }
-
-    func gestureRecognizer(
-        _ recognizer: UIGestureRecognizer,
-        shouldRecognizeSimultaneouslyWith other: UIGestureRecognizer
-    ) -> Bool {
-        if recognizer == panRecognizer, other == pressRecognizer {
-            return true
-        }
-
-        if recognizer == pressRecognizer, other == panRecognizer {
-            return true
-        }
-
-        return false
-    }
 }

@@ -27,23 +27,30 @@ class BarColumnLayer: Layer {
         backgroundColor = theme.color.placeholder.cgColor
     }
 
+    func stackedValue() -> Int {
+        return column.stackedValue()
+    }
+
     func enable(values: Set<String>) {
         column.enable(ids: values)
     }
 
-    func set(range: Range<Int>, maxRange: Range<Int>, animated: Bool) {
-        self.range = range
-        self.maxRange = maxRange
+    func set(maxValue: Int, minHeight: CGFloat, animated: Bool) {
+        self.maxValue = maxValue
+        self.minHeight = minHeight
         draw(animated: animated)
     }
 
     func draw(animated: Bool) {
-        guard !bounds.isEmpty, !range.isEmpty, !maxRange.isEmpty else {
+        guard !bounds.isEmpty, maxValue > 0 else {
             return
         }
 
-        let scale = CGFloat(maxRange.size) / CGFloat(range.size)
-        let frames = column.barFrames(in: bounds, maxValue: range.max, minHeight: scale)
+        let frames = column.barFrames(
+            in: bounds,
+            maxValue: maxValue,
+            minHeight: minHeight
+        )
 
         layers.enumerated().forEach { index, layer in
             let frame = (frames[safe: index] ?? .zero).rounded()
@@ -60,8 +67,8 @@ class BarColumnLayer: Layer {
 
     private let layers: [CALayer]
     private var column: StackedColumn
-    private var range: Range<Int> = .zero
-    private var maxRange: Range<Int> = .zero
+    private var maxValue: Int = 0
+    private var minHeight: CGFloat = 0
 }
 
 private extension CALayer {

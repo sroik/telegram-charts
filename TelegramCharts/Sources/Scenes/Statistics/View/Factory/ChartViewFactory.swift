@@ -5,12 +5,16 @@
 import UIKit
 
 struct ChartViewFactory {
-    static func view(with chart: Chart, isMap: Bool = false) -> ChartView {
+    static func timelineView(with chart: Chart, isMap: Bool = false) -> TimelineChartView {
         switch chart.columnsType {
         case .line:
             return lineChartView(with: chart, isMap: isMap)
         case .bar:
             return rasterizedBarChartView(with: chart, isMap: isMap)
+        case .area where chart.expandable:
+            return PercentageLineChartView(chart: chart)
+        case .area where isMap:
+            return BarChartView(chart: chart)
         case .area:
             return PercentageLineChartView(chart: chart)
         case .timestamps:

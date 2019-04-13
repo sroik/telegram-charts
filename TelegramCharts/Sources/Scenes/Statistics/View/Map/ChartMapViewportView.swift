@@ -13,7 +13,6 @@ final class ChartMapViewportView: View {
     }
 
     let tapAreaInsets: UIEdgeInsets = UIEdgeInsets(repeated: -15)
-    var selectedKnob: Knob = .none
 
     var knobWidth: CGFloat {
         return 10 + 2 * theme.knobBorderWidth

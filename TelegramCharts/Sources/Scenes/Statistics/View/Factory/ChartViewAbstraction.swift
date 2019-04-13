@@ -13,21 +13,29 @@ protocol ChartBrowserDelegate: AnyObject {
 }
 
 protocol ChartBrowser: ChartViewportable {
-    var delegate: ChartBrowserDelegate? { get set }
     func deselect(animated: Bool)
+}
+
+protocol ExpandableChartBrowser: ChartBrowser {
+    var delegate: ChartBrowserDelegate? { get set }
 }
 
 protocol ChartViewType: ChartViewportable {
     var selectedIndex: Int? { get set }
-    var contentSize: CGSize { get }
     var chart: Chart { get }
+}
+
+protocol TimelineChartViewType: ChartViewType {
+    var contentSize: CGSize { get }
 }
 
 typealias ChartViewportableView = View & ChartViewportable
 typealias ChartBrowserView = UIView & ChartBrowser
+typealias ExpandableChartBrowserView = UIView & ExpandableChartBrowser
 typealias ChartView = ChartViewportableView & ChartViewType
+typealias TimelineChartView = ChartViewportableView & TimelineChartViewType
 
-extension ChartViewType {
+extension TimelineChartViewType {
     var offset: CGFloat {
         return -contentSize.width * viewport.min
     }

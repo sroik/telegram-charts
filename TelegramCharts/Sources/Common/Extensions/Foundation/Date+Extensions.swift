@@ -12,7 +12,7 @@ extension Date {
     func rounded(by interval: TimeInterval) -> Date {
         let count = (timeIntervalSinceReferenceDate / interval).rounded(.toNearestOrEven)
         let stamp = count * interval
-        return Date(timeIntervalSince1970: stamp)
+        return Date(timeIntervalSinceReferenceDate: stamp)
     }
 
     func string(format: String) -> String {

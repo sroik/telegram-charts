@@ -4,34 +4,27 @@
 
 import UIKit
 
-protocol ChartMapViewDelegate: ChartMapOverlayViewDelegate {}
+protocol ChartMapViewDelegate: AnyObject {
+    func mapView(_ view: ChartMapView, didChageViewportTo viewport: Viewport)
+    func mapViewDidLongPress(_ view: ChartMapView)
+}
 
 final class ChartMapView: View {
-    weak var delegate: ChartMapViewDelegate? {
+    weak var delegate: ChartMapViewDelegate?
+
+    var viewport: Viewport = .zeroToOne {
         didSet {
-            overlayView.delegate = delegate
+            overlayView.viewport = viewport
         }
-    }
-
-    var viewport: Viewport {
-        get {
-            return overlayView.viewport
-        }
-        set {
-            overlayView.viewport = newValue
-        }
-    }
-
-    var selectedKnob: ChartMapViewportView.Knob {
-        return overlayView.selectedKnob
     }
 
     var chart: Chart {
         return chartView.chart
     }
 
-    init(chartView: ChartView) {
+    init(chartView: ChartView, interactor: ChartMapInteractor = ChartMapInteractor()) {
         self.chartView = chartView
+        self.interactor = interactor
         super.init(frame: .screen)
         setup()
     }
@@ -47,16 +40,28 @@ final class ChartMapView: View {
     }
 
     private func setup() {
+        viewport = Range(max: 1, size: chart.preferredViewportSize)
         chartView.viewport = .zeroToOne
         chartView.layer.cornerRadius = theme.state.cornerRadius
         chartView.clipsToBounds = true
-        addSubview(chartView)
+        addSubviews(chartView, overlayView)
 
-        overlayView.minSize = chart.minViewportSize
-        overlayView.viewport = Range(max: 1, size: chart.preferredViewportSize)
-        addSubviews(overlayView)
+        interactor.minSize = chart.minViewportSize
+        interactor.delegate = self
+        interactor.register(in: overlayView)
     }
 
+    private let interactor: ChartMapInteractor
     private let overlayView = ChartMapOverlayView()
     private var chartView: ChartView
+}
+
+extension ChartMapView: ChartMapInteractorDelegate {
+    func interactor(_ interactor: ChartMapInteractor, didChageViewportTo viewport: Viewport) {
+        delegate?.mapView(self, didChageViewportTo: viewport)
+    }
+
+    func interactorDidLongPress(_ view: ChartMapInteractor) {
+        delegate?.mapViewDidLongPress(self)
+    }
 }

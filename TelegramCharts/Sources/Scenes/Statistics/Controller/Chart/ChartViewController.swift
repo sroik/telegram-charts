@@ -41,7 +41,6 @@ class ChartViewController: ViewController {
         super.viewDidLoad()
         mapView.delegate = self
         columnsView.delegate = self
-        chartView.delegate = self
         periodView.delegate = self
         set(viewport: mapView.viewport)
         view.addSubviews(periodView, mapView, chartView, columnsView)
@@ -59,6 +58,11 @@ class ChartViewController: ViewController {
         periodView.frame = layout.periodFrame(in: view.bounds)
     }
 
+    override func themeUp() {
+        super.themeUp()
+        view.backgroundColor = theme.color.placeholder
+    }
+
     func invalidateLayout() {
         layout.columnsHeight = columnsView.size(fitting: CGRect.screen.width).height
     }
@@ -74,15 +78,6 @@ class ChartViewController: ViewController {
         chartView.enable(columns: columns, animated: animated)
         columnsView.enable(columns: columns, animated: animated)
     }
-
-    func expand(at index: Int) {
-        assertionFailureWrapper("not implemente")
-    }
-
-    override func themeUp() {
-        super.themeUp()
-        view.backgroundColor = theme.color.placeholder
-    }
 }
 
 extension ChartViewController: ColumnsListViewDelegate, ChartMapViewDelegate {
@@ -90,11 +85,11 @@ extension ChartViewController: ColumnsListViewDelegate, ChartMapViewDelegate {
         enable(columns: columns.ids, animated: true)
     }
 
-    func mapView(_ view: ChartMapOverlayView, didChageViewportTo viewport: Viewport) {
+    func mapView(_ view: ChartMapView, didChageViewportTo viewport: Viewport) {
         set(viewport: viewport)
     }
 
-    func mapViewDidLongPress(_ view: ChartMapOverlayView) {
+    func mapViewDidLongPress(_ view: ChartMapView) {
         chartView.deselect(animated: true)
     }
 
@@ -103,11 +98,7 @@ extension ChartViewController: ColumnsListViewDelegate, ChartMapViewDelegate {
     }
 }
 
-extension ChartViewController: ChartBrowserDelegate, TimePeriodViewDelegate {
-    func chartBrowser(_ view: ChartBrowserView, wantsToExpand index: Int) {
-        expand(at: index)
-    }
-
+extension ChartViewController: TimePeriodViewDelegate {
     func periodViewWantsToFold(_ view: TimePeriodView) {
         delegate?.chartViewControllerWantsToFold(self)
     }

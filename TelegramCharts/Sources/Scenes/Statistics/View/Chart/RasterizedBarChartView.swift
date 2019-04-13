@@ -4,7 +4,7 @@
 
 import UIKit
 
-final class RasterizedBarChartView: ViewportView, ChartViewType {
+final class RasterizedBarChartView: ViewportView, TimelineChartViewType {
     let imageView = UIImageView.pixelated()
     let overlayView: BarChartOverlayView
     let minViewportSize: CGFloat
@@ -71,6 +71,10 @@ final class RasterizedBarChartView: ViewportView, ChartViewType {
     }
 
     private func adaptRange(animated: Bool) {
+        guard !chart.percentage else {
+            return
+        }
+
         let range = chart.adjustedRange(of: enabledColumns, in: viewport)
         let scale = CGFloat(maxRange.size) / CGFloat(range.size)
         imageView.layer.scale(byY: scale, animated: animated)

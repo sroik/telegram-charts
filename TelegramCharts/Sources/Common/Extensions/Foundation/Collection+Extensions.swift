@@ -4,13 +4,11 @@
 
 import UIKit
 
-extension Collection {
-    subscript(safe index: Index) -> Iterator.Element? {
-        return indices.contains(index) ? self[index] : nil
-    }
-}
-
 extension Collection where Index == Int {
+    subscript(safe index: Int) -> Element? {
+        return index < 0 || index >= count ? nil : self[index]
+    }
+
     func index(
         nearestTo zeroToOnePosition: CGFloat,
         rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero
@@ -19,7 +17,7 @@ extension Collection where Index == Int {
             return nil
         }
 
-        let floatingIndex = CGFloat(count) * zeroToOnePosition - 1
+        let floatingIndex = CGFloat(count) * zeroToOnePosition - 0.5
         let index = Int(floatingIndex.rounded(rule))
         let clampedIndex = index.clamped(from: 0, to: count - 1)
         return clampedIndex

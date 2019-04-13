@@ -29,6 +29,12 @@ extension Array where Element: Arithmetical {
 }
 
 extension Array {
+    func elements(from: Int, to: Int) -> ArraySlice<Element> {
+        let fromIndex = from.clamped(from: 0, to: count - 1)
+        let toIndex = to.clamped(from: 0, to: count - 1)
+        return self[fromIndex ... toIndex]
+    }
+
     func elements(in viewport: Viewport) -> ArraySlice<Element> {
         guard
             let fromIndex = index(nearestTo: viewport.min, rule: .down),

@@ -97,19 +97,4 @@ extension UIView {
             removeFromSuperview()
         }
     }
-
-    func removeFromSuperview(
-        animated: Bool,
-        duration: TimeInterval = .defaultDuration,
-        then completion: Completion? = nil
-    ) {
-        UIView.animate(
-            withDuration: animated ? duration : 0,
-            animations: { self.alpha = 0 },
-            completion: { _ in
-                self.removeFromSuperview()
-                completion?()
-            }
-        )
-    }
 }
