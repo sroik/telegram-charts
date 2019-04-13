@@ -78,4 +78,8 @@ extension ThemeColor {
         mapKnob: UIColor(red: 86 / 255, green: 98 / 255, blue: 109 / 255, alpha: 1),
         mapDim: UIColor(red: 24 / 255, green: 34 / 255, blue: 45 / 255, alpha: 0.6)
     )
+
+    var barOverlay: UIColor {
+        return placeholder.withAlphaComponent(0.5)
+    }
 }

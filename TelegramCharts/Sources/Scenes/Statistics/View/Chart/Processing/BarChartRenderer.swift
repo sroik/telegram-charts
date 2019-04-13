@@ -9,10 +9,12 @@ final class BarChartRenderer {
     let layout: GridLayout
     let chart: Chart
     let scale: CGFloat = min(2, Device.scale)
+    let inflatesFrames: Bool
 
-    init(chart: Chart) {
+    init(chart: Chart, inflatesFrames: Bool = false) {
         self.chart = chart
         self.layout = GridLayout(itemsNumber: chart.timestamps.count)
+        self.inflatesFrames = inflatesFrames
     }
 
     func render(columns: [Column], size: CGSize) -> UIImage {
@@ -26,15 +28,14 @@ final class BarChartRenderer {
     }
 
     func render(columns: [Column], in rect: CGRect, in context: UIGraphicsRendererContext) {
-        let layout = GridLayout(itemsNumber: chart.timestamps.count)
         let range = chart.adjustedRange(of: columns)
         let frames = layout.itemFrames(in: rect)
 
         frames.enumerated().forEach { index, frame in
             BarColumnRenderer().render(
                 column: StackedColumn(columns: columns, at: index),
-                range: range,
-                in: frame.rounded(),
+                maxValue: range.max,
+                in: inflatesFrames ? frame.inflated() : frame.rounded(),
                 in: context,
                 minHeight: scale
             )

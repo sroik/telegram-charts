@@ -5,20 +5,20 @@
 import UIKit
 
 struct ChartGridViewCellState {
-    var hasLine: Bool
+    var lineWidth: CGFloat
     var leftValue: Int?
     var rightValue: Int?
     var leftColor: UIColor?
     var rightColor: UIColor?
 
     init(
-        hasLine: Bool = true,
+        lineWidth: CGFloat = .pixel,
         leftValue: Int? = nil,
         rightValue: Int? = nil,
         leftColor: UIColor? = nil,
         rightColor: UIColor? = nil
     ) {
-        self.hasLine = hasLine
+        self.lineWidth = lineWidth
         self.leftValue = leftValue
         self.rightValue = rightValue
         self.leftColor = leftColor
@@ -41,9 +41,9 @@ final class ChartGridViewCell: View {
 
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
-        line.frame = bounds.slice(at: .pixel, from: .maxYEdge)
         leftLabel.frame = bounds.slice(at: bounds.midX, from: .minXEdge)
         rightLabel.frame = bounds.remainder(at: bounds.midX, from: .minXEdge)
+        updateState()
     }
 
     override func themeUp() {
@@ -59,7 +59,7 @@ final class ChartGridViewCell: View {
         rightLabel.text = state.rightValue.flatMap { String(roundedValue: $0) }
         leftLabel.isHidden = state.leftValue == nil
         rightLabel.isHidden = state.rightValue == nil
-        line.isHidden = !state.hasLine
+        line.frame = bounds.slice(at: state.lineWidth, from: .maxYEdge)
     }
 
     private func setup() {

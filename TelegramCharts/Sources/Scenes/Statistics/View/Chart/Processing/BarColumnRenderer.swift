@@ -7,14 +7,14 @@ import UIKit
 final class BarColumnRenderer {
     func render(
         column: StackedColumn,
-        range: Range<Int>,
+        maxValue: Int,
         in rect: CGRect,
         in context: UIGraphicsRendererContext,
         minHeight: CGFloat = 0
     ) {
         let frames = column.barFrames(
             in: rect,
-            maxValue: range.max,
+            maxValue: maxValue,
             minHeight: minHeight
         )
 

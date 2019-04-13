@@ -10,25 +10,34 @@ struct ChartViewControllerFactory {
     static func controller(
         with chart: Chart,
         dependencies: Dependencies
-    ) -> ChartViewController {
-        if chart.expandable {
-            return expandableController(with: chart, dependencies: dependencies)
-        }
-
-        return expandedController(with: chart, dependencies: dependencies)
-    }
-
-    private static func expandableController(
-        with chart: Chart,
-        dependencies: Dependencies
     ) -> ExpandableChartViewController {
-        return ExpandableChartViewController(dependencies: dependencies, chart: chart)
+        return ExpandableChartViewController(
+            dependencies: dependencies,
+            chart: chart
+        )
     }
 
-    private static func expandedController(
+    static func controller(
+        expandedFrom expandable: ExpandableChartViewController,
+        at index: Int,
         with chart: Chart,
         dependencies: Dependencies
     ) -> ChartViewController {
-        return ChartViewController(dependencies: dependencies, chart: chart)
+        let controller = ChartViewController(dependencies: dependencies, chart: chart)
+        controller.set(viewport: Range(mid: 0.5, size: chart.preferredViewportSize))
+        expandable.moveState(from: expandable, to: controller)
+        return controller
+    }
+}
+
+extension ChartViewController {
+    convenience init(dependencies: Dependencies, chart: Chart) {
+        self.init(
+            dependencies: dependencies,
+            layout: ChartViewControllerLayout(chart: chart),
+            chart: chart,
+            chartView: ChartBrowserFactory.view(with: chart),
+            mapView: ChartMapViewFactory.view(with: chart)
+        )
     }
 }

@@ -81,6 +81,8 @@
 		AC4BB463225F774000D72E00 /* StackedColumn+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BB462225F774000D72E00 /* StackedColumn+Extensions.swift */; };
 		AC4BB465225F7EFD00D72E00 /* PercentageLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BB464225F7EFD00D72E00 /* PercentageLineChartView.swift */; };
 		AC4BB467225F85AC00D72E00 /* PercentageLineChartLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4BB466225F85AC00D72E00 /* PercentageLineChartLayer.swift */; };
+		AC5261E22261D38500272B05 /* Chart+Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5261E12261D38500272B05 /* Chart+Range.swift */; };
+		AC5261E42261D3D700272B05 /* Chart+Viewport.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5261E32261D3D700272B05 /* Chart+Viewport.swift */; };
 		AC5BCD0C226049CC007C06E4 /* TimelineChartBrowserLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5BCD0B226049CC007C06E4 /* TimelineChartBrowserLayout.swift */; };
 		AC5BCD0E2260530E007C06E4 /* StackedChartCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5BCD0D2260530E007C06E4 /* StackedChartCardView.swift */; };
 		AC5EFB6B223A2D8A00979B60 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB6A223A2D8A00979B60 /* TimelineView.swift */; };
@@ -215,6 +217,8 @@
 		AC4BB462225F774000D72E00 /* StackedColumn+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StackedColumn+Extensions.swift"; sourceTree = "<group>"; };
 		AC4BB464225F7EFD00D72E00 /* PercentageLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentageLineChartView.swift; sourceTree = "<group>"; };
 		AC4BB466225F85AC00D72E00 /* PercentageLineChartLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentageLineChartLayer.swift; sourceTree = "<group>"; };
+		AC5261E12261D38500272B05 /* Chart+Range.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart+Range.swift"; sourceTree = "<group>"; };
+		AC5261E32261D3D700272B05 /* Chart+Viewport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart+Viewport.swift"; sourceTree = "<group>"; };
 		AC5BCD0B226049CC007C06E4 /* TimelineChartBrowserLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineChartBrowserLayout.swift; sourceTree = "<group>"; };
 		AC5BCD0D2260530E007C06E4 /* StackedChartCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedChartCardView.swift; sourceTree = "<group>"; };
 		AC5EFB6A223A2D8A00979B60 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
@@ -413,6 +417,8 @@
 				AC143B472237AC1700FEB9CD /* Column+Extensions.swift */,
 				AC3B385822366839000AD635 /* Chart+Parsing.swift */,
 				AC16EAAC225CA90F009471D7 /* Chart+Extensions.swift */,
+				AC5261E32261D3D700272B05 /* Chart+Viewport.swift */,
+				AC5261E12261D38500272B05 /* Chart+Range.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -948,6 +954,7 @@
 				AC3099292238F02B00A04331 /* Collection+Extensions.swift in Sources */,
 				AC5EFB6B223A2D8A00979B60 /* TimelineView.swift in Sources */,
 				AC16EAA5225CA356009471D7 /* ChartViewFactory.swift in Sources */,
+				AC5261E22261D38500272B05 /* Chart+Range.swift in Sources */,
 				AC4BB467225F85AC00D72E00 /* PercentageLineChartLayer.swift in Sources */,
 				AC3099482239254800A04331 /* Control.swift in Sources */,
 				AC3B3856223666C3000AD635 /* AnyDecodable.swift in Sources */,
@@ -998,6 +1005,7 @@
 				AC2542A42257961F00EE2021 /* Bool+Extensions.swift in Sources */,
 				AC7C1F22225A0A8A00A095D6 /* CardView.swift in Sources */,
 				AC3B383222365CF8000AD635 /* Utils.swift in Sources */,
+				AC5261E42261D3D700272B05 /* Chart+Viewport.swift in Sources */,
 				ACE6868C2236AFB200724432 /* SettingsService.swift in Sources */,
 				AC143B3A22378B7D00FEB9CD /* Placeholder.swift in Sources */,
 				AC5EFB74223BA02600979B60 /* Range+Extensions.swift in Sources */,

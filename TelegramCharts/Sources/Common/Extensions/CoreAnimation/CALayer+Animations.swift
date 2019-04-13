@@ -159,11 +159,6 @@ extension CABasicAnimation {
 }
 
 extension CAMediaTimingFunction {
-    static var linear: CAMediaTimingFunction {
-        return CAMediaTimingFunction(name: .linear)
-    }
-
-    static var easeInEaseOut: CAMediaTimingFunction {
-        return CAMediaTimingFunction(name: .easeInEaseOut)
-    }
+    static let linear = CAMediaTimingFunction(name: .linear)
+    static let easeInEaseOut = CAMediaTimingFunction(name: .easeInEaseOut)
 }

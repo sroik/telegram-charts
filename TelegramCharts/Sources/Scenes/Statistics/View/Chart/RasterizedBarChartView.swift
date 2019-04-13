@@ -16,14 +16,6 @@ final class RasterizedBarChartView: ViewportView, ChartViewType {
         }
     }
 
-    convenience init(chart: Chart, minViewportSize: CGFloat = 1) {
-        self.init(
-            chart: chart,
-            minViewportSize: minViewportSize,
-            renderer: BarChartRenderer(chart: chart)
-        )
-    }
-
     init(chart: Chart, minViewportSize: CGFloat, renderer: BarChartRenderer) {
         self.chart = chart
         self.renderer = renderer

@@ -146,6 +146,15 @@ extension CGRect {
         )
     }
 
+    func inflated() -> CGRect {
+        return CGRect(
+            x: minX.rounded(.down),
+            y: minY.rounded(.down),
+            maxX: maxX.rounded(.up),
+            maxY: maxY.rounded(.up)
+        )
+    }
+
     func slice(at distance: CGFloat, from edge: CGRectEdge) -> CGRect {
         return divided(atDistance: distance, from: edge).slice
     }

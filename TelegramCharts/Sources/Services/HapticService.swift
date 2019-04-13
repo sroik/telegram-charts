@@ -45,9 +45,7 @@ final class HapticService {
 }
 
 private extension UIDevice {
-    static var isHapticAvailable: Bool {
-        return current.isHapticAvailable
-    }
+    static let isHapticAvailable = current.isHapticAvailable
 
     var isHapticAvailable: Bool {
         guard let level = value(forKey: "_feedbackSupportLevel") as? Int else {

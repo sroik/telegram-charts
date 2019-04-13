@@ -71,7 +71,7 @@ final class TimePeriodView: View {
 
     private var singleDayTitle: String {
         let period = chart.timePeriod(in: viewport)
-        return singleDayFormatter.string(from: period.min)
+        return singleDayFormatter.string(from: period.mid)
     }
 
     private var differentDaysTitle: String {
@@ -107,6 +107,13 @@ private extension Button {
 
 private extension Range where T == Date {
     var isSingleDay: Bool {
-        return min.isSameDay(as: max)
+        /* Just to make it look more pretty */
+        return (min + .hour).isSameDay(as: max - .hour)
+    }
+
+    var mid: Date {
+        let minInterval = min.timeIntervalSince1970
+        let maxInterval = max.timeIntervalSince1970
+        return Date(timeIntervalSince1970: (minInterval + maxInterval) / 2)
     }
 }

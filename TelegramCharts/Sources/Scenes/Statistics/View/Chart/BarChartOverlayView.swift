@@ -19,7 +19,7 @@ final class BarChartOverlayView: View {
 
     override func themeUp() {
         super.themeUp()
-        let color = theme.color.placeholder.withAlphaComponent(0.5)
+        let color = theme.color.barOverlay
         leftView.backgroundColor = color
         rightView.backgroundColor = color
     }
@@ -42,9 +42,9 @@ final class BarChartOverlayView: View {
             layoutIndex = index
         }
 
-        let holeFrame = chartLayout.itemFrame(at: layoutIndex, in: bounds)
-        leftView.frame = bounds.slice(at: holeFrame.minX, from: .minXEdge)
-        rightView.frame = bounds.remainder(at: holeFrame.maxX, from: .minXEdge)
+        let hole = chartLayout.itemFrame(at: layoutIndex, in: bounds)
+        leftView.frame = bounds.slice(at: hole.minX.rounded(.up), from: .minXEdge)
+        rightView.frame = bounds.remainder(at: hole.maxX.rounded(.down), from: .minXEdge)
     }
 
     private func fadeIn(animated: Bool) {

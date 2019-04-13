@@ -37,6 +37,11 @@ final class StatisticsTableViewCell: UITableViewCell, Themeable {
         fatalError()
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        controller = nil
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         label.frame = CGRect(x: 15, y: 15, width: bounds.width, height: 30)

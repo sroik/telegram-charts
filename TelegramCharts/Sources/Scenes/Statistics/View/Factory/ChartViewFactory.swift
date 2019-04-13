@@ -9,10 +9,8 @@ struct ChartViewFactory {
         switch chart.columnsType {
         case .line:
             return lineChartView(with: chart, isMap: isMap)
-        case .bar where isMap:
-            return RasterizedBarChartView(chart: chart)
         case .bar:
-            return RasterizedBarChartView(chart: chart, minViewportSize: chart.minViewportSize)
+            return rasterizedBarChartView(with: chart, isMap: isMap)
         case .area:
             return PercentageLineChartView(chart: chart)
         case .timestamps:
@@ -28,5 +26,16 @@ struct ChartViewFactory {
 
         view.set(lineWidth: isMap ? 1 : 2)
         return view
+    }
+
+    static func rasterizedBarChartView(
+        with chart: Chart,
+        isMap: Bool
+    ) -> RasterizedBarChartView {
+        return RasterizedBarChartView(
+            chart: chart,
+            minViewportSize: isMap ? 1 : chart.minViewportSize,
+            renderer: BarChartRenderer(chart: chart, inflatesFrames: isMap)
+        )
     }
 }

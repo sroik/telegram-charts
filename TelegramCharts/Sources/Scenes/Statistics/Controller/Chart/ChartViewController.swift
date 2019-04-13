@@ -20,16 +20,6 @@ class ChartViewController: ViewController {
     let dependencies: Dependencies
     let chart: Chart
 
-    convenience init(dependencies: Dependencies, chart: Chart) {
-        self.init(
-            dependencies: dependencies,
-            layout: ChartViewControllerLayout(chart: chart),
-            chart: chart,
-            chartView: ChartBrowserFactory.view(with: chart),
-            mapView: ChartMapViewFactory.view(with: chart)
-        )
-    }
-
     init(
         dependencies: Dependencies,
         layout: ChartViewControllerLayout,
@@ -74,8 +64,8 @@ class ChartViewController: ViewController {
     }
 
     func set(viewport: Viewport) {
-        periodView.viewport = mapView.viewport
-        chartView.viewport = mapView.viewport
+        periodView.viewport = viewport
+        chartView.viewport = viewport
         mapView.viewport = viewport
     }
 
@@ -85,7 +75,7 @@ class ChartViewController: ViewController {
         columnsView.enable(columns: columns, animated: animated)
     }
 
-    func expand(at index: Int, in viewport: Viewport) {
+    func expand(at index: Int) {
         assertionFailureWrapper("not implemente")
     }
 
@@ -115,7 +105,7 @@ extension ChartViewController: ColumnsListViewDelegate, ChartMapViewDelegate {
 
 extension ChartViewController: ChartBrowserDelegate, TimePeriodViewDelegate {
     func chartBrowser(_ view: ChartBrowserView, wantsToExpand index: Int) {
-        expand(at: index, in: mapView.viewport)
+        expand(at: index)
     }
 
     func periodViewWantsToFold(_ view: TimePeriodView) {

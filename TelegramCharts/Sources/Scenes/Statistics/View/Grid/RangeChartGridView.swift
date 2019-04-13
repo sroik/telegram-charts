@@ -83,7 +83,7 @@ extension ChartGridViewCell {
     static func cells(count: Int) -> [ChartGridViewCell] {
         return (0 ..< count).map { index in
             var state = ChartGridViewCellState()
-            state.hasLine = index < count - 1
+            state.lineWidth = index < count - 1 ? .pixel : 0
             return ChartGridViewCell(state: state)
         }
     }
