@@ -44,8 +44,6 @@ extension CALayer {
 
     func disableActions() {
         actions = [
-            kCAOnOrderIn: NSNull(),
-            kCAOnOrderOut: NSNull(),
             KeyPath.opacity: NSNull(),
             KeyPath.bounds: NSNull(),
             KeyPath.path: NSNull(),
