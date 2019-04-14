@@ -91,7 +91,7 @@ final class PieChartBrowserView: View, ChartBrowser {
         let size = cardView.size
         let isPinnedToTop = sliceBox.midY > chartView.bounds.midY
         let minY = isPinnedToTop ?
-            sliceBox.minY - 10 :
+            sliceBox.minY - size.height - 10 :
             sliceBox.maxY + 10
 
         return CGRect(
