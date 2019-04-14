@@ -14,6 +14,7 @@ class ChartMapInteractor: NSObject {
     var selectedKnob: ChartMapViewportView.Knob = .none
     var minSize: CGFloat = 0
     var maxSize: CGFloat = 1
+    var minShift: CGFloat = 0
 
     var viewport: Viewport {
         return overlay?.viewport ?? .zeroToOne
@@ -75,8 +76,13 @@ class ChartMapInteractor: NSObject {
 
         let translation = recognizer.translation(in: overlay).x
         let delta = translation / overlay.bounds.width
+//        guard abs(remainder) > minShift / 2 else {
+//            return
+//        }
+
+//        let remainder = delta.truncatingRemainder(dividingBy: minShift)
+        recognizer.setTranslation(CGPoint(x: 0, y: 0), in: overlay)
         moveViewport(by: delta)
-        recognizer.setTranslation(.zero, in: overlay)
     }
 
     private(set) lazy var tapRecognizer = UITapGestureRecognizer(

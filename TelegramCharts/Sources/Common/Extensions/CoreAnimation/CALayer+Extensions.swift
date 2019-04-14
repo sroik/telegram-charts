@@ -7,6 +7,17 @@ import UIKit
 extension CALayer {
     typealias KeyPath = String
 
+    static let disabledActions = [
+        KeyPath.opacity: NSNull(),
+        KeyPath.bounds: NSNull(),
+        KeyPath.path: NSNull(),
+        KeyPath.position: NSNull(),
+        KeyPath.transform: NSNull(),
+        KeyPath.backgroundColor: NSNull(),
+        KeyPath.strokeEnd: NSNull(),
+        KeyPath.strokeStart: NSNull()
+    ]
+
     var presentedYScale: CGFloat {
         return (presentedValue(for: .yScale) as? CGFloat) ?? 1
     }
@@ -43,14 +54,7 @@ extension CALayer {
     }
 
     func disableActions() {
-        actions = [
-            KeyPath.opacity: NSNull(),
-            KeyPath.bounds: NSNull(),
-            KeyPath.path: NSNull(),
-            KeyPath.position: NSNull(),
-            KeyPath.transform: NSNull(),
-            KeyPath.backgroundColor: NSNull()
-        ]
+        actions = CALayer.disabledActions
     }
 }
 
@@ -63,4 +67,6 @@ extension CALayer.KeyPath {
     static let xTranslation = "transform.translation.x"
     static let transform = "transform"
     static let backgroundColor = "backgroundColor"
+    static let strokeStart = "strokeStart"
+    static let strokeEnd = "strokeEnd"
 }

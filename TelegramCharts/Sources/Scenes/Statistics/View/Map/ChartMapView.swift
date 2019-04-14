@@ -47,6 +47,7 @@ final class ChartMapView: View {
         addSubviews(chartView, overlayView)
 
         interactor.minSize = chart.minViewportSize
+        interactor.minShift = chart.minViewportShift
         interactor.delegate = self
         interactor.register(in: overlayView)
     }

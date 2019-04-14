@@ -24,6 +24,5 @@ struct StackedColumnValue: Hashable {
 }
 
 struct StackedColumn: Hashable {
-    var index: Int
     var values: [StackedColumnValue]
 }

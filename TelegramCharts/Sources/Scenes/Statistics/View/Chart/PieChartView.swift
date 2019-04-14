@@ -36,11 +36,16 @@ final class PieChartView: View, ChartViewType {
     }
 
     func update(animated: Bool) {
-        #warning("calculate relevant column")
         chartLayer.set(
-            column: StackedColumn(columns: chart.drawableColumns, at: 0),
+            column: stackedColumn(),
             animated: animated
         )
+    }
+
+    private func stackedColumn() -> StackedColumn {
+        var column = StackedColumn(columns: chart.drawableColumns, in: viewport)
+        column.enable(ids: Set(enabledColumns.ids))
+        return column
     }
 
     private func setup() {

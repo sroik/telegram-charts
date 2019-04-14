@@ -10,6 +10,14 @@ extension Chart {
         return viewportSizeToCover(days: expandable ? 30 : 0.5)
     }
 
+    var minViewportShift: CGFloat {
+        if expandable && percentage {
+            return 1.0 / CGFloat(timestamps.count)
+        }
+
+        return 0
+    }
+
     var preferredViewportSize: CGFloat {
         return expandable ? minViewportSize : viewportSizeToCover(days: 1)
     }

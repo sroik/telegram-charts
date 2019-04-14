@@ -4,13 +4,11 @@
 
 import UIKit
 
-typealias PieSlice = Range<CGFloat>
-
 extension StackedColumn {
     typealias Slice = Range<CGFloat>
 
     static var empty: StackedColumn {
-        return StackedColumn(index: 0, values: [])
+        return StackedColumn(values: [])
     }
 
     static func columns(with chartColumns: [Column]) -> [StackedColumn] {
@@ -21,8 +19,19 @@ extension StackedColumn {
         return columns
     }
 
+    init(columns: [Column], in viewport: Viewport) {
+        self.init(values: columns.map { column in
+            StackedColumnValue(
+                id: column.id,
+                value: column.values(in: viewport).reduce(0, +),
+                color: column.cgColor,
+                isEnabled: true
+            )
+        })
+    }
+
     init(columns: [Column], at index: Index) {
-        self.init(index: index, values: columns.map { column in
+        self.init(values: columns.map { column in
             StackedColumnValue(
                 id: column.id,
                 value: column.values[safe: index] ?? 0,
@@ -54,10 +63,6 @@ extension StackedColumn {
         return values.map {
             $0.isEnabled ? CGFloat($0.value) / CGFloat(stackedValue) : 0
         }
-    }
-
-    func pieSlices() -> [PieSlice] {
-        return slices(height: 2 * .pi)
     }
 
     func slices(height: CGFloat, minHeight: CGFloat = 0) -> [Slice] {

@@ -34,7 +34,7 @@ final class PieChartLayer: Layer {
 
     override func layoutSublayersOnBoundsChange() {
         super.layoutSublayersOnBoundsChange()
-        layers.forEach { $0.frame = bounds }
+        layoutLayers()
         draw(animated: false)
     }
 
@@ -44,23 +44,19 @@ final class PieChartLayer: Layer {
     }
 
     func draw(animated: Bool) {
-        guard !bounds.isEmpty else {
-            return
-        }
-
         zip(layers, column.pieSlices()).forEach { layer, slice in
-            let path = CGMutablePath()
-            path.move(to: bounds.center)
-            path.addArc(
-                center: bounds.center,
-                radius: radius,
-                startAngle: slice.min,
-                endAngle: slice.max,
-                clockwise: false
+            layer.spring(
+                to: slice.degreeInflated(),
+                animated: animated
             )
-            path.closeSubpath()
-            let bezier = UIBezierPath(cgPath: path)
-            layer.path = path
+        }
+    }
+
+    private func layoutLayers() {
+        layers.forEach { layer in
+            layer.frame = bounds
+            layer.path = piePath
+            layer.lineWidth = radius * 2
         }
     }
 
@@ -71,8 +67,15 @@ final class PieChartLayer: Layer {
         themeUp()
     }
 
+    private var piePath: CGPath {
+        return CGPath.circle(
+            center: bounds.center,
+            radius: radius
+        )
+    }
+
     private var radius: CGFloat {
-        return bounds.minSide / 2
+        return bounds.minSide / 4
     }
 
     private var column: StackedColumn
@@ -82,8 +85,26 @@ final class PieChartLayer: Layer {
 private extension CAShapeLayer {
     static func pieSlice(value: StackedColumnValue) -> CAShapeLayer {
         let layer = CAShapeLayer()
-        layer.fillColor = value.color
+        layer.strokeColor = value.color
+        layer.fillColor = nil
         layer.disableActions()
         return layer
+    }
+}
+
+private extension Range where T == CGFloat {
+    func degreeInflated() -> Range {
+        guard abs(max - min) > .ulpOfOne else {
+            return self
+        }
+
+        let degree: CGFloat = 1 / 360
+        return Range(min: min - degree, max: max + degree)
+    }
+}
+
+private extension StackedColumn {
+    func pieSlices() -> [Slice] {
+        return slices(height: 1)
     }
 }

@@ -16,7 +16,7 @@ final class PieChartBrowserView: View, ChartBrowser {
 
     init(chartView: PieChartView) {
         self.chartView = chartView
-        self.insets = UIEdgeInsets(repeated: 15)
+        self.insets = UIEdgeInsets(top: 15, left: 15, bottom: 25, right: 15)
         super.init(frame: .zero)
         setup()
     }

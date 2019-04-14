@@ -37,8 +37,8 @@ extension Array {
 
     func elements(in viewport: Viewport) -> ArraySlice<Element> {
         guard
-            let fromIndex = index(nearestTo: viewport.min, rule: .down),
-            let toIndex = index(nearestTo: viewport.max, rule: .up)
+            let fromIndex = index(nearestTo: viewport.min),
+            let toIndex = index(nearestTo: viewport.max)
         else {
             return []
         }
