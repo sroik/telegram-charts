@@ -88,6 +88,12 @@ extension Range where T: Arithmetical {
     }
 }
 
+extension Range where T == CGFloat {
+    func isClose(to range: Range<CGFloat>, threshold: CGFloat = .ulpOfOne) -> Bool {
+        return abs(min - range.min) < threshold && abs(max - range.max) < threshold
+    }
+}
+
 extension Range where T == Int {
     func scaled(by: CGFloat, from edge: RangeEdge) -> Range<Int> {
         let size = Int(CGFloat(self.size) * by)

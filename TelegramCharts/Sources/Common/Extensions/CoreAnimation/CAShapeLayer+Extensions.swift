@@ -51,15 +51,4 @@ extension CAShapeLayer {
         let from = current.scaled(x: scaleX)
         animateValue(for: .path, from: from, to: path, duration: animation.leftTime)
     }
-
-    func spring(to strokeRange: Range<CGFloat>, animated: Bool) {
-        guard animated else {
-            strokeStart = strokeRange.min
-            strokeEnd = strokeRange.max
-            return
-        }
-
-        springValue(for: .strokeStart, to: strokeRange.min)
-        springValue(for: .strokeEnd, to: strokeRange.max)
-    }
 }

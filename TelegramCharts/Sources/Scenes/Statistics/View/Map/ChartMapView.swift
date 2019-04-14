@@ -12,9 +12,12 @@ protocol ChartMapViewDelegate: AnyObject {
 final class ChartMapView: View {
     weak var delegate: ChartMapViewDelegate?
 
-    var viewport: Viewport = .zeroToOne {
-        didSet {
-            overlayView.viewport = viewport
+    var viewport: Viewport {
+        get {
+            return overlayView.viewport
+        }
+        set {
+            overlayView.set(viewport: newValue)
         }
     }
 
@@ -22,9 +25,14 @@ final class ChartMapView: View {
         return chartView.chart
     }
 
-    init(chartView: ChartView, interactor: ChartMapInteractor = ChartMapInteractor()) {
+    init(
+        chartView: ChartView,
+        interactor: ChartMapInteractor = ChartMapInteractor(),
+        sounds: SoundService
+    ) {
         self.chartView = chartView
         self.interactor = interactor
+        self.sounds = sounds
         super.init(frame: .screen)
         setup()
     }
@@ -33,6 +41,10 @@ final class ChartMapView: View {
         super.layoutSubviewsOnBoundsChange()
         chartView.frame = bounds
         overlayView.frame = bounds
+    }
+
+    func set(viewport: Viewport, animated: Bool) {
+        overlayView.set(viewport: viewport, animated: animated)
     }
 
     func enable(columns: [String], animated: Bool = false) {
@@ -55,11 +67,16 @@ final class ChartMapView: View {
     private let interactor: ChartMapInteractor
     private let overlayView = ChartMapOverlayView()
     private var chartView: ChartView
+    private let sounds: SoundService
 }
 
 extension ChartMapView: ChartMapInteractorDelegate {
     func interactor(_ interactor: ChartMapInteractor, didChageViewportTo viewport: Viewport) {
         delegate?.mapView(self, didChageViewportTo: viewport)
+
+        if interactor.pinnable {
+            sounds.play(.haptic(event: .selection))
+        }
     }
 
     func interactorDidLongPress(_ view: ChartMapInteractor) {

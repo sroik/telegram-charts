@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC0D377B22632BED00EA6D38 /* PieSliceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D377A22632BED00EA6D38 /* PieSliceLayer.swift */; };
+		AC0D377D22636B4C00EA6D38 /* PieChartCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D377C22636B4C00EA6D38 /* PieChartCardView.swift */; };
 		AC143B302236F1D700FEB9CD /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B2F2236F1D700FEB9CD /* Label.swift */; };
 		AC143B322236F36C00FEB9CD /* StatisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B312236F36C00FEB9CD /* StatisticsTableViewCell.swift */; };
 		AC143B3422378A9300FEB9CD /* UITableView+Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC143B3322378A9300FEB9CD /* UITableView+Statistics.swift */; };
@@ -145,6 +147,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC0D377A22632BED00EA6D38 /* PieSliceLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSliceLayer.swift; sourceTree = "<group>"; };
+		AC0D377C22636B4C00EA6D38 /* PieChartCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartCardView.swift; sourceTree = "<group>"; };
 		AC143B2F2236F1D700FEB9CD /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		AC143B312236F36C00FEB9CD /* StatisticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsTableViewCell.swift; sourceTree = "<group>"; };
 		AC143B3322378A9300FEB9CD /* UITableView+Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Statistics.swift"; sourceTree = "<group>"; };
@@ -421,6 +425,7 @@
 				AC16EAB4225D0DA7009471D7 /* BarColumnLayer.swift */,
 				AC4BB466225F85AC00D72E00 /* PercentageLineChartLayer.swift */,
 				AC5261ED2262828100272B05 /* PieChartLayer.swift */,
+				AC0D377A22632BED00EA6D38 /* PieSliceLayer.swift */,
 			);
 			path = Layer;
 			sourceTree = "<group>";
@@ -715,6 +720,7 @@
 				AC5BCD0D2260530E007C06E4 /* StackedChartCardView.swift */,
 				ACAF2B01223E30CD00533F37 /* ChartCardView.swift */,
 				AC7C1F24225A119700A095D6 /* ChartCardViewCell.swift */,
+				AC0D377C22636B4C00EA6D38 /* PieChartCardView.swift */,
 			);
 			path = Card;
 			sourceTree = "<group>";
@@ -979,6 +985,7 @@
 				AC16EAAB225CA5AB009471D7 /* ComparingChartGridView.swift in Sources */,
 				ACC9173A226132CB00FD5015 /* Device.swift in Sources */,
 				AC16EA9C225C8E4E009471D7 /* Viewport.swift in Sources */,
+				AC0D377B22632BED00EA6D38 /* PieSliceLayer.swift in Sources */,
 				AC45EC5F2258D7DE00A8E884 /* TimelineRowView.swift in Sources */,
 				AC16EAC1225DE85B009471D7 /* RasterizedBarChartView.swift in Sources */,
 				AC143B502237CD8000FEB9CD /* ChartMapView.swift in Sources */,
@@ -1026,6 +1033,7 @@
 				AC5261EC2262700000272B05 /* PieChartBrowserView.swift in Sources */,
 				AC2542A42257961F00EE2021 /* Bool+Extensions.swift in Sources */,
 				AC7C1F22225A0A8A00A095D6 /* CardView.swift in Sources */,
+				AC0D377D22636B4C00EA6D38 /* PieChartCardView.swift in Sources */,
 				AC3B383222365CF8000AD635 /* Utils.swift in Sources */,
 				AC5261E42261D3D700272B05 /* Chart+Viewport.swift in Sources */,
 				ACE6868C2236AFB200724432 /* SettingsService.swift in Sources */,

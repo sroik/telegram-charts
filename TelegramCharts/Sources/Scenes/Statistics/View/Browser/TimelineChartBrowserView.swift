@@ -75,6 +75,10 @@ class TimelineChartBrowserView: ViewportView, ExpandableChartBrowser {
     }
 
     private func select(index: Int?, animated: Bool) {
+        guard chartView.selectedIndex != index else {
+            return
+        }
+
         chartView.selectedIndex = index
 
         guard let index = index else {
@@ -95,6 +99,7 @@ class TimelineChartBrowserView: ViewportView, ExpandableChartBrowser {
     }
 
     private func setup() {
+        cardView.alpha = 0
         timelineView.clipsToBounds = true
         chartContainer.clipsToBounds = true
         chartContainer.addSubviews(chartView)

@@ -5,9 +5,10 @@
 import UIKit
 
 struct ChartMapViewFactory {
-    static func view(with chart: Chart) -> ChartMapView {
+    static func view(with chart: Chart, sounds: SoundService) -> ChartMapView {
         return ChartMapView(
-            chartView: ChartViewFactory.timelineView(with: chart, isMap: true)
+            chartView: ChartViewFactory.timelineView(with: chart, isMap: true),
+            sounds: sounds
         )
     }
 }

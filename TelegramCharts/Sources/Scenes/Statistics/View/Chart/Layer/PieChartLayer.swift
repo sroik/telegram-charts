@@ -12,7 +12,7 @@ final class PieChartLayer: Layer {
 
     init(column: StackedColumn) {
         self.column = column
-        self.layers = column.values.map(CAShapeLayer.pieSlice)
+        self.layers = column.values.map(PieSliceLayer.init(value:))
         super.init()
         setup()
     }
@@ -34,8 +34,21 @@ final class PieChartLayer: Layer {
 
     override func layoutSublayersOnBoundsChange() {
         super.layoutSublayersOnBoundsChange()
-        layoutLayers()
-        draw(animated: false)
+        layers.forEach { layer in
+            layer.frame = bounds
+        }
+    }
+
+    func select(value: String?, animated: Bool) {
+        selectedValue = value
+        layers.forEach { layer in
+            layer.isSelected = layer.id == value
+            layer.draw(animated: animated)
+        }
+    }
+
+    func visualPath(of valueId: String) -> CGPath {
+        return layer(with: valueId)?.visualPath ?? .empty
     }
 
     func set(column: StackedColumn, animated: Bool) {
@@ -44,20 +57,20 @@ final class PieChartLayer: Layer {
     }
 
     func draw(animated: Bool) {
-        zip(layers, column.pieSlices()).forEach { layer, slice in
-            layer.spring(
-                to: slice.degreeInflated(),
+        let percents = column.roundedPercents()
+        let slices = column.pieSlices()
+
+        layers.enumerated().forEach { index, layer in
+            layer.set(
+                percent: percents[safe: index] ?? 0,
+                slice: slices[safe: index] ?? .zero,
                 animated: animated
             )
         }
     }
 
-    private func layoutLayers() {
-        layers.forEach { layer in
-            layer.frame = bounds
-            layer.path = piePath
-            layer.lineWidth = radius * 2
-        }
+    private func layer(with id: String) -> PieSliceLayer? {
+        return layers.first { $0.id == id }
     }
 
     private func setup() {
@@ -67,44 +80,7 @@ final class PieChartLayer: Layer {
         themeUp()
     }
 
-    private var piePath: CGPath {
-        return CGPath.circle(
-            center: bounds.center,
-            radius: radius
-        )
-    }
-
-    private var radius: CGFloat {
-        return bounds.minSide / 4
-    }
-
+    private(set) var selectedValue: String?
     private var column: StackedColumn
-    private let layers: [CAShapeLayer]
-}
-
-private extension CAShapeLayer {
-    static func pieSlice(value: StackedColumnValue) -> CAShapeLayer {
-        let layer = CAShapeLayer()
-        layer.strokeColor = value.color
-        layer.fillColor = nil
-        layer.disableActions()
-        return layer
-    }
-}
-
-private extension Range where T == CGFloat {
-    func degreeInflated() -> Range {
-        guard abs(max - min) > .ulpOfOne else {
-            return self
-        }
-
-        let degree: CGFloat = 1 / 360
-        return Range(min: min - degree, max: max + degree)
-    }
-}
-
-private extension StackedColumn {
-    func pieSlices() -> [Slice] {
-        return slices(height: 1)
-    }
+    private let layers: [PieSliceLayer]
 }

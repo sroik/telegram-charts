@@ -5,12 +5,6 @@
 import UIKit
 
 final class ChartMapOverlayView: View {
-    var viewport: Viewport = Range(min: 0.9, max: 1.0) {
-        didSet {
-            layoutViewport()
-        }
-    }
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -18,12 +12,12 @@ final class ChartMapOverlayView: View {
 
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
-        layoutViewport()
+        layoutViewport(animated: false)
     }
 
     override func themeUp() {
         super.themeUp()
-        layoutViewport()
+        layoutViewport(animated: false)
         [leftSpaceView, rightSpaceView].forEach { view in
             view.backgroundColor = theme.color.mapDim
         }
@@ -33,27 +27,21 @@ final class ChartMapOverlayView: View {
         return knob(at: point) != .none || bounds.contains(point)
     }
 
-    func layoutViewport() {
+    func set(viewport: Viewport, animated: Bool = false) {
+        self.viewport = viewport
+        layoutViewport(animated: animated)
+    }
+
+    func layoutViewport(animated: Bool) {
         workspace.frame = bounds
+        viewportView.set(frame: viewportFrame, animated: animated)
+        leftSpaceView.set(frame: leftSpaceFrame, animated: animated)
+        rightSpaceView.set(frame: rightSpaceFrame, animated: animated)
+    }
 
-        viewportView.frame = CGRect(
-            x: bounds.width * viewport.min,
-            y: -viewportView.lineWidth,
-            width: bounds.width * viewport.max - bounds.width * viewport.min,
-            height: bounds.height + viewportView.lineWidth * 2
-        )
-
-        leftSpaceView.frame = CGRect(
-            x: 0, y: 0,
-            width: viewportView.frame.minX + viewportView.knobWidth,
-            height: bounds.height
-        )
-
-        rightSpaceView.frame = CGRect(
-            x: viewportView.frame.maxX - viewportView.knobWidth, y: 0,
-            width: bounds.width - viewportView.frame.maxX + viewportView.knobWidth,
-            height: bounds.height
-        )
+    func knob(at point: CGPoint) -> ChartMapViewportView.Knob {
+        let viewportPoint = convert(point, to: viewportView)
+        return viewportView.knob(at: viewportPoint)
     }
 
     private func setup() {
@@ -66,11 +54,26 @@ final class ChartMapOverlayView: View {
         addSubviews(workspace, viewportView)
     }
 
-    func knob(at point: CGPoint) -> ChartMapViewportView.Knob {
-        let viewportPoint = convert(point, to: viewportView)
-        return viewportView.knob(at: viewportPoint)
+    private var rightSpaceFrame: CGRect {
+        let offset = viewportFrame.maxX - viewportView.knobWidth
+        return bounds.remainder(at: offset, from: .minXEdge)
     }
 
+    private var leftSpaceFrame: CGRect {
+        let offset = viewportFrame.minX + viewportView.knobWidth
+        return bounds.slice(at: offset, from: .minXEdge)
+    }
+
+    private var viewportFrame: CGRect {
+        return CGRect(
+            x: bounds.width * viewport.min,
+            y: -viewportView.lineWidth,
+            width: bounds.width * viewport.max - bounds.width * viewport.min,
+            height: bounds.height + viewportView.lineWidth * 2
+        )
+    }
+
+    private(set) var viewport: Viewport = .zeroToOne
     private let workspace = UIView()
     private let viewportView = ChartMapViewportView(frame: .screen)
     private let leftSpaceView = UIView()

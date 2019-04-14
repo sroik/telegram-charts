@@ -4,6 +4,8 @@
 
 import UIKit
 
+typealias PieSlice = Range<CGFloat>
+
 extension StackedColumn {
     typealias Slice = Range<CGFloat>
 
@@ -47,11 +49,23 @@ extension StackedColumn {
         }
     }
 
+    func value(with id: String) -> StackedColumnValue? {
+        return values.first { $0.id == id }
+    }
+
+    func pieSlices() -> [Slice] {
+        return slices(height: 2 * .pi)
+    }
+
     func stackedValue() -> Int {
         return values
             .lazy
             .filter { $0.isEnabled }
             .reduce(0) { $0 + $1.value }
+    }
+
+    func roundedPercents() -> [CGFloat] {
+        return CGFloat.rounded(percents: percents())
     }
 
     func percents() -> [CGFloat] {

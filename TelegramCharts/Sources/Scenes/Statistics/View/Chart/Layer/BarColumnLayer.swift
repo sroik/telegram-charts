@@ -54,7 +54,7 @@ class BarColumnLayer: Layer {
 
         layers.enumerated().forEach { index, layer in
             let frame = (frames[safe: index] ?? .zero).rounded()
-            layer.spring(to: frame, animated: animated)
+            layer.maybeSpring(to: frame, animated: animated)
         }
     }
 

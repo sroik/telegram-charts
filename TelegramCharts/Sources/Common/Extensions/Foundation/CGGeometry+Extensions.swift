@@ -16,9 +16,17 @@ extension CGFloat {
     static var pixel: CGFloat {
         return 1.0 / UIScreen.main.scale
     }
+
+    var floatingSign: CGFloat {
+        return self > 0 ? 1 : -1
+    }
 }
 
 extension CGPoint {
+    static func - (l: CGPoint, r: CGPoint) -> CGPoint {
+        return CGPoint(x: l.x - r.x, y: l.y - r.y)
+    }
+
     func distance(to: CGPoint) -> CGFloat {
         let dx = x - to.x
         let dy = y - to.y
@@ -78,6 +86,15 @@ extension CGRect {
 
     var diagonal: CGFloat {
         return sqrt(width * width + height * height)
+    }
+
+    init(center: CGPoint, size: CGSize) {
+        self.init(
+            x: center.x - size.width / 2,
+            y: center.y - size.height / 2,
+            width: size.width,
+            height: size.height
+        )
     }
 
     init(x: CGFloat, y: CGFloat = 0, size: CGSize) {
@@ -183,19 +200,50 @@ extension CGRect {
 }
 
 extension CGPath {
+    static var empty: CGPath {
+        return CGPath(rect: .zero, transform: nil)
+    }
+
     static func between(points: [CGPoint]) -> CGPath {
         let path = CGMutablePath()
         path.addLines(between: points)
         return path
     }
 
-    static func circle(center: CGPoint = .zero, radius: CGFloat) -> CGPath {
-        return CGPath(ellipseIn: CGRect(
-            x: center.x - radius,
-            y: center.y - radius,
-            width: 2 * radius,
-            height: 2 * radius
-        ), transform: nil)
+    static func circle(
+        center: CGPoint = .zero,
+        radius: CGFloat,
+        startAngle: CGFloat = 0
+    ) -> CGPath {
+        let path = CGMutablePath()
+        path.addArc(
+            center: center,
+            radius: radius,
+            startAngle: startAngle,
+            endAngle: startAngle + 2 * .pi,
+            clockwise: false
+        )
+        path.closeSubpath()
+        return path
+    }
+
+    static func circleSlice(
+        center: CGPoint = .zero,
+        radius: CGFloat,
+        startAngle: CGFloat,
+        endAngle: CGFloat
+    ) -> CGPath {
+        let path = CGMutablePath()
+        path.move(to: center)
+        path.addArc(
+            center: center,
+            radius: radius,
+            startAngle: startAngle,
+            endAngle: endAngle,
+            clockwise: false
+        )
+        path.closeSubpath()
+        return path
     }
 
     var bounds: CGRect {

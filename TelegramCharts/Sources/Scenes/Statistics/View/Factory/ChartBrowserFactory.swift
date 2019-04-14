@@ -7,7 +7,7 @@ import UIKit
 struct ChartBrowserFactory {
     static func view(with chart: Chart) -> ChartBrowserView {
         switch chart.columnsType {
-        case .area where chart.expandable == false:
+        case .area where chart.expanded:
             return pieView(with: chart)
         case .area, .bar, .line, .timestamps:
             return timelineView(with: chart)

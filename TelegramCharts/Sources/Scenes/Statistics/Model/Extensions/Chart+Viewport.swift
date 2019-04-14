@@ -5,17 +5,21 @@
 import UIKit
 
 extension Chart {
-    /* I don't know the logic, so I'll just leave hardcoded numbers */
-    var minViewportSize: CGFloat {
-        return viewportSizeToCover(days: expandable ? 30 : 0.5)
-    }
-
     var minViewportShift: CGFloat {
-        if expandable && percentage {
+        if dailyShifted {
             return 1.0 / CGFloat(timestamps.count)
         }
 
         return 0
+    }
+
+    /* I don't know the logic, so I'll just leave hardcoded numbers */
+    var minViewportSize: CGFloat {
+        if minViewportShift > .ulpOfOne {
+            return minViewportShift
+        }
+
+        return viewportSizeToCover(days: expandable ? 30 : 0.5)
     }
 
     var preferredViewportSize: CGFloat {
@@ -28,9 +32,14 @@ extension Chart {
     }
 
     func viewport(toCover day: Timestamp) -> Viewport {
-        let viewportSize = viewportSizeToCover(days: 1)
+        var viewportSize = viewportSizeToCover(days: 1)
         let nearestIndex = timestamps.indexOfNearest(to: day) ?? 0
         let min = CGFloat(nearestIndex) / CGFloat(timestamps.count)
+
+        if dailyShifted {
+            viewportSize = minViewportShift
+        }
+
         return Viewport(
             min: min.clamped(from: 0, to: 1 - viewportSize),
             size: viewportSize

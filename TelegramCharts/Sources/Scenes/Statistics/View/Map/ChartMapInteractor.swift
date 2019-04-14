@@ -16,6 +16,10 @@ class ChartMapInteractor: NSObject {
     var maxSize: CGFloat = 1
     var minShift: CGFloat = 0
 
+    var pinnable: Bool {
+        return minShift > .ulpOfOne
+    }
+
     var viewport: Viewport {
         return overlay?.viewport ?? .zeroToOne
     }
@@ -31,25 +35,56 @@ class ChartMapInteractor: NSObject {
         }
     }
 
-    func moveViewport(by delta: CGFloat) {
-        var moved: Viewport
+    @discardableResult
+    func shiftViewport(by delta: CGFloat, animated: Bool) -> Bool {
+        var shifted: Viewport
         switch selectedKnob {
         case .mid:
             let halfSize = viewport.size / 2
             let mid = (viewport.mid + delta).clamped(from: halfSize, to: 1 - halfSize)
-            moved = Range(mid: mid, size: viewport.size)
+            shifted = Range(mid: mid, size: viewport.size)
         case .left:
             let min = (viewport.min + delta).clamped(from: 0, to: viewport.max - minSize)
-            moved = Range(min: min, max: viewport.max)
+            shifted = Range(min: min, max: viewport.max)
         case .right:
             let max = (viewport.max + delta).clamped(from: viewport.min + minSize, to: 1)
-            moved = Range(min: viewport.min, max: max)
+            shifted = Range(min: viewport.min, max: max)
         case .none:
+            return false
+        }
+
+        guard !viewport.isClose(to: shifted) else {
+            return false
+        }
+
+        overlay?.set(viewport: shifted, animated: animated)
+        delegate?.interactor(self, didChageViewportTo: shifted)
+        return true
+    }
+
+    @objc func onPan(_ recognizer: UIPanGestureRecognizer) {
+        guard let overlay = overlay, recognizer.state == .changed else {
+            shiftAccumulator = 0
             return
         }
 
-        overlay?.viewport = moved
-        delegate?.interactor(self, didChageViewportTo: moved)
+        let translation = recognizer.translation(in: overlay).x
+        let delta = translation / overlay.bounds.width
+        recognizer.setTranslation(.zero, in: overlay)
+        shiftAccumulator += delta
+
+        guard pinnable else {
+            shiftViewport(by: delta, animated: false)
+            return
+        }
+
+        guard abs(shiftAccumulator) > minShift * 0.5 else {
+            return
+        }
+
+        let shift = delta.floatingSign * minShift
+        let shifted = shiftViewport(by: shift, animated: true)
+        shiftAccumulator = shifted ? shiftAccumulator - shift : 0
     }
 
     @objc func onTap(_ recognizer: UITapGestureRecognizer) {
@@ -69,22 +104,6 @@ class ChartMapInteractor: NSObject {
         }
     }
 
-    @objc func onPan(_ recognizer: UIPanGestureRecognizer) {
-        guard let overlay = overlay, recognizer.state == .changed else {
-            return
-        }
-
-        let translation = recognizer.translation(in: overlay).x
-        let delta = translation / overlay.bounds.width
-//        guard abs(remainder) > minShift / 2 else {
-//            return
-//        }
-
-//        let remainder = delta.truncatingRemainder(dividingBy: minShift)
-        recognizer.setTranslation(CGPoint(x: 0, y: 0), in: overlay)
-        moveViewport(by: delta)
-    }
-
     private(set) lazy var tapRecognizer = UITapGestureRecognizer(
         target: self,
         action: #selector(onTap)
@@ -100,6 +119,7 @@ class ChartMapInteractor: NSObject {
         action: #selector(onPress)
     )
 
+    private var shiftAccumulator: CGFloat = 0
     private(set) var overlay: ChartMapOverlayView?
 }
 

@@ -35,30 +35,50 @@ extension CALayer {
         timing: CAMediaTimingFunction = .linear
     ) {
         let animation = CABasicAnimation(keyPath: keyPath)
-        animation.fromValue = from
-        animation.toValue = to
         animation.duration = duration
         animation.timingFunction = timing
+        animateValue(for: keyPath, with: animation, from: from, to: to)
+    }
+
+    func spring(to value: Any?, for keyPath: KeyPath, animated: Bool) {
+        if animated {
+            springValue(for: keyPath, to: value)
+        } else {
+            removeAnimation(forKey: keyPath)
+            setValue(value, forKeyPath: keyPath)
+        }
+    }
+
+    func springValue(for keyPath: KeyPath, to: Any?) {
+        return springValue(for: keyPath, from: presentedValue(for: keyPath), to: to)
+    }
+
+    func maybeSpringValue(for keyPath: KeyPath, to: Any?) {
+        maybeSpringValue(for: keyPath, from: presentedValue(for: keyPath), to: to)
+    }
+
+    func springValue(for keyPath: KeyPath, from: Any?, to: Any?) {
+        let animation = CABasicAnimation.spring(for: keyPath)
+        animateValue(for: keyPath, with: animation, from: from, to: to)
+    }
+
+    func maybeSpringValue(for keyPath: KeyPath, from: Any?, to: Any?) {
+        let animation = CABasicAnimation.maybeSpring(for: keyPath)
+        animateValue(for: keyPath, with: animation, from: from, to: to)
+    }
+
+    func animateValue(
+        for keyPath: KeyPath,
+        with animation: CABasicAnimation,
+        from: Any?,
+        to: Any?
+    ) {
+        animation.fromValue = from
+        animation.toValue = to
         animation.beginTime = CACurrentMediaTime()
         removeAnimation(forKey: keyPath)
         setValue(to, forKeyPath: keyPath)
         add(animation, forKey: keyPath)
-    }
-
-    @discardableResult
-    func springValue(for keyPath: KeyPath, to: Any?) -> TimeInterval {
-        return springValue(for: keyPath, from: presentedValue(for: keyPath), to: to)
-    }
-
-    @discardableResult
-    func springValue(for keyPath: KeyPath, from: Any?, to: Any?) -> TimeInterval {
-        let animation = CABasicAnimation.maybeSpring(for: keyPath)
-        animation.fromValue = from
-        animation.toValue = to
-        removeAnimation(forKey: keyPath)
-        setValue(to, forKeyPath: keyPath)
-        add(animation, forKey: keyPath)
-        return animation.duration
     }
 
     func blink(scale: CGFloat, duration: TimeInterval = .defaultDuration) {
@@ -105,16 +125,26 @@ extension CALayer {
         )
     }
 
-    @discardableResult
-    func spring(to frame: CGRect, animated: Bool) -> TimeInterval {
+    func maybeSpring(to frame: CGRect, animated: Bool) {
         guard animated else {
             self.frame = frame
-            return 0
+            removeAnimation(forKey: .bounds)
+            removeAnimation(forKey: .position)
+            return
         }
 
-        let bounds = springValue(for: .bounds, to: frame.originless)
-        let center = springValue(for: .position, to: frame.center)
-        return max(center, bounds)
+        maybeSpringValue(for: .bounds, to: frame.originless)
+        maybeSpringValue(for: .position, to: frame.center)
+    }
+
+    func spring(to frame: CGRect, animated: Bool) {
+        spring(to: frame.originless, for: .bounds, animated: animated)
+        spring(to: frame.center, for: .position, animated: animated)
+    }
+
+    func spring(to strokeRange: Range<CGFloat>, animated: Bool) {
+        spring(to: strokeRange.min, for: .strokeStart, animated: animated)
+        spring(to: strokeRange.max, for: .strokeEnd, animated: animated)
     }
 }
 
@@ -137,23 +167,23 @@ extension TimeInterval {
 }
 
 extension CABasicAnimation {
-    static func maybeSpring(
-        for keyPath: CALayer.KeyPath
-    ) -> CABasicAnimation {
-        guard Device.isFast else {
-            let animation = CABasicAnimation(keyPath: keyPath)
-            animation.timingFunction = .easeInEaseOut
-            animation.duration = .smoothDuration
-            animation.beginTime = CACurrentMediaTime()
-            return animation
+    static func maybeSpring(for keyPath: CALayer.KeyPath) -> CABasicAnimation {
+        if Device.isFast {
+            return spring(for: keyPath)
         }
 
+        let animation = CABasicAnimation(keyPath: keyPath)
+        animation.timingFunction = .easeInEaseOut
+        animation.duration = .smoothDuration
+        return animation
+    }
+
+    static func spring(for keyPath: CALayer.KeyPath) -> CABasicAnimation {
         let animation = CASpringAnimation(keyPath: keyPath)
         animation.initialVelocity = 10
         animation.damping = 20
         animation.stiffness = 200
         animation.duration = animation.settlingDuration
-        animation.beginTime = CACurrentMediaTime()
         return animation
     }
 }

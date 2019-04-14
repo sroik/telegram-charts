@@ -24,6 +24,14 @@ extension Chart {
         return columns.filter { $0.type.isDrawable }
     }
 
+    var expanded: Bool {
+        return !expandable
+    }
+
+    var mapless: Bool {
+        return days < 3
+    }
+
     var columnsType: ColumnType {
         guard let drawableColumn = drawableColumns.first else {
             assertionFailureWrapper("no columns found")
@@ -34,10 +42,10 @@ extension Chart {
     }
 
     func columns(with ids: [String]) -> [Column] {
-        return ids.compactMap(columns(with:))
+        return ids.compactMap(column(with:))
     }
 
-    func columns(with id: String) -> Column? {
+    func column(with id: String) -> Column? {
         return columns.first { $0.id == id }
     }
 
@@ -51,5 +59,9 @@ extension Chart {
 
     var days: Int {
         return Int(ceil(maxDate.timeIntervalSince(minDate) / .day))
+    }
+
+    var dailyShifted: Bool {
+        return expanded && percentage
     }
 }

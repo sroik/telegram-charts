@@ -38,7 +38,7 @@ extension ChartViewController {
             layout: ChartViewControllerLayout(chart: chart),
             chart: chart,
             chartView: ChartBrowserFactory.view(with: chart),
-            mapView: ChartMapViewFactory.view(with: chart)
+            mapView: ChartMapViewFactory.view(with: chart, sounds: dependencies.sounds)
         )
     }
 }

@@ -13,9 +13,7 @@ extension CALayer {
         KeyPath.path: NSNull(),
         KeyPath.position: NSNull(),
         KeyPath.transform: NSNull(),
-        KeyPath.backgroundColor: NSNull(),
-        KeyPath.strokeEnd: NSNull(),
-        KeyPath.strokeStart: NSNull()
+        KeyPath.backgroundColor: NSNull()
     ]
 
     var presentedYScale: CGFloat {
@@ -69,4 +67,5 @@ extension CALayer.KeyPath {
     static let backgroundColor = "backgroundColor"
     static let strokeStart = "strokeStart"
     static let strokeEnd = "strokeEnd"
+    static let string = "string"
 }

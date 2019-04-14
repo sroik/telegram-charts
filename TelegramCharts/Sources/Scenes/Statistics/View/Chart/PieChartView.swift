@@ -4,17 +4,18 @@
 
 import UIKit
 
-final class PieChartView: View, ChartViewType {
+final class PieChartView: View {
     let chart: Chart
-
-    var selectedIndex: Int? {
-        didSet {}
-    }
 
     var viewport: Viewport = .zeroToOne {
         didSet {
             update(animated: true)
         }
+    }
+
+    var selectedColumn: String? {
+        get { return chartLayer.selectedValue }
+        set { select(column: newValue, animated: true) }
     }
 
     init(chart: Chart) {
@@ -42,7 +43,27 @@ final class PieChartView: View, ChartViewType {
         )
     }
 
-    private func stackedColumn() -> StackedColumn {
+    func column(at point: CGPoint) -> String? {
+        return enabledColumns.map { $0.id }.first {
+            visualPath(of: $0).contains(point)
+        }
+    }
+
+    func visualPath(of column: String) -> CGPath {
+        return chartLayer.visualPath(of: column)
+    }
+
+    func select(column: String?, animated: Bool) {
+        chartLayer.select(value: column, animated: animated)
+    }
+
+    func stackedValue() -> StackedColumnValue? {
+        return selectedColumn.flatMap { id in
+            stackedColumn().value(with: id)
+        }
+    }
+
+    func stackedColumn() -> StackedColumn {
         var column = StackedColumn(columns: chart.drawableColumns, in: viewport)
         column.enable(ids: Set(enabledColumns.ids))
         return column

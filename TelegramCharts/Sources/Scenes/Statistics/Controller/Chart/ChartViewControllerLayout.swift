@@ -18,7 +18,7 @@ extension ChartViewControllerLayout {
     init(chart: Chart) {
         self.init(
             insets: UIEdgeInsets(top: 0, left: 15, bottom: 15, right: 15),
-            hasMap: chart.days > 1,
+            hasMap: !chart.mapless,
             mapHeight: 40,
             hasColumns: chart.drawableColumns.count > 1,
             columnsHeight: 0,
