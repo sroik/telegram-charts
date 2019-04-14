@@ -11,13 +11,17 @@ protocol ChartMapViewDelegate: AnyObject {
 
 final class ChartMapView: View {
     weak var delegate: ChartMapViewDelegate?
+    let interactor: ChartMapInteractor
+    let overlayView = ChartMapOverlayView()
+    var chartView: ChartView
+    let sounds: SoundService
 
     var viewport: Viewport {
         get {
             return overlayView.viewport
         }
         set {
-            overlayView.set(viewport: newValue)
+            overlayView.set(viewport: newValue, animated: false)
         }
     }
 
@@ -37,14 +41,19 @@ final class ChartMapView: View {
         setup()
     }
 
+    override func themeUp() {
+        super.themeUp()
+        backgroundColor = theme.color.placeholder
+    }
+
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
         chartView.frame = bounds
         overlayView.frame = bounds
     }
 
-    func set(viewport: Viewport, animated: Bool) {
-        overlayView.set(viewport: viewport, animated: animated)
+    func set(viewport: Viewport, animated: Bool, duration: TimeInterval = .defaultDuration) {
+        overlayView.set(viewport: viewport, animated: animated, duration: duration)
     }
 
     func enable(columns: [String], animated: Bool = false) {
@@ -63,11 +72,6 @@ final class ChartMapView: View {
         interactor.delegate = self
         interactor.register(in: overlayView)
     }
-
-    private let interactor: ChartMapInteractor
-    private let overlayView = ChartMapOverlayView()
-    private var chartView: ChartView
-    private let sounds: SoundService
 }
 
 extension ChartMapView: ChartMapInteractorDelegate {

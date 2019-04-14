@@ -27,11 +27,6 @@ final class PieChartLayer: Layer {
         self.init(column: .empty)
     }
 
-    override func themeUp() {
-        super.themeUp()
-        backgroundColor = theme.color.placeholder.cgColor
-    }
-
     override func layoutSublayersOnBoundsChange() {
         super.layoutSublayersOnBoundsChange()
         layers.forEach { layer in

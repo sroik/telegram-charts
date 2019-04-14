@@ -25,7 +25,7 @@ struct ChartViewControllerFactory {
     ) -> ChartViewController {
         let viewport = chart.viewport(toCover: timestamp)
         let controller = ChartViewController(dependencies: dependencies, chart: chart)
-        controller.set(viewport: viewport)
+        controller.set(viewport: viewport, animated: false)
         expandable.moveState(from: expandable, to: controller)
         return controller
     }

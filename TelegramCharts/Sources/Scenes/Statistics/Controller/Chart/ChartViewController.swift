@@ -12,6 +12,7 @@ class ChartViewController: ViewController {
     typealias Dependencies = SoundServiceContainer & ChartsServiceContainer
 
     weak var delegate: ChartViewControllerDelegate?
+    let chartContainer = View()
     var layout: ChartViewControllerLayout
     var chartView: ChartBrowserView
     let columnsView: ColumnsListView
@@ -42,8 +43,10 @@ class ChartViewController: ViewController {
         mapView.delegate = self
         columnsView.delegate = self
         periodView.delegate = self
-        set(viewport: mapView.viewport)
-        view.addSubviews(periodView, mapView, chartView, columnsView)
+        chartContainer.clipsToBounds = !(chart.percentage && chart.expandable)
+        set(viewport: mapView.viewport, animated: false)
+        view.addSubviews(periodView, chartContainer, mapView, columnsView)
+        chartContainer.addSubview(chartView)
     }
 
     override func didLayoutSubviewsOnBoundsChange() {
@@ -54,8 +57,9 @@ class ChartViewController: ViewController {
         columnsView.isHidden = !layout.hasColumns
         mapView.frame = layout.mapFrame(in: view.bounds)
         columnsView.frame = layout.columnsFrame(in: view.bounds)
-        chartView.frame = layout.chartFrame(in: view.bounds)
+        chartContainer.frame = layout.chartFrame(in: view.bounds)
         periodView.frame = layout.periodFrame(in: view.bounds)
+        chartView.frame = chartContainer.bounds
     }
 
     override func themeUp() {
@@ -64,13 +68,14 @@ class ChartViewController: ViewController {
     }
 
     func invalidateLayout() {
-        layout.columnsHeight = columnsView.size(fitting: CGRect.screen.width).height
+        let columnsWidth = layout.insets.inset(.screen).width
+        layout.columnsHeight = columnsView.size(fitting: columnsWidth).height
     }
 
-    func set(viewport: Viewport) {
+    func set(viewport: Viewport, animated: Bool) {
+        mapView.set(viewport: viewport, animated: animated)
         periodView.viewport = viewport
         chartView.viewport = viewport
-        mapView.viewport = viewport
     }
 
     func enable(columns: [String], animated: Bool = false) {
@@ -86,7 +91,8 @@ extension ChartViewController: ColumnsListViewDelegate, ChartMapViewDelegate {
     }
 
     func mapView(_ view: ChartMapView, didChageViewportTo viewport: Viewport) {
-        set(viewport: viewport)
+        periodView.viewport = viewport
+        chartView.viewport = viewport
     }
 
     func mapViewDidLongPress(_ view: ChartMapView) {
@@ -100,6 +106,7 @@ extension ChartViewController: ColumnsListViewDelegate, ChartMapViewDelegate {
 
 extension ChartViewController: TimePeriodViewDelegate {
     func periodViewWantsToFold(_ view: TimePeriodView) {
+        chartView.deselect(animated: true)
         delegate?.chartViewControllerWantsToFold(self)
     }
 }

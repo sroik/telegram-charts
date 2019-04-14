@@ -9,6 +9,31 @@ extension UIView {
         return !isHidden && alpha > .ulpOfOne
     }
 
+    static func run(
+        animation: @escaping () -> Void,
+        animated: Bool,
+        duration: TimeInterval = .defaultDuration,
+        options: UIView.AnimationOptions = .curveLinear,
+        then completion: Completion? = nil
+    ) {
+        guard animated, duration > .ulpOfOne else {
+            animation()
+            return
+        }
+
+        UIView.animate(
+            withDuration: duration,
+            delay: 0,
+            options: options,
+            animations: animation,
+            completion: { isFinished in
+                if isFinished {
+                    completion?()
+                }
+            }
+        )
+    }
+
     func fadeIn(
         animated: Bool,
         duration: TimeInterval = .fastDuration,
@@ -44,6 +69,7 @@ extension UIView {
         set(
             frame: frame,
             animated: animated && frame.intersects(self.frame),
+            options: .curveLinear,
             duration: duration
         )
     }
@@ -51,6 +77,7 @@ extension UIView {
     func set(
         frame: CGRect,
         animated: Bool = true,
+        options: UIView.AnimationOptions = .curveLinear,
         duration: TimeInterval = .fastDuration
     ) {
         guard animated, isVisible else {
@@ -58,12 +85,11 @@ extension UIView {
             return
         }
 
-        UIView.animate(
-            withDuration: duration,
-            animations: {
-                self.frame = frame
-                self.layoutIfNeeded()
-            }
+        UIView.run(
+            animation: { self.frame = frame },
+            animated: animated,
+            duration: duration,
+            options: options
         )
     }
 

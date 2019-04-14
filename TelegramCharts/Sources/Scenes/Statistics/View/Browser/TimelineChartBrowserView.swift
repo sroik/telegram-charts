@@ -45,7 +45,6 @@ class TimelineChartBrowserView: ViewportView, ExpandableChartBrowser {
     override func themeUp() {
         super.themeUp()
         pointLine.backgroundColor = theme.color.gridLine
-        backgroundColor = theme.color.placeholder
     }
 
     override func adaptViewport() {

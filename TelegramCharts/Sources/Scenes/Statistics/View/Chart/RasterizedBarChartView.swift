@@ -25,11 +25,6 @@ final class RasterizedBarChartView: ViewportView, TimelineChartViewType {
         setup()
     }
 
-    override func themeUp() {
-        super.themeUp()
-        contentView.backgroundColor = theme.color.placeholder
-    }
-
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
         render(animated: false)

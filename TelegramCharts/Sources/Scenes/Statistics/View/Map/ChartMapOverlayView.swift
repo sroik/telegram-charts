@@ -12,12 +12,12 @@ final class ChartMapOverlayView: View {
 
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
+        workspace.frame = bounds
         layoutViewport(animated: false)
     }
 
     override func themeUp() {
         super.themeUp()
-        layoutViewport(animated: false)
         [leftSpaceView, rightSpaceView].forEach { view in
             view.backgroundColor = theme.color.mapDim
         }
@@ -27,16 +27,27 @@ final class ChartMapOverlayView: View {
         return knob(at: point) != .none || bounds.contains(point)
     }
 
-    func set(viewport: Viewport, animated: Bool = false) {
-        self.viewport = viewport
-        layoutViewport(animated: animated)
+    func set(viewport: Viewport, animated: Bool, duration: TimeInterval = .defaultDuration) {
+        if !self.viewport.isClose(to: viewport) {
+            self.viewport = viewport
+            layoutViewport(animated: animated, duration: duration)
+        }
     }
 
-    func layoutViewport(animated: Bool) {
-        workspace.frame = bounds
-        viewportView.set(frame: viewportFrame, animated: animated)
-        leftSpaceView.set(frame: leftSpaceFrame, animated: animated)
-        rightSpaceView.set(frame: rightSpaceFrame, animated: animated)
+    func layoutViewport(animated: Bool, duration: TimeInterval = .defaultDuration) {
+        let animation = {
+            self.leftSpaceView.frame = self.leftSpaceFrame
+            self.rightSpaceView.frame = self.rightSpaceFrame
+            self.viewportView.frame = self.viewportFrame
+            self.viewportView.layoutIfNeeded()
+        }
+
+        UIView.run(
+            animation: animation,
+            animated: animated,
+            duration: duration,
+            options: .curveEaseInOut
+        )
     }
 
     func knob(at point: CGPoint) -> ChartMapViewportView.Knob {

@@ -59,6 +59,10 @@ extension CGRect {
         return min(size.width, size.height)
     }
 
+    var maxSide: CGFloat {
+        return max(size.width, size.height)
+    }
+
     var vertices: [CGPoint] {
         return [
             CGPoint(x: minX, y: minY),

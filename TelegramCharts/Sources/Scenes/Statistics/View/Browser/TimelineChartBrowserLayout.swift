@@ -12,7 +12,7 @@ struct TimelineChartBrowserLayout {
     var timelineHeight: CGFloat
 
     init(
-        lineWidth: CGFloat = .pixel,
+        lineWidth: CGFloat,
         isOnLineTop: Bool = false,
         cardTopOffset: CGFloat = 0,
         timelineHeight: CGFloat = 25,

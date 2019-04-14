@@ -40,7 +40,9 @@ struct ChartBrowserLayoutFactory {
             )
         }
 
-        return TimelineChartBrowserLayout()
+        return TimelineChartBrowserLayout(
+            lineWidth: chart.columnsType == .line ? .pixel : 0
+        )
     }
 }
 

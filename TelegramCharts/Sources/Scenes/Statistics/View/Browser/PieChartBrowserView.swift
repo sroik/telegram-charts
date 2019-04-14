@@ -28,11 +28,6 @@ final class PieChartBrowserView: View, ChartBrowser {
         chartView.frame = insets.inset(bounds)
     }
 
-    override func themeUp() {
-        super.themeUp()
-        backgroundColor = theme.color.placeholder
-    }
-
     func enable(columns: [String], animated: Bool) {
         deselect(animated: animated)
         chartView.enable(columns: columns, animated: animated)

@@ -14,7 +14,7 @@ struct UIViewControllerLayoutContext {
 protocol UIViewControllerLayoutAnimator {
     typealias Completion = () -> Void
     typealias Context = UIViewControllerLayoutContext
-    func animate(with context: Context, completion: @escaping Completion)
+    func animate(with context: Context, then completion: @escaping Completion)
 }
 
 extension UIViewController {

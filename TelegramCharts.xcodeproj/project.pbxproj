@@ -121,7 +121,6 @@
 		ACAF2B06223E63A000533F37 /* CGGeometryExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAF2B05223E63A000533F37 /* CGGeometryExtensionsTests.swift */; };
 		ACB9B9C822397F5200B8E841 /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB9B9C722397F5200B8E841 /* CALayer+Extensions.swift */; };
 		ACC91734226119CA00FD5015 /* ExpandableChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC91733226119CA00FD5015 /* ExpandableChartViewController.swift */; };
-		ACC9173822611B4000FD5015 /* CrossDissolveLayoutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC9173722611B4000FD5015 /* CrossDissolveLayoutAnimator.swift */; };
 		ACC9173A226132CB00FD5015 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC91739226132CB00FD5015 /* Device.swift */; };
 		ACCAD327223AE13200A99436 /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCAD326223AE13200A99436 /* Layer.swift */; };
 		ACD5EF8822573496003B09C3 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD5EF8722573496003B09C3 /* Image.swift */; };
@@ -268,7 +267,6 @@
 		ACAF2B05223E63A000533F37 /* CGGeometryExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGGeometryExtensionsTests.swift; sourceTree = "<group>"; };
 		ACB9B9C722397F5200B8E841 /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
 		ACC91733226119CA00FD5015 /* ExpandableChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableChartViewController.swift; sourceTree = "<group>"; };
-		ACC9173722611B4000FD5015 /* CrossDissolveLayoutAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossDissolveLayoutAnimator.swift; sourceTree = "<group>"; };
 		ACC91739226132CB00FD5015 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		ACCAD326223AE13200A99436 /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
 		ACD5EF8722573496003B09C3 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -764,7 +762,6 @@
 		ACC9173622611B2E00FD5015 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
-				ACC9173722611B4000FD5015 /* CrossDissolveLayoutAnimator.swift */,
 				AC59175B22637EE900C7A3EF /* PieChartExpansionAnimator.swift */,
 				AC59175D22637F1B00C7A3EF /* ChartExpansionAnimator.swift */,
 				AC59175F22639F2800C7A3EF /* LayoutAnimatorFactory.swift */,
@@ -945,7 +942,6 @@
 				AC16EAC5225DFD23009471D7 /* BarChartRenderer.swift in Sources */,
 				AC675E22225B819A00BF9380 /* TimePeriodView.swift in Sources */,
 				ACE686942236B60F00724432 /* Dependencies.swift in Sources */,
-				ACC9173822611B4000FD5015 /* CrossDissolveLayoutAnimator.swift in Sources */,
 				AC16EAB9225D18F3009471D7 /* BarChartView.swift in Sources */,
 				AC143B572237F52D00FEB9CD /* ChartMapViewportView.swift in Sources */,
 				AC16EACA225E3B1A009471D7 /* BarChartOverlayView.swift in Sources */,
@@ -1205,7 +1201,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 92S697UFZB;
+				DEVELOPMENT_TEAM = 9Q262Z5T3C;
 				INFOPLIST_FILE = "$(SRCROOT)/TelegramCharts/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1214,7 +1210,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sroik.telegramcharts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development *";
+				PROVISIONING_PROFILE_SPECIFIER = telegramcharts_dev;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1226,7 +1222,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 9Q262Z5T3C;
 				INFOPLIST_FILE = "$(SRCROOT)/TelegramCharts/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
