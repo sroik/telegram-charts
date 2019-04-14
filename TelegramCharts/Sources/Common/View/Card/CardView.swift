@@ -28,7 +28,7 @@ class CardView: Control {
     init(items: [View] = []) {
         self.items = items
         self.stack = UIStackView(arrangedSubviews: items)
-        super.init(frame: .screen)
+        super.init(frame: .zero)
         setup()
     }
 

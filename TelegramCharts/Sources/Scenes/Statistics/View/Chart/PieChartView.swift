@@ -57,7 +57,7 @@ final class PieChartView: View {
         chartLayer.select(value: column, animated: animated)
     }
 
-    func stackedValue() -> StackedColumnValue? {
+    func selectedColumnValue() -> StackedColumnValue? {
         return selectedColumn.flatMap { id in
             stackedColumn().value(with: id)
         }

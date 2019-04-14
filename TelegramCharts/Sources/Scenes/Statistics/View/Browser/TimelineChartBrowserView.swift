@@ -99,7 +99,6 @@ class TimelineChartBrowserView: ViewportView, ExpandableChartBrowser {
     }
 
     private func setup() {
-        cardView.alpha = 0
         timelineView.clipsToBounds = true
         chartContainer.clipsToBounds = true
         chartContainer.addSubviews(chartView)
@@ -114,6 +113,7 @@ class TimelineChartBrowserView: ViewportView, ExpandableChartBrowser {
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTap))
         chartContainer.addGestureRecognizer(tap)
         cardView.addTarget(self, action: #selector(cardPressed), for: .touchUpInside)
+        cardView.alpha = 0
     }
 
     @objc private func onTap(_ recognizer: UITapGestureRecognizer) {

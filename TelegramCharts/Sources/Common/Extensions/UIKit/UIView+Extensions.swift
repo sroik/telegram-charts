@@ -53,7 +53,7 @@ extension UIView {
         animated: Bool = true,
         duration: TimeInterval = .fastDuration
     ) {
-        guard animated else {
+        guard animated, isVisible else {
             self.frame = frame
             return
         }

@@ -59,19 +59,21 @@ final class PieChartBrowserView: View, ChartBrowser {
             return
         }
 
-        cardView.value = chartView.stackedValue()
+        cardView.value = chartView.selectedColumnValue()
+        cardView.set(frame: cardFrame, animated: animated, duration: .defaultDuration)
         cardView.set(alpha: 1, animated: animated)
-        cardView.shift(to: cardFrame, animated: animated)
     }
 
     @objc private func onTap(_ recognizer: UITapGestureRecognizer) {
         let point = recognizer.location(in: chartView)
         let column = chartView.column(at: point)
-        select(column: column, animated: true)
+        let same = column == chartView.selectedColumn
+        same ? deselect(animated: true) : select(column: column, animated: true)
     }
 
     private func setup() {
-        addSubviews(chartView, cardView)
+        addSubview(chartView)
+        chartView.addSubview(cardView)
         chartView.addGestureRecognizer(tapRecognizer)
         cardView.alpha = 0
     }
@@ -81,9 +83,22 @@ final class PieChartBrowserView: View, ChartBrowser {
     }
 
     private var cardFrame: CGRect {
-        let center = bounds.center
+        guard let column = chartView.selectedColumn else {
+            return .zero
+        }
+
+        let sliceBox = chartView.visualPath(of: column).bounds
         let size = cardView.size
-        return CGRect(center: center, size: size)
+        let isPinnedToTop = sliceBox.midY > chartView.bounds.midY
+        let minY = isPinnedToTop ?
+            sliceBox.minY - 10 :
+            sliceBox.maxY + 10
+
+        return CGRect(
+            midX: sliceBox.midX,
+            y: minY,
+            size: size
+        ).limited(with: chartView.bounds)
     }
 
     private lazy var tapRecognizer = UITapGestureRecognizer(
