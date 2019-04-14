@@ -91,6 +91,9 @@
 		AC5261EC2262700000272B05 /* PieChartBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5261EB2262700000272B05 /* PieChartBrowserView.swift */; };
 		AC5261EE2262828100272B05 /* PieChartLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5261ED2262828100272B05 /* PieChartLayer.swift */; };
 		AC5261F0226288DC00272B05 /* StackedColumnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5261EF226288DC00272B05 /* StackedColumnTests.swift */; };
+		AC59175C22637EE900C7A3EF /* PieChartExpansionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59175B22637EE900C7A3EF /* PieChartExpansionAnimator.swift */; };
+		AC59175E22637F1B00C7A3EF /* ChartExpansionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59175D22637F1B00C7A3EF /* ChartExpansionAnimator.swift */; };
+		AC59176022639F2800C7A3EF /* LayoutAnimatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59175F22639F2800C7A3EF /* LayoutAnimatorFactory.swift */; };
 		AC5BCD0C226049CC007C06E4 /* TimelineChartBrowserLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5BCD0B226049CC007C06E4 /* TimelineChartBrowserLayout.swift */; };
 		AC5BCD0E2260530E007C06E4 /* StackedChartCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5BCD0D2260530E007C06E4 /* StackedChartCardView.swift */; };
 		AC5EFB6B223A2D8A00979B60 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5EFB6A223A2D8A00979B60 /* TimelineView.swift */; };
@@ -235,6 +238,9 @@
 		AC5261EB2262700000272B05 /* PieChartBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartBrowserView.swift; sourceTree = "<group>"; };
 		AC5261ED2262828100272B05 /* PieChartLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartLayer.swift; sourceTree = "<group>"; };
 		AC5261EF226288DC00272B05 /* StackedColumnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedColumnTests.swift; sourceTree = "<group>"; };
+		AC59175B22637EE900C7A3EF /* PieChartExpansionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartExpansionAnimator.swift; sourceTree = "<group>"; };
+		AC59175D22637F1B00C7A3EF /* ChartExpansionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartExpansionAnimator.swift; sourceTree = "<group>"; };
+		AC59175F22639F2800C7A3EF /* LayoutAnimatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutAnimatorFactory.swift; sourceTree = "<group>"; };
 		AC5BCD0B226049CC007C06E4 /* TimelineChartBrowserLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineChartBrowserLayout.swift; sourceTree = "<group>"; };
 		AC5BCD0D2260530E007C06E4 /* StackedChartCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedChartCardView.swift; sourceTree = "<group>"; };
 		AC5EFB6A223A2D8A00979B60 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
@@ -759,6 +765,9 @@
 			isa = PBXGroup;
 			children = (
 				ACC9173722611B4000FD5015 /* CrossDissolveLayoutAnimator.swift */,
+				AC59175B22637EE900C7A3EF /* PieChartExpansionAnimator.swift */,
+				AC59175D22637F1B00C7A3EF /* ChartExpansionAnimator.swift */,
+				AC59175F22639F2800C7A3EF /* LayoutAnimatorFactory.swift */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -950,6 +959,7 @@
 				ACE6869B2236C01300724432 /* Reusable.swift in Sources */,
 				AC4BB449225F165600D72E00 /* PercentageChartGridView.swift in Sources */,
 				AC3B3854223663D1000AD635 /* ChartData.swift in Sources */,
+				AC59175C22637EE900C7A3EF /* PieChartExpansionAnimator.swift in Sources */,
 				AC16EAC8225E0772009471D7 /* BarColumnRenderer.swift in Sources */,
 				AC71BD192260DCE800AD85AD /* UIViewController+Extensions.swift in Sources */,
 				AC143B4E2237C94400FEB9CD /* LineColumnLayer.swift in Sources */,
@@ -963,6 +973,7 @@
 				AC2542AC225812F100EE2021 /* CAShapeLayer+Extensions.swift in Sources */,
 				AC143B302236F1D700FEB9CD /* Label.swift in Sources */,
 				ACE6868A2236AD1000724432 /* Themeable.swift in Sources */,
+				AC59176022639F2800C7A3EF /* LayoutAnimatorFactory.swift in Sources */,
 				AC45EC622259037700A8E884 /* HapticService.swift in Sources */,
 				AC5BCD0E2260530E007C06E4 /* StackedChartCardView.swift in Sources */,
 				AC16EAA7225CA406009471D7 /* ChartGridViewFactory.swift in Sources */,
@@ -1012,6 +1023,7 @@
 				AC5BCD0C226049CC007C06E4 /* TimelineChartBrowserLayout.swift in Sources */,
 				ACE686992236BED100724432 /* UIView+Layout.swift in Sources */,
 				AC5261E62262132800272B05 /* ChartMapInteractor.swift in Sources */,
+				AC59175E22637F1B00C7A3EF /* ChartExpansionAnimator.swift in Sources */,
 				AC16EA95225C705F009471D7 /* ChartViewControllerLayout.swift in Sources */,
 				AC71BD0E226072BC00AD85AD /* CGFloat+Percent.swift in Sources */,
 				AC16EACE225E8FC2009471D7 /* RasterizedBarChartAnimatior.swift in Sources */,

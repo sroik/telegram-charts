@@ -62,9 +62,9 @@ final class PieSliceLayer: Layer {
         arcLayer.spring(to: stateTransform, for: .transform, animated: animated)
 
         percentLayer.string = percentString
-        percentLayer.fontSize = percentFontSize
+        percentLayer.spring(to: percentFontSize, for: .fontSize, animated: animated)
         percentLayer.spring(to: percentFrame, animated: animated)
-        percentLayer.isHidden = slice.size < .pi / 30
+        percentLayer.set(value: isSliceSmall ? 0 : 1, for: .opacity, animated: animated)
     }
 
     private func setup() {
@@ -80,6 +80,14 @@ final class PieSliceLayer: Layer {
         let x = center.x + cos(centerAngle) * radius
         let y = center.y + sin(centerAngle) * radius
         return CGPoint(x: x, y: y)
+    }
+
+    private var isSliceFullCircle: Bool {
+        return abs(slice.size - 2 * .pi) < .ulpOfOne
+    }
+
+    private var isSliceSmall: Bool {
+        return slice.size < .pi / 30
     }
 
     private var stateTransform: CATransform3D {
@@ -102,7 +110,10 @@ final class PieSliceLayer: Layer {
     }
 
     private var percentFrame: CGRect {
-        return CGRect(center: percentCenter, size: percentSize)
+        return CGRect(
+            center: isSliceFullCircle ? center : percentCenter,
+            size: percentSize
+        )
     }
 
     private var percentCenter: CGPoint {
@@ -143,12 +154,10 @@ final class PieSliceLayer: Layer {
 
 private extension CATextLayer {
     static func pieSlice() -> CATextLayer {
-        let layer = CATextLayer()
+        let layer = ActionlessTextLayer()
         layer.font = UIFont.systemFont(ofSize: 30, weight: .heavy)
         layer.foregroundColor = UIColor.white.cgColor
         layer.contentsScale = Device.scale
-        layer.alignmentMode = .center
-        layer.disableActions()
         return layer
     }
 }

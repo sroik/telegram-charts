@@ -31,3 +31,11 @@ class Layer: CALayer, Themeable {
 
     private var laidoutBounds: CGRect = .zero
 }
+
+class ActionlessTextLayer: CATextLayer {
+    var actionsEnabled: Bool = false
+
+    override func action(forKey event: String) -> CAAction? {
+        return actionsEnabled ? super.action(forKey: event) : nil
+    }
+}

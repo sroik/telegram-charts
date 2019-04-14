@@ -68,4 +68,5 @@ extension CALayer.KeyPath {
     static let strokeStart = "strokeStart"
     static let strokeEnd = "strokeEnd"
     static let string = "string"
+    static let fontSize = "fontSize"
 }
