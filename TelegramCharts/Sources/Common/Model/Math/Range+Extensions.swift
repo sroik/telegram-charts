@@ -104,8 +104,11 @@ extension Range where T == Int {
         }
     }
 
-    func value(at zeroToOnePosition: CGFloat) -> Int {
-        let offset = Int(CGFloat(size) * zeroToOnePosition)
+    func value(
+        at zeroToOnePosition: CGFloat,
+        rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero
+    ) -> Int {
+        let offset = Int((CGFloat(size) * zeroToOnePosition).rounded(rule))
         let value = (min + offset).clamped(from: min, to: max)
         return value
     }

@@ -6,8 +6,8 @@ import UIKit
 
 final class ComparingChartGridView: RangeChartGridView {
     override func adaptRange(animated: Bool) {
-        leftRange = leftColumn.flatMap { chart.adjustedRange(of: $0, in: viewport) }
-        rightRange = rightColumn.flatMap { chart.adjustedRange(of: $0, in: viewport) }
+        leftRange = leftColumn.flatMap { chart.range(of: $0, in: viewport) }
+        rightRange = rightColumn.flatMap { chart.range(of: $0, in: viewport) }
 
         cells.enumerated().forEach { index, cell in
             animator.animate(

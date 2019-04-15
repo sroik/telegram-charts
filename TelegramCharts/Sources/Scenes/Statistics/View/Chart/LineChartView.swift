@@ -60,7 +60,7 @@ class LineChartView: ViewportView, TimelineChartViewType {
     }
 
     func adaptRange(animated: Bool) {
-        let range = chart.adjustedRange(of: enabledColumns, in: viewport)
+        let range = chart.range(of: enabledColumns, in: viewport)
 
         layers.forEach { layer in
             layer.set(range: range, animated: animated)

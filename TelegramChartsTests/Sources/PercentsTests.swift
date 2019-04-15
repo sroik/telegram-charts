@@ -9,7 +9,7 @@ class PercentsTests: XCTestCase {
     func testPercentsRounding() {
         (0 ..< 100).forEach {
             let values = StackedColumnValue.random(count: $0)
-            let column = StackedColumn(index: 0, values: values)
+            let column = StackedColumn(values: values)
             let percents = column.percents()
             check(
                 percents: percents,

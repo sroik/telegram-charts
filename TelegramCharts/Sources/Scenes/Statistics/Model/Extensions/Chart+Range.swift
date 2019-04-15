@@ -5,21 +5,22 @@
 import UIKit
 
 extension Chart {
-    func adjustedRange(of columns: [Column], in viewport: Viewport = .zeroToOne) -> Range<Int> {
+    var preferredGridIntervals: CGFloat {
+        return 5.4
+    }
+
+    func range(of columns: [Column], in viewport: Viewport = .zeroToOne) -> Range<Int> {
         let range = stacked ?
             stackedRange(of: columns, in: viewport) :
             unitedRange(of: columns, in: viewport)
 
-        return range
-            .scaled(by: 1.05, from: .center)
-            .clamped(from: 0, to: .max)
+        return range.pretty(intervals: preferredGridIntervals)
     }
 
-    func adjustedRange(of column: Column, in viewport: Viewport = .zeroToOne) -> Range<Int> {
+    func range(of column: Column, in viewport: Viewport = .zeroToOne) -> Range<Int> {
         return column
             .range(in: viewport)
-            .scaled(by: 1.05, from: .center)
-            .clamped(from: 0, to: .max)
+            .pretty(intervals: preferredGridIntervals)
     }
 
     private func unitedRange(of columns: [Column], in viewport: Viewport) -> Range<Int> {

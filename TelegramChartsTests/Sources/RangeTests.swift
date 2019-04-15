@@ -83,4 +83,48 @@ class RangeTests: XCTestCase {
             TelegramCharts.Range<Int>(min: 5, max: 10)
         )
     }
+
+    func testPrettyNumbers() {
+        XCTAssertEqual(CGFloat(0.0).nextPretty(), 0)
+        XCTAssertEqual(CGFloat(1.3).nextPretty(), 2)
+        XCTAssertEqual(CGFloat(2.0).nextPretty(), 2)
+        XCTAssertEqual(CGFloat(2.1).nextPretty(), 5)
+        XCTAssertEqual(CGFloat(5.1).nextPretty(), 10)
+        XCTAssertEqual(CGFloat(10).nextPretty(), 10)
+
+        XCTAssertEqual(CGFloat(10.0).nextPretty(), 10)
+        XCTAssertEqual(CGFloat(11.2).nextPretty(), 12)
+        XCTAssertEqual(CGFloat(12.2).nextPretty(), 15)
+        XCTAssertEqual(CGFloat(15.1).nextPretty(), 20)
+
+        XCTAssertEqual(CGFloat(31.2).nextPretty(), 32)
+        XCTAssertEqual(CGFloat(32.2).nextPretty(), 35)
+        XCTAssertEqual(CGFloat(37).nextPretty(), 40)
+        XCTAssertEqual(CGFloat(99).nextPretty(), 100)
+
+        XCTAssertEqual(CGFloat(101).nextPretty(), 110)
+        XCTAssertEqual(CGFloat(109).nextPretty(), 110)
+        XCTAssertEqual(CGFloat(121).nextPretty(), 150)
+
+        XCTAssertEqual(CGFloat(1009).nextPretty(), 1100)
+        XCTAssertEqual(CGFloat(1019).nextPretty(), 1100)
+        XCTAssertEqual(CGFloat(1111).nextPretty(), 1200)
+        XCTAssertEqual(CGFloat(1900).nextPretty(), 2000)
+        XCTAssertEqual(CGFloat(1901).nextPretty(), 2000)
+
+        XCTAssertEqual(
+            TelegramCharts.Range<Int>(min: 0, max: 1).pretty(intervals: 0),
+            TelegramCharts.Range<Int>(min: 0, max: 1)
+        )
+
+        XCTAssertEqual(
+            TelegramCharts.Range<Int>(min: 0, max: 1).pretty(intervals: 1),
+            TelegramCharts.Range<Int>(min: 0, max: 1)
+        )
+
+        XCTAssertEqual(
+            TelegramCharts.Range<Int>(min: 0, max: 0).pretty(intervals: 2),
+            TelegramCharts.Range<Int>(min: 0, max: 0)
+        )
+    }
 }

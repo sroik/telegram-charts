@@ -11,18 +11,9 @@ struct ChartGridViewFactory {
         }
 
         if chart.yScaled {
-            return ComparingChartGridView(chart: chart, layout: .values)
+            return ComparingChartGridView(chart: chart)
         }
 
-        return RangeChartGridView(chart: chart, layout: .values)
+        return RangeChartGridView(chart: chart)
     }
-}
-
-extension GridLayout {
-    static let values = GridLayout(
-        itemSide: .fixed(20),
-        itemsNumber: 6,
-        insets: .zero,
-        direction: .vertical
-    )
 }

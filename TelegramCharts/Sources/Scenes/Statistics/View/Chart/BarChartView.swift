@@ -39,8 +39,8 @@ class BarChartView: ViewportView, TimelineChartViewType {
     }
 
     func adaptRange(animated: Bool) {
-        let maxRange = chart.adjustedRange(of: enabledColumns)
-        let range = chart.adjustedRange(of: enabledColumns, in: viewport)
+        let maxRange = chart.range(of: enabledColumns)
+        let range = chart.range(of: enabledColumns, in: viewport)
         let rangeScale = CGFloat(maxRange.size) / CGFloat(range.size)
 
         forEachVisibleLayer { index, layer in

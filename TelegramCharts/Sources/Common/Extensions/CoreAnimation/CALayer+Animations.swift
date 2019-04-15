@@ -111,18 +111,15 @@ extension CALayer {
         velocity: CGFloat = 750,
         timing: CAMediaTimingFunction = .linear
     ) {
+        guard scale.isFinite else {
+            return
+        }
+
         let height = bounds.height * presentedYScale
         let scaledHeight = bounds.height * scale
         let delta = abs(scaledHeight - height)
         let duration = TimeInterval(delta / velocity).clampedDuration
-
-        set(
-            value: scale,
-            for: .yScale,
-            animated: animated,
-            duration: duration,
-            timing: timing
-        )
+        set(value: scale, for: .yScale, animated: animated, duration: duration, timing: timing)
     }
 
     func maybeSpring(to frame: CGRect, animated: Bool) {

@@ -8,7 +8,7 @@ class ComparingLineChartView: LineChartView {
     override func adaptRange(animated: Bool) {
         layers.forEach { layer in
             layer.set(
-                range: chart.adjustedRange(of: layer.column, in: viewport),
+                range: chart.range(of: layer.column, in: viewport),
                 animated: animated
             )
         }

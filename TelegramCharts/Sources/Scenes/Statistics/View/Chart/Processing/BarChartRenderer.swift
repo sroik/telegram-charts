@@ -28,7 +28,7 @@ final class BarChartRenderer {
     }
 
     func render(columns: [Column], in rect: CGRect, in context: UIGraphicsRendererContext) {
-        let range = chart.adjustedRange(of: columns)
+        let range = chart.range(of: columns)
         let frames = layout.itemFrames(in: rect)
 
         frames.enumerated().forEach { index, frame in

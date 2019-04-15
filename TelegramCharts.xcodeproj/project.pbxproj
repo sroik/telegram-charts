@@ -45,6 +45,7 @@
 		AC16EACA225E3B1A009471D7 /* BarChartOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EAC9225E3B1A009471D7 /* BarChartOverlayView.swift */; };
 		AC16EACC225E80D3009471D7 /* DispatchQueue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EACB225E80D3009471D7 /* DispatchQueue+Extensions.swift */; };
 		AC16EACE225E8FC2009471D7 /* RasterizedBarChartAnimatior.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16EACD225E8FC2009471D7 /* RasterizedBarChartAnimatior.swift */; };
+		AC1BF73C2264B5D200F2212D /* Range+Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1BF73B2264B5D200F2212D /* Range+Round.swift */; };
 		AC2542A42257961F00EE2021 /* Bool+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2542A32257961F00EE2021 /* Bool+Extensions.swift */; };
 		AC2542A62257DA4E00EE2021 /* CAAnimation+Extenisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2542A52257DA4E00EE2021 /* CAAnimation+Extenisions.swift */; };
 		AC2542A82257F03400EE2021 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2542A72257F03400EE2021 /* String+Extensions.swift */; };
@@ -187,6 +188,7 @@
 		AC16EAC9225E3B1A009471D7 /* BarChartOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartOverlayView.swift; sourceTree = "<group>"; };
 		AC16EACB225E80D3009471D7 /* DispatchQueue+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extensions.swift"; sourceTree = "<group>"; };
 		AC16EACD225E8FC2009471D7 /* RasterizedBarChartAnimatior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RasterizedBarChartAnimatior.swift; sourceTree = "<group>"; };
+		AC1BF73B2264B5D200F2212D /* Range+Round.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Range+Round.swift"; sourceTree = "<group>"; };
 		AC2542A32257961F00EE2021 /* Bool+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extensions.swift"; sourceTree = "<group>"; };
 		AC2542A52257DA4E00EE2021 /* CAAnimation+Extenisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAAnimation+Extenisions.swift"; sourceTree = "<group>"; };
 		AC2542A72257F03400EE2021 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 			children = (
 				AC32DCA9223C3F9100873B04 /* Collection+Range.swift */,
 				AC5EFB73223BA02600979B60 /* Range+Extensions.swift */,
+				AC1BF73B2264B5D200F2212D /* Range+Round.swift */,
 				AC143B492237AD2F00FEB9CD /* Range.swift */,
 				AC32DCA4223C2B1000873B04 /* Stride.swift */,
 				AC16EA9B225C8E4E009471D7 /* Viewport.swift */,
@@ -925,7 +928,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "eval \"$(rbenv init -)\" && bundler exec code-formatter format\n";
+			shellScript = "# commented for telegram team\n# eval \"$(rbenv init -)\" && bundler exec code-formatter format\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1046,6 +1049,7 @@
 				AC5261E42261D3D700272B05 /* Chart+Viewport.swift in Sources */,
 				ACE6868C2236AFB200724432 /* SettingsService.swift in Sources */,
 				AC143B3A22378B7D00FEB9CD /* Placeholder.swift in Sources */,
+				AC1BF73C2264B5D200F2212D /* Range+Round.swift in Sources */,
 				AC5EFB74223BA02600979B60 /* Range+Extensions.swift in Sources */,
 				AC16EAAD225CA90F009471D7 /* Chart+Extensions.swift in Sources */,
 				ACCAD327223AE13200A99436 /* Layer.swift in Sources */,

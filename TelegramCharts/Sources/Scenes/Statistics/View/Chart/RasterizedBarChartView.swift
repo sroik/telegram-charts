@@ -50,7 +50,7 @@ final class RasterizedBarChartView: ViewportView, TimelineChartViewType {
         let ids = enabledColumns.ids
         let started = animator.animateColumns(from: ids, to: columns, animated: animated)
         enabledColumns = chart.columns(with: columns)
-        maxRange = chart.adjustedRange(of: enabledColumns)
+        maxRange = chart.range(of: enabledColumns)
         render(animated: animated && !started)
     }
 
@@ -70,7 +70,7 @@ final class RasterizedBarChartView: ViewportView, TimelineChartViewType {
             return
         }
 
-        let range = chart.adjustedRange(of: enabledColumns, in: viewport)
+        let range = chart.range(of: enabledColumns, in: viewport)
         let scale = CGFloat(maxRange.size) / CGFloat(range.size)
         imageView.layer.scale(byY: scale, animated: animated)
     }
