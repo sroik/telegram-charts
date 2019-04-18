@@ -928,7 +928,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# commented for telegram team\n# eval \"$(rbenv init -)\" && bundler exec code-formatter format\n";
+			shellScript = "eval \"$(rbenv init -)\" && bundler exec code-formatter format\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

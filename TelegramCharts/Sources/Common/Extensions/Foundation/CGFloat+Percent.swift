@@ -20,7 +20,7 @@ extension CGFloat {
         let percentsSum = percents.reduce(0, +)
         let flooredSum = percents.map { $0.percentFloor }.reduce(0, +)
         let diff = percentsSum - flooredSum
-        let diffedCount = Int(ceil(diff / percent))
+        let diffedCount = Int((diff / percent).rounded())
 
         flooredSortedByRemainder.transform { index, arg in
             if index < diffedCount {

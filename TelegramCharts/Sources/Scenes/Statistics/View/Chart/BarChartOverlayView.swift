@@ -43,8 +43,10 @@ final class BarChartOverlayView: View {
         }
 
         let hole = chartLayout.itemFrame(at: layoutIndex, in: bounds)
-        leftView.frame = bounds.slice(at: hole.minX.rounded(.up), from: .minXEdge)
-        rightView.frame = bounds.remainder(at: hole.maxX.rounded(.down), from: .minXEdge)
+        let minX = hole.minX.rounded(.up)
+        let maxX = max(minX + 1, hole.maxX.rounded(.down))
+        leftView.frame = bounds.slice(at: minX, from: .minXEdge)
+        rightView.frame = bounds.remainder(at: maxX, from: .minXEdge)
     }
 
     private func fadeIn(animated: Bool) {

@@ -18,6 +18,7 @@ final class ChartMapOverlayView: View {
 
     override func themeUp() {
         super.themeUp()
+        layoutViewport(animated: false)
         [leftSpaceView, rightSpaceView].forEach { view in
             view.backgroundColor = theme.color.mapDim
         }

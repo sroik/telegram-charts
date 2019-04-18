@@ -91,7 +91,7 @@ final class PieSliceLayer: Layer {
     }
 
     private var stateTransform: CATransform3D {
-        let shift = isSelected ? selectedShift : 0
+        let shift = (isSelected && !isSliceFullCircle) ? selectedShift : 0
         let offset = centerPoint(radius: shift) - center
         return CATransform3DMakeTranslation(offset.x, offset.y, 0)
     }

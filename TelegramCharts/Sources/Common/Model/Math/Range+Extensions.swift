@@ -94,16 +94,18 @@ extension Range where T == CGFloat {
     }
 }
 
-extension Range where T == Int {
-    func scaled(by: CGFloat, from edge: RangeEdge) -> Range<Int> {
-        let size = Int(CGFloat(self.size) * by)
+extension Range where T == CGFloat {
+    func scaled(by: CGFloat, from edge: RangeEdge) -> Range<CGFloat> {
+        let size = self.size * by
         switch edge {
         case .center: return Range(mid: mid, size: size)
         case .top: return Range(min: max - size, max: max)
         case .bottom: return Range(min: min, max: min + size)
         }
     }
+}
 
+extension Range where T == Int {
     func value(
         at zeroToOnePosition: CGFloat,
         rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero

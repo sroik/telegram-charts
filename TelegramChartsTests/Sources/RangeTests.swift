@@ -26,25 +26,25 @@ class RangeTests: XCTestCase {
     }
 
     func testScale() {
-        let range = TelegramCharts.Range<Int>(min: 10, max: 20)
+        let range = TelegramCharts.Range<CGFloat>(min: 10, max: 20)
         XCTAssertEqual(
             range.scaled(by: 2, from: .center),
-            TelegramCharts.Range<Int>(min: 5, max: 25)
+            TelegramCharts.Range<CGFloat>(min: 5, max: 25)
         )
 
         XCTAssertEqual(
             range.scaled(by: 2, from: .top),
-            TelegramCharts.Range<Int>(min: 0, max: 20)
+            TelegramCharts.Range<CGFloat>(min: 0, max: 20)
         )
 
         XCTAssertEqual(
             range.scaled(by: 2, from: .bottom),
-            TelegramCharts.Range<Int>(min: 10, max: 30)
+            TelegramCharts.Range<CGFloat>(min: 10, max: 30)
         )
 
         XCTAssertEqual(
-            TelegramCharts.Range<Int>(min: 0, max: 0).scaled(by: 2, from: .bottom),
-            TelegramCharts.Range<Int>(min: 0, max: 0)
+            TelegramCharts.Range<CGFloat>(min: 0, max: 0).scaled(by: 2, from: .bottom),
+            TelegramCharts.Range<CGFloat>(min: 0, max: 0)
         )
     }
 

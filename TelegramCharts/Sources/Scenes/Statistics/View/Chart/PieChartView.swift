@@ -64,6 +64,7 @@ final class PieChartView: View {
     }
 
     func stackedColumn() -> StackedColumn {
+        let viewport = self.viewport.scaled(by: 0.9, from: .center)
         var column = StackedColumn(columns: chart.drawableColumns, in: viewport)
         column.enable(ids: Set(enabledColumns.ids))
         return column

@@ -19,6 +19,7 @@ final class TimelineView: ViewportView {
 
     override func themeUp() {
         super.themeUp()
+        backgroundColor = theme.color.placeholder
         line.backgroundColor = theme.color.gridLine
         rowView.theme = theme
     }

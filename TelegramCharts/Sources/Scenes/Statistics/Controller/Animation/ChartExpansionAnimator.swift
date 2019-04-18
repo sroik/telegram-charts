@@ -50,6 +50,7 @@ class ChartExpansionAnimator: UIViewController.LayoutAnimator {
         let timelineBrowser = child.chartView as? TimelineChartBrowserView
         let timeBrowserClipping = timelineBrowser?.chartContainer.clipsToBounds ?? true
         timelineBrowser?.chartContainer.clipsToBounds = false
+        timelineBrowser?.timelineView.backgroundColor = .clear
 
         let upscale = CGAffineTransform(scaleX: 5, y: 1)
         let downscale = CGAffineTransform(scaleX: 0.25, y: 1)
@@ -68,6 +69,7 @@ class ChartExpansionAnimator: UIViewController.LayoutAnimator {
 
         run(animation: animation) {
             timelineBrowser?.chartContainer.clipsToBounds = timeBrowserClipping
+            timelineBrowser?.timelineView.backgroundColor = parent.theme.color.placeholder
             completion()
         }
     }

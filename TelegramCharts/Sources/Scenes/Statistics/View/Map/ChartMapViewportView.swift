@@ -57,28 +57,11 @@ final class ChartMapViewportView: View {
 
     override func layoutSubviewsOnBoundsChange() {
         super.layoutSubviewsOnBoundsChange()
-        leftKnob.frame = bounds.slice(at: knobWidth, from: .minXEdge)
-        rightKnob.frame = bounds.slice(at: knobWidth, from: .maxXEdge)
-        bottomLine.frame = bounds.slice(at: lineWidth, from: .maxYEdge)
-        topLine.frame = bounds.slice(at: lineWidth, from: .minYEdge)
-    }
-
-    private func setup() {
-        [leftKnob, rightKnob].forEach { view in
-            view.contentMode = .center
-            view.tintColor = .white
-        }
-
-        addSubviews(rightKnob, leftKnob, topLine, bottomLine)
+        layout()
     }
 
     override func themeUp() {
         super.themeUp()
-        setNeedsLayout()
-
-        layer.cornerRadius = theme.state.cornerRadius
-        layer.masksToBounds = true
-
         [leftKnob, rightKnob, self].forEach { view in
             view.layer.borderColor = theme.knobBorder.cgColor
             view.layer.borderWidth = theme.knobBorderWidth
@@ -87,6 +70,26 @@ final class ChartMapViewportView: View {
         [leftKnob, rightKnob, topLine, bottomLine].forEach { view in
             view.backgroundColor = theme.color.mapKnob
         }
+
+        layer.cornerRadius = theme.state.cornerRadius
+        layer.masksToBounds = true
+        layout()
+    }
+
+    private func layout() {
+        leftKnob.frame = bounds.slice(at: knobWidth, from: .minXEdge)
+        rightKnob.frame = bounds.slice(at: knobWidth, from: .maxXEdge)
+        bottomLine.frame = bounds.slice(at: lineWidth, from: .maxYEdge)
+        topLine.frame = bounds.slice(at: lineWidth, from: .minYEdge)
+    }
+    
+    private func setup() {
+        [leftKnob, rightKnob].forEach { view in
+            view.contentMode = .center
+            view.tintColor = .white
+        }
+        
+        addSubviews(rightKnob, leftKnob, topLine, bottomLine)
     }
 
     private var midFrame: CGRect {
